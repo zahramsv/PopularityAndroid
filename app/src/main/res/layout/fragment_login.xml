@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".Fragments.LoginFragment">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include layout="@layout/toolbar" />
+
+    </android.support.design.widget.AppBarLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/instagram_btn"
+            android:onClick="loginBtnClick"
+            android:layout_centerInParent="true"
+            android:background="@drawable/btn_rounded_white_outline"
+            android:padding="@dimen/spacing_large"
+            android:drawablePadding="@dimen/spacing_medium"
+            android:drawableLeft="@drawable/instagram_ic"
+            android:text="@string/instagram_login"
+            android:layout_width="@dimen/login_btn_length"
+            android:textColor="@color/grey_1000"
+            android:layout_height="@dimen/login_btn_height"
+            tools:ignore="OnClick" />
+
+        <Button
+            android:id="@+id/facebook_btn"
+            android:layout_below="@+id/instagram_btn"
+            android:layout_centerInParent="true"
+            android:background="@drawable/btn_rounded_white_outline"
+            android:padding="@dimen/spacing_large"
+            android:textColor="@color/grey_1000"
+            android:text="@string/facebook_login"
+            android:drawablePadding="@dimen/spacing_medium"
+            android:drawableLeft="@drawable/facebook_ic"
+            android:layout_width="@dimen/login_btn_length"
+            android:layout_height="@dimen/login_btn_height" />
+    </RelativeLayout>
+
+</FrameLayout>
