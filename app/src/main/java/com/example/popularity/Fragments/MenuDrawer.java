@@ -1,7 +1,6 @@
 package com.example.popularity.Fragments;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
@@ -13,8 +12,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.LinearLayout;
-
 import com.example.popularity.R;
 
 
@@ -77,13 +74,17 @@ public class MenuDrawer extends Fragment {
     private void define() {
 
         btn1 = layout.findViewById(R.id.btn1);
-        btn1 = layout.findViewById(R.id.btn2);
+        btn2= layout.findViewById(R.id.btn2);
 
         btn1.setOnClickListener(v -> {
-            mListener.onBtn1Clicked();
+            if(mListener!=null) {
+                mListener.onBtn1Clicked();
+            }
         });
         btn2.setOnClickListener(v -> {
-            mListener.onBtn2Clicked();
+            if(mListener!=null) {
+                mListener.onBtn2Clicked();
+            }
         });
 
     }

@@ -1,31 +1,24 @@
 package com.example.popularity.Activities;
 
 import android.app.Dialog;
-import android.app.ProgressDialog;
-import android.os.AsyncTask;
 import android.os.Handler;
 import android.support.design.widget.TextInputEditText;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
-
 import com.example.popularity.Fragments.InstagramPopularityFragment;
 import com.example.popularity.Fragments.LoginFragment;
 import com.example.popularity.Fragments.MenuDrawer;
 import com.example.popularity.Fragments.SplashFragment;
 import com.example.popularity.Utils.BaseFragment;
 import com.example.popularity.R;
-
-import java.io.IOException;
-
 import dev.niekirk.com.instagram4android.Instagram4Android;
 import dev.niekirk.com.instagram4android.requests.payload.InstagramLoginResult;
 
@@ -62,11 +55,7 @@ public class MainActivity extends AppCompatActivity implements
 
         ImageView menuDrawer = findViewById(R.id.menuDrawer);
         menuDrawer.setOnClickListener(v->{
-            if(drawerLayout.isDrawerOpen(Gravity.RIGHT)){
-                openDrawer();
-            }else{
-                closeDrawer();
-            }
+            openDrawer();
         });
 
     }

@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.example.popularity.Utils.BaseFragment;
 import com.example.popularity.R;
 
@@ -32,7 +31,6 @@ public class InstagramPopularityFragment extends BaseFragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_instageam_popularity, container, false);
-        initToolbar(view, getString(R.string.rate_to_friends));
         return view;
     }
 

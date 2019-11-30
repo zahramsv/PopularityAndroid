@@ -1,14 +1,11 @@
 package com.example.popularity.Fragments;
 
 import android.os.Bundle;
-import android.support.v4.widget.DrawerLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.widget.Button;
-
-import com.example.popularity.Activities.MainActivity;
 import com.example.popularity.Utils.BaseFragment;
 import com.example.popularity.R;
 
@@ -35,7 +32,6 @@ public class LoginFragment extends BaseFragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_login, container, false);
         clickEvents(view);
-        initToolbar(view,getString(R.string.login_with));
 
         return view;
 
