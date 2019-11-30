@@ -1,12 +1,11 @@
 package com.example.popularity.Fragments;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.popularity.Help.BaseFragment;
+import com.example.popularity.Utils.BaseFragment;
 import com.example.popularity.R;
 
 public class InstagramPopularityFragment extends BaseFragment {
@@ -17,9 +16,7 @@ public class InstagramPopularityFragment extends BaseFragment {
     }
 
 
-
-    // TODO: Rename and change types and number of parameters
-    public static InstagramPopularityFragment newInstance(String param1, String param2) {
+    public static InstagramPopularityFragment newInstance() {
         InstagramPopularityFragment fragment = new InstagramPopularityFragment();
         return fragment;
     }
@@ -37,8 +34,6 @@ public class InstagramPopularityFragment extends BaseFragment {
         return inflater.inflate(R.layout.fragment_instageam_popularity, container, false);
     }
 
-    public boolean onBackPressed() {
-        return false;
-    }
+
 
 }

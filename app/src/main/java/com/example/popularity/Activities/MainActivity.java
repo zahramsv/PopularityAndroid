@@ -13,13 +13,11 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.popularity.Fragments.InstagramPopularityFragment;
 import com.example.popularity.Fragments.LoginFragment;
 import com.example.popularity.Fragments.SplashFragment;
-import com.example.popularity.Help.BaseFragment;
+import com.example.popularity.Utils.BaseFragment;
 import com.example.popularity.R;
 
 import java.io.IOException;
@@ -30,7 +28,7 @@ import dev.niekirk.com.instagram4android.requests.payload.InstagramLoginResult;
 public class MainActivity extends AppCompatActivity {
 
     private TextInputEditText username, password;
-    private String usernametxt, passwordTxt;
+    private String usernameTxt, passwordTxt;
     private InstagramLoginResult login;
     private Instagram4Android instagram;
     @Override
@@ -38,34 +36,34 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        SplashFragment fragment1 = new SplashFragment();
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.pop_enter, R.anim.pop_exit);
-        transaction.replace(R.id.your_placeholder, fragment1);
-        transaction.commit();
+        openFragment(new SplashFragment(),false);
 
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 // Do something after 2s = 2000ms
-                LoginFragment fragment = new LoginFragment();
-                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                transaction.setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.pop_enter, R.anim.pop_exit);
-                transaction.replace(R.id.your_placeholder, fragment);
-                transaction.commit();
+                openFragment(new LoginFragment(),false);
             }
         }, 2000);
 
     }
 
-    private void openFragment(BaseFragment fragment){
+    private void openFragment(BaseFragment fragment,Boolean addStack){
+
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.pop_enter, R.anim.pop_exit);
-        transaction.replace(R.id.your_placeholder, fragment);
+        if (!addStack)
+        {
+            transaction.replace(R.id.your_placeholder, fragment);
+        }
+       else
+        {
+            transaction.add(R.id.your_placeholder,fragment);
+            transaction.addToBackStack(fragment.getClass().getName());
+        }
         transaction.commit();
     }
-
 
     public void loginBtnClick(View view) {
         switch (view.getId()) {
@@ -93,10 +91,9 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
     private void showCustomDialog() {
         final Dialog dialog = new Dialog(this);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE); // before
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.custom_dialog);
         dialog.setCancelable(true);
 
@@ -104,10 +101,8 @@ public class MainActivity extends AppCompatActivity {
         lp.copyFrom(dialog.getWindow().getAttributes());
         lp.width = WindowManager.LayoutParams.WRAP_CONTENT;
         lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
-
         dialog.show();
         dialog.getWindow().setAttributes(lp);
-
 
         username = dialog.findViewById(R.id.username);
         Button btn = dialog.findViewById(R.id.signIn_btn);
@@ -115,28 +110,18 @@ public class MainActivity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
-                usernametxt = username.getText().toString();
-
-
+                usernameTxt = username.getText().toString();
                 passwordTxt = password.getText().toString();
-                loginToInstagram(usernametxt, passwordTxt);
+                loginToInstagram(usernameTxt, passwordTxt);
 
                 dialog.dismiss();
-
-                /*InstagramPopularityFragment instagramPopularityFragment=new InstagramPopularityFragment();
-                FragmentTransaction transaction=getSupportFragmentManager().beginTransaction();
-                transaction.setCustomAnimations(R.anim.enter,R.anim.exit,R.anim.pop_enter,R.anim.pop_exit);
-                transaction.replace(R.id.your_placeholder,instagramPopularityFragment);
-                transaction.commit();*/
+                openFragment(new InstagramPopularityFragment(),true);
 
             }
         });
 
 
     }
-
 
     private void loginToInstagram(String username, String password) {
 
@@ -152,8 +137,7 @@ public class MainActivity extends AppCompatActivity {
 
     private String TAG = "TAG";
 
-    private class AsyncCaller extends AsyncTask<Void, InstagramLoginResult, InstagramLoginResult>
-    {
+    private class AsyncCaller extends AsyncTask<Void, InstagramLoginResult, InstagramLoginResult> {
         ProgressDialog pdLoading = new ProgressDialog(MainActivity.this);
 
 
@@ -190,11 +174,9 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
-    private void mohad(){}
-
     @Override
     public void onBackPressed() {
+
         int count=getSupportFragmentManager().getBackStackEntryCount();
         if (count==0)
         super.onBackPressed();

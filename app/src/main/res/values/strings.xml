@@ -5,4 +5,12 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="instagram_login">My Instagram Popularity</string>
     <string name="facebook_login">My Facebook Popularity</string>
+    <string name="navigation_drawer_open">Open Navigation</string>
+    <string name="navigation_drawer_close">Close Navigation</string>
+    <string name="i_dont_see">I dont see</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="about_us">About us</string>
+    <string name="settings">Settings</string>
+    <string name="rate_us">Rate us</string>
+    <string name="login_page">Login Page</string>
 </resources>

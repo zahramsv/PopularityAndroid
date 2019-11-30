@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+        <item
+            android:id="@+id/t"
+            android:icon="@drawable/ic_menu"
+            android:iconTint="@color/black"
+            android:title="@string/i_dont_see"
+             />
+        <item
+            android:id="@+id/PrivacyPolicy"
+            android:iconTint="@color/black"
+            android:icon="@drawable/ic_privacy"
+            android:title="@string/privacy_policy"
+             />
+        <item
+            android:id="@+id/Settings"
+            android:icon="@drawable/ic_settings"
+            android:iconTint="@color/black"
+            android:title="@string/settings"
+
+            />
+
+        <item
+            android:id="@+id/RateUs"
+            android:icon="@drawable/ic_rate"
+            android:iconTint="@color/black"
+            android:title="@string/rate_us"
+            />
+
+
+        <item
+            android:id="@+id/aboutUs"
+            android:icon="@drawable/ic_about_us"
+            android:title="@string/about_us"
+            />
+
+
+
+</menu>

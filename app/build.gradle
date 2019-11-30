@@ -34,5 +34,6 @@ dependencies {
 
     // Library added
 
-    implementation 'com.github.charlieAndroidDev:Instagram4Android:0.2.7'
+    implementation 'com.github.charlieAndroidDev:Instagram4Android:0.2.7'    //instagram api
+    implementation 'com.mikhaellopez:circularimageview:4.1.0'         // circle image view
 }

@@ -1,16 +1,15 @@
 package com.example.popularity.Fragments;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import android.support.v4.widget.DrawerLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.widget.Button;
 
-import com.example.popularity.Help.BaseFragment;
+import com.example.popularity.Activities.MainActivity;
+import com.example.popularity.Utils.BaseFragment;
 import com.example.popularity.R;
 
 public class LoginFragment extends BaseFragment {
@@ -36,7 +35,8 @@ public class LoginFragment extends BaseFragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_login, container, false);
         instagram_btn=view.findViewById(R.id.instagram_btn);
-        initToolbar(view);
+        initToolbar(view,"Login"  );
+
         return view;
 
     }
