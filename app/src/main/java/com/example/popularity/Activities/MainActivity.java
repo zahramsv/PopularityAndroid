@@ -13,6 +13,8 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
+
 import com.example.popularity.Fragments.InstagramPopularityFragment;
 import com.example.popularity.Fragments.LoginFragment;
 import com.example.popularity.Fragments.MenuDrawer;
@@ -58,6 +60,12 @@ public class MainActivity extends AppCompatActivity implements
             openDrawer();
         });
 
+    }
+
+    public void setTitle(String s)
+    {
+        TextView textView=findViewById(R.id.txtToolbar);
+        textView.setText(s);
     }
 
     private void openFragment(BaseFragment fragment,Boolean addStack){
@@ -155,8 +163,8 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onBtn1Clicked() {
-
+    public void onBtn1Clicked(String str) {
+        setTitle(str);
     }
 
     @Override

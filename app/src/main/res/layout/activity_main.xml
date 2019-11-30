@@ -22,6 +22,9 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
                 <TextView
+                    android:id="@+id/txtToolbar"
+                    tools:text="salam"
+                    android:textColor="@color/white"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:gravity="center"

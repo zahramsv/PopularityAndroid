@@ -78,7 +78,7 @@ public class MenuDrawer extends Fragment {
 
         btn1.setOnClickListener(v -> {
             if(mListener!=null) {
-                mListener.onBtn1Clicked();
+                mListener.onBtn1Clicked("Zahra");
             }
         });
         btn2.setOnClickListener(v -> {
@@ -88,8 +88,10 @@ public class MenuDrawer extends Fragment {
         });
 
     }
+
+
     public interface OnSlidingMenuFragmentListener {
-        void onBtn1Clicked();
+        void onBtn1Clicked(String str);
         void onBtn2Clicked();
     }
 
