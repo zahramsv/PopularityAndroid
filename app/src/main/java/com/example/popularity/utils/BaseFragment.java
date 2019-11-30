@@ -1,4 +1,4 @@
-package com.example.popularity.Utils;
+package com.example.popularity.utils;
 
 import android.support.v4.app.Fragment;
 

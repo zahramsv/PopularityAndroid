@@ -1,4 +1,4 @@
-package com.example.popularity.Fragments;
+package com.example.popularity.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -15,7 +15,7 @@ import android.widget.Button;
 import com.example.popularity.R;
 
 
-public class MenuDrawer extends Fragment {
+public class MenuDrawerFragment extends Fragment {
 
     private ActionBarDrawerToggle drawertoogle;
     private DrawerLayout my_drawer_layout;
@@ -23,7 +23,7 @@ public class MenuDrawer extends Fragment {
     private Button                          btn1,btn2;
     private OnSlidingMenuFragmentListener   mListener;
 
-    public MenuDrawer(){}
+    public MenuDrawerFragment(){}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

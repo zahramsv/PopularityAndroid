@@ -1,0 +1,69 @@
+package com.example.popularity.adapter;
+
+import android.content.Context;
+import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.example.popularity.R;
+import com.example.popularity.model.Friend;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import de.hdodenhof.circleimageview.CircleImageView;
+
+public class FriendsListAdapter extends RecyclerView.Adapter<FriendsListAdapter.FriendsHolder> {
+
+
+    private List<Friend> friends = new ArrayList<>();
+    private Context context;
+
+    public FriendsListAdapter(List<Friend> friends, Context context) {
+        this.friends = friends;
+        this.context = context;
+    }
+
+    @NonNull
+    @Override
+    public FriendsHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+
+        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_friend, viewGroup, false);
+        return new FriendsHolder(v);
+
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull FriendsHolder friendsHolder, int i) {
+
+        if (friendsHolder instanceof FriendsHolder) {
+            FriendsHolder view = (FriendsHolder) friendsHolder;
+            final Friend obj = friends.get(i);
+            view.username.setText(obj.getName());
+        }
+    }
+
+    @Override
+    public int getItemCount() {
+        return friends.size();
+    }
+
+    public class FriendsHolder extends RecyclerView.ViewHolder {
+
+        //CircleImageView profile_image;
+        private ImageView ic_rate;
+        private TextView username;
+        private ImageView profile_image;
+
+        public FriendsHolder(@NonNull View itemView) {
+            super(itemView);
+            profile_image = itemView.findViewById(R.id.profile_image);
+            ic_rate = itemView.findViewById(R.id.rate);
+            username = itemView.findViewById(R.id.username);
+        }
+    }
+}

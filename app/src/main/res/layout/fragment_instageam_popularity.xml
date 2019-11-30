@@ -4,15 +4,39 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".Fragments.InstagramPopularityFragment">
+    tools:context=".fragment.InstagramPopularityFragment">
 
 
-    <android.support.design.widget.AppBarLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="3">
 
-        <include layout="@layout/toolbar" />
 
-    </android.support.design.widget.AppBarLayout>
+        <android.support.v7.widget.RecyclerView
+            tools:listitem="@layout/item_rate"
+            android:id="@+id/favorites_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.7">
+
+        </android.support.v7.widget.RecyclerView>
+
+
+        <android.support.v7.widget.RecyclerView
+            android:orientation="horizontal"
+            tools:listitem="@layout/item_friend"
+            android:id="@+id/friends_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.3">
+
+        </android.support.v7.widget.RecyclerView>
+    </LinearLayout>
+
+
+
+
 
 </FrameLayout>

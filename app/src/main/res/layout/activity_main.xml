@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".Activities.MainActivity">
+    tools:context=".activity.MainActivity">
 
    <LinearLayout
        android:layout_width="match_parent"
@@ -47,7 +47,7 @@
    </LinearLayout>
     <fragment
         android:id="@+id/fragment_nd"
-        android:name="com.example.popularity.Fragments.MenuDrawer"
+        android:name="com.example.popularity.fragment.MenuDrawerFragment"
         android:layout_width="280dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"

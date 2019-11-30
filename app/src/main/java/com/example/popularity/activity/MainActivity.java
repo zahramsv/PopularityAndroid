@@ -1,4 +1,4 @@
-package com.example.popularity.Activities;
+package com.example.popularity.activity;
 
 import android.app.Dialog;
 import android.os.Handler;
@@ -15,17 +15,17 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.popularity.Fragments.InstagramPopularityFragment;
-import com.example.popularity.Fragments.LoginFragment;
-import com.example.popularity.Fragments.MenuDrawer;
-import com.example.popularity.Fragments.SplashFragment;
-import com.example.popularity.Utils.BaseFragment;
+import com.example.popularity.fragment.InstagramPopularityFragment;
+import com.example.popularity.fragment.LoginFragment;
+import com.example.popularity.fragment.MenuDrawerFragment;
+import com.example.popularity.fragment.SplashFragment;
+import com.example.popularity.utils.BaseFragment;
 import com.example.popularity.R;
 import dev.niekirk.com.instagram4android.Instagram4Android;
 import dev.niekirk.com.instagram4android.requests.payload.InstagramLoginResult;
 
 public class MainActivity extends AppCompatActivity implements
-        MenuDrawer.OnSlidingMenuFragmentListener
+        MenuDrawerFragment.OnSlidingMenuFragmentListener
 {
 
     private TextInputEditText username, password;
@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements
     private Instagram4Android instagram;
 
     DrawerLayout                    drawerLayout;
-    MenuDrawer             slidingMenuFragment;
+    MenuDrawerFragment slidingMenuFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements
         setContentView(R.layout.activity_main);
 
         drawerLayout    = findViewById(R.id.drawer_layout);
-        slidingMenuFragment = (MenuDrawer) getSupportFragmentManager().findFragmentById(R.id.fragment_nd);
+        slidingMenuFragment = (MenuDrawerFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_nd);
 
         openFragment(new SplashFragment(),false);
 

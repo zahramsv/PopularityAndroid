@@ -1,4 +1,4 @@
-package com.example.popularity.Fragments;
+package com.example.popularity.fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.widget.Button;
-import com.example.popularity.Utils.BaseFragment;
+import com.example.popularity.utils.BaseFragment;
 import com.example.popularity.R;
 
 public class LoginFragment extends BaseFragment {
