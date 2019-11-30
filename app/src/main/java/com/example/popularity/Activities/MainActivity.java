@@ -174,11 +174,11 @@ public class MainActivity extends AppCompatActivity implements
 
 
     private void openDrawer(){
-        drawerLayout.openDrawer(Gravity.RIGHT);
+        drawerLayout.openDrawer(Gravity.START);
     }
 
     private void closeDrawer(){
-        drawerLayout.closeDrawer(Gravity.RIGHT);
+        drawerLayout.closeDrawer(Gravity.START);
     }
 }
 
