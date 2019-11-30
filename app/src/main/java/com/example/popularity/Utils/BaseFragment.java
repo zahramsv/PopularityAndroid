@@ -17,7 +17,7 @@ import com.example.popularity.R;
 public class BaseFragment extends Fragment {
     Toolbar toolbar;
 
-    protected void initToolbar(final View view, String s ) {
+    protected void initToolbar(final View view, String title ) {
         toolbar = view.findViewById(R.id.toolbar);
         toolbar.setNavigationIcon(R.drawable.ic_menu);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -27,8 +27,9 @@ public class BaseFragment extends Fragment {
                // Toast.makeText(getActivity(),"sdsdf",Toast.LENGTH_LONG).show();
             }
         });
-        getActivity().setTitle(s);
+        getActivity().setTitle(title);
     }
+
 
 
     protected void initNavigationMenu(View view) {

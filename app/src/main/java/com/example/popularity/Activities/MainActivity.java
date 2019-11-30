@@ -69,11 +69,7 @@ public class MainActivity extends AppCompatActivity {
         switch (view.getId()) {
             case R.id.instagram_btn:
 
-                /*InstagramPopularityFragment fragment = new InstagramPopularityFragment();
-                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                transaction.setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.pop_enter, R.anim.pop_exit);
-                transaction.replace(R.id.your_placeholder, fragment);
-                transaction.commit();*/
+
 
                 showCustomDialog();
                 break;

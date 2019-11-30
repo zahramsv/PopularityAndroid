@@ -34,10 +34,24 @@ public class LoginFragment extends BaseFragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_login, container, false);
-        instagram_btn=view.findViewById(R.id.instagram_btn);
-        initToolbar(view,"Login"  );
+        clickEvents(view);
+        initToolbar(view,getString(R.string.login_with));
 
         return view;
+
+    }
+
+
+
+
+    //Fragment Button Click
+    public void clickEvents(View v) {
+
+        switch (v.getId())
+        {
+            case R.id.instagram_btn:
+                break;
+        }
 
     }
 
