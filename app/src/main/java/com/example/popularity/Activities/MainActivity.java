@@ -6,16 +6,20 @@ import android.os.AsyncTask;
 import android.os.Handler;
 import android.support.design.widget.TextInputEditText;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import com.example.popularity.Fragments.InstagramPopularityFragment;
 import com.example.popularity.Fragments.LoginFragment;
+import com.example.popularity.Fragments.MenuDrawer;
 import com.example.popularity.Fragments.SplashFragment;
 import com.example.popularity.Utils.BaseFragment;
 import com.example.popularity.R;
@@ -25,16 +29,25 @@ import java.io.IOException;
 import dev.niekirk.com.instagram4android.Instagram4Android;
 import dev.niekirk.com.instagram4android.requests.payload.InstagramLoginResult;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements
+        MenuDrawer.OnSlidingMenuFragmentListener
+{
 
     private TextInputEditText username, password;
     private String usernameTxt, passwordTxt;
     private InstagramLoginResult login;
     private Instagram4Android instagram;
+
+    DrawerLayout                    drawerLayout;
+    MenuDrawer             slidingMenuFragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        drawerLayout    = findViewById(R.id.drawer_layout);
+        slidingMenuFragment = (MenuDrawer) getSupportFragmentManager().findFragmentById(R.id.fragment_nd);
 
         openFragment(new SplashFragment(),false);
 
@@ -46,6 +59,15 @@ public class MainActivity extends AppCompatActivity {
                 openFragment(new LoginFragment(),false);
             }
         }, 2000);
+
+        ImageView menuDrawer = findViewById(R.id.menuDrawer);
+        menuDrawer.setOnClickListener(v->{
+            if(drawerLayout.isDrawerOpen(Gravity.RIGHT)){
+                openDrawer();
+            }else{
+                closeDrawer();
+            }
+        });
 
     }
 
@@ -133,43 +155,6 @@ public class MainActivity extends AppCompatActivity {
 
     private String TAG = "TAG";
 
-    private class AsyncCaller extends AsyncTask<Void, InstagramLoginResult, InstagramLoginResult> {
-        ProgressDialog pdLoading = new ProgressDialog(MainActivity.this);
-
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
-
-        @Override
-        protected InstagramLoginResult doInBackground(Void... voids) {
-            try {
-
-                instagram.login();
-                login = instagram.login();
-
-            } catch (IOException e) {
-                e.printStackTrace();
-                Log.i(TAG,e.getMessage());
-            }
-
-           return login;
-
-        }
-
-        @Override
-        protected void onPostExecute(InstagramLoginResult s) {
-            super.onPostExecute(s);
-            if(s!=null){
-
-            }
-           // Toast.makeText(LoginFragment.newInstance().getContext(),s,Toast.LENGTH_LONG).show();
-        }
-
-
-    }
-
     @Override
     public void onBackPressed() {
 
@@ -178,6 +163,25 @@ public class MainActivity extends AppCompatActivity {
         super.onBackPressed();
         else
             getSupportFragmentManager().popBackStack();
+    }
+
+    @Override
+    public void onBtn1Clicked() {
+
+    }
+
+    @Override
+    public void onBtn2Clicked() {
+
+    }
+
+
+    private void openDrawer(){
+        drawerLayout.openDrawer(Gravity.RIGHT);
+    }
+
+    private void closeDrawer(){
+        drawerLayout.closeDrawer(Gravity.RIGHT);
     }
 }
 

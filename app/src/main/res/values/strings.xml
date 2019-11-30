@@ -15,4 +15,7 @@
     <string name="rate_to_friends">Rate to friends</string>
     <string name="login_page">Login Page</string>
     <string name="login_with">Choose Login Way </string>
+
+    <string name="drawer_open">open</string>
+    <string name="drawer_close">close</string>
 </resources>

@@ -1,16 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<android.support.v4.widget.DrawerLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".Activities.MainActivity">
 
-    <FrameLayout
-        android:id="@+id/your_placeholder"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    </FrameLayout>
-
-</RelativeLayout>
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:orientation="vertical">
+       <android.support.v7.widget.Toolbar
+           android:layout_width="match_parent"
+           android:layout_height="50dp"
+           android:background="@color/colorAccent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:layout_weight="1"/>
+                <ImageView
+                    android:id="@+id/menuDrawer"
+                    android:padding="10dp"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:src="@drawable/ic_menu"/>
+            </LinearLayout>
+       </android.support.v7.widget.Toolbar>
+       <FrameLayout
+           android:id="@+id/your_placeholder"
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"/>
+   </LinearLayout>
+    <fragment
+        android:id="@+id/fragment_nd"
+        android:name="com.example.popularity.Fragments.MenuDrawer"
+        android:layout_width="280dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="right"
+        app:layout="@layout/fragment_menu_drawer" />
+</android.support.v4.widget.DrawerLayout>
