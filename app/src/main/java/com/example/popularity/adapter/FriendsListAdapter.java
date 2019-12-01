@@ -33,8 +33,6 @@ public class FriendsListAdapter extends RecyclerView.Adapter<FriendsListAdapter.
     public FriendsHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
 
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_friend, viewGroup, false);
-
-      //  View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_friend, viewGroup, false);
         return new FriendsHolder(view);
 
     }
@@ -57,14 +55,14 @@ public class FriendsListAdapter extends RecyclerView.Adapter<FriendsListAdapter.
     public class FriendsHolder extends RecyclerView.ViewHolder {
 
         //CircleImageView profile_image;
-        private ImageView ic_rate;
+        private ImageView rate;
         private TextView username;
-        private ImageView profile_image;
+        private ImageView profileimage;
 
         public FriendsHolder(@NonNull View itemView) {
             super(itemView);
-            //profile_image = itemView.findViewById(R.id.profile_image);
-           // ic_rate = itemView.findViewById(R.id.rate);
+            //profileImage = itemView.findViewById(R.id.profileimage);
+           // rate = itemView.findViewById(R.id.rate);
             username = itemView.findViewById(R.id.username);
         }
     }

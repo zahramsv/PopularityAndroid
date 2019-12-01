@@ -23,13 +23,12 @@
             android:orientation="vertical">
 
 
-
             <ImageView
+                android:id="@+id/profileimage"
                 android:layout_width="100dp"
-                android:layout_height="90dp"
 
-                android:src="@drawable/ic_person_black_24dp"
-                android:id="@+id/profile_image"/>
+                android:layout_height="99dp"
+                android:src="@drawable/ic_person_black_24dp" />
 
 
            <!-- <de.hdodenhof.circleimageview.CircleImageView

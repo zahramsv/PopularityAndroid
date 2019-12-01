@@ -17,18 +17,18 @@ import com.example.popularity.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class InstagramPopularityFragment extends BaseFragment {
+public class HomeFragment extends BaseFragment {
 
 
     private RecyclerView favorites_recycler_view,friends_recycler_view;
 
-    public InstagramPopularityFragment() {
+    public HomeFragment() {
         // Required empty public constructor
     }
 
 
-    public static InstagramPopularityFragment newInstance() {
-        InstagramPopularityFragment fragment = new InstagramPopularityFragment();
+    public static HomeFragment newInstance() {
+        HomeFragment fragment = new HomeFragment();
         return fragment;
     }
 
@@ -41,14 +41,14 @@ public class InstagramPopularityFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         View view = inflater.inflate(R.layout.fragment_instageam_popularity, container, false);
-
-
         friends_recycler_view=view.findViewById(R.id.friends_recycler_view);
         LinearLayoutManager layoutManager1=new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false);
         friends_recycler_view.setLayoutManager(layoutManager1);
 
+
+        //for test
         List<Friend> friends=new ArrayList<>();
         friends.add(new Friend("Sara",false));
         friends.add(new Friend("Ali",false));
@@ -58,8 +58,6 @@ public class InstagramPopularityFragment extends BaseFragment {
         friends.add(new Friend("Fereshte",false));
         FriendsListAdapter friendsListAdapter=new FriendsListAdapter(friends,getActivity());
         friends_recycler_view.setAdapter(friendsListAdapter);
-
-
 
         favorites_recycler_view=view.findViewById(R.id.favorites_recycler_view);
         LinearLayoutManager layoutManager=new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false);
@@ -75,10 +73,7 @@ public class InstagramPopularityFragment extends BaseFragment {
         RateListAdapter rateListAdapter=new RateListAdapter(rates,getActivity());
         favorites_recycler_view.setAdapter(rateListAdapter);
 
-
         return view;
     }
-
-
 
 }

@@ -53,11 +53,11 @@ public class RateListAdapter extends RecyclerView.Adapter<RateListAdapter.RateHo
 
 
         private TextView attribute;
-        private AppCompatRatingBar ratingBar;
+        private AppCompatRatingBar rating;
         public RateHolder(@NonNull View itemView) {
             super(itemView);
             attribute=itemView.findViewById(R.id.attribute);
-            ratingBar=itemView.findViewById(R.id.rating);
+            rating=itemView.findViewById(R.id.rating);
         }
     }
 }

@@ -3,6 +3,7 @@ package com.example.popularity.activity;
 import android.app.Dialog;
 import android.os.Handler;
 import android.support.design.widget.TextInputEditText;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -14,8 +15,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.example.popularity.fragment.InstagramPopularityFragment;
+import com.example.popularity.fragment.HomeFragment;
 import com.example.popularity.fragment.LoginFragment;
 import com.example.popularity.fragment.MenuDrawerFragment;
 import com.example.popularity.fragment.SplashFragment;
@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity implements
         textView.setText(s);
     }
 
-    private void openFragment(BaseFragment fragment,Boolean addStack){
+    private void openFragment(Fragment fragment,Boolean addStack){
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.pop_enter, R.anim.pop_exit);
@@ -109,7 +109,7 @@ public class MainActivity extends AppCompatActivity implements
     private void showCustomDialog() {
         final Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.custom_dialog);
+        dialog.setContentView(R.layout.sign_in_dialog);
         dialog.setCancelable(true);
 
         WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
@@ -130,7 +130,7 @@ public class MainActivity extends AppCompatActivity implements
                 loginToInstagram(usernameTxt, passwordTxt);
 
                 dialog.dismiss();
-                openFragment(new InstagramPopularityFragment(),true);
+                openFragment(new HomeFragment(),true);
 
             }
         });
@@ -162,17 +162,23 @@ public class MainActivity extends AppCompatActivity implements
             getSupportFragmentManager().popBackStack();
     }
 
-    @Override
+   /* @Override
     public void onBtn1Clicked(String str) {
         setTitle(str);
-    }
+    }*/
+
+     @Override
+   public void onBtn1Clicked(Fragment fragment) {
+       openFragment(fragment,true);
+   }
+
 
     @Override
-    public void onBtn2Clicked() {
+    public void onBtn2Clicked(Fragment fragment)
+    {
 
+        openFragment(fragment,true);
     }
-
-
     private void openDrawer(){
         drawerLayout.openDrawer(Gravity.START);
     }
