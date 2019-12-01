@@ -8,19 +8,104 @@
     android:orientation="vertical"
     android:layout_gravity="start"
     android:background="@color/white">
-    <Button
-        android:id="@+id/btn1"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:text="one"
-        android:textColor="@color/black"/>
 
 
-    <Button
-        android:id="@+id/btn2"
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:text="two"
-        android:textColor="@color/black"/>
+        android:layout_height="170dp">
+
+        <ImageView
+
+            android:layout_width="match_parent"
+            android:layout_height="170dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/spash_pic" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="@dimen/spacing_large"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing_medium"
+                    android:text="Zahra Mousavi"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+
+                <TextView
+                    android:id="@+id/email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Instagram Account"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </RelativeLayout>
+
+
+    <android.support.v7.widget.AppCompatButton
+        android:backgroundTint="@color/red_400"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/t"
+        android:paddingLeft="@dimen/spacing_middle"
+        android:drawableLeft="@drawable/ic_menu"
+        android:text="@string/i_canot_see"/>
+    <android.support.v7.widget.AppCompatButton
+        android:backgroundTint="@color/red_400"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/PrivacyPolicy"
+        android:drawableLeft="@drawable/ic_privacy"
+        android:text="@string/privacy_policy"
+        />
+    <android.support.v7.widget.AppCompatButton
+        android:backgroundTint="@color/red_400"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/Settings"
+        android:paddingLeft="@dimen/spacing_middle"
+        android:drawableLeft="@drawable/ic_settings"
+        android:text="@string/settings"
+
+        />
+
+    <android.support.v7.widget.AppCompatButton
+        android:backgroundTint="@color/red_400"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/RateUs"
+        android:minHeight="0dp"
+        android:minWidth="0dp"
+        android:paddingLeft="@dimen/spacing_middle"
+        android:drawableLeft="@drawable/ic_rate"
+        android:text="@string/rate_us"
+        />
+
+
+    <android.support.v7.widget.AppCompatButton
+        android:backgroundTint="@color/red_400"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/aboutUs"
+        android:paddingLeft="@dimen/spacing_middle"
+        android:drawableLeft="@drawable/ic_about_us"
+        android:text="@string/about_us"
+        />
+
 
 </LinearLayout>

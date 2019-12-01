@@ -73,7 +73,7 @@ public class MenuDrawerFragment extends Fragment {
 
     private void define() {
 
-        btn1 = layout.findViewById(R.id.btn1);
+        /*btn1 = layout.findViewById(R.id.btn1);
         btn2= layout.findViewById(R.id.btn2);
 
         btn1.setOnClickListener(v -> {
@@ -85,7 +85,7 @@ public class MenuDrawerFragment extends Fragment {
             if(mListener!=null) {
                 mListener.onBtn2Clicked();
             }
-        });
+        });*/
 
     }
 

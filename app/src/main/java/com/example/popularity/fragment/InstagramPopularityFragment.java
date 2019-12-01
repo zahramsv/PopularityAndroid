@@ -46,7 +46,7 @@ public class InstagramPopularityFragment extends BaseFragment {
 
 
         friends_recycler_view=view.findViewById(R.id.friends_recycler_view);
-        LinearLayoutManager layoutManager1=new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false);
+        LinearLayoutManager layoutManager1=new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false);
         friends_recycler_view.setLayoutManager(layoutManager1);
 
         List<Friend> friends=new ArrayList<>();
@@ -62,13 +62,16 @@ public class InstagramPopularityFragment extends BaseFragment {
 
 
         favorites_recycler_view=view.findViewById(R.id.favorites_recycler_view);
-        LinearLayoutManager layoutManager=new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false);
+        LinearLayoutManager layoutManager=new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false);
         favorites_recycler_view.setLayoutManager(layoutManager);
         List<Rate> rates=new ArrayList<>();
         rates.add(new Rate("Personality",3));
         rates.add(new Rate("Beauty",2));
         rates.add(new Rate("Style",5));
         rates.add(new Rate("Good Content!",3));
+        rates.add(new Rate("Empathetic",3));
+        rates.add(new Rate("Intuitive",5));
+        rates.add(new Rate("Creative",4));
         RateListAdapter rateListAdapter=new RateListAdapter(rates,getActivity());
         favorites_recycler_view.setAdapter(rateListAdapter);
 

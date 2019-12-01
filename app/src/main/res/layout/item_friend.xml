@@ -16,6 +16,7 @@
 
 
         <LinearLayout
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
@@ -24,9 +25,10 @@
 
 
             <ImageView
-                android:layout_width="96dp"
-                android:layout_height="96dp"
-                android:src="@drawable/photo_female_1"
+                android:layout_width="100dp"
+                android:layout_height="90dp"
+
+                android:src="@drawable/ic_person_black_24dp"
                 android:id="@+id/profile_image"/>
 
 
@@ -44,13 +46,12 @@
             <ImageView
                 android:id="@+id/rate"
                 android:background="@drawable/ic_rate"
-                android:backgroundTint="@color/red_600"
+               android:backgroundTint="@color/red_600"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_large"
-                android:text="Adams Green"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
-                android:textColor="@color/grey_90" />
+                android:layout_marginTop="@dimen/spacing_small"
+
+                />
 
             <TextView
                 android:id="@+id/username"
@@ -65,7 +66,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginTop="@dimen/spacing_middle"
+                android:layout_marginTop="@dimen/spacing_small"
                 android:background="@color/grey_5" />
 
 

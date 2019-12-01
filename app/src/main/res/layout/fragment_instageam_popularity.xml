@@ -9,12 +9,13 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:weightSum="3">
+        android:weightSum="4">
 
 
         <android.support.v7.widget.RecyclerView
+            android:layout_marginTop="@dimen/spacing_middle"
             tools:listitem="@layout/item_rate"
             android:id="@+id/favorites_recycler_view"
             android:layout_width="match_parent"
@@ -25,6 +26,7 @@
 
 
         <android.support.v7.widget.RecyclerView
+            android:layout_marginTop="@dimen/spacing_middle"
             android:orientation="horizontal"
             tools:listitem="@layout/item_friend"
             android:id="@+id/friends_recycler_view"
@@ -33,8 +35,25 @@
             android:layout_weight="1.3">
 
         </android.support.v7.widget.RecyclerView>
+
+
+
     </LinearLayout>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.7">
+
+        <android.support.design.widget.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="@dimen/spacing_middle"
+            android:background="@color/red_600"/>
+
+    </RelativeLayout>
 
 
 

@@ -32,8 +32,10 @@ public class FriendsListAdapter extends RecyclerView.Adapter<FriendsListAdapter.
     @Override
     public FriendsHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
 
-        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_friend, viewGroup, false);
-        return new FriendsHolder(v);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_friend, viewGroup, false);
+
+      //  View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_friend, viewGroup, false);
+        return new FriendsHolder(view);
 
     }
 
@@ -61,8 +63,8 @@ public class FriendsListAdapter extends RecyclerView.Adapter<FriendsListAdapter.
 
         public FriendsHolder(@NonNull View itemView) {
             super(itemView);
-            profile_image = itemView.findViewById(R.id.profile_image);
-            ic_rate = itemView.findViewById(R.id.rate);
+            //profile_image = itemView.findViewById(R.id.profile_image);
+           // ic_rate = itemView.findViewById(R.id.rate);
             username = itemView.findViewById(R.id.username);
         }
     }
