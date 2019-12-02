@@ -58,34 +58,37 @@
 
 
     <android.support.v7.widget.AppCompatButton
-        android:backgroundTint="@color/red_400"
+        android:backgroundTint="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/t"
         android:paddingLeft="@dimen/spacing_middle"
+        android:drawableTint="@color/red_400"
         android:drawableLeft="@drawable/ic_menu"
         android:text="@string/i_canot_see"/>
     <android.support.v7.widget.AppCompatButton
-        android:backgroundTint="@color/red_400"
+        android:backgroundTint="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/privacyPolicy"
         android:drawableLeft="@drawable/ic_privacy"
+        android:drawableTint="@color/red_400"
         android:text="@string/privacy_policy"
         />
     <android.support.v7.widget.AppCompatButton
-        android:backgroundTint="@color/red_400"
+        android:backgroundTint="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/settings"
         android:paddingLeft="@dimen/spacing_middle"
+        android:drawableTint="@color/red_400"
         android:drawableLeft="@drawable/ic_settings"
         android:text="@string/settings"
 
         />
 
     <android.support.v7.widget.AppCompatButton
-        android:backgroundTint="@color/red_400"
+        android:backgroundTint="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/rateUs"
@@ -93,16 +96,18 @@
         android:minWidth="0dp"
         android:paddingLeft="@dimen/spacing_middle"
         android:drawableLeft="@drawable/ic_rate"
+        android:drawableTint="@color/red_400"
         android:text="@string/rate_us"
         />
 
 
     <android.support.v7.widget.AppCompatButton
-        android:backgroundTint="@color/red_400"
+        android:backgroundTint="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/aboutUs"
         android:paddingLeft="@dimen/spacing_middle"
+        android:drawableTint="@color/red_400"
         android:drawableLeft="@drawable/ic_about_us"
         android:text="@string/about_us"
         />

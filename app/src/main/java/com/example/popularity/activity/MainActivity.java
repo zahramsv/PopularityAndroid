@@ -170,6 +170,7 @@ public class MainActivity extends AppCompatActivity implements
      @Override
    public void onBtn1Clicked(Fragment fragment) {
        openFragment(fragment,true);
+       closeDrawer();
    }
 
 
@@ -178,6 +179,7 @@ public class MainActivity extends AppCompatActivity implements
     {
 
         openFragment(fragment,true);
+        closeDrawer();
     }
     private void openDrawer(){
         drawerLayout.openDrawer(Gravity.START);
