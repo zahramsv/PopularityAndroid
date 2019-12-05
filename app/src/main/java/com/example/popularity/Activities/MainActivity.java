@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
@@ -21,6 +22,15 @@ import com.example.popularity.Fragments.MenuDrawer;
 import com.example.popularity.Fragments.SplashFragment;
 import com.example.popularity.Utils.BaseFragment;
 import com.example.popularity.R;
+import com.facebook.AccessToken;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.login.LoginManager;
+
+import org.json.JSONObject;
+
+import java.util.Arrays;
+
 import dev.niekirk.com.instagram4android.Instagram4Android;
 import dev.niekirk.com.instagram4android.requests.payload.InstagramLoginResult;
 
@@ -165,10 +175,29 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     public void onBtn1Clicked(String str) {
         setTitle(str);
+        LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("public_profile"));
     }
 
     @Override
     public void onBtn2Clicked() {
+
+        AccessToken accessToken = AccessToken.getCurrentAccessToken();
+        boolean isLoggedIn = accessToken != null && !accessToken.isExpired();
+        if(isLoggedIn){
+            GraphRequest request = GraphRequest.newMeRequest(
+                    accessToken,
+                    new GraphRequest.GraphJSONObjectCallback() {
+                        @Override
+                        public void onCompleted(JSONObject object, GraphResponse response) {
+                            Log.i("app_tag",response.toString());
+                        }
+                    });
+
+            Bundle parameters = new Bundle();
+            parameters.putString("fields", "id,name");
+            request.setParameters(parameters);
+            request.executeAsync();
+        }
 
     }
 
