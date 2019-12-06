@@ -43,7 +43,9 @@ dependencies {
     // Circle ImageView
     implementation 'de.hdodenhof:circleimageview:3.0.1'
     //Font Library
-    implementation 'uk.co.chrisjenx:calligraphy:2.3.0'
-    //facebook sdk
+    implementation ('uk.co.chrisjenx:calligraphy:2.3.0') {
+        exclude module: 'support-core-utils'
+    }
+        //facebook sdk
     implementation 'com.facebook.android:facebook-android-sdk:5.0.0'
 }
