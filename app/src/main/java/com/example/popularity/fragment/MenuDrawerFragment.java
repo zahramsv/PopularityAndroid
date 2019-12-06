@@ -2,17 +2,20 @@ package com.example.popularity.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.widget.AppCompatButton;
-import android.support.v7.widget.Toolbar;
+
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.widget.AppCompatButton;
+import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+
 import com.example.popularity.R;
 
 
@@ -23,7 +26,7 @@ public class MenuDrawerFragment extends Fragment {
     private ViewGroup                       layout;
     private Button                          btn1,btn2;
     private OnSlidingMenuFragmentListener   mListener;
-    private AppCompatButton                 rateUs,t,privacyPolicy,settings,aboutUs;
+    private AppCompatButton rateUs,t,privacyPolicy,settings,aboutUs;
     public MenuDrawerFragment(){}
 
     @Override
@@ -94,6 +97,13 @@ public class MenuDrawerFragment extends Fragment {
                 mListener.onBtn2Clicked(PrivacyPolicyFragment.newInstance());
             }
         });
+
+        rateUs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mListener.onTestFaceBook();
+            }
+        });
         /*btn1 = layout.findViewById(R.id.btn1);
         btn2= layout.findViewById(R.id.btn2);
 
@@ -114,6 +124,7 @@ public class MenuDrawerFragment extends Fragment {
     public interface OnSlidingMenuFragmentListener {
         void onBtn1Clicked(Fragment fragment);
         void onBtn2Clicked(Fragment fragment);
+        void onTestFaceBook();
     }
 
 }

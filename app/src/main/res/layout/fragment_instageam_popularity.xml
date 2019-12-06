@@ -22,7 +22,7 @@
             android:text="@string/your_popularity"
             android:textColor="@color/black"/>
 
-        <android.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:layout_marginTop="@dimen/spacing_middle"
             tools:listitem="@layout/item_rate"
             android:id="@+id/favorites_recycler_view"
@@ -44,7 +44,7 @@
                 android:textColor="@color/black"/>
 
 
-        <android.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:layout_marginTop="@dimen/spacing_middle"
             android:orientation="horizontal"
             tools:listitem="@layout/item_friend"
@@ -62,7 +62,7 @@
         android:layout_height="match_parent"
         android:layout_weight="0.7">
 
-        <android.support.design.widget.FloatingActionButton
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"

@@ -1,15 +1,7 @@
 package com.example.popularity.activity;
 
 import android.app.Dialog;
-import android.content.Context;
-import android.content.res.AssetManager;
-import android.graphics.Typeface;
 import android.os.Handler;
-import android.support.design.widget.TextInputEditText;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -19,25 +11,25 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+
 import com.example.popularity.fragment.HomeFragment;
 import com.example.popularity.fragment.LoginFragment;
 import com.example.popularity.fragment.MenuDrawerFragment;
 import com.example.popularity.fragment.SplashFragment;
-import com.example.popularity.utils.BaseFragment;
 import com.example.popularity.R;
 import com.facebook.AccessToken;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
-import com.facebook.login.LoginManager;
-import java.util.Locale;
+import com.google.android.material.textfield.TextInputEditText;
+
 import org.json.JSONObject;
 
-import java.util.Arrays;
-
-import dev.niekirk.com.instagram4android.Instagram4Android;
-import dev.niekirk.com.instagram4android.requests.payload.InstagramLoginResult;
-import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
-import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class MainActivity extends AppCompatActivity implements
         MenuDrawerFragment.OnSlidingMenuFragmentListener
@@ -45,19 +37,22 @@ public class MainActivity extends AppCompatActivity implements
 
     private TextInputEditText username, password;
     private String usernameTxt, passwordTxt;
-    private InstagramLoginResult login;
-    private Instagram4Android instagram;
 
-    DrawerLayout                    drawerLayout;
+    DrawerLayout drawerLayout;
     MenuDrawerFragment slidingMenuFragment;
 
-    @Override
-    protected void attachBaseContext(Context newBase) {
-        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
-    }
+//    @Override
+//    protected void attachBaseContext(Context newBase) {
+//        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+//    }
 
 
 
+  //  keytool -exportcert -alias androiddebugkey -keystore "C:\Users\zahra\.android\debug.keystore" | "E:\openssl-0.9.8k_X64\bin\openssl" sha1 -binary | "E:\openssl-0.9.8k_X64\bin\openssl" base64
+
+
+    //ga0RGNYHvNM5d0SLGQfpQWAPGJ8=
+    // ga0RGNYHvNM5d0SLGQfpQWAPGJ8
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,7 +86,7 @@ public class MainActivity extends AppCompatActivity implements
         textView.setText(s);
     }
 
-    private void openFragment(Fragment fragment,Boolean addStack){
+    private void openFragment(Fragment fragment, Boolean addStack){
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.pop_enter, R.anim.pop_exit);
@@ -228,12 +223,18 @@ public class MainActivity extends AppCompatActivity implements
         openFragment(fragment,true);
         closeDrawer();
     }
+
+    @Override
+    public void onTestFaceBook() {
+        getFacebookData();
+    }
+
     private void openDrawer(){
-        drawerLayout.openDrawer(Gravity.START);
+        drawerLayout.openDrawer(GravityCompat.START);
     }
 
     private void closeDrawer(){
-        drawerLayout.closeDrawer(Gravity.START);
+        drawerLayout.closeDrawer(GravityCompat.START);
     }
 }
 

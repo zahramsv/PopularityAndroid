@@ -1,16 +1,15 @@
 package com.example.popularity.fragment;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.popularity.R;
+import com.example.popularity.utils.BaseFragment;
 
-public class AboutUsFragment extends Fragment {
+public class AboutUsFragment extends BaseFragment {
 
 
     public AboutUsFragment() {

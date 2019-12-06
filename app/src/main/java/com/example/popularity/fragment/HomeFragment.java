@@ -1,11 +1,13 @@
 package com.example.popularity.fragment;
 
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.popularity.adapter.FriendsListAdapter;
 import com.example.popularity.adapter.RateListAdapter;
@@ -59,8 +61,10 @@ public class HomeFragment extends BaseFragment {
         FriendsListAdapter friendsListAdapter=new FriendsListAdapter(friends,getActivity());
         friends_recycler_view.setAdapter(friendsListAdapter);
 
+
+        //Vertical
         favorites_recycler_view=view.findViewById(R.id.favorites_recycler_view);
-        LinearLayoutManager layoutManager=new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false);
+        LinearLayoutManager layoutManager=new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false);
         favorites_recycler_view.setLayoutManager(layoutManager);
         List<Rate> rates=new ArrayList<>();
         rates.add(new Rate("Personality",3));

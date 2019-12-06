@@ -1,16 +1,16 @@
 package com.example.popularity.adapter;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.AppCompatRatingBar;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatRatingBar;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.popularity.R;
-import com.example.popularity.model.Friend;
 import com.example.popularity.model.Rate;
 
 import java.util.ArrayList;

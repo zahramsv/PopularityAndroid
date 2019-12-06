@@ -2,7 +2,7 @@ package com.example.popularity.fragment;
 
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +10,7 @@ import com.example.popularity.utils.BaseFragment;
 import com.example.popularity.R;
 
 /**
- * A simple {@link Fragment} subclass.
+ * A simple {@link  } subclass.
  * Activities that contain this fragment must implement the
  * {@link SplashFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.

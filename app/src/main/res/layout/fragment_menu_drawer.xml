@@ -57,7 +57,7 @@
     </RelativeLayout>
 
 
-    <android.support.v7.widget.AppCompatButton
+    <androidx.appcompat.widget.AppCompatButton
         android:backgroundTint="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -66,7 +66,7 @@
         android:drawableTint="@color/red_400"
         android:drawableLeft="@drawable/ic_menu"
         android:text="@string/i_canot_see"/>
-    <android.support.v7.widget.AppCompatButton
+    <androidx.appcompat.widget.AppCompatButton
         android:backgroundTint="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -75,7 +75,7 @@
         android:drawableTint="@color/red_400"
         android:text="@string/privacy_policy"
         />
-    <android.support.v7.widget.AppCompatButton
+    <androidx.appcompat.widget.AppCompatButton
         android:backgroundTint="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -87,7 +87,7 @@
 
         />
 
-    <android.support.v7.widget.AppCompatButton
+    <androidx.appcompat.widget.AppCompatButton
         android:backgroundTint="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -101,7 +101,7 @@
         />
 
 
-    <android.support.v7.widget.AppCompatButton
+    <androidx.appcompat.widget.AppCompatButton
         android:backgroundTint="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
