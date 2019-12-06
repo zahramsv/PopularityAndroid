@@ -14,15 +14,34 @@
         android:weightSum="4">
 
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_marginTop="@dimen/spacing_middle"
+            android:layout_marginLeft="@dimen/spacing_large"
+            android:layout_height="wrap_content"
+            android:text="@string/your_popularity"
+            android:textColor="@color/black"/>
+
         <android.support.v7.widget.RecyclerView
             android:layout_marginTop="@dimen/spacing_middle"
             tools:listitem="@layout/item_rate"
             android:id="@+id/favorites_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1.7">
+            android:layout_weight="1.7"/>
 
-        </android.support.v7.widget.RecyclerView>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/black"/>
+            <TextView
+                android:layout_width="wrap_content"
+               android:layout_marginTop="@dimen/spacing_middle"
+                android:layout_marginLeft="@dimen/spacing_large"
+                android:layout_height="wrap_content"
+                android:text="@string/your_friends"
+                android:textColor="@color/black"/>
 
 
         <android.support.v7.widget.RecyclerView
@@ -32,9 +51,7 @@
             android:id="@+id/friends_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1.3">
-
-        </android.support.v7.widget.RecyclerView>
+            android:layout_weight="1.3"/>
 
 
 

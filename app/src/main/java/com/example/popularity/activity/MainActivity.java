@@ -1,6 +1,9 @@
 package com.example.popularity.activity;
 
 import android.app.Dialog;
+import android.content.Context;
+import android.content.res.AssetManager;
+import android.graphics.Typeface;
 import android.os.Handler;
 import android.support.design.widget.TextInputEditText;
 import android.support.v4.app.Fragment;
@@ -21,8 +24,13 @@ import com.example.popularity.fragment.MenuDrawerFragment;
 import com.example.popularity.fragment.SplashFragment;
 import com.example.popularity.utils.BaseFragment;
 import com.example.popularity.R;
+
+import java.util.Locale;
+
 import dev.niekirk.com.instagram4android.Instagram4Android;
 import dev.niekirk.com.instagram4android.requests.payload.InstagramLoginResult;
+import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class MainActivity extends AppCompatActivity implements
         MenuDrawerFragment.OnSlidingMenuFragmentListener
@@ -37,14 +45,24 @@ public class MainActivity extends AppCompatActivity implements
     MenuDrawerFragment slidingMenuFragment;
 
     @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
+
+
+
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         drawerLayout    = findViewById(R.id.drawer_layout);
         slidingMenuFragment = (MenuDrawerFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_nd);
 
         openFragment(new SplashFragment(),false);
+
 
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
@@ -61,6 +79,8 @@ public class MainActivity extends AppCompatActivity implements
         });
 
     }
+
+
 
     public void setTitle(String s)
     {

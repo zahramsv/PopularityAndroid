@@ -40,4 +40,5 @@ dependencies {
 
     implementation 'com.github.charlieAndroidDev:Instagram4Android:0.2.7'    // instagram api
     implementation 'de.hdodenhof:circleimageview:3.0.1'                // Circle ImageView
+    implementation 'uk.co.chrisjenx:calligraphy:2.3.0'                  //Font Library
 }
