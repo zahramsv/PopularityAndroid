@@ -28,7 +28,11 @@ If you choose to use [my/our] Service, then you agree to the collection and use 
 The terms used in this Privacy Policy have the same meanings as in our Terms and Conditions, which is accessible at [App Name] unless otherwise defined in this Privacy Policy.</string>
 
 
-<string name="your_popularity">your popularity </string>
-<string name="your_friends">your friends</string>
+    <string name="your_popularity">your popularity </string>
+    <string name="your_friends">your friends</string>
+
+    <string name="facebook_app_id">424534631577046</string>
+    <string name="fb_login_protocol_scheme">fb424534631577046</string>
+
 </resources>
 

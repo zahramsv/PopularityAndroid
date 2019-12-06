@@ -36,6 +36,17 @@
             android:drawableLeft="@drawable/facebook_ic"
             android:layout_width="@dimen/login_btn_length"
             android:layout_height="@dimen/login_btn_height" />
+
+
+        <com.facebook.login.widget.LoginButton
+            android:id="@+id/login_button"
+            android:layout_width="@dimen/login_btn_length"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="30dp"
+            android:layout_below="@+id/facebook_btn"
+            android:layout_centerInParent="true" />
     </RelativeLayout>
 
 </FrameLayout>

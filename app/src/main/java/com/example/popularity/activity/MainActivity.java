@@ -11,6 +11,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
@@ -24,8 +25,14 @@ import com.example.popularity.fragment.MenuDrawerFragment;
 import com.example.popularity.fragment.SplashFragment;
 import com.example.popularity.utils.BaseFragment;
 import com.example.popularity.R;
-
+import com.facebook.AccessToken;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.login.LoginManager;
 import java.util.Locale;
+import org.json.JSONObject;
+
+import java.util.Arrays;
 
 import dev.niekirk.com.instagram4android.Instagram4Android;
 import dev.niekirk.com.instagram4android.requests.payload.InstagramLoginResult;
@@ -57,12 +64,10 @@ public class MainActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         drawerLayout    = findViewById(R.id.drawer_layout);
         slidingMenuFragment = (MenuDrawerFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_nd);
 
         openFragment(new SplashFragment(),false);
-
 
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
@@ -79,8 +84,6 @@ public class MainActivity extends AppCompatActivity implements
         });
 
     }
-
-
 
     public void setTitle(String s)
     {
@@ -185,12 +188,36 @@ public class MainActivity extends AppCompatActivity implements
    /* @Override
     public void onBtn1Clicked(String str) {
         setTitle(str);
+        LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("public_profile"));
+
     }*/
 
      @Override
    public void onBtn1Clicked(Fragment fragment) {
        openFragment(fragment,true);
        closeDrawer();
+
+   }
+
+
+   private void getFacebookData(){
+       AccessToken accessToken = AccessToken.getCurrentAccessToken();
+       boolean isLoggedIn = accessToken != null && !accessToken.isExpired();
+       if(isLoggedIn){
+           GraphRequest request = GraphRequest.newMeRequest(
+                   accessToken,
+                   new GraphRequest.GraphJSONObjectCallback() {
+                       @Override
+                       public void onCompleted(JSONObject object, GraphResponse response) {
+                           Log.i("app_tag",response.toString());
+                       }
+                   });
+
+           Bundle parameters = new Bundle();
+           parameters.putString("fields", "id,name");
+           request.setParameters(parameters);
+           request.executeAsync();
+       }
    }
 
 
