@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="170dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/spash_pic" />
+            android:src="@drawable/ic_app" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -57,15 +57,6 @@
     </RelativeLayout>
 
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:backgroundTint="@color/white"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/t"
-        android:paddingLeft="@dimen/spacing_middle"
-        android:drawableTint="@color/red_400"
-        android:drawableLeft="@drawable/ic_menu"
-        android:text="@string/i_canot_see"/>
     <androidx.appcompat.widget.AppCompatButton
         android:backgroundTint="@color/white"
         android:layout_width="match_parent"

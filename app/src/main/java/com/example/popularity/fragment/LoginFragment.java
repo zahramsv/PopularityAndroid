@@ -1,5 +1,6 @@
 package com.example.popularity.fragment;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,8 +9,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.widget.Button;
+
+import androidx.annotation.NonNull;
+
 import com.example.popularity.utils.BaseFragment;
 import com.example.popularity.R;
+import com.example.popularity.utils.ToolbarState;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -23,7 +28,7 @@ public class LoginFragment extends BaseFragment {
 
 
     Button instagram_btn;
-
+    private ToolbarState toolbarState;
     public LoginFragment() {
         // Required empty public constructor
     }
@@ -40,6 +45,7 @@ public class LoginFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        toolbarState.toolbarState(true);
         View view = inflater.inflate(R.layout.fragment_login, container, false);
         clickEvents(view);
 
@@ -81,8 +87,6 @@ public class LoginFragment extends BaseFragment {
     }
 
 
-
-
     //Fragment Button Click
     public void clickEvents(View v) {
 
@@ -95,11 +99,20 @@ public class LoginFragment extends BaseFragment {
     }
 
 
-
     @Override
     public Animation onCreateAnimation(int transit, boolean enter, int nextAnim) {
         return super.onCreateAnimation(transit, enter, nextAnim);
     }
 
 
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        if (context instanceof MenuDrawerFragment.OnSlidingMenuFragmentListener) {
+            toolbarState = (ToolbarState) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnAccountingMainFragmentInteractionListener");
+        }
+    }
 }

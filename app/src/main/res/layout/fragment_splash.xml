@@ -3,12 +3,76 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:theme="http://schemas.android.com/apk/res-auto"
     tools:context=".fragment.SplashFragment">
 
-    <ImageView
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/spacing_xlarge"
+            android:layout_marginTop="@dimen/spacing_xxlarge"
+            android:text="@string/social_popularity"
+            android:textAlignment="center"
+            android:textSize="@dimen/app_title_size"
+            android:textColor="@color/black" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/spacing_xxxxlarge"
+            >
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="@dimen/splash_pic_width"
+                android:layout_height="@dimen/splash_pic_height"
+                android:layout_centerInParent="true"
+                android:src="@drawable/popularity_1"/>
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/spash_pic"
-        android:scaleType="centerCrop"/>
+        android:layout_gravity="bottom|end"
+       >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <androidx.appcompat.widget.AppCompatTextView
+                android:textAlignment="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_large"
+                android:text="@string/app_name"
+                android:textSize="@dimen/app_name_txt_size"
+                android:textColor="@color/black" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_middle"
+                android:layout_marginBottom="@dimen/spacing_large"
+                android:text="@string/app_version"
+                android:textAlignment="center"
+                android:textColor="@color/black" />
+
+
+
+        </LinearLayout>
+    </RelativeLayout>
+
 
 </FrameLayout>

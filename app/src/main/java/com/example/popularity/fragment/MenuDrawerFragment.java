@@ -17,6 +17,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
 import com.example.popularity.R;
+import com.example.popularity.utils.ToolbarState;
 
 
 public class MenuDrawerFragment extends Fragment {
@@ -27,6 +28,7 @@ public class MenuDrawerFragment extends Fragment {
     private Button                          btn1,btn2;
     private OnSlidingMenuFragmentListener   mListener;
     private AppCompatButton rateUs,t,privacyPolicy,settings,aboutUs;
+
     public MenuDrawerFragment(){}
 
     @Override
@@ -82,7 +84,7 @@ public class MenuDrawerFragment extends Fragment {
         rateUs=layout.findViewById(R.id.rateUs);
         settings=layout.findViewById(R.id.settings);
         privacyPolicy=layout.findViewById(R.id.privacyPolicy);
-        t=layout.findViewById(R.id.t);
+      //  t=layout.findViewById(R.id.t);
 
         aboutUs.setOnClickListener(v->{
             if (mListener!=null)

@@ -23,6 +23,7 @@ import com.example.popularity.fragment.LoginFragment;
 import com.example.popularity.fragment.MenuDrawerFragment;
 import com.example.popularity.fragment.SplashFragment;
 import com.example.popularity.R;
+import com.example.popularity.utils.ToolbarState;
 import com.facebook.AccessToken;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
@@ -32,7 +33,7 @@ import org.json.JSONObject;
 
 
 public class MainActivity extends AppCompatActivity implements
-        MenuDrawerFragment.OnSlidingMenuFragmentListener
+        MenuDrawerFragment.OnSlidingMenuFragmentListener,ToolbarState
 {
 
     private TextInputEditText username, password;
@@ -41,18 +42,6 @@ public class MainActivity extends AppCompatActivity implements
     DrawerLayout drawerLayout;
     MenuDrawerFragment slidingMenuFragment;
 
-//    @Override
-//    protected void attachBaseContext(Context newBase) {
-//        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
-//    }
-
-
-
-  //  keytool -exportcert -alias androiddebugkey -keystore "C:\Users\zahra\.android\debug.keystore" | "E:\openssl-0.9.8k_X64\bin\openssl" sha1 -binary | "E:\openssl-0.9.8k_X64\bin\openssl" base64
-
-
-    //ga0RGNYHvNM5d0SLGQfpQWAPGJ8=
-    // ga0RGNYHvNM5d0SLGQfpQWAPGJ8
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,6 +76,7 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     private void openFragment(Fragment fragment, Boolean addStack){
+
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.pop_enter, R.anim.pop_exit);
@@ -195,6 +185,8 @@ public class MainActivity extends AppCompatActivity implements
    }
 
 
+   //GraphRequest - ApiRequest
+    // in nabaiad inja bashe baiad dakhel loginFragment to inSuccess bezar
    private void getFacebookData(){
        AccessToken accessToken = AccessToken.getCurrentAccessToken();
        boolean isLoggedIn = accessToken != null && !accessToken.isExpired();
@@ -205,6 +197,10 @@ public class MainActivity extends AppCompatActivity implements
                        @Override
                        public void onCompleted(JSONObject object, GraphResponse response) {
                            Log.i("app_tag",response.toString());
+                           Log.i("app_tag_object",object.toString());
+
+                           //Call loginBySocial Mahad
+                           //parse Recived Data
                        }
                    });
 
@@ -235,6 +231,20 @@ public class MainActivity extends AppCompatActivity implements
 
     private void closeDrawer(){
         drawerLayout.closeDrawer(GravityCompat.START);
+    }
+
+    @Override
+    public void toolbarState(Boolean flag) {
+         if (!flag)
+         {
+             findViewById(R.id.toolbar).setVisibility(View.INVISIBLE);
+             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
+         }
+         else if (flag)
+         {
+             getWindow().getDecorView().setSystemUiVisibility(View.VISIBLE);
+             findViewById(R.id.toolbar).setVisibility(View.VISIBLE);
+         }
     }
 }
 

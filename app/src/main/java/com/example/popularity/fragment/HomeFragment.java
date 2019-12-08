@@ -1,11 +1,13 @@
 package com.example.popularity.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -15,6 +17,7 @@ import com.example.popularity.model.Friend;
 import com.example.popularity.model.Rate;
 import com.example.popularity.utils.BaseFragment;
 import com.example.popularity.R;
+import com.example.popularity.utils.ToolbarState;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +25,7 @@ import java.util.List;
 public class HomeFragment extends BaseFragment {
 
 
+    private ToolbarState toolbarState;
     private RecyclerView favorites_recycler_view,friends_recycler_view;
 
     public HomeFragment() {
@@ -44,6 +48,8 @@ public class HomeFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+
+        toolbarState.toolbarState(true);
         View view = inflater.inflate(R.layout.fragment_instageam_popularity, container, false);
         friends_recycler_view=view.findViewById(R.id.friends_recycler_view);
         LinearLayoutManager layoutManager1=new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false);
@@ -80,4 +86,14 @@ public class HomeFragment extends BaseFragment {
         return view;
     }
 
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        if (context instanceof MenuDrawerFragment.OnSlidingMenuFragmentListener) {
+            toolbarState = (ToolbarState) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnAccountingMainFragmentInteractionListener");
+        }
+    }
 }
