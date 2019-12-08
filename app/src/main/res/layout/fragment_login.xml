@@ -8,45 +8,39 @@
     tools:context=".fragment.LoginFragment">
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <Button
-            android:id="@+id/instagram_btn"
-            android:onClick="loginBtnClick"
-            android:layout_centerInParent="true"
-            android:background="@drawable/btn_rounded_white_outline"
-            android:padding="@dimen/spacing_large"
-            android:drawablePadding="@dimen/spacing_medium"
-            android:drawableLeft="@drawable/instagram_ic"
-            android:text="@string/instagram_login"
-            android:layout_width="@dimen/login_btn_length"
-            android:textColor="@color/grey_1000"
-            android:layout_height="@dimen/login_btn_height"
-            tools:ignore="OnClick" />
-
-        <Button
-            android:id="@+id/facebook_btn"
-            android:layout_below="@+id/instagram_btn"
-            android:layout_centerInParent="true"
-            android:background="@drawable/btn_rounded_white_outline"
-            android:padding="@dimen/spacing_large"
-            android:textColor="@color/grey_1000"
-            android:text="@string/facebook_login"
-            android:drawablePadding="@dimen/spacing_medium"
-            android:drawableLeft="@drawable/facebook_ic"
-            android:layout_width="@dimen/login_btn_length"
-            android:layout_height="@dimen/login_btn_height" />
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/spacing_xxxlarge">
 
 
         <com.facebook.login.widget.LoginButton
             android:id="@+id/login_button"
             android:layout_width="@dimen/login_btn_length"
+            android:paddingBottom="20dp"
+            android:paddingTop="20dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="30dp"
-            android:layout_marginBottom="30dp"
-            android:layout_below="@+id/facebook_btn"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="13dp"
+            android:background="@color/login_btn_color"
             android:layout_centerInParent="true" />
+        <Button
+            android:id="@+id/instagram_btn"
+            android:onClick="loginBtnClick"
+            android:layout_centerInParent="true"
+            android:padding="@dimen/spacing_large"
+            android:background="@color/login_btn_color"
+            android:drawableLeft="@drawable/instagram_ic"
+            android:text="@string/instagram_login"
+            android:layout_width="@dimen/login_btn_length"
+            android:textSize="12dp"
+            android:textColor="@color/white"
+            android:layout_height="@dimen/login_btn_height"
+            android:layout_below="@id/login_button"
+            tools:ignore="OnClick" />
+
+
+
+
     </RelativeLayout>
 
 </FrameLayout>

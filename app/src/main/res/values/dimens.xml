@@ -25,7 +25,7 @@
     <dimen name="spacing_xxxxlarge">145dp</dimen>
     <dimen name="appbar_padding_top">8dp</dimen>
     <dimen name="login_btn_length">270dp</dimen>
-    <dimen name="login_btn_height">60dp</dimen>
+    <dimen name="login_btn_height">56dp</dimen>
     <dimen name="splash_pic_width">250dp</dimen>
     <dimen name="splash_pic_height">250dp</dimen>
     <dimen name="app_title_size">25dp</dimen>

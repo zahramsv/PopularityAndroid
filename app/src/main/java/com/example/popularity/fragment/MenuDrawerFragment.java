@@ -80,18 +80,18 @@ public class MenuDrawerFragment extends Fragment {
     private void define() {
 
 
-        aboutUs=layout.findViewById(R.id.aboutUs);
-        rateUs=layout.findViewById(R.id.rateUs);
+       // aboutUs=layout.findViewById(R.id.aboutUs);
+      //  rateUs=layout.findViewById(R.id.rateUs);
         settings=layout.findViewById(R.id.settings);
         privacyPolicy=layout.findViewById(R.id.privacyPolicy);
       //  t=layout.findViewById(R.id.t);
 
-        aboutUs.setOnClickListener(v->{
+       /* aboutUs.setOnClickListener(v->{
             if (mListener!=null)
             {
                 mListener.onBtn1Clicked(AboutUsFragment.newInstance());
             }
-        });
+        });*/
 
         privacyPolicy.setOnClickListener(v->{
             if (mListener!=null)
@@ -100,12 +100,12 @@ public class MenuDrawerFragment extends Fragment {
             }
         });
 
-        rateUs.setOnClickListener(new View.OnClickListener() {
+      /*  rateUs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mListener.onTestFaceBook();
             }
-        });
+        });*/
         /*btn1 = layout.findViewById(R.id.btn1);
         btn2= layout.findViewById(R.id.btn2);
 

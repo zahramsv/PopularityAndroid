@@ -101,8 +101,7 @@ public class MainActivity extends AppCompatActivity implements
                 showCustomDialog();
                 break;
 
-            case R.id.facebook_btn:
-                break;
+
 
 
             case R.id.signIn_btn:
@@ -197,7 +196,7 @@ public class MainActivity extends AppCompatActivity implements
                        @Override
                        public void onCompleted(JSONObject object, GraphResponse response) {
                            Log.i("app_tag",response.toString());
-                           Log.i("app_tag_object",object.toString());
+                           Log.i("app_tag",object.toString());
 
                            //Call loginBySocial Mahad
                            //parse Recived Data

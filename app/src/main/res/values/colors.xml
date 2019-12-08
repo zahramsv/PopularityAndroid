@@ -335,4 +335,6 @@
         <item type="color">#607d8b</item>
         <item type="color">#ff9800</item>
     </array>
+
+    <color name="login_btn_color">#3B5998</color>
 </resources>

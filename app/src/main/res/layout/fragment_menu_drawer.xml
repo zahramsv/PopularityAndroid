@@ -19,8 +19,8 @@
 
             android:layout_width="match_parent"
             android:layout_height="170dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/ic_app" />
+            android:scaleType="fitCenter"
+            android:src="@drawable/popularity_2" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -62,7 +62,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/privacyPolicy"
+        android:background="@drawable/btn_rounded_white_outline"
         android:drawableLeft="@drawable/ic_privacy"
+        android:paddingLeft="@dimen/spacing_middle"
         android:drawableTint="@color/red_400"
         android:text="@string/privacy_policy"
         />
@@ -71,6 +73,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/settings"
+        android:background="@drawable/btn_rounded_white_outline"
         android:paddingLeft="@dimen/spacing_middle"
         android:drawableTint="@color/red_400"
         android:drawableLeft="@drawable/ic_settings"
@@ -86,6 +89,7 @@
         android:minHeight="0dp"
         android:minWidth="0dp"
         android:paddingLeft="@dimen/spacing_middle"
+        android:background="@drawable/btn_rounded_white_outline"
         android:drawableLeft="@drawable/ic_rate"
         android:drawableTint="@color/red_400"
         android:text="@string/rate_us"
@@ -96,12 +100,17 @@
         android:backgroundTint="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/aboutUs"
+        android:minHeight="0dp"
+        android:minWidth="0dp"
         android:paddingLeft="@dimen/spacing_middle"
+        android:background="@drawable/btn_rounded_white_outline"
+        android:drawableLeft="@drawable/ic_rate"
         android:drawableTint="@color/red_400"
-        android:drawableLeft="@drawable/ic_about_us"
         android:text="@string/about_us"
+        android:id="@+id/aboutUs"
         />
+
+
 
 
 </LinearLayout>

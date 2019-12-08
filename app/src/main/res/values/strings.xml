@@ -3,7 +3,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="instagram_login">My Instagram Popularity</string>
+    <string name="instagram_login">Continue with Instagram</string>
     <string name="facebook_login">My Facebook Popularity</string>
     <string name="navigation_drawer_open">Open Navigation</string>
     <string name="navigation_drawer_close">Close Navigation</string>
