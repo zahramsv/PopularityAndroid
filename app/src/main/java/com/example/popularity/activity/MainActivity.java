@@ -186,7 +186,7 @@ public class MainActivity extends AppCompatActivity implements
 
    //GraphRequest - ApiRequest
     // in nabaiad inja bashe baiad dakhel loginFragment to inSuccess bezar
-   private void getFacebookData(){
+/*   private void getFacebookData(){
        AccessToken accessToken = AccessToken.getCurrentAccessToken();
        boolean isLoggedIn = accessToken != null && !accessToken.isExpired();
        if(isLoggedIn){
@@ -208,7 +208,7 @@ public class MainActivity extends AppCompatActivity implements
            request.setParameters(parameters);
            request.executeAsync();
        }
-   }
+   }*/
 
 
     @Override
@@ -221,7 +221,7 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public void onTestFaceBook() {
-        getFacebookData();
+        //getFacebookData();
     }
 
     private void openDrawer(){
