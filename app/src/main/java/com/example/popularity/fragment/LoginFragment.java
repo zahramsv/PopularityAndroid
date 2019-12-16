@@ -22,6 +22,7 @@ import com.facebook.FacebookException;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.HttpMethod;
+import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
@@ -57,17 +58,30 @@ public class LoginFragment extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_login, container, false);
         clickEvents(view);
 
-        String EMAIL = "email";
+        String EMAIL = "email,user_friends";
+
 
         LoginButton loginButton = view.findViewById(R.id.login_button);
-        loginButton.setReadPermissions(Arrays.asList(EMAIL));
+        loginButton.setReadPermissions("email","user_friends","public_profile","read_custom_friendlists");
         loginButton.setFragment(this);
+
+
+
+        LoginManager.getInstance().logInWithReadPermissions(
+                this,
+                Arrays.asList("email","user_friends","read_custom_friendlists"));
+
+
+        Log.i("app_tag", AccessToken.getCurrentAccessToken().getPermissions().toString());
+        Log.i("app_tag", AccessToken.getCurrentAccessToken().getDeclinedPermissions().toString());
+
 
         // Callback registration
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
                 Log.i("app_tag","onSuccess: "+loginResult.getAccessToken());
+                AccessToken.setCurrentAccessToken(loginResult.getAccessToken());
                 getFacebookData();
 
             }
@@ -175,19 +189,20 @@ public class LoginFragment extends BaseFragment {
 
 
     private void myNewGraphReq(String friendlistId) {
-        final String graphPath = "/"+friendlistId+"/friends/";
+        final String graphPath = "/"+friendlistId+"/friends";
         AccessToken token = AccessToken.getCurrentAccessToken();
         GraphRequest request = new GraphRequest(token, graphPath, null, HttpMethod.GET, new GraphRequest.Callback() {
             @Override
             public void onCompleted(GraphResponse graphResponse) {
                 JSONObject object = graphResponse.getJSONObject();
                 try {
-                    JSONArray arrayOfUsersInFriendList= object.getJSONArray("data");
+                   // JSONArray arrayOfUsersInFriendList= object.getJSONArray("data");
                     /* Do something with the user list */
                     /* ex: get first user in list, "name" */
-                    JSONObject user = arrayOfUsersInFriendList.getJSONObject(0);
-                    String usersName = user.getString("name");
-                } catch (JSONException e) {
+                    //JSONObject user = arrayOfUsersInFriendList.getJSONObject(0);
+                    //String usersName = user.getString("name");
+                    Log.i("app_tag",object.toString());
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
