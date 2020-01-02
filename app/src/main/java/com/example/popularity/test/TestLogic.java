@@ -15,7 +15,8 @@ public class TestLogic {
     }
 
     public String minusNumbers(){
-        return "result is : "+(7-4);
+        return "result is : "+(repository.getNum1().number - repository.getNum2().number);
+        //return "result is : "+(7-4);
     }
 
 }
