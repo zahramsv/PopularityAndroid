@@ -36,6 +36,7 @@ public class SocialLoginRepository {
         
     }
 
+
     public void GenerateDataFromServer(){}
     public void GenerateDataFromAPI(){}
 }

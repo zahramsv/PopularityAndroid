@@ -2,6 +2,7 @@ package com.example.popularity;
 
 import com.example.popularity.model.LoginSendDataModel;
 import com.example.popularity.model.SocialRootModel;
+import com.example.popularity.utils.URLS;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -11,11 +12,12 @@ import retrofit2.http.POST;
 
 public interface GetLoginDataService {
 
-    @POST("http://popularity.mohad.ir/api/login_to_social")
+
+    @POST(URLS.LoginToSocial)
     Call<SocialRootModel> getLoginData(@Body LoginSendDataModel loginSendDataModel);
 
     @FormUrlEncoded
-    @POST("http://popularity.mohad.ir/api/login_to_social")
+    @POST(URLS.LoginToSocial)
     Call<SocialRootModel> login(
       @Field("social_primary") String socialPrimary,
       @Field("username") String username,

@@ -12,7 +12,19 @@
         android:layout_marginBottom="@dimen/spacing_xxxlarge">
 
 
-        <com.facebook.login.widget.LoginButton
+        <Button
+            android:id="@+id/login_button"
+            android:layout_width="@dimen/login_btn_length"
+            android:paddingBottom="20dp"
+            android:paddingTop="20dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="13dp"
+            android:text="Login"
+            android:background="@color/login_btn_color"
+            android:layout_centerInParent="true" />
+      <!--  <com.facebook.login.widget.LoginButton
             android:id="@+id/login_button"
             android:layout_width="@dimen/login_btn_length"
             android:paddingBottom="20dp"
@@ -22,7 +34,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="13dp"
             android:background="@color/login_btn_color"
-            android:layout_centerInParent="true" />
+            android:layout_centerInParent="true" />-->
         <Button
             android:id="@+id/instagram_btn"
             android:onClick="loginBtnClick"

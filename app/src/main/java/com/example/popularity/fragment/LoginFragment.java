@@ -12,6 +12,7 @@ import android.view.animation.Animation;
 import android.widget.Button;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.popularity.GetLoginDataService;
 import com.example.popularity.logic.SocialLoginLogic;
@@ -20,6 +21,7 @@ import com.example.popularity.model.SocialRootModel;
 import com.example.popularity.utils.BaseFragment;
 import com.example.popularity.R;
 import com.example.popularity.utils.RetrofitInstance;
+import com.example.popularity.utils.SavePref;
 import com.example.popularity.utils.ToolbarState;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
@@ -61,12 +63,12 @@ public class LoginFragment extends BaseFragment {
         // Inflate the layout for this fragment
         toolbarState.toolbarState(true);
         View view = inflater.inflate(R.layout.fragment_login, container, false);
-        clickEvents(view);
+       // clickEvents(view);
 
         String EMAIL = "email,friends";
 
 
-        LoginButton loginButton = view.findViewById(R.id.login_button);
+        Button loginButton = view.findViewById(R.id.login_button);
       /*  loginButton.setReadPermissions("email", "user_friends", "public_profile");
         loginButton.setFragment(this);
 
@@ -85,12 +87,11 @@ public class LoginFragment extends BaseFragment {
 
                 RetrofitInstance retrofitInstance = new RetrofitInstance();
                 Retrofit retrofit = retrofitInstance.getRetrofitInstance();
-
                 SocialLoginLogic socialLoginLogic = new SocialLoginLogic();
                 socialLoginLogic.GetFirstUserLoginData();
-
-
                 GetLoginDataService getLoginDataService = retrofit.create(GetLoginDataService.class);
+
+
                 getLoginDataService.getLoginData(socialLoginLogic.GetFirstUserLoginData()).enqueue(new Callback<SocialRootModel>() {
                     @Override
                     public void onResponse(Call<SocialRootModel> call, Response<SocialRootModel> response) {
@@ -99,14 +100,27 @@ public class LoginFragment extends BaseFragment {
                         if((response.isSuccessful())){
                             SocialRootModel obr = response.body();
 
-                            SharedPreferences prefs = null;
+                           // SharedPreferences prefs = null;
                             User data = obr.getData();
-                            SharedPreferences.Editor editor = prefs.edit();
-                            editor.putString("user_name", data.getUsername());
-                            editor.commit();
-                            editor.apply();
+//                            SharedPreferences.Editor editor = prefs.edit();
+//                            editor.putString("user_name", data.getUsername());
+//                            editor.commit();
+//                            editor.apply();
 
+                            SavePref savePref=new SavePref();
+                            savePref.SaveUser(getContext(),data);
+
+                            Bundle bundle=new Bundle();
+                            bundle.putSerializable("User",data);
+
+                            HomeFragment homeFragment=new HomeFragment();
+                            homeFragment.setArguments(bundle);
+                            FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                            transaction.setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.pop_enter, R.anim.pop_exit);
+                            transaction.replace(R.id.your_placeholder, homeFragment);
+                            transaction.commit();
                             Log.i("app_tag", "info: "+obr.getCode());
+
 
                         }else{
                             Log.i("app_tag", "error");

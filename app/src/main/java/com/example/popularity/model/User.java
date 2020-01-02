@@ -2,7 +2,9 @@ package com.example.popularity.model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
 
     @SerializedName("social_primary")
     private String social_primary;

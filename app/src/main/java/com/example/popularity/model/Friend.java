@@ -5,12 +5,27 @@ public class Friend {
     public int image;
     public String name;
     public boolean rate;
+    public int id;
 
     public Friend(String name, boolean rate) {
         this.name = name;
         this.rate = rate;
     }
 
+    public Friend(int image, String name, boolean rate, int id) {
+        this.image = image;
+        this.name = name;
+        this.rate = rate;
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public Friend(int image, String name, boolean rate) {
         this.image = image;

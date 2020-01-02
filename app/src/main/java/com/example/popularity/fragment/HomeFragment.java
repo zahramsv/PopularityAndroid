@@ -15,6 +15,7 @@ import com.example.popularity.adapter.FriendsListAdapter;
 import com.example.popularity.adapter.RateListAdapter;
 import com.example.popularity.model.Friend;
 import com.example.popularity.model.Rate;
+import com.example.popularity.model.User;
 import com.example.popularity.utils.BaseFragment;
 import com.example.popularity.R;
 import com.example.popularity.utils.ToolbarState;
@@ -47,10 +48,11 @@ public class HomeFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
+        Bundle bundle=getArguments();
+        User user= (User) bundle.getSerializable("User");
 
         toolbarState.toolbarState(true);
-        View view = inflater.inflate(R.layout.fragment_instageam_popularity, container, false);
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
         friends_recycler_view=view.findViewById(R.id.friends_recycler_view);
         LinearLayoutManager layoutManager1=new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false);
         friends_recycler_view.setLayoutManager(layoutManager1);
