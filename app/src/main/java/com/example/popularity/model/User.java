@@ -18,7 +18,7 @@ public class User implements Serializable {
     @SerializedName("avatar_url")
     private String avatar_url;
     @SerializedName("rates_summary_sum")
-    private String rates_summary_sum;
+    private UserPopularity rates_summary_sum;
 
     @SerializedName("updated_at")
     private String updated_at;
@@ -32,7 +32,7 @@ public class User implements Serializable {
     private int rates_count;
 
 
-    public User(String social_primary, String username, String token, String full_name, String avatar_url, String rates_summary_sum, String updated_at, String created_at, int social_type, int rated_count, int rates_count) {
+    public User(String social_primary, String username, String token, String full_name, String avatar_url, UserPopularity rates_summary_sum, String updated_at, String created_at, int social_type, int rated_count, int rates_count) {
         this.social_primary = social_primary;
         this.username = username;
         this.token = token;
@@ -86,11 +86,11 @@ public class User implements Serializable {
         this.avatar_url = avatar_url;
     }
 
-    public String getRates_summary_sum() {
+    public UserPopularity getRates_summary_sum() {
         return rates_summary_sum;
     }
 
-    public void setRates_summary_sum(String rates_summary_sum) {
+    public void setRates_summary_sum(UserPopularity rates_summary_sum) {
         this.rates_summary_sum = rates_summary_sum;
     }
 

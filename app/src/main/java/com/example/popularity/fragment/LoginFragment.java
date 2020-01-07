@@ -18,6 +18,7 @@ import com.example.popularity.GetLoginDataService;
 import com.example.popularity.logic.SocialLoginLogic;
 import com.example.popularity.model.User;
 import com.example.popularity.model.SocialRootModel;
+import com.example.popularity.model.UserPopularity;
 import com.example.popularity.utils.BaseFragment;
 import com.example.popularity.R;
 import com.example.popularity.utils.RetrofitInstance;
@@ -65,19 +66,15 @@ public class LoginFragment extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_login, container, false);
        // clickEvents(view);
 
-        String EMAIL = "email,friends";
 
 
         Button loginButton = view.findViewById(R.id.login_button);
+
       /*  loginButton.setReadPermissions("email", "user_friends", "public_profile");
         loginButton.setFragment(this);
-
-
         LoginManager.getInstance().logInWithReadPermissions(
                 this,
                 Arrays.asList("email", "friends"));
-
-
         Log.i("app_tag", AccessToken.getCurrentAccessToken().getPermissions().toString());
         Log.i("app_tag", AccessToken.getCurrentAccessToken().getDeclinedPermissions().toString());*/
 
@@ -102,13 +99,14 @@ public class LoginFragment extends BaseFragment {
 
                            // SharedPreferences prefs = null;
                             User data = obr.getData();
+                            UserPopularity userPopularity=obr.getData().getRates_summary_sum();
 //                            SharedPreferences.Editor editor = prefs.edit();
 //                            editor.putString("user_name", data.getUsername());
 //                            editor.commit();
 //                            editor.apply();
 
                             SavePref savePref=new SavePref();
-                            savePref.SaveUser(getContext(),data);
+                            savePref.SaveUser(getContext(),data,userPopularity);
 
                             Bundle bundle=new Bundle();
                             bundle.putSerializable("User",data);

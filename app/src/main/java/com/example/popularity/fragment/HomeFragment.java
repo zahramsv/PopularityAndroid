@@ -1,5 +1,6 @@
 package com.example.popularity.fragment;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 
@@ -16,6 +17,8 @@ import com.example.popularity.adapter.RateListAdapter;
 import com.example.popularity.model.Friend;
 import com.example.popularity.model.Rate;
 import com.example.popularity.model.User;
+import com.example.popularity.model.UserPopularity;
+import com.example.popularity.repository.UserFriendsRepository;
 import com.example.popularity.utils.BaseFragment;
 import com.example.popularity.R;
 import com.example.popularity.utils.ToolbarState;
@@ -50,6 +53,7 @@ public class HomeFragment extends BaseFragment {
                              Bundle savedInstanceState) {
         Bundle bundle=getArguments();
         User user= (User) bundle.getSerializable("User");
+        UserPopularity userPopularity=user.getRates_summary_sum();
 
         toolbarState.toolbarState(true);
         View view = inflater.inflate(R.layout.fragment_home, container, false);
@@ -59,20 +63,16 @@ public class HomeFragment extends BaseFragment {
 
 
         //for test
-        List<Friend> friends=new ArrayList<>();
-        friends.add(new Friend("Sara",false));
-        friends.add(new Friend("Ali",false));
-        friends.add(new Friend("Samane",false));
-        friends.add(new Friend("Nava",false));
-        friends.add(new Friend("Hani",false));
-        friends.add(new Friend("Fereshte",false));
-        FriendsListAdapter friendsListAdapter=new FriendsListAdapter(friends,getActivity());
+        UserFriendsRepository userFriendsRepository=new UserFriendsRepository();
+        List<Friend> friendList=userFriendsRepository.getUserFriendsMock(Integer.parseInt(user.getSocial_primary()));
+
+        FriendsListAdapter friendsListAdapter=new FriendsListAdapter(friendList,getActivity());
         friends_recycler_view.setAdapter(friendsListAdapter);
 
 
         //Vertical
         favorites_recycler_view=view.findViewById(R.id.favorites_recycler_view);
-        LinearLayoutManager layoutManager=new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false);
+        @SuppressLint("WrongConstant") LinearLayoutManager layoutManager=new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false);
         favorites_recycler_view.setLayoutManager(layoutManager);
         List<Rate> rates=new ArrayList<>();
         rates.add(new Rate("Personality",3));

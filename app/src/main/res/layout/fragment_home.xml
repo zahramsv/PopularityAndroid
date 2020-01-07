@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
     tools:context=".fragment.HomeFragment">
 
@@ -14,34 +15,75 @@
         android:weightSum="4">
 
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_marginTop="@dimen/spacing_middle"
-            android:layout_marginLeft="@dimen/spacing_large"
-            android:layout_height="wrap_content"
-            android:text="@string/your_popularity"
-            android:textColor="@color/black"/>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:layout_marginTop="@dimen/spacing_middle"
-            tools:listitem="@layout/item_rate"
-            android:id="@+id/favorites_recycler_view"
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1.7"/>
+            app:cardElevation="@dimen/spacing_large"
+            android:layout_margin="@dimen/spacing_large"
+            app:cardCornerRadius="@dimen/spacing_middle">
 
 
-        <View
+          <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical">
+              <LinearLayout
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_marginTop="@dimen/spacing_large"
+                  android:orientation="horizontal">
+
+                  <androidx.appcompat.widget.AppCompatImageView
+                      android:layout_width="30dp"
+                      android:layout_height="30dp"
+                      android:layout_marginLeft="@dimen/spacing_middle"
+                      android:background="@drawable/popularity_ic"/>
+                  <TextView
+                      android:layout_width="wrap_content"
+                      android:layout_marginLeft="@dimen/spacing_medium"
+                      android:layout_height="wrap_content"
+                      android:text="@string/your_popularity"
+                      android:layout_gravity="center"
+                      android:textSize="@dimen/spacing_large"
+                      android:textColor="@color/black"/>
+              </LinearLayout>
+
+              <androidx.recyclerview.widget.RecyclerView
+                  android:layout_marginTop="@dimen/spacing_large"
+                  tools:listitem="@layout/item_rate"
+                  android:id="@+id/favorites_recycler_view"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_weight="1.7"/>
+          </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+       <!-- <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/black"/>
+            android:layout_marginTop="@dimen/spacing_large"
+            android:background="@color/black"/>-->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_middle"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="@dimen/spacing_large"
+                android:background="@drawable/friends"/>
             <TextView
                 android:layout_width="wrap_content"
-               android:layout_marginTop="@dimen/spacing_middle"
-                android:layout_marginLeft="@dimen/spacing_large"
+                android:layout_marginLeft="@dimen/spacing_medium"
                 android:layout_height="wrap_content"
                 android:text="@string/your_friends"
+                android:textSize="@dimen/spacing_large"
                 android:textColor="@color/black"/>
+        </LinearLayout>
 
 
         <androidx.recyclerview.widget.RecyclerView
@@ -68,6 +110,7 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
             android:layout_margin="@dimen/spacing_middle"
+            android:src="@drawable/ic_share"
             android:background="@color/red_600"/>
 
     </RelativeLayout>
