@@ -4,9 +4,11 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -18,6 +20,7 @@ import com.example.popularity.model.Friend;
 import com.example.popularity.model.Rate;
 import com.example.popularity.model.User;
 import com.example.popularity.model.UserPopularity;
+import com.example.popularity.myInterface.itemClickListener;
 import com.example.popularity.repository.UserFriendsRepository;
 import com.example.popularity.utils.BaseFragment;
 import com.example.popularity.R;
@@ -36,11 +39,6 @@ public class HomeFragment extends BaseFragment {
         // Required empty public constructor
     }
 
-
-    public static HomeFragment newInstance() {
-        HomeFragment fragment = new HomeFragment();
-        return fragment;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -69,20 +67,43 @@ public class HomeFragment extends BaseFragment {
         FriendsListAdapter friendsListAdapter=new FriendsListAdapter(friendList,getActivity());
         friends_recycler_view.setAdapter(friendsListAdapter);
 
+       friendsListAdapter.setOnItemClickListener(new itemClickListener() {
+           @Override
+           public void onItemClick(int pos) {
 
+               Friend friend= friendList.get(pos);
+               Bundle bundle=new Bundle();
+               bundle.putSerializable("Friend",friend);
+               bundle.putSerializable("User",user);
+               RateFragment rateFragment=new RateFragment();
+               rateFragment.setArguments(bundle);
+
+
+               openFragment(rateFragment,true);
+               Log.i("app_tag","tt");
+
+           }
+       });
         //Vertical
         favorites_recycler_view=view.findViewById(R.id.favorites_recycler_view);
         @SuppressLint("WrongConstant") LinearLayoutManager layoutManager=new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false);
         favorites_recycler_view.setLayoutManager(layoutManager);
         List<Rate> rates=new ArrayList<>();
-        rates.add(new Rate("Personality",3));
-        rates.add(new Rate("Beauty",2));
-        rates.add(new Rate("Style",5));
-        rates.add(new Rate("Good Content!",3));
-        rates.add(new Rate("Empathetic",3));
-        rates.add(new Rate("Intuitive",5));
-        rates.add(new Rate("Creative",4));
+
+        rates.add(new Rate("Look",Integer.parseInt(userPopularity.getRate_look())));
+        rates.add(new Rate("Fitness",Integer.parseInt(userPopularity.getRate_fitness())));
+        rates.add(new Rate("Style",Integer.parseInt(userPopularity.getRate_style())));
+        rates.add(new Rate("Personality",Integer.parseInt(userPopularity.getRate_personality())));
+        rates.add(new Rate("Trustworthy",Integer.parseInt(userPopularity.getRate_trustworthy())));
+        rates.add(new Rate("Popularity",Integer.parseInt(userPopularity.getRate_popularity())));
+
         RateListAdapter rateListAdapter=new RateListAdapter(rates,getActivity());
+        rateListAdapter.setOnItemClickListener(new RateListAdapter.ClickListener() {
+            @Override
+            public void onItemClick(int position, View v) {
+                Toast.makeText(getContext(),"test",Toast.LENGTH_LONG).show();
+            }
+        });
         favorites_recycler_view.setAdapter(rateListAdapter);
 
         return view;

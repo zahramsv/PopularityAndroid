@@ -9,6 +9,7 @@
     <dimen name="viewpager_margin_overlap_payment">-30dp</dimen>
 
     <!--genaral spacing-->
+    <dimen name="text_size">11dp</dimen>
     <dimen name="spacing_xsmall">2dp</dimen>
     <dimen name="spacing_small">3dp</dimen>
     <dimen name="spacing_medium">5dp</dimen>

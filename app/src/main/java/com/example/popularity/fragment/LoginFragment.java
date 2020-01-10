@@ -2,7 +2,6 @@ package com.example.popularity.fragment;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,7 +13,7 @@ import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.popularity.GetLoginDataService;
+import com.example.popularity.myInterface.GetLoginDataService;
 import com.example.popularity.logic.SocialLoginLogic;
 import com.example.popularity.model.User;
 import com.example.popularity.model.SocialRootModel;
@@ -29,7 +28,6 @@ import com.facebook.CallbackManager;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.HttpMethod;
-import com.facebook.login.widget.LoginButton;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -61,7 +59,7 @@ public class LoginFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         toolbarState.toolbarState(true);
         View view = inflater.inflate(R.layout.fragment_login, container, false);
        // clickEvents(view);
@@ -69,14 +67,6 @@ public class LoginFragment extends BaseFragment {
 
 
         Button loginButton = view.findViewById(R.id.login_button);
-
-      /*  loginButton.setReadPermissions("email", "user_friends", "public_profile");
-        loginButton.setFragment(this);
-        LoginManager.getInstance().logInWithReadPermissions(
-                this,
-                Arrays.asList("email", "friends"));
-        Log.i("app_tag", AccessToken.getCurrentAccessToken().getPermissions().toString());
-        Log.i("app_tag", AccessToken.getCurrentAccessToken().getDeclinedPermissions().toString());*/
 
 
         loginButton.setOnClickListener(new View.OnClickListener() {
@@ -97,26 +87,16 @@ public class LoginFragment extends BaseFragment {
                         if((response.isSuccessful())){
                             SocialRootModel obr = response.body();
 
-                           // SharedPreferences prefs = null;
+
                             User data = obr.getData();
                             UserPopularity userPopularity=obr.getData().getRates_summary_sum();
-//                            SharedPreferences.Editor editor = prefs.edit();
-//                            editor.putString("user_name", data.getUsername());
-//                            editor.commit();
-//                            editor.apply();
-
                             SavePref savePref=new SavePref();
                             savePref.SaveUser(getContext(),data,userPopularity);
-
                             Bundle bundle=new Bundle();
                             bundle.putSerializable("User",data);
-
                             HomeFragment homeFragment=new HomeFragment();
                             homeFragment.setArguments(bundle);
-                            FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                            transaction.setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.pop_enter, R.anim.pop_exit);
-                            transaction.replace(R.id.your_placeholder, homeFragment);
-                            transaction.commit();
+                            openFragment(homeFragment,true);
                             Log.i("app_tag", "info: "+obr.getCode());
 
 
@@ -127,35 +107,12 @@ public class LoginFragment extends BaseFragment {
 
                     @Override
                     public void onFailure(Call<SocialRootModel> call, Throwable t) {
-
                         Log.i("app_tag", t.getMessage().toString());
                     }
                 });
 
             }
         });
-
-        // Callback registration
-        /*loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
-            @Override
-            public void onSuccess(LoginResult loginResult) {
-                Log.i("app_tag","onSuccess: "+loginResult.getAccessToken());
-                AccessToken.setCurrentAccessToken(loginResult.getAccessToken());
-                getFacebookData();
-
-            }
-
-            @Override
-            public void onCancel() {
-                Log.i("app_tag","onCancel");
-            }
-
-            @Override
-            public void onError(FacebookException exception) {
-                Log.i("app_tag","onError: "+exception.getMessage());
-            }
-        });*/
-
 
         //getUserFriends();
         return view;
@@ -171,7 +128,6 @@ public class LoginFragment extends BaseFragment {
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-
     //Fragment Button Click
     public void clickEvents(View v) {
 
@@ -181,7 +137,6 @@ public class LoginFragment extends BaseFragment {
         }
 
     }
-
 
     private void getFacebookData() {
         AccessToken accessToken = AccessToken.getCurrentAccessToken();
@@ -207,7 +162,6 @@ public class LoginFragment extends BaseFragment {
 
         }
     }
-
 
     private void getUserFriends() {
         AccessToken token = AccessToken.getCurrentAccessToken();
@@ -243,7 +197,6 @@ public class LoginFragment extends BaseFragment {
         }
     }
 
-
     private void myNewGraphReq(String friendlistId) {
         final String graphPath = "/" + friendlistId + "/friends";
         AccessToken token = AccessToken.getCurrentAccessToken();
@@ -273,7 +226,6 @@ public class LoginFragment extends BaseFragment {
     public Animation onCreateAnimation(int transit, boolean enter, int nextAnim) {
         return super.onCreateAnimation(transit, enter, nextAnim);
     }
-
 
     @Override
     public void onAttach(@NonNull Context context) {

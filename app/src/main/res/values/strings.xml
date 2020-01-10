@@ -36,5 +36,13 @@ The terms used in this Privacy Policy have the same meanings as in our Terms and
 
     <string name="social_popularity">Social Popularity</string>
     <string name="app_version">1.0</string>
+    <string name="rate_look">Look</string>
+    <string name="rate_fitness">Fitness</string>
+    <string name="rate_style">Style</string>
+    <string name="rate_personality">Personality</string>
+    <string name="rate_trustworthy">Trustworthy</string>
+    <string name="rate_popularity">Popularity</string>
+    <string name="rate_to">What you think about ... </string>
+    <string name="Save">Save</string>
 </resources>
 

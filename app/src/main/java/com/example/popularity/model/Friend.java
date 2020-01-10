@@ -1,11 +1,24 @@
 package com.example.popularity.model;
 
-public class Friend {
+import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
+public class Friend implements Serializable {
+
+    @SerializedName("image")
     public String image;
+
+    @SerializedName("name")
     public String name;
+
+    @SerializedName("rate")
     public boolean rate;
+
+    @SerializedName("userId")
     public int userId;
+
+    @SerializedName("id")
     public int id;
 
 

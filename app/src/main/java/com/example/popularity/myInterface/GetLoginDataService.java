@@ -1,4 +1,4 @@
-package com.example.popularity;
+package com.example.popularity.myInterface;
 
 import com.example.popularity.model.LoginSendDataModel;
 import com.example.popularity.model.SocialRootModel;

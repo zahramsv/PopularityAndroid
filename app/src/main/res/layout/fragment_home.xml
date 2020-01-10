@@ -19,9 +19,9 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardElevation="@dimen/spacing_large"
-            android:layout_margin="@dimen/spacing_large"
-            app:cardCornerRadius="@dimen/spacing_middle">
+            app:cardElevation="@dimen/spacing_middle"
+            android:layout_margin="@dimen/spacing_middle"
+           >
 
 
           <LinearLayout
@@ -65,29 +65,39 @@
             android:layout_marginTop="@dimen/spacing_large"
             android:background="@color/black"/>-->
 
-        <LinearLayout
+
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_middle"
-            android:orientation="horizontal">
+            app:cardElevation="@dimen/spacing_small"
+            android:layout_marginTop="@dimen/spacing_small">
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginLeft="@dimen/spacing_large"
-                android:background="@drawable/friends"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_marginLeft="@dimen/spacing_medium"
+            <LinearLayout
+                android:padding="@dimen/spacing_medium"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/your_friends"
-                android:textSize="@dimen/spacing_large"
-                android:textColor="@color/black"/>
-        </LinearLayout>
+                android:layout_gravity="center"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="@dimen/spacing_large"
+                    android:background="@drawable/friends"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_marginLeft="@dimen/spacing_medium"
+                    android:layout_height="wrap_content"
+                    android:text="@string/your_friends"
+                    android:layout_gravity="center"
+                    android:textSize="@dimen/spacing_large"
+                    android:textColor="@color/black"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
 
         <androidx.recyclerview.widget.RecyclerView
-            android:layout_marginTop="@dimen/spacing_middle"
+            android:layout_marginTop="@dimen/spacing_large"
             android:orientation="horizontal"
             tools:listitem="@layout/item_friend"
             android:id="@+id/friends_recycler_view"

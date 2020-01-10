@@ -21,7 +21,17 @@ public class RateListAdapter extends RecyclerView.Adapter<RateListAdapter.RateHo
 
     private List<Rate> rates = new ArrayList<>();
     private Context context;
+    private static ClickListener clickListener;
 
+    public interface ClickListener {
+        void onItemClick(int position, View v);
+    }
+
+    public void setOnItemClickListener(ClickListener clickListener)
+    {
+       RateListAdapter.clickListener=clickListener;
+
+    }
     public RateListAdapter(List<Rate> rates, Context context) {
         this.rates = rates;
         this.context = context;
@@ -41,6 +51,7 @@ public class RateListAdapter extends RecyclerView.Adapter<RateListAdapter.RateHo
             RateHolder view =  rateHolder;
             final Rate o = rates.get(i);
             view.attribute.setText(o.getAttribute());
+            view.rating.setRating(rates.get(i).getRate());
         }
     }
 
@@ -49,7 +60,7 @@ public class RateListAdapter extends RecyclerView.Adapter<RateListAdapter.RateHo
         return rates.size();
     }
 
-    public class RateHolder extends RecyclerView.ViewHolder {
+    public class RateHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
 
         private TextView attribute;
@@ -58,6 +69,11 @@ public class RateListAdapter extends RecyclerView.Adapter<RateListAdapter.RateHo
             super(itemView);
             attribute=itemView.findViewById(R.id.attribute);
             rating=itemView.findViewById(R.id.rating);
+        }
+
+        @Override
+        public void onClick(View view) {
+            clickListener.onItemClick(getAdapterPosition(),view);
         }
     }
 }

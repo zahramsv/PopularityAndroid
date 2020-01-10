@@ -9,9 +9,7 @@ public class UserFriendsRepository {
 
     public List<Friend> friends=new ArrayList<>();
 
-
-    public void SetUserFriendsMock(int userId)
-    {
+    public void SetUserFriendsMock(int userId) {
 
        friends.add(new Friend("image1","Hanie",false,userId,1));
        friends.add(new Friend("image2","Maryam",false,userId,2));
@@ -25,8 +23,7 @@ public class UserFriendsRepository {
 
     }
 
-    public List<Friend> getUserFriendsMock(int userId)
-    {
+    public List<Friend> getUserFriendsMock(int userId) {
         SetUserFriendsMock(userId);
         return friends;
     }
