@@ -77,10 +77,10 @@
 
                     <androidx.appcompat.widget.AppCompatRatingBar
                         android:id="@+id/look_rate"
+                        android:isIndicator="false"
                         style="@style/Yellow.Small.AppCompatRatingBar"
                         android:layout_width="wrap_content"
                         android:layout_height="24dp"
-                        android:clickable="true"
                         android:numStars="10"
                         android:stepSize="1"
                         android:theme="@style/Yellow.Small.AppCompatRatingBar" />
@@ -137,7 +137,7 @@
                         style="@style/Yellow.Small.AppCompatRatingBar"
                         android:layout_width="wrap_content"
                         android:layout_height="22dp"
-                        android:clickable="true"
+                        android:isIndicator="false"
                         android:numStars="10"
                         android:stepSize="1"
                         android:theme="@style/Yellow.Small.AppCompatRatingBar" />
@@ -194,7 +194,7 @@
                         style="@style/Yellow.Small.AppCompatRatingBar"
                         android:layout_width="wrap_content"
                         android:layout_height="22dp"
-                        android:clickable="true"
+                        android:isIndicator="false"
                         android:numStars="10"
                         android:stepSize="1"
                         android:theme="@style/Yellow.Small.AppCompatRatingBar" />
@@ -251,7 +251,7 @@
                         style="@style/Yellow.Small.AppCompatRatingBar"
                         android:layout_width="wrap_content"
                         android:layout_height="22dp"
-                        android:clickable="true"
+                        android:isIndicator="false"
                         android:numStars="10"
                         android:stepSize="1"
                         android:theme="@style/Yellow.Small.AppCompatRatingBar" />
@@ -309,7 +309,7 @@
                         style="@style/Yellow.Small.AppCompatRatingBar"
                         android:layout_width="wrap_content"
                         android:layout_height="22dp"
-                        android:clickable="true"
+                        android:isIndicator="false"
                         android:numStars="10"
                         android:stepSize="1"
                         android:theme="@style/Yellow.Small.AppCompatRatingBar" />
@@ -366,7 +366,7 @@
                         style="@style/Yellow.Small.AppCompatRatingBar"
                         android:layout_width="wrap_content"
                         android:layout_height="22dp"
-                        android:clickable="true"
+                        android:isIndicator="false"
                         android:numStars="10"
                         android:stepSize="1"
                         android:theme="@style/Yellow.Small.AppCompatRatingBar" />

@@ -23,6 +23,13 @@ import com.example.popularity.fragment.LoginFragment;
 import com.example.popularity.fragment.MenuDrawerFragment;
 import com.example.popularity.fragment.SplashFragment;
 import com.example.popularity.R;
+import com.example.popularity.logic.SocialLoginLogic;
+import com.example.popularity.model.SocialRootModel;
+import com.example.popularity.model.User;
+import com.example.popularity.model.UserPopularity;
+import com.example.popularity.myInterface.GetLoginDataService;
+import com.example.popularity.utils.RetrofitInstance;
+import com.example.popularity.utils.SavePref;
 import com.example.popularity.utils.ToolbarState;
 import com.facebook.AccessToken;
 import com.facebook.GraphRequest;
@@ -31,9 +38,14 @@ import com.google.android.material.textfield.TextInputEditText;
 
 import org.json.JSONObject;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+
 
 public class MainActivity extends AppCompatActivity implements
-        MenuDrawerFragment.OnSlidingMenuFragmentListener,ToolbarState
+        MenuDrawerFragment.OnSlidingMenuFragmentListener,ToolbarState, MenuDrawerFragment.OpenMenuFragments
 {
 
     private TextInputEditText username, password;
@@ -51,14 +63,14 @@ public class MainActivity extends AppCompatActivity implements
         drawerLayout    = findViewById(R.id.drawer_layout);
         slidingMenuFragment = (MenuDrawerFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_nd);
 
-        openFragment(new SplashFragment(),false);
+        OpenFragment(new SplashFragment(),false);
 
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 // Do something after 2s = 2000ms
-                openFragment(new LoginFragment(),false);
+                OpenFragment(new LoginFragment(),false);
             }
         }, 2000);
 
@@ -75,7 +87,7 @@ public class MainActivity extends AppCompatActivity implements
         textView.setText(s);
     }
 
-    private void openFragment(Fragment fragment, Boolean addStack){
+    private void OpenFragment(Fragment fragment, Boolean addStack){
 
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -94,6 +106,12 @@ public class MainActivity extends AppCompatActivity implements
 
     public void loginBtnClick(View view) {
         switch (view.getId()) {
+
+
+            case R.id.login_api_button:
+
+                break;
+
             case R.id.instagram_btn:
 
 
@@ -134,10 +152,50 @@ public class MainActivity extends AppCompatActivity implements
             public void onClick(View v) {
                 usernameTxt = username.getText().toString();
                 passwordTxt = password.getText().toString();
-                loginToInstagram(usernameTxt, passwordTxt);
+              //  loginToInstagram(usernameTxt, passwordTxt);
 
+                RetrofitInstance retrofitInstance = new RetrofitInstance();
+                Retrofit retrofit = retrofitInstance.getRetrofitInstance();
+                SocialLoginLogic socialLoginLogic = new SocialLoginLogic();
+                socialLoginLogic.GetFirstUserLoginData();
+
+                GetLoginDataService getLoginDataService = retrofit.create(GetLoginDataService.class);
+
+
+                getLoginDataService.getLoginData(socialLoginLogic.GetFirstUserLoginData()).enqueue(new Callback<SocialRootModel>() {
+                    @Override
+                    public void onResponse(Call<SocialRootModel> call, Response<SocialRootModel> response) {
+
+                        Log.i("app_tag", response.toString());
+                        if((response.isSuccessful())){
+                            SocialRootModel obr = response.body();
+
+
+                            User data = obr.getData();
+                            UserPopularity userPopularity=obr.getData().getRates_summary_sum();
+                            SavePref savePref=new SavePref();
+                            data.setSocial_primary((socialLoginLogic.GetFirstUserLoginData().getSocial_primary())+"");
+                            savePref.SaveUser(MainActivity.this,data,userPopularity);
+                            Bundle bundle=new Bundle();
+                            bundle.putSerializable("User",data);
+                            HomeFragment homeFragment=new HomeFragment();
+                            homeFragment.setArguments(bundle);
+                            OpenFragment(homeFragment,true);
+                            Log.i("app_tag", "info: "+obr.getCode());
+
+
+                        }else{
+                            Log.i("app_tag", "error");
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<SocialRootModel> call, Throwable t) {
+                        Log.i("app_tag", t.getMessage().toString());
+                    }
+                });
                 dialog.dismiss();
-                openFragment(new HomeFragment(),true);
+                OpenFragment(new HomeFragment(),true);
 
             }
         });
@@ -169,60 +227,22 @@ public class MainActivity extends AppCompatActivity implements
             getSupportFragmentManager().popBackStack();
     }
 
-   /* @Override
-    public void onBtn1Clicked(String str) {
-        setTitle(str);
-        LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("public_profile"));
-
-    }*/
-
      @Override
    public void onBtn1Clicked(Fragment fragment) {
-       openFragment(fragment,true);
-       closeDrawer();
-
+         OpenFragment(fragment,true);
+         closeDrawer();
    }
-
-
-   //GraphRequest - ApiRequest
-    // in nabaiad inja bashe baiad dakhel loginFragment to inSuccess bezar
-/*   private void getFacebookData(){
-       AccessToken accessToken = AccessToken.getCurrentAccessToken();
-       boolean isLoggedIn = accessToken != null && !accessToken.isExpired();
-       if(isLoggedIn){
-           GraphRequest request = GraphRequest.newMeRequest(
-                   accessToken,
-                   new GraphRequest.GraphJSONObjectCallback() {
-                       @Override
-                       public void onCompleted(JSONObject object, GraphResponse response) {
-                           Log.i("app_tag",response.toString());
-                           Log.i("app_tag",object.toString());
-
-                           //Call loginBySocial Mahad
-                           //parse Recived Data
-                       }
-                   });
-
-           Bundle parameters = new Bundle();
-           parameters.putString("fields", "id,name");
-           request.setParameters(parameters);
-           request.executeAsync();
-       }
-   }*/
 
 
     @Override
     public void onBtn2Clicked(Fragment fragment)
     {
 
-        openFragment(fragment,true);
+        OpenFragment(fragment,true);
         closeDrawer();
     }
 
-    @Override
-    public void onTestFaceBook() {
-        //getFacebookData();
-    }
+
 
     private void openDrawer(){
         drawerLayout.openDrawer(GravityCompat.START);
@@ -244,6 +264,14 @@ public class MainActivity extends AppCompatActivity implements
              getWindow().getDecorView().setSystemUiVisibility(View.VISIBLE);
              findViewById(R.id.toolbar).setVisibility(View.VISIBLE);
          }
+    }
+
+
+    @Override
+    public void Open(Fragment fragment) {
+        OpenFragment(fragment,true);
+        closeDrawer();
+
     }
 }
 

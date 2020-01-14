@@ -11,8 +11,8 @@ public class UserFriendsRepository {
 
     public void SetUserFriendsMock(int userId) {
 
-       friends.add(new Friend("image1","Hanie",false,userId,1));
-       friends.add(new Friend("image2","Maryam",false,userId,2));
+       friends.add(new Friend("image1","hanie",false,userId,4));
+       friends.add(new Friend("image2","Maryam",false,userId,8006));
        friends.add(new Friend("image3","Sara",false,userId,3));
        friends.add(new Friend("image4","Parisa",false,userId,4));
        friends.add(new Friend("image5","Nava",false,userId,5));

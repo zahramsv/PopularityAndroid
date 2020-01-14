@@ -20,19 +20,19 @@ public class SocialLoginRepository {
         DataModel1=new LoginSendDataModel();
         DataModel2=new LoginSendDataModel();
 
-       DataModel1.setAvatar_url("test");
-       DataModel1.setFull_name("zahra");
-       DataModel1.setSocial_primary(8001);
+       DataModel1.setAvatar_url("image1");
+       DataModel1.setFull_name("hanie");
+       DataModel1.setSocial_primary(4);
        DataModel1.setSocial_type(2);
-       DataModel1.setUsername("zahra.msv");
+       DataModel1.setUsername("hani");
 
 
 
-        DataModel2.setAvatar_url("test1");
+      /*  DataModel2.setAvatar_url("test1");
         DataModel2.setFull_name("sara");
         DataModel2.setSocial_primary(8002);
         DataModel2.setSocial_type(2);
-        DataModel2.setUsername("sara.sh");
+        DataModel2.setUsername("sara.sh");*/
         
     }
 

@@ -43,12 +43,6 @@
                     android:text="Zahra Mousavi"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
 
-                <TextView
-                    android:id="@+id/email"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Instagram Account"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
             </LinearLayout>
 

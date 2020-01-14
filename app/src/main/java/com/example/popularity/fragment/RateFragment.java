@@ -7,13 +7,17 @@ import android.os.Bundle;
 import androidx.appcompat.widget.AppCompatRatingBar;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.example.popularity.R;
+import com.example.popularity.model.BaseResponse;
 import com.example.popularity.model.Friend;
 import com.example.popularity.model.RateSendDataModel;
 import com.example.popularity.model.SubmitRate;
@@ -60,7 +64,11 @@ public class RateFragment extends Fragment {
 
 
         View view= inflater.inflate(R.layout.fragment_rate, container, false);
+
         AppCompatRatingBar look=view.findViewById(R.id.look_rate);
+
+
+
         AppCompatRatingBar style=view.findViewById(R.id.style_rate);
         AppCompatRatingBar popularity=view.findViewById(R.id.popularity_rate);
         AppCompatRatingBar fitness=view.findViewById(R.id.fitness_rate);
@@ -68,35 +76,33 @@ public class RateFragment extends Fragment {
         AppCompatRatingBar personality=view.findViewById(R.id.personality_rate);
 
 
-        int social_primary=Integer.parseInt(user.getSocial_primary());
-
-        SubmitRate submitRate=new SubmitRate(user.getToken(), social_primary,friend.getId()
-               ,friend.getName(),friend.getName(),
-                user.getAvatar_url(),user.getSocial_type(),look.getRating(),
-                fitness.getRating(),style.getRating(),personality.getRating(),trustworthy.getRating(),
-                popularity.getRating());
-
         userName= view.findViewById(R.id.username);
         userName.setText(friend.getName() + " - "+friend.getUserId()+" - "+user.getFull_name());
         view.findViewById(R.id.save_btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
+                SubmitRate submitRate=new SubmitRate(user.getToken(), Integer.parseInt(user.getSocial_primary()),friend.getId()
+                        ,friend.getName(),friend.getName(),
+                        user.getAvatar_url(),user.getSocial_type(),look.getRating(),
+                        fitness.getRating(),style.getRating(),personality.getRating(),trustworthy.getRating(),
+                        popularity.getRating());
+
                 RetrofitInstance retrofitInstance=new RetrofitInstance();
                 Retrofit retrofit=retrofitInstance.getRetrofitInstance();
                 FriendsRate friendsRate=retrofit.create(FriendsRate.class);
-                friendsRate.SubmitRateToFriend(submitRate).enqueue(new Callback<Integer>() {
+                friendsRate.SubmitRateToFriend(submitRate).enqueue(new Callback<BaseResponse<String>>() {
                     @Override
-                    public void onResponse(Call<Integer> call, Response<Integer> response) {
+                    public void onResponse(Call<BaseResponse<String>> call, Response<BaseResponse<String>> response) {
 
+                        Log.i("app_tag",response.message().toString());
                     }
 
                     @Override
-                    public void onFailure(Call<Integer> call, Throwable t) {
+                    public void onFailure(Call<BaseResponse<String>> call, Throwable t) {
 
                     }
                 });
-
 
             }
         });

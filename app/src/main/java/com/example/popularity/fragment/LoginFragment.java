@@ -66,7 +66,7 @@ public class LoginFragment extends BaseFragment {
 
 
 
-        Button loginButton = view.findViewById(R.id.login_button);
+        Button loginButton = view.findViewById(R.id.login_api_button);
 
 
         loginButton.setOnClickListener(new View.OnClickListener() {
@@ -76,6 +76,7 @@ public class LoginFragment extends BaseFragment {
                 Retrofit retrofit = retrofitInstance.getRetrofitInstance();
                 SocialLoginLogic socialLoginLogic = new SocialLoginLogic();
                 socialLoginLogic.GetFirstUserLoginData();
+
                 GetLoginDataService getLoginDataService = retrofit.create(GetLoginDataService.class);
 
 
@@ -91,6 +92,7 @@ public class LoginFragment extends BaseFragment {
                             User data = obr.getData();
                             UserPopularity userPopularity=obr.getData().getRates_summary_sum();
                             SavePref savePref=new SavePref();
+                            data.setSocial_primary((socialLoginLogic.GetFirstUserLoginData().getSocial_primary())+"");
                             savePref.SaveUser(getContext(),data,userPopularity);
                             Bundle bundle=new Bundle();
                             bundle.putSerializable("User",data);

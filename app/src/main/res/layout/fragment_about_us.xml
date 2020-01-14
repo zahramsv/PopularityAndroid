@@ -3,13 +3,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.AboutUsFragment">
+    android:background="@color/white"
+>
 
-    <TextView
-        android:layout_margin="@dimen/spacing_middle"
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:textColor="@color/black"
-        android:text="@string/about_us_txt" />
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColor="@color/black"
+            android:layout_margin="@dimen/spacing_middle"
+            android:text="@string/privacy_policy_txt" />
+
+    </RelativeLayout>
+
 
 </FrameLayout>

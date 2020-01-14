@@ -21,14 +21,11 @@ public class PrivacyPolicyFragment extends Fragment {
     private ToolbarState toolbarState;
 
     public PrivacyPolicyFragment() {
-        // Required empty public constructor
+
     }
 
-
-    // TODO: Rename and change types and number of parameters
     public static PrivacyPolicyFragment newInstance() {
         PrivacyPolicyFragment fragment = new PrivacyPolicyFragment();
-
         return fragment;
     }
 
@@ -52,7 +49,7 @@ public class PrivacyPolicyFragment extends Fragment {
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        if (context instanceof MenuDrawerFragment.OnSlidingMenuFragmentListener) {
+        if (context instanceof MenuDrawerFragment.OpenMenuFragments) {
             toolbarState = (ToolbarState) context;
         } else {
             throw new RuntimeException(context.toString()

@@ -1,17 +1,26 @@
 package com.example.popularity.myInterface;
 
+import com.example.popularity.model.BaseResponse;
+import com.example.popularity.model.SubmitRate;
+import com.example.popularity.model.User;
 import com.example.popularity.utils.URLS;
 
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
 
 public interface FriendsRate {
 
-    @FormUrlEncoded
+
     @POST(URLS.RateToFriend)
-    Call<Integer> SubmitRateToFriend(
+    Call<BaseResponse<String>> SubmitRateToFriend(@Body SubmitRate submitRate
+
+                                                  );
+    /*@FormUrlEncoded
+    @POST(URLS.RateToFriend)
+    Call<BaseResponse<String>> SubmitRateToFriend(
             @Field("token") String token,
             @Field("who_rate_id") int who_rate_id,
             @Field("whom_rated_id") int whom_rated_id,
@@ -25,5 +34,5 @@ public interface FriendsRate {
             @Field("rate_personality") float rate_personality,
             @Field("rate_trustworthy") float rate_trustworthy,
             @Field("rate_popularity") float rate_popularity
-            );
+            );*/
 }
