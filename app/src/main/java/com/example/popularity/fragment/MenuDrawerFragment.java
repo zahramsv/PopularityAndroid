@@ -114,7 +114,7 @@ public class MenuDrawerFragment extends Fragment {
         rateUs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openMenuFragments.Open(RateUsFragment.newInstance());
+                //openMenuFragments.Open(RateUsFragment.newInstance());
             }
         });
 

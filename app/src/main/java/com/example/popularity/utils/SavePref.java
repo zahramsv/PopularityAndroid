@@ -30,10 +30,21 @@ public  class SavePref {
         editor.putString("social_type", user.getSocial_primary());
         editor.putString("created_at", user.getCreated_at());
         editor.putString("updated_at", user.getUpdated_at());
+
+
         editor.apply();
+
 
     }
 
+    public void DeleteUser(Context context)
+    {
+        sharedPref= context.getSharedPreferences(USER_DATA,Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+       editor.clear();
+       editor.apply();
+
+    }
     public String getUser(String key) {
         if (sharedPref!= null) {
             return sharedPref.getString(key, "");

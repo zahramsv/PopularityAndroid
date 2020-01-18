@@ -1,7 +1,5 @@
 package com.example.popularity.fragment;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.appcompat.widget.AppCompatRatingBar;
@@ -9,21 +7,17 @@ import androidx.fragment.app.Fragment;
 
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.example.popularity.R;
 import com.example.popularity.model.BaseResponse;
 import com.example.popularity.model.Friend;
-import com.example.popularity.model.RateSendDataModel;
 import com.example.popularity.model.SubmitRate;
 import com.example.popularity.model.User;
-import com.example.popularity.myInterface.FriendsRate;
-import com.example.popularity.myInterface.GetLoginDataService;
+import com.example.popularity.myInterface.ApiServices;
 import com.example.popularity.utils.RetrofitInstance;
 
 import retrofit2.Call;
@@ -90,7 +84,7 @@ public class RateFragment extends Fragment {
 
                 RetrofitInstance retrofitInstance=new RetrofitInstance();
                 Retrofit retrofit=retrofitInstance.getRetrofitInstance();
-                FriendsRate friendsRate=retrofit.create(FriendsRate.class);
+                ApiServices friendsRate=retrofit.create(ApiServices.class);
                 friendsRate.SubmitRateToFriend(submitRate).enqueue(new Callback<BaseResponse<String>>() {
                     @Override
                     public void onResponse(Call<BaseResponse<String>> call, Response<BaseResponse<String>> response) {

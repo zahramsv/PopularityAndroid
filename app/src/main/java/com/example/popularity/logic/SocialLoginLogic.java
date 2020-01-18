@@ -1,6 +1,6 @@
 package com.example.popularity.logic;
 
-import com.example.popularity.model.LoginSendDataModel;
+import com.example.popularity.model.Login;
 import com.example.popularity.repository.SocialLoginRepository;
 
 public class SocialLoginLogic {
@@ -12,7 +12,7 @@ public class SocialLoginLogic {
     }
 
 
-    public LoginSendDataModel GetFirstUserLoginData()
+    public Login GetFirstUserLoginData()
     {
         socialLoginRepository.generateDataMock();
         return socialLoginRepository.getMockDataModel1();

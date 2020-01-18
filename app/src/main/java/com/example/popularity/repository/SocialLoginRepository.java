@@ -1,24 +1,24 @@
 package com.example.popularity.repository;
 
-import com.example.popularity.model.LoginSendDataModel;
+import com.example.popularity.model.Login;
 
 public class SocialLoginRepository {
 
 
-    public  LoginSendDataModel DataModel1;
-    public  LoginSendDataModel DataModel2;
+    public Login DataModel1;
+    public Login DataModel2;
 
-    public LoginSendDataModel getMockDataModel2() {
+    public Login getMockDataModel2() {
         return DataModel2;
     }
 
-    public LoginSendDataModel getMockDataModel1() {
+    public Login getMockDataModel1() {
         return DataModel1;
     }
 
     public  void generateDataMock() {
-        DataModel1=new LoginSendDataModel();
-        DataModel2=new LoginSendDataModel();
+        DataModel1=new Login();
+        DataModel2=new Login();
 
        DataModel1.setAvatar_url("image1");
        DataModel1.setFull_name("hanie");

@@ -1,6 +1,9 @@
 package com.example.popularity.activity;
 
 import android.app.Dialog;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,6 +15,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -28,6 +32,7 @@ import com.example.popularity.model.SocialRootModel;
 import com.example.popularity.model.User;
 import com.example.popularity.model.UserPopularity;
 import com.example.popularity.myInterface.GetLoginDataService;
+import com.example.popularity.myInterface.UserTransaction;
 import com.example.popularity.utils.RetrofitInstance;
 import com.example.popularity.utils.SavePref;
 import com.example.popularity.utils.ToolbarState;
@@ -38,6 +43,8 @@ import com.google.android.material.textfield.TextInputEditText;
 
 import org.json.JSONObject;
 
+import java.io.Serializable;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -46,13 +53,48 @@ import retrofit2.Retrofit;
 
 public class MainActivity extends AppCompatActivity implements
         MenuDrawerFragment.OnSlidingMenuFragmentListener,ToolbarState, MenuDrawerFragment.OpenMenuFragments
+        , UserTransaction
 {
 
     private TextInputEditText username, password;
     private String usernameTxt, passwordTxt;
+    private User userInfo=new User();
+    private DrawerLayout drawerLayout;
+    private MenuDrawerFragment slidingMenuFragment;
+    private getUserDataSplash getUserDataSplash;
 
-    DrawerLayout drawerLayout;
-    MenuDrawerFragment slidingMenuFragment;
+    private User mainUser;
+
+
+
+    @Override
+    public User getMainUser() {
+        return mainUser;
+    }
+
+    @Override
+    public void setMainUser(User mainUser) {
+        this.mainUser = mainUser;
+
+
+      //  Log.d("app_tag", "user data: "+mainUser.getFull_name());
+        final Handler handler = new Handler();
+
+        handler.postDelayed(() -> {
+            // Do something after 2s = 2000ms
+            if (mainUser==null)
+            {
+                OpenFragment(new LoginFragment(),false,null);
+            }
+            else {
+
+
+                OpenFragment (new HomeFragment(),false,mainUser);
+            }
+
+        }, 2000);
+    }
+
 
 
     @Override
@@ -60,19 +102,14 @@ public class MainActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+
         drawerLayout    = findViewById(R.id.drawer_layout);
         slidingMenuFragment = (MenuDrawerFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_nd);
 
-        OpenFragment(new SplashFragment(),false);
+        OpenFragment(new SplashFragment(this),false,null);
 
-        final Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                // Do something after 2s = 2000ms
-                OpenFragment(new LoginFragment(),false);
-            }
-        }, 2000);
+
 
         ImageView menuDrawer = findViewById(R.id.menuDrawer);
         menuDrawer.setOnClickListener(v->{
@@ -81,14 +118,17 @@ public class MainActivity extends AppCompatActivity implements
 
     }
 
-    public void setTitle(String s)
-    {
-        TextView textView=findViewById(R.id.txtToolbar);
-        textView.setText(s);
-    }
 
-    private void OpenFragment(Fragment fragment, Boolean addStack){
 
+
+    private void OpenFragment(Fragment fragment, Boolean addStack,Object object){
+
+        if (object!=null)
+        {
+            Bundle bundle=new Bundle();
+            bundle.putSerializable("User", (Serializable) object);
+            fragment.setArguments(bundle);
+        }
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.pop_enter, R.anim.pop_exit);
@@ -102,6 +142,11 @@ public class MainActivity extends AppCompatActivity implements
             transaction.addToBackStack(fragment.getClass().getName());
         }
         transaction.commit();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     public void loginBtnClick(View view) {
@@ -180,7 +225,7 @@ public class MainActivity extends AppCompatActivity implements
                             bundle.putSerializable("User",data);
                             HomeFragment homeFragment=new HomeFragment();
                             homeFragment.setArguments(bundle);
-                            OpenFragment(homeFragment,true);
+                            OpenFragment(homeFragment,true,null);
                             Log.i("app_tag", "info: "+obr.getCode());
 
 
@@ -195,7 +240,7 @@ public class MainActivity extends AppCompatActivity implements
                     }
                 });
                 dialog.dismiss();
-                OpenFragment(new HomeFragment(),true);
+                OpenFragment(new HomeFragment(),true,null);
 
             }
         });
@@ -229,18 +274,21 @@ public class MainActivity extends AppCompatActivity implements
 
      @Override
    public void onBtn1Clicked(Fragment fragment) {
-         OpenFragment(fragment,true);
+         OpenFragment(fragment,true,null);
          closeDrawer();
    }
+
+
 
 
     @Override
     public void onBtn2Clicked(Fragment fragment)
     {
 
-        OpenFragment(fragment,true);
+        OpenFragment(fragment,true,null);
         closeDrawer();
     }
+
 
 
 
@@ -256,11 +304,15 @@ public class MainActivity extends AppCompatActivity implements
     public void toolbarState(Boolean flag) {
          if (!flag)
          {
+
+
              findViewById(R.id.toolbar).setVisibility(View.INVISIBLE);
              getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
          }
          else if (flag)
          {
+            // TextView tt=findViewById(R.id.txtToolbar);
+            // tt.setText("Setting");
              getWindow().getDecorView().setSystemUiVisibility(View.VISIBLE);
              findViewById(R.id.toolbar).setVisibility(View.VISIBLE);
          }
@@ -269,10 +321,18 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public void Open(Fragment fragment) {
-        OpenFragment(fragment,true);
+        OpenFragment(fragment,true,null);
         closeDrawer();
 
     }
+
+
+    public interface getUserDataSplash
+    {
+        User GetUserSplash();
+    }
+
+
 }
 
 

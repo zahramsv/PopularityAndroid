@@ -32,6 +32,9 @@ public class User implements Serializable {
     private int rates_count;
 
 
+    public User() {
+    }
+
     public User(String social_primary, String username, String token, String full_name, String avatar_url, UserPopularity rates_summary_sum, String updated_at, String created_at, int social_type, int rated_count, int rates_count) {
         this.social_primary = social_primary;
         this.username = username;
