@@ -1,20 +1,15 @@
 package com.example.popularity.fragment;
 
-import android.content.Context;
 import android.os.Bundle;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-
 import com.example.popularity.R;
-import com.example.popularity.utils.BaseFragment;
 import com.example.popularity.utils.ToolbarState;
 
-public class AboutUsFragment extends Fragment {
+public class AboutUsFragment extends BaseFragment {
 
 
     private ToolbarState toolbarState;
@@ -40,19 +35,10 @@ public class AboutUsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        toolbarState.toolbarState(true);
-        return inflater.inflate(R.layout.fragment_about_us, container, false);
-    }
 
-    @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
-        if (context instanceof MenuDrawerFragment.OpenMenuFragments) {
-            toolbarState = (ToolbarState) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnAccountingMainFragmentInteractionListener");
-        }
+        toolbarState=(ToolbarState)getContext();
+        toolbarState.toolbarState(true,getResources().getString(R.string.about_us_toolbar_txt));
+        return inflater.inflate(R.layout.fragment_about_us, container, false);
     }
 
 }

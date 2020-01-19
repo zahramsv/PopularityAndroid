@@ -15,7 +15,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.popularity.R;
-import com.example.popularity.utils.BaseFragment;
+import com.example.popularity.fragment.BaseFragment;
 
 /**
  * A simple {@link Fragment} subclass.

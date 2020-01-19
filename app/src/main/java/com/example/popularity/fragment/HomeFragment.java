@@ -20,9 +20,9 @@ import com.example.popularity.model.Friend;
 import com.example.popularity.model.Rate;
 import com.example.popularity.model.User;
 import com.example.popularity.model.UserPopularity;
+import com.example.popularity.myInterface.MainActivityTransaction;
 import com.example.popularity.myInterface.itemClickListener;
 import com.example.popularity.repository.UserFriendsRepository;
-import com.example.popularity.utils.BaseFragment;
 import com.example.popularity.R;
 import com.example.popularity.utils.ToolbarState;
 
@@ -34,11 +34,6 @@ public class HomeFragment extends BaseFragment {
 
     private ToolbarState toolbarState;
     private RecyclerView favorites_recycler_view,friends_recycler_view;
-
-    public HomeFragment() {
-        // Required empty public constructor
-    }
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -53,7 +48,8 @@ public class HomeFragment extends BaseFragment {
         User user= (User) bundle.getSerializable("User");
         UserPopularity userPopularity=user.getRates_summary_sum();
 
-        toolbarState.toolbarState(true);
+        toolbarState=(ToolbarState)getContext();
+        toolbarState.toolbarState(true,getResources().getString(R.string.home_toolbar_txt));
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         friends_recycler_view=view.findViewById(R.id.friends_recycler_view);
         LinearLayoutManager layoutManager1=new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false);
@@ -67,22 +63,16 @@ public class HomeFragment extends BaseFragment {
         FriendsListAdapter friendsListAdapter=new FriendsListAdapter(friendList,getActivity());
         friends_recycler_view.setAdapter(friendsListAdapter);
 
-       friendsListAdapter.setOnItemClickListener(new itemClickListener() {
-           @Override
-           public void onItemClick(int pos) {
+       friendsListAdapter.setOnItemClickListener(pos -> {
 
-               Friend friend= friendList.get(pos);
-               Bundle bundle=new Bundle();
-               bundle.putSerializable("Friend",friend);
-               bundle.putSerializable("User",user);
-               RateFragment rateFragment=new RateFragment();
-               rateFragment.setArguments(bundle);
+           Friend friend= friendList.get(pos);
+           Bundle bundle1 =new Bundle();
+           bundle1.putSerializable("Friend",friend);
+           bundle1.putSerializable("User",user);
 
+           baseListener.openFragment(new RateFragment(), true, bundle1);
+           Log.i("app_tag","tt");
 
-               openFragment(rateFragment,true);
-               Log.i("app_tag","tt");
-
-           }
        });
         //Vertical
         favorites_recycler_view=view.findViewById(R.id.favorites_recycler_view);
@@ -90,12 +80,12 @@ public class HomeFragment extends BaseFragment {
         favorites_recycler_view.setLayoutManager(layoutManager);
         List<Rate> rates=new ArrayList<>();
 
-        rates.add(new Rate("Look",Integer.parseInt(userPopularity.getRate_look())));
-        rates.add(new Rate("Fitness",Integer.parseInt(userPopularity.getRate_fitness())));
-        rates.add(new Rate("Style",Integer.parseInt(userPopularity.getRate_style())));
-        rates.add(new Rate("Personality",Integer.parseInt(userPopularity.getRate_personality())));
-        rates.add(new Rate("Trustworthy",Integer.parseInt(userPopularity.getRate_trustworthy())));
-        rates.add(new Rate("Popularity",Integer.parseInt(userPopularity.getRate_popularity())));
+        rates.add(new Rate("Look",Float.parseFloat(userPopularity.getRate_look())));
+        rates.add(new Rate("Fitness",Float.parseFloat(userPopularity.getRate_fitness())));
+        rates.add(new Rate("Style",Float.parseFloat(userPopularity.getRate_style())));
+        rates.add(new Rate("Personality",Float.parseFloat(userPopularity.getRate_personality())));
+        rates.add(new Rate("Trustworthy",Float.parseFloat(userPopularity.getRate_trustworthy())));
+        rates.add(new Rate("Popularity",Float.parseFloat(userPopularity.getRate_popularity())));
 
         RateListAdapter rateListAdapter=new RateListAdapter(rates,getActivity());
         rateListAdapter.setOnItemClickListener(new RateListAdapter.ClickListener() {
@@ -109,14 +99,4 @@ public class HomeFragment extends BaseFragment {
         return view;
     }
 
-    @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
-        if (context instanceof MenuDrawerFragment.OnSlidingMenuFragmentListener) {
-            toolbarState = (ToolbarState) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnAccountingMainFragmentInteractionListener");
-        }
-    }
 }

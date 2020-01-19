@@ -2,5 +2,5 @@ package com.example.popularity.utils;
 
 public interface ToolbarState {
 
-    void toolbarState(Boolean flag);
+    void toolbarState(Boolean flag,String toolbarText);
 }

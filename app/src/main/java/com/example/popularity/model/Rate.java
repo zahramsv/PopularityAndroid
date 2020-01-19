@@ -3,9 +3,9 @@ package com.example.popularity.model;
 public class Rate {
 
     private String attribute;
-    private int Rate;
+    private Float Rate;
 
-    public Rate(String attribute, int rate) {
+    public Rate(String attribute, Float rate) {
         this.attribute = attribute;
         Rate = rate;
     }
@@ -18,11 +18,11 @@ public class Rate {
         this.attribute = attribute;
     }
 
-    public int getRate() {
+    public Float getRate() {
         return Rate;
     }
 
-    public void setRate(int rate) {
+    public void setRate(Float rate) {
         Rate = rate;
     }
 }

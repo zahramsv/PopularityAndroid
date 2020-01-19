@@ -18,6 +18,7 @@
     <string name="rate_to_friends">Rate to friends</string>
     <string name="login_page">Login Page</string>
     <string name="login_with">Choose Login Way </string>
+    <string name="error_under_construction">This part is under construction!</string>
 
     <string name="drawer_open">open</string>
     <string name="drawer_close">close</string>
@@ -46,5 +47,16 @@ The terms used in this Privacy Policy have the same meanings as in our Terms and
     <string name="rate_popularity">Popularity</string>
     <string name="rate_to">What you think about ... </string>
     <string name="Save">Save</string>
+
+    <!--ToolBarTitles-->
+    <string name="login_toolbar_txt">login</string>
+    <string name="setting_toolbar_txt">Setting</string>
+    <string name="home_toolbar_txt">Home</string>
+    <string name="about_us_toolbar_txt">About Us</string>
+    <string name="privacy_policy_toolbar_txt">Privacy Policy</string>
+
+
+    <!--errors-->
+    <string name="error_api_call">مشکلی در درخواست به سرور به وجود آمده است.</string>
 </resources>
 

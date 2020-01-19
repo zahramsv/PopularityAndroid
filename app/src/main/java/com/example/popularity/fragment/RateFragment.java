@@ -26,7 +26,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 
 
-public class RateFragment extends Fragment {
+public class RateFragment extends BaseFragment {
 
     private TextView userName;
     private Button save_btn;
@@ -34,7 +34,7 @@ public class RateFragment extends Fragment {
         // Required empty public constructor
     }
 
-    public static RateFragment newInstance(String param1, String param2) {
+    public static RateFragment newInstance() {
         RateFragment fragment = new RateFragment();
         return fragment;
     }
@@ -54,22 +54,13 @@ public class RateFragment extends Fragment {
         Bundle bundle=getArguments();
         Friend friend= (Friend) bundle.getSerializable("Friend");
         User user= (User) bundle.getSerializable("User");
-
-
-
         View view= inflater.inflate(R.layout.fragment_rate, container, false);
-
         AppCompatRatingBar look=view.findViewById(R.id.look_rate);
-
-
-
         AppCompatRatingBar style=view.findViewById(R.id.style_rate);
         AppCompatRatingBar popularity=view.findViewById(R.id.popularity_rate);
         AppCompatRatingBar fitness=view.findViewById(R.id.fitness_rate);
         AppCompatRatingBar trustworthy=view.findViewById(R.id.trustworthy_rate);
         AppCompatRatingBar personality=view.findViewById(R.id.personality_rate);
-
-
         userName= view.findViewById(R.id.username);
         userName.setText(friend.getName() + " - "+friend.getUserId()+" - "+user.getFull_name());
         view.findViewById(R.id.save_btn).setOnClickListener(new View.OnClickListener() {
