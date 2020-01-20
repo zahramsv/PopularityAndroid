@@ -7,12 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.popularity.R;
-import com.example.popularity.utils.ToolbarState;
+import com.example.popularity.utils.ToolbarKind;
 
 public class AboutUsFragment extends BaseFragment {
-
-
-    private ToolbarState toolbarState;
 
     public AboutUsFragment() {
         // Required empty public constructor
@@ -24,20 +21,15 @@ public class AboutUsFragment extends BaseFragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-
-        }
+    public void onHiddenChanged(boolean hidden) {
+        if(!hidden)
+            baseListener.changeToolbar(ToolbarKind.BACK, getString(R.string.about_us_toolbar_txt));
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-
-        toolbarState=(ToolbarState)getContext();
-        toolbarState.toolbarState(true,getResources().getString(R.string.about_us_toolbar_txt));
+        baseListener.changeToolbar(ToolbarKind.BACK, getString(R.string.about_us_toolbar_txt));
         return inflater.inflate(R.layout.fragment_about_us, container, false);
     }
 

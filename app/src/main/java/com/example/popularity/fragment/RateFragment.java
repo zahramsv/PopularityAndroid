@@ -4,8 +4,10 @@ import android.os.Bundle;
 
 import androidx.appcompat.widget.AppCompatRatingBar;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
-import android.util.Log;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +21,7 @@ import com.example.popularity.model.SubmitRate;
 import com.example.popularity.model.User;
 import com.example.popularity.myInterface.ApiServices;
 import com.example.popularity.utils.RetrofitInstance;
+import com.example.popularity.utils.ToolbarKind;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -29,7 +32,7 @@ import retrofit2.Retrofit;
 public class RateFragment extends BaseFragment {
 
     private TextView userName;
-    private Button save_btn;
+
     public RateFragment() {
         // Required empty public constructor
     }
@@ -40,10 +43,10 @@ public class RateFragment extends BaseFragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if(!hidden){
+            baseListener.changeToolbar(ToolbarKind.BACK,getString(R.string.rate_us));
         }
     }
 
@@ -51,6 +54,7 @@ public class RateFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        baseListener.changeToolbar(ToolbarKind.BACK,getString(R.string.rate_toolbar));
         Bundle bundle=getArguments();
         Friend friend= (Friend) bundle.getSerializable("Friend");
         User user= (User) bundle.getSerializable("User");
@@ -80,12 +84,28 @@ public class RateFragment extends BaseFragment {
                     @Override
                     public void onResponse(Call<BaseResponse<String>> call, Response<BaseResponse<String>> response) {
 
-                        Log.i("app_tag",response.message().toString());
+                        baseListener.showMessage("امتیاز دهی با موفقیت انجام شد.");
+                        final Handler handler = new Handler();
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                getFragmentManager().popBackStackImmediate();
+                                FragmentManager fm = getFragmentManager();
+                                Fragment fragment = fm.findFragmentById(R.id.your_placeholder);
+                                FragmentTransaction ft = fm.beginTransaction();
+                                if(fragment!=null){
+                                    ft.show(fragment);
+                                    ft.commit();
+                                }
+                            }
+                        }, 2000);
+
                     }
 
                     @Override
                     public void onFailure(Call<BaseResponse<String>> call, Throwable t) {
 
+                        baseListener.showMessage("در ثبت امتیاز مشکل بوجود آمده است.");
                     }
                 });
 

@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -36,11 +37,8 @@ import com.example.popularity.myInterface.MainActivityTransaction;
 import com.example.popularity.myInterface.UserTransaction;
 import com.example.popularity.utils.RetrofitInstance;
 import com.example.popularity.utils.SavePref;
-import com.example.popularity.utils.ToolbarState;
+import com.example.popularity.utils.ToolbarKind;
 import com.google.android.material.textfield.TextInputEditText;
-
-import java.io.Serializable;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -49,20 +47,18 @@ import retrofit2.Retrofit;
 
 
 public class MainActivity extends AppCompatActivity implements
-          ToolbarState
-        , UserTransaction
-        , MainActivityTransaction
+      UserTransaction
+    , MainActivityTransaction
 {
 
     private TextInputEditText username, password;
     private String usernameTxt, passwordTxt;
-    private User userInfo = new User();
     private DrawerLayout drawerLayout;
     private MenuDrawerFragment slidingMenuFragment;
-    private getUserDataSplash getUserDataSplash;
     private ProgressBar loadingBar;
-    Dialog dialog;
+    private Dialog dialog;
     private User mainUser;
+    private ImageView toolbar_icon;
 
 
     @Override
@@ -71,17 +67,14 @@ public class MainActivity extends AppCompatActivity implements
         setContentView(R.layout.activity_main);
 
         drawerLayout = findViewById(R.id.drawer_layout);
+        toolbar_icon=findViewById(R.id.toolbar_icon);
+        toolbarTitle = findViewById(R.id.txtToolbar);
+
         slidingMenuFragment = (MenuDrawerFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_nd);
         assert slidingMenuFragment != null;
         slidingMenuFragment.attachFragment(this);
         loadingBar = findViewById(R.id.loadingBar);
         openFragment(new SplashFragment(this), false, null);
-
-        ImageView menuDrawer = findViewById(R.id.menuDrawer);
-        menuDrawer.setOnClickListener(v -> {
-            openDrawer();
-        });
-
     }
 
 
@@ -129,6 +122,41 @@ public class MainActivity extends AppCompatActivity implements
         transaction.commit();
         closeDrawer();
 
+    }
+
+    private TextView toolbarTitle;
+    @Override
+    public void changeToolbar(ToolbarKind kind, String title) {
+
+        toolbarTitle.setText(title);
+
+        switch (kind){
+            case EMPTY:
+                findViewById(R.id.toolbar).setVisibility(View.GONE);
+                getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
+                break;
+
+            case HOME:
+                findViewById(R.id.toolbar).setVisibility(View.VISIBLE);
+                toolbar_icon.setImageResource(R.drawable.ic_menu);
+                toolbar_icon.setOnClickListener(v->{
+                    openDrawer();
+                });
+                getWindow().getDecorView().setSystemUiVisibility(View.VISIBLE);
+                break;
+
+            case BACK:
+                findViewById(R.id.toolbar).setVisibility(View.VISIBLE);
+                toolbar_icon.setImageResource(R.drawable.ic_back);
+                toolbar_icon.setOnClickListener(v->{
+                    onBackPressed();
+                });
+                getWindow().getDecorView().setSystemUiVisibility(View.VISIBLE);
+                break;
+
+            default:
+                break;
+        }
     }
 
     @Override
@@ -216,7 +244,7 @@ public class MainActivity extends AppCompatActivity implements
                     savePref.SaveUser(MainActivity.this, data, userPopularity);
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("User", data);
-                    openFragment(new HomeFragment(), false, bundle);
+                    openFragment(new HomeFragment(), true, bundle);
                     Log.i("app_tag", "info: " + obr.getCode());
 
 
@@ -232,20 +260,6 @@ public class MainActivity extends AppCompatActivity implements
         });
         dialog.dismiss();
     }
-    private void loginToInstagram(String username, String password) {
-
-
-
-
-        /* instagram = Instagram4Android.builder().username(username).password(password).build();
-        instagram.setup();
-        new AsyncCaller().execute();*/
-
-
-    }
-
-    private String TAG = "TAG";
-
 
     int count = 0;
     @Override
@@ -260,9 +274,9 @@ public class MainActivity extends AppCompatActivity implements
                 this.finish();
         }else{
             super.onBackPressed();
-
             Fragment fragment = fm.findFragmentById(R.id.your_placeholder);
             FragmentTransaction ft = fm.beginTransaction();
+            ft.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
             if(fragment!=null){
                 ft.show(fragment);
                 ft.commit();
@@ -280,22 +294,6 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void toolbarState(Boolean flag, String toolbarTitle) {
-        if (!flag) {
-            findViewById(R.id.toolbar).setVisibility(View.INVISIBLE);
-            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
-        } else if (flag) {
-            TextView tt = findViewById(R.id.txtToolbar);
-            tt.setText(toolbarTitle);
-            getWindow().getDecorView().setSystemUiVisibility(View.VISIBLE);
-            findViewById(R.id.toolbar).setVisibility(View.VISIBLE);
-        }
-    }
-
-
-
-
-    @Override
     public void showLoadingBar(boolean isShow) {
         if (isShow) {
             loadingBar.setVisibility(View.VISIBLE);
@@ -310,9 +308,7 @@ public class MainActivity extends AppCompatActivity implements
     }
 
 
-    public interface getUserDataSplash {
-        User GetUserSplash();
-    }
+
 
 
 }

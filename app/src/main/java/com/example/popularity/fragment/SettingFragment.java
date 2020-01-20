@@ -10,13 +10,18 @@ import android.view.ViewGroup;
 import com.example.popularity.R;
 import com.example.popularity.activity.MainActivity;
 import com.example.popularity.utils.SavePref;
-import com.example.popularity.utils.ToolbarState;
+import com.example.popularity.utils.ToolbarKind;
 
 
 public class SettingFragment extends BaseFragment {
 
 
-    private ToolbarState toolbarState;
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        if (!hidden)
+        baseListener.changeToolbar(ToolbarKind.BACK,getString(R.string.setting_toolbar_txt));
+
+    }
 
     public static SettingFragment newInstance() {
         SettingFragment fragment = new SettingFragment();
@@ -27,20 +32,10 @@ public class SettingFragment extends BaseFragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-
-        }
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        toolbarState=(ToolbarState)getContext();
 
-        toolbarState.toolbarState(true,getResources().getString(R.string.setting_toolbar_txt));
+        baseListener.changeToolbar(ToolbarKind.BACK,getString(R.string.setting_toolbar_txt));
         View view= inflater.inflate(R.layout.fragment_setting, container, false);
         view.findViewById(R.id.log_out_btn).setOnClickListener(new View.OnClickListener() {
             @Override

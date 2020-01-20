@@ -9,13 +9,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.example.popularity.model.BaseResponse;
 import com.example.popularity.model.User;
 import com.example.popularity.myInterface.ApiServices;
 import com.example.popularity.myInterface.UserTransaction;
 import com.example.popularity.R;
 import com.example.popularity.utils.RetrofitInstance;
-import com.example.popularity.utils.ToolbarState;
+import com.example.popularity.utils.ToolbarKind;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -24,13 +26,12 @@ import retrofit2.Retrofit;
 
 public class SplashFragment extends BaseFragment {
 
-    private ToolbarState toolbarState;
 
     private UserTransaction userTransaction;
+
     public SplashFragment(UserTransaction userTransaction) {
         this.userTransaction = userTransaction;
     }
-
 
 
     @Override
@@ -44,8 +45,6 @@ public class SplashFragment extends BaseFragment {
             getUserInfoFromServer();
 
         }, 2000);
-
-
 
 
     }
@@ -77,8 +76,7 @@ public class SplashFragment extends BaseFragment {
             });
 
 
-
-        }else{
+        } else {
             userTransaction.setMainUser(null);
         }
         Log.i("app_tag", token + "");
@@ -88,14 +86,7 @@ public class SplashFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-
-        toolbarState=(ToolbarState)getContext();
-        if (toolbarState != null) {
-            toolbarState.toolbarState(false,null);
-        }
-
-
+        baseListener.changeToolbar(ToolbarKind.EMPTY, "");
         return inflater.inflate(R.layout.fragment_splash, container, false);
     }
 

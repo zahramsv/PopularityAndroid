@@ -1,6 +1,5 @@
 package com.example.popularity.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,8 +16,7 @@ import com.example.popularity.model.UserPopularity;
 import com.example.popularity.R;
 import com.example.popularity.utils.RetrofitInstance;
 import com.example.popularity.utils.SavePref;
-import com.example.popularity.utils.ToolbarState;
-import com.facebook.CallbackManager;
+import com.example.popularity.utils.ToolbarKind;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -28,19 +26,18 @@ import retrofit2.Retrofit;
 public class LoginFragment extends BaseFragment {
 
 
-    Button instagram_btn;
-    private ToolbarState toolbarState;
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+       if(!hidden)
+           baseListener.changeToolbar(ToolbarKind.HOME,getString(R.string.login_toolbar_txt));
 
-
-
-    CallbackManager callbackManager = CallbackManager.Factory.create();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        toolbarState=(ToolbarState)getContext();
-        toolbarState.toolbarState(true, getResources().getString(R.string.login_toolbar_txt));
+        baseListener.changeToolbar(ToolbarKind.HOME,getString(R.string.login_toolbar_txt));
         View view = inflater.inflate(R.layout.fragment_login, container, false);
         Button loginButton = view.findViewById(R.id.login_api_button);
         loginButton.setOnClickListener(view1 -> {
@@ -48,7 +45,7 @@ public class LoginFragment extends BaseFragment {
             loginToServer();
         });
 
-        //getUserFriends();
+        //getUserFriends(); khodet bezan yekam bebinam :D dasht khabam mibord jedan
         return view;
 
     }
@@ -80,7 +77,7 @@ public class LoginFragment extends BaseFragment {
                     savePref.SaveUser(getContext(), data, userPopularity);
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("User", data);
-                    baseListener.openFragment(new HomeFragment(), false, bundle);
+                    baseListener.openFragment(new HomeFragment(), true, bundle);
                     Log.i("app_tag", "info: " + obr.getCode());
 
 
@@ -100,13 +97,6 @@ public class LoginFragment extends BaseFragment {
         });
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        callbackManager.onActivityResult(requestCode, resultCode, data);
-        Log.i("app_tag", requestCode + "");
-        Log.i("app_tag", resultCode + "");
-        super.onActivityResult(requestCode, resultCode, data);
-    }
 
 
     @Override

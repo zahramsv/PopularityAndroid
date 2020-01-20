@@ -1,7 +1,6 @@
 package com.example.popularity.fragment;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.os.Bundle;
 
 import android.util.Log;
@@ -10,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -20,11 +18,9 @@ import com.example.popularity.model.Friend;
 import com.example.popularity.model.Rate;
 import com.example.popularity.model.User;
 import com.example.popularity.model.UserPopularity;
-import com.example.popularity.myInterface.MainActivityTransaction;
-import com.example.popularity.myInterface.itemClickListener;
 import com.example.popularity.repository.UserFriendsRepository;
 import com.example.popularity.R;
-import com.example.popularity.utils.ToolbarState;
+import com.example.popularity.utils.ToolbarKind;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +28,6 @@ import java.util.List;
 public class HomeFragment extends BaseFragment {
 
 
-    private ToolbarState toolbarState;
     private RecyclerView favorites_recycler_view,friends_recycler_view;
 
     @Override
@@ -42,14 +37,25 @@ public class HomeFragment extends BaseFragment {
     }
 
     @Override
+    public void onHiddenChanged(boolean hidden) {
+        if(!hidden)
+            baseListener.changeToolbar(ToolbarKind.HOME, getString(R.string.home_toolbar_txt));
+    }
+
+    public static HomeFragment newInstance()
+    {
+        HomeFragment homeFragment=new HomeFragment();
+        return homeFragment;
+    }
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         Bundle bundle=getArguments();
         User user= (User) bundle.getSerializable("User");
         UserPopularity userPopularity=user.getRates_summary_sum();
 
-        toolbarState=(ToolbarState)getContext();
-        toolbarState.toolbarState(true,getResources().getString(R.string.home_toolbar_txt));
+        baseListener.changeToolbar(ToolbarKind.HOME, getString(R.string.home_toolbar_txt));
+
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         friends_recycler_view=view.findViewById(R.id.friends_recycler_view);
         LinearLayoutManager layoutManager1=new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false);
