@@ -101,9 +101,8 @@ public class MainActivity extends AppCompatActivity implements
         if(bundle!=null){
             fragment.setArguments(bundle);
         }
-
+// :P :P :P :P byebye :*
         fragment.attachFragment(this);
-
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.pop_enter, R.anim.pop_exit);
         if (!addStack) {
