@@ -126,6 +126,7 @@ public class LoginFragment extends BaseFragment {
         });
     }
 
+
     @Override
     public Animation onCreateAnimation(int transit, boolean enter, int nextAnim) {
         return super.onCreateAnimation(transit, enter, nextAnim);
