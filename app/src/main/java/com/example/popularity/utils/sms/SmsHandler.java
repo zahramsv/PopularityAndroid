@@ -1,12 +1,15 @@
 package com.example.popularity.utils.sms;
 
+import android.annotation.SuppressLint;
 import android.os.AsyncTask;
-import android.os.Handler;
+
+import java.util.Random;
 
 import ir.trez.raygansms.Raygansms;
-import ir.trez.raygansms.RecipientsMessage;
 import ir.trez.raygansms.Result;
+import ir.trez.raygansms.ResultCode;
 
+@SuppressLint("StaticFieldLeak")
 public class SmsHandler {
 
     public SmsHandler(SmsHandlerListener listener){
@@ -14,13 +17,12 @@ public class SmsHandler {
     }
     private SmsHandlerListener listener;
     private Raygansms raygansms = new Raygansms("mohadi", "m@xRaygansms");
-    private String[] userMobile = { "09352775527" };
-    private RecipientsMessage[] recipientsMessages = {};
-    private String[] MessageIDs = { "1" };
-    private String smsPanelPhoneNumber = "50002210003000";
-    private String userGroupID = "1";
+    private String[] userMobile = { "" };
+    private final static  String smsPanelPhoneNumber = "50002210003000";
+    private final static  String userGroupID = "1";
+    private String verifyCode = "xxxx";
 
-    private class CallSMS extends AsyncTask<Void, Void, Result> {
+    private class AuthSms extends AsyncTask<Void, Void, Result> {
         @Override
         protected void onPreExecute() { }
         @Override
@@ -35,16 +37,17 @@ public class SmsHandler {
         @Override
         protected void onPostExecute(Result result) {
             if(result != null) {
-                String text = "Code:\t" + result.getCode() + "\nMessage:\t" + result.getMessage();
-                if(result.getResult() != null){
-                    text += "\nResult:\t" + result.getResult();
+                if(result.getCode() == ResultCode.Success){
+                    new SendSms().execute();
+                }else{
+                    listener.onSmsSendingResult(false, "authentication error happened to send sms! please try later.");
                 }
-                listener.onLoginDone(text);
             }
         }
     }
 
     private class SendSms extends AsyncTask<Void, Void, Result> {
+
         @Override
         protected void onPreExecute() { }
         @Override
@@ -59,27 +62,26 @@ public class SmsHandler {
         @Override
         protected void onPostExecute(Result result) {
             if(result != null) {
-                String text = "Code:\t" + result.getCode() + "\nMessage:\t" + result.getMessage();
-                if(result.getResult() != null){
-                    text += "\nResult:\t" + result.getResult();
-                }
-                listener.onSmsSend(text);
+                if(result.getCode() == ResultCode.Success)
+                    listener.onSmsSendingResult(true, "sms sent successfully.");
+                else
+                    listener.onSmsSendingResult(false, "sms didn't send.");
             }
         }
     }
 
-
-    public void auth(){
-        new CallSMS().execute();
+    public void requestSendSms(String userPhone){
+        userMobile[0] = userPhone;
+        new AuthSms().execute();
     }
 
-    public void requestSendSms(){
-        new SendSms().execute();
+    public Boolean isVerifyCodeValid(String code){
+        code = code.replaceAll("\\s+","");
+        return verifyCode.equals(code);
     }
 
     public interface SmsHandlerListener{
-        void onLoginDone(String result);
-        void onSmsSend(String result);
+        void onSmsSendingResult(Boolean isSuccess, String message);
     }
 
     private String getMessageToSend(){
@@ -87,8 +89,13 @@ public class SmsHandler {
     }
 
     private String generateValidationCode(){
-        String verifyCode = "6651";
-        return  verifyCode;
+        Random r = new Random();
+        StringBuilder code = new StringBuilder();
+        for(int i=0;i<4;i++){
+            code.append(r.nextInt(10 - 1) + 1);
+        }
+        verifyCode = code.toString();
+        return verifyCode;
     }
 
 }

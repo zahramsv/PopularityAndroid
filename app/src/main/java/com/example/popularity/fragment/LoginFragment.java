@@ -111,10 +111,27 @@ public class LoginFragment extends BaseFragment {
         });
     }
 
+    @Override
+    public Animation onCreateAnimation(int transit, boolean enter, int nextAnim) {
+        return super.onCreateAnimation(transit, enter, nextAnim);
+    }
 
+
+    /*private SmsHandler smsHandler;
+    private void loginByMobile(View view){
+        smsHandler = new SmsHandler(this);
+        Button loginByMobile = view.findViewById(R.id.loginByMobile);
+        loginByMobile.setOnClickListener(v->{
+            smsHandler.requestSendSms(USER_PHONE_NUMBER);
+        });
+    }
 
     @Override
     public Animation onCreateAnimation(int transit, boolean enter, int nextAnim) {
         return super.onCreateAnimation(transit, enter, nextAnim);
     }
+    public void onSmsSendingResult(Boolean isSuccess, String message) {
+        baseListener.showMessage(message);
+    }*/
+
 }
