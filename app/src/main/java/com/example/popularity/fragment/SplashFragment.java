@@ -2,17 +2,13 @@ package com.example.popularity.fragment;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.annotation.TargetApi;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
 import android.os.Build;
 import android.os.Bundle;
 
 import android.os.Handler;
-import android.provider.ContactsContract;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
@@ -20,15 +16,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import com.example.popularity.model.BaseResponse;
-import com.example.popularity.model.PhoneContact;
 import com.example.popularity.model.User;
 import com.example.popularity.myInterface.ApiServices;
 import com.example.popularity.myInterface.UserTransaction;
@@ -36,25 +28,14 @@ import com.example.popularity.R;
 import com.example.popularity.utils.RetrofitInstance;
 import com.example.popularity.utils.ToolbarKind;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-import static com.facebook.FacebookSdk.getApplicationContext;
-
-
 public class SplashFragment extends BaseFragment {
-
-
-
-
 
 
     private UserTransaction userTransaction;
