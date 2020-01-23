@@ -25,9 +25,6 @@ public class SettingFragment extends BaseFragment {
 
     public static SettingFragment newInstance() {
         SettingFragment fragment = new SettingFragment();
-        Bundle args = new Bundle();
-
-        fragment.setArguments(args);
         return fragment;
     }
 

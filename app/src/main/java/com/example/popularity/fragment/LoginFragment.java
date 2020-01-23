@@ -26,10 +26,13 @@ import retrofit2.Retrofit;
 public class LoginFragment extends BaseFragment {
 
 
+    private Button loginWithPhoneNumber, loginWithMockData;
+    private View view;
+
     @Override
     public void onHiddenChanged(boolean hidden) {
-       if(!hidden)
-           baseListener.changeToolbar(ToolbarKind.HOME,getString(R.string.login_toolbar_txt));
+        if (!hidden)
+            baseListener.changeToolbar(ToolbarKind.HOME, getString(R.string.login_toolbar_txt));
 
     }
 
@@ -37,18 +40,29 @@ public class LoginFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        baseListener.changeToolbar(ToolbarKind.HOME,getString(R.string.login_toolbar_txt));
-        View view = inflater.inflate(R.layout.fragment_login, container, false);
-        Button loginButton = view.findViewById(R.id.login_api_button);
-        loginButton.setOnClickListener(view1 -> {
+        baseListener.changeToolbar(ToolbarKind.HOME, getString(R.string.login_toolbar_txt));
+        view = inflater.inflate(R.layout.fragment_login, container, false);
+        init(view);
+
+        loginWithPhoneNumber.setOnClickListener(view -> {
+            baseListener.openFragment(PhoneNumberLoginFragment.newInstance(),true,null);
+        });
+        loginWithMockData.setOnClickListener(view -> {
             baseListener.showLoadingBar(true);
             loginToServer();
         });
 
-        //getUserFriends(); khodet bezan yekam bebinam :D dasht khabam mibord jedan
+
         return view;
 
     }
+
+
+    public void init(View view) {
+        loginWithMockData = view.findViewById(R.id.login_api_button);
+        loginWithPhoneNumber = view.findViewById(R.id.login_with_phone_number);
+    }
+
 
     private void loginToServer() {
 

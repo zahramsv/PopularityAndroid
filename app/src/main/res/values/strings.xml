@@ -49,7 +49,7 @@ The terms used in this Privacy Policy have the same meanings as in our Terms and
     <string name="Save">Save</string>
 
     <!--ToolBarTitles-->
-    <string name="login_toolbar_txt">login</string>
+    <string name="login_toolbar_txt">Login methods</string>
     <string name="setting_toolbar_txt">Setting</string>
     <string name="home_toolbar_txt">Home</string>
     <string name="about_us_toolbar_txt">About Us</string>
