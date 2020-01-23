@@ -18,6 +18,19 @@
         android:gravity="center"
         android:orientation="vertical">
 
+        <Button
+            android:id="@+id/loginByMobile"
+            android:onClick="loginBtnClick"
+            android:layout_centerInParent="true"
+            android:padding="@dimen/spacing_large"
+            android:background="@color/login_btn_color"
+            android:text="Login with Phone Number"
+            android:layout_width="@dimen/login_btn_length"
+            android:textSize="12dp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/white"
+            android:layout_height="@dimen/login_btn_height"
+            tools:ignore="OnClick" />
 
         <Button
             android:id="@+id/login_api_button"

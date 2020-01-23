@@ -17,13 +17,16 @@ import com.example.popularity.R;
 import com.example.popularity.utils.RetrofitInstance;
 import com.example.popularity.utils.SavePref;
 import com.example.popularity.utils.ToolbarKind;
+import com.example.popularity.utils.sms.SmsHandler;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-public class LoginFragment extends BaseFragment {
+public class LoginFragment extends BaseFragment implements
+        SmsHandler.SmsHandlerListener
+{
 
 
     @Override
@@ -44,6 +47,8 @@ public class LoginFragment extends BaseFragment {
             baseListener.showLoadingBar(true);
             loginToServer();
         });
+
+        loginByMobile(view);
 
         //getUserFriends(); khodet bezan yekam bebinam :D dasht khabam mibord jedan
         return view;
@@ -98,9 +103,28 @@ public class LoginFragment extends BaseFragment {
     }
 
 
+    private SmsHandler smsHandler;
+    private void loginByMobile(View view){
+        smsHandler = new SmsHandler(this);
+        Button loginByMobile = view.findViewById(R.id.loginByMobile);
+        loginByMobile.setOnClickListener(v->{
+            smsHandler.auth();
+        });
+    }
+
 
     @Override
     public Animation onCreateAnimation(int transit, boolean enter, int nextAnim) {
         return super.onCreateAnimation(transit, enter, nextAnim);
+    }
+
+    @Override
+    public void onLoginDone(String result) {
+        smsHandler.requestSendSms();
+    }
+
+    @Override
+    public void onSmsSend(String result) {
+        baseListener.showMessage(result);
     }
 }
