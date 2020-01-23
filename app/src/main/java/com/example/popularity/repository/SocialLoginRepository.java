@@ -22,7 +22,7 @@ public class SocialLoginRepository {
 
        DataModel1.setAvatar_url("image1");
        DataModel1.setFull_name("hanie");
-       DataModel1.setSocial_primary(4);
+       DataModel1.setSocial_primary("4");
        DataModel1.setSocial_type(2);
        DataModel1.setUsername("hani");
 

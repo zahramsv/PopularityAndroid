@@ -45,7 +45,7 @@ public class LoginFragment extends BaseFragment {
         init(view);
 
         loginWithPhoneNumber.setOnClickListener(view -> {
-            baseListener.openFragment(PhoneNumberLoginFragment.newInstance(),true,null);
+            baseListener.openFragment(MobileLoginFragment.newInstance(),true,null);
         });
         loginWithMockData.setOnClickListener(view -> {
             baseListener.showLoadingBar(true);

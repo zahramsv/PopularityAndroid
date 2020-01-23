@@ -65,7 +65,7 @@ public class SmsHandler {
                 if(result.getCode() == ResultCode.Success)
                     listener.onSmsSendingResult(true, "sms sent successfully.");
                 else
-                    listener.onSmsSendingResult(false, "sms didn't send.");
+                    listener.onSmsSendingResult(false, result.getMessage());
             }
         }
     }

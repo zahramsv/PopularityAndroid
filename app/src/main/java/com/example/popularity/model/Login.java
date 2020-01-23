@@ -1,13 +1,14 @@
 package com.example.popularity.model;
 
 public class Login {
-   private int social_primary,social_type;
+   private int social_type;
    private String username,full_name,avatar_url;
+   private String social_primary;
 
     public Login() {
     }
 
-    public Login(int social_primary, int social_type, String username, String full_name, String avatar_url) {
+    public Login(String social_primary, int social_type, String username, String full_name, String avatar_url) {
         this.social_primary = social_primary;
         this.social_type = social_type;
         this.username = username;
@@ -16,11 +17,11 @@ public class Login {
     }
 
 
-    public int getSocial_primary() {
+    public String getSocial_primary() {
         return social_primary;
     }
 
-    public void setSocial_primary(int social_primary) {
+    public void setSocial_primary(String social_primary) {
         this.social_primary = social_primary;
     }
 
