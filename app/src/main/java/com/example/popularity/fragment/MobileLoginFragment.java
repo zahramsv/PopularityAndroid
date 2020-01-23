@@ -158,10 +158,10 @@ public class MobileLoginFragment extends BaseFragment implements
 
     private Login getLoginInfo() {
         Login user = new Login();
-        user.setAvatar_url("");
-        user.setFull_name("");
+        user.setAvatar_url("myavatar.jpg");
+        user.setFull_name("zahra hadi");
         user.setSocial_primary(userMobile);
-        user.setUsername("");
+        user.setUsername("z.hadi");
         user.setSocial_type(0);
         return user;
     }

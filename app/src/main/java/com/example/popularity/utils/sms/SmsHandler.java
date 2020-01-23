@@ -19,7 +19,6 @@ public class SmsHandler {
     private Raygansms raygansms = new Raygansms("mohadi", "m@xRaygansms");
     private String[] userMobile = { "" };
     private final static  String smsPanelPhoneNumber = "50002210003000";
-    private final static  String userGroupID = "1";
     private String verifyCode = "xxxx";
 
     private class AuthSms extends AsyncTask<Void, Void, Result> {
@@ -53,7 +52,7 @@ public class SmsHandler {
         @Override
         protected Result doInBackground(Void... voids) {
             try {
-                return raygansms.SendMessage(smsPanelPhoneNumber, getMessageToSend(), userMobile, userGroupID, System.currentTimeMillis() / 1000L);
+                return raygansms.SendMessage(smsPanelPhoneNumber, getMessageToSend(), userMobile, getUserGroupID(), System.currentTimeMillis() / 1000L);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -85,7 +84,7 @@ public class SmsHandler {
     }
 
     private String getMessageToSend(){
-        return "سلام , شماره عضویت شما : "+generateValidationCode();
+        return "سلام , شماره عضویت شما در پاپیولاریتی : "+generateValidationCode();
     }
 
     private String generateValidationCode(){
@@ -96,6 +95,15 @@ public class SmsHandler {
         }
         verifyCode = code.toString();
         return verifyCode;
+    }
+
+    private String getUserGroupID(){
+        Random r = new Random();
+        StringBuilder code = new StringBuilder();
+        for(int i=0;i<6;i++){
+            code.append(r.nextInt(10 - 1) + 1);
+        }
+        return code.toString();
     }
 
 }
