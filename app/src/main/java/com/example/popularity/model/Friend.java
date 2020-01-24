@@ -16,13 +16,13 @@ public class Friend implements Serializable {
     public boolean rate;
 
     @SerializedName("userId")
-    public int userId;
+    public String userId;
 
     @SerializedName("id")
     public int id;
 
 
-    public Friend(String image, String name, boolean rate, int userId, int id) {
+    public Friend(String image, String name, boolean rate, String userId, int id) {
         this.image = image;
         this.name = name;
         this.rate = rate;
@@ -60,11 +60,11 @@ public class Friend implements Serializable {
         this.rate = rate;
     }
 
-    public int getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 

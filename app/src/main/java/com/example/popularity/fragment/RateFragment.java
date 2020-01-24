@@ -71,7 +71,7 @@ public class RateFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
 
-                SubmitRate submitRate=new SubmitRate(user.getToken(), Integer.parseInt(user.getSocial_primary()),friend.getId()
+                SubmitRate submitRate=new SubmitRate(user.getToken(), user.getSocial_primary(),friend.getUserId()
                         ,friend.getName(),friend.getName(),
                         user.getAvatar_url(),user.getSocial_type(),look.getRating(),
                         fitness.getRating(),style.getRating(),personality.getRating(),trustworthy.getRating(),

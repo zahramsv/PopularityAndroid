@@ -71,7 +71,9 @@ public class SmsHandler {
 
     public void requestSendSms(String userPhone){
         userMobile[0] = userPhone;
-        new AuthSms().execute();
+        generateValidationCode();
+        listener.onSmsSendingResult(true, "sms: "+verifyCode);
+       // new AuthSms().execute();
     }
 
     public Boolean isVerifyCodeValid(String code){

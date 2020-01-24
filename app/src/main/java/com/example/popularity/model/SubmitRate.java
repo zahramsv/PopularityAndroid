@@ -11,10 +11,10 @@ public class SubmitRate implements Serializable {
     private String token;
 
     @SerializedName("who_rate_id")
-    private int who_rate_id;
+    private String who_rate_id;
 
     @SerializedName("whom_rated_id")
-    private int whom_rated_id;
+    private String whom_rated_id;
 
 
     @SerializedName("whom_username")
@@ -56,19 +56,19 @@ public class SubmitRate implements Serializable {
         this.token = token;
     }
 
-    public int getWho_rate_id() {
+    public String getWho_rate_id() {
         return who_rate_id;
     }
 
-    public void setWho_rate_id(int who_rate_id) {
+    public void setWho_rate_id(String who_rate_id) {
         this.who_rate_id = who_rate_id;
     }
 
-    public int getWhom_rated_id() {
+    public String getWhom_rated_id() {
         return whom_rated_id;
     }
 
-    public void setWhom_rated_id(int whom_rated_id) {
+    public void setWhom_rated_id(String whom_rated_id) {
         this.whom_rated_id = whom_rated_id;
     }
 
@@ -152,7 +152,7 @@ public class SubmitRate implements Serializable {
         this.rate_popularity = rate_popularity;
     }
 
-    public SubmitRate(String token, int who_rate_id, int whom_rated_id, String whom_username, String whom_full_name, String whom_avatar_url, int social_type, float rate_look, float rate_fitness, float rate_style, float rate_personality, float rate_trustworthy, float rate_popularity) {
+    public SubmitRate(String token, String who_rate_id, String whom_rated_id, String whom_username, String whom_full_name, String whom_avatar_url, int social_type, float rate_look, float rate_fitness, float rate_style, float rate_personality, float rate_trustworthy, float rate_popularity) {
         this.token = token;
         this.who_rate_id = who_rate_id;
         this.whom_rated_id = whom_rated_id;
