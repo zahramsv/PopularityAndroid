@@ -1,12 +1,8 @@
 package com.example.popularity.fragment;
 
 import android.annotation.SuppressLint;
-import android.content.ContentResolver;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
 import android.os.Bundle;
-
-import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,21 +15,19 @@ import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.popularity.R;
 import com.example.popularity.adapter.FriendsListAdapter;
 import com.example.popularity.adapter.RateListAdapter;
-import com.example.popularity.logic.ContactsLogic;
+import com.example.popularity.logic.HomePresenter;
 import com.example.popularity.model.Friend;
 import com.example.popularity.model.Rate;
 import com.example.popularity.model.User;
 import com.example.popularity.model.UserPopularity;
 import com.example.popularity.repository.UserFriendsRepository;
-import com.example.popularity.R;
 import com.example.popularity.utils.ToolbarKind;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class HomeFragment extends BaseFragment {
 
@@ -41,7 +35,7 @@ public class HomeFragment extends BaseFragment {
     private RecyclerView favorites_recycler_view, friends_recycler_view;
     List<Rate> rates = new ArrayList<>();
     private List<Friend> phoneContacts = new ArrayList<>();
-    private ContactsLogic contactsLogic;
+    private HomePresenter homePresenter;
     public static final int REQUEST_READ_CONTACTS = 79;
 
 
@@ -55,12 +49,12 @@ public class HomeFragment extends BaseFragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        contactsLogic = new ContactsLogic(getContext());
-        //phoneContacts = contactsLogic.getContact();
+        homePresenter = new HomePresenter(getContext());
+        //phoneContacts = homePresenter.getContact();
         baseListener.changeToolbar(ToolbarKind.HOME, "");
         if (ActivityCompat.checkSelfPermission(getActivity(), android.Manifest.permission.READ_CONTACTS)
                 == PackageManager.PERMISSION_GRANTED) {
-            contactsLogic.getContact();
+            homePresenter.getFriends();
         } else {
             requestPermission();
         }
@@ -71,10 +65,9 @@ public class HomeFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-       View view = inflater.inflate(R.layout.fragment_home, container, false);
-       init(view);
-        Bundle bundle = getArguments();
-        User user = (User) bundle.getSerializable("User");
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
+        init(view);
+        User user = baseListener.getMainUser();
         if (user != null) {
             UserPopularity userPopularity = user.getRates_summary_sum();
             UserFriendsRepository userFriendsRepository = new UserFriendsRepository();
@@ -132,7 +125,7 @@ public class HomeFragment extends BaseFragment {
             case REQUEST_READ_CONTACTS: {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
-                    contactsLogic.getContact();
+                    homePresenter.getFriends();
                 } else {
                     // permission denied,Disable the
                     // functionality that depends on this permission.

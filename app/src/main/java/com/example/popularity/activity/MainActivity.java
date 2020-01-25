@@ -2,7 +2,6 @@ package com.example.popularity.activity;
 
 import android.app.Dialog;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -34,7 +33,6 @@ import com.example.popularity.model.User;
 import com.example.popularity.model.UserPopularity;
 import com.example.popularity.myInterface.ApiServices;
 import com.example.popularity.myInterface.MainActivityTransaction;
-import com.example.popularity.myInterface.UserTransaction;
 import com.example.popularity.utils.ConnectivityReceiver;
 import com.example.popularity.utils.MyApp;
 import com.example.popularity.utils.RetrofitInstance;
@@ -50,8 +48,7 @@ import retrofit2.Retrofit;
 
 
 public class MainActivity extends AppCompatActivity implements
-        UserTransaction
-        , MainActivityTransaction
+          MainActivityTransaction
         , ConnectivityReceiver.ConnectivityReceiverListener {
 
     private Snackbar snackbar;
@@ -76,7 +73,7 @@ public class MainActivity extends AppCompatActivity implements
         checkConnection();
 
 
-        openFragment(new SplashFragment(this), false, null);
+        openFragment(new SplashFragment(), false, null);
     }
 
 
@@ -88,13 +85,6 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     public void setMainUser(User mainUser) {
         this.mainUser = mainUser;
-        if (mainUser == null) {
-            openFragment(new LoginFragment(), false, null);
-        } else {
-            Bundle bundle = new Bundle();
-            bundle.putSerializable("User", mainUser);
-            openFragment(new HomeFragment(), false, bundle);
-        }
     }
 
     @Override
@@ -249,9 +239,9 @@ public class MainActivity extends AppCompatActivity implements
                     SavePref savePref = new SavePref();
                     data.setSocial_primary((socialLoginLogic.GetFirstUserLoginData().getSocial_primary()) + "");
                     savePref.SaveUser(MainActivity.this, data, userPopularity);
-                    Bundle bundle = new Bundle();
-                    bundle.putSerializable("User", data);
-                    openFragment(new HomeFragment(), true, bundle);
+
+                    setMainUser(data);
+                    openFragment(new HomeFragment(), true, null);
                     Log.i("app_tag", "info: " + obr.getCode());
 
 

@@ -13,11 +13,23 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class ContactRepository {
+public class FriendRepository {
     List<Friend> phoneContacts;
     private Friend friend;
 
-    public List<Friend> getContacts(Context context) {
+    public List<Friend> getFriendsFromInstagramFollowers(){
+        return null;
+    }
+
+    public List<Friend> getFriendsFromFacebookFriends(){
+        return null;
+    }
+
+    public List<Friend> getFriendsFromLinkedinConnections(){
+        return null;
+    }
+
+    public List<Friend> getFriendsFromPhoneContacts(Context context) {
 
             ArrayList<String> nameList = new ArrayList<>();
             ContentResolver cr = context.getContentResolver();
@@ -46,7 +58,7 @@ public class ContactRepository {
                         friend.userId = friend.userId.replace("+98", "0");
                         friend.userId = friend.userId.replace(" ", "");
                         friend.userId = friend.userId.trim();
-                        if (friend.userId != null && friend.name != null && IsValidMobileNumber(friend.userId)) {
+                        if (friend.userId != null && friend.name != null && isValidMobileNumber(friend.userId)) {
                             phoneContacts.add(friend);
                         }
                         pCur.close();
@@ -64,7 +76,7 @@ public class ContactRepository {
 
     }
 
-    public static boolean IsValidMobileNumber(String input) {
+    private boolean isValidMobileNumber(String input) {
 
         //(0|\+98)?([ ]|,|-|[()]){0,2}9[1|2|3|4]([ ]|,|-|[()]){0,2}(?:[0-9]([ ]|,|-|[()]){0,2}){8}
         Pattern pattern = Pattern.compile("^09[0|1|2|3][0-9]{8}$");

@@ -89,9 +89,10 @@ public class LoginFragment extends BaseFragment {
                     SavePref savePref = new SavePref();
                     data.setSocial_primary((socialLoginLogic.GetFirstUserLoginData().getSocial_primary()) + "");
                     savePref.SaveUser(getContext(), data, userPopularity);
-                    Bundle bundle = new Bundle();
-                    bundle.putSerializable("User", data);
-                    baseListener.openFragment(new HomeFragment(), true, bundle);
+
+                    baseListener.setMainUser(data);
+                    baseListener.openFragment(new HomeFragment(), true, null);
+
                     Log.i("app_tag", "info: " + obr.getCode());
 
 

@@ -163,9 +163,9 @@ public class MobileLoginFragment extends BaseFragment {
                     SavePref savePref = new SavePref();
                     data.setSocial_primary(userMobile + "");
                     savePref.SaveUser(getContext(), data, userPopularity);
-                    Bundle bundle = new Bundle();
-                    bundle.putSerializable("User", data);
-                    baseListener.openFragment(new HomeFragment(), true, bundle);
+
+                    baseListener.setMainUser(data);
+                    baseListener.openFragment(new HomeFragment(), true, null);
                     Log.i("app_tag", "info: " + obr.getCode());
 
 
