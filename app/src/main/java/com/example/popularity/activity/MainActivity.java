@@ -2,9 +2,9 @@ package com.example.popularity.activity;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -32,12 +32,15 @@ import com.example.popularity.logic.SocialLoginLogic;
 import com.example.popularity.model.SocialRootModel;
 import com.example.popularity.model.User;
 import com.example.popularity.model.UserPopularity;
-import com.example.popularity.myInterface.GetLoginDataService;
+import com.example.popularity.myInterface.ApiServices;
 import com.example.popularity.myInterface.MainActivityTransaction;
 import com.example.popularity.myInterface.UserTransaction;
+import com.example.popularity.utils.ConnectivityReceiver;
+import com.example.popularity.utils.MyApp;
 import com.example.popularity.utils.RetrofitInstance;
 import com.example.popularity.utils.SavePref;
 import com.example.popularity.utils.ToolbarKind;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 
 import retrofit2.Call;
@@ -47,33 +50,32 @@ import retrofit2.Retrofit;
 
 
 public class MainActivity extends AppCompatActivity implements
-      UserTransaction
-    , MainActivityTransaction
-{
+        UserTransaction
+        , MainActivityTransaction
+        , ConnectivityReceiver.ConnectivityReceiverListener {
 
+    private Snackbar snackbar;
+    ApiServices apiServices;
+    private SocialLoginLogic socialLoginLogic;
+    private TextView toolbarTitle;
     private TextInputEditText username, password;
-    private String usernameTxt, passwordTxt;
+    private RetrofitInstance retrofitInstance;
     private DrawerLayout drawerLayout;
     private MenuDrawerFragment slidingMenuFragment;
     private ProgressBar loadingBar;
     private Dialog dialog;
     private User mainUser;
     private ImageView toolbar_icon;
-
+    private View parent_view;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        init();
+        checkConnection();
 
-        drawerLayout = findViewById(R.id.drawer_layout);
-        toolbar_icon=findViewById(R.id.toolbar_icon);
-        toolbarTitle = findViewById(R.id.txtToolbar);
 
-        slidingMenuFragment = (MenuDrawerFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_nd);
-        assert slidingMenuFragment != null;
-        slidingMenuFragment.attachFragment(this);
-        loadingBar = findViewById(R.id.loadingBar);
         openFragment(new SplashFragment(this), false, null);
     }
 
@@ -98,7 +100,7 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     public void openFragment(BaseFragment fragment, Boolean addStack, Bundle bundle) {
 
-        if(bundle!=null){
+        if (bundle != null) {
             fragment.setArguments(bundle);
         }
 
@@ -109,7 +111,7 @@ public class MainActivity extends AppCompatActivity implements
             transaction.replace(R.id.your_placeholder, fragment);
         } else {
             Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.your_placeholder);
-            if(currentFragment!=null){
+            if (currentFragment != null) {
                 transaction.hide(currentFragment);
                 transaction.commit();
             }
@@ -123,13 +125,13 @@ public class MainActivity extends AppCompatActivity implements
 
     }
 
-    private TextView toolbarTitle;
+
     @Override
     public void changeToolbar(ToolbarKind kind, String title) {
 
         toolbarTitle.setText(title);
 
-        switch (kind){
+        switch (kind) {
             case EMPTY:
                 findViewById(R.id.toolbar).setVisibility(View.GONE);
                 getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
@@ -138,7 +140,7 @@ public class MainActivity extends AppCompatActivity implements
             case HOME:
                 findViewById(R.id.toolbar).setVisibility(View.VISIBLE);
                 toolbar_icon.setImageResource(R.drawable.ic_menu);
-                toolbar_icon.setOnClickListener(v->{
+                toolbar_icon.setOnClickListener(v -> {
                     openDrawer();
                 });
                 getWindow().getDecorView().setSystemUiVisibility(View.VISIBLE);
@@ -147,7 +149,7 @@ public class MainActivity extends AppCompatActivity implements
             case BACK:
                 findViewById(R.id.toolbar).setVisibility(View.VISIBLE);
                 toolbar_icon.setImageResource(R.drawable.ic_back);
-                toolbar_icon.setOnClickListener(v->{
+                toolbar_icon.setOnClickListener(v -> {
                     onBackPressed();
                 });
                 getWindow().getDecorView().setSystemUiVisibility(View.VISIBLE);
@@ -156,6 +158,24 @@ public class MainActivity extends AppCompatActivity implements
             default:
                 break;
         }
+    }
+
+    @Override
+    public void showSnackBar(String message) {
+        snackbar = Snackbar.make(parent_view, message, Snackbar.LENGTH_LONG)
+                .setAction("OK", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        snackbar.dismiss();
+                        //Snackbar.make(parent_view, "UNDO CLICKED!", Snackbar.LENGTH_SHORT).show();
+                    }
+                });
+        snackbar.show();
+    }
+
+    @Override
+    public boolean checkNetwork() {
+        return ConnectivityReceiver.isConnected();
     }
 
     @Override
@@ -213,21 +233,9 @@ public class MainActivity extends AppCompatActivity implements
 
     }
 
-    public void login()
-    {
-        usernameTxt = username.getText().toString();
-        passwordTxt = password.getText().toString();
-        //  loginToInstagram(usernameTxt, passwordTxt);
+    public void login() {
 
-        RetrofitInstance retrofitInstance = new RetrofitInstance();
-        Retrofit retrofit = retrofitInstance.getRetrofitInstance();
-        SocialLoginLogic socialLoginLogic = new SocialLoginLogic();
-        socialLoginLogic.GetFirstUserLoginData();
-
-        GetLoginDataService getLoginDataService = retrofit.create(GetLoginDataService.class);
-
-
-        getLoginDataService.getLoginData(socialLoginLogic.GetFirstUserLoginData()).enqueue(new Callback<SocialRootModel>() {
+        apiServices.getLoginData(socialLoginLogic.GetFirstUserLoginData()).enqueue(new Callback<SocialRootModel>() {
             @Override
             public void onResponse(Call<SocialRootModel> call, Response<SocialRootModel> response) {
 
@@ -261,22 +269,22 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     int count = 0;
+
     @Override
     public void onBackPressed() {
         FragmentManager fm = getSupportFragmentManager();
-        if(fm.getBackStackEntryCount() == 0){
-            if(count<1) {
+        if (fm.getBackStackEntryCount() == 0) {
+            if (count < 1) {
                 showMessage("are you sure?");
                 count++;
-            }
-            else
+            } else
                 this.finish();
-        }else{
+        } else {
             super.onBackPressed();
             Fragment fragment = fm.findFragmentById(R.id.your_placeholder);
             FragmentTransaction ft = fm.beginTransaction();
             ft.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
-            if(fragment!=null){
+            if (fragment != null) {
                 ft.show(fragment);
                 ft.commit();
             }
@@ -306,10 +314,62 @@ public class MainActivity extends AppCompatActivity implements
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
+    private void checkConnection() {
+        boolean isConnected = ConnectivityReceiver.isConnected();
+        snackBarWithAction(isConnected);
 
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
 
+        // register connection status listener
+        MyApp.getInstance().setConnectivityListener(this);
+    }
 
+    private void snackBarWithAction(boolean isConnected) {
+        String message = "";
+        if (!isConnected) {
+
+            message = "Disconnected";
+            snackbar = Snackbar.make(parent_view, message, Snackbar.LENGTH_LONG)
+                    .setAction("OK", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            snackbar.dismiss();
+                            //Snackbar.make(parent_view, "UNDO CLICKED!", Snackbar.LENGTH_SHORT).show();
+                        }
+                    });
+            snackbar.show();
+        }
+
+    }
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        if (!isConnected)
+        showSnackBar("Disconnected");
+       // snackBarWithAction(isConnected);
+        //showSnack(isConnected);
+    }
+
+    private void init() {
+        parent_view = findViewById(R.id.parent_view);
+        drawerLayout = findViewById(R.id.drawer_layout);
+        toolbar_icon = findViewById(R.id.toolbar_icon);
+        toolbarTitle = findViewById(R.id.txtToolbar);
+        slidingMenuFragment = (MenuDrawerFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_nd);
+        assert slidingMenuFragment != null;
+        slidingMenuFragment.attachFragment(this);
+        loadingBar = findViewById(R.id.loadingBar);
+        retrofitInstance = new RetrofitInstance();
+        Retrofit retrofit = retrofitInstance.getRetrofitInstance();
+        socialLoginLogic = new SocialLoginLogic();
+        socialLoginLogic.GetFirstUserLoginData();
+
+        apiServices = retrofit.create(ApiServices.class);
+    }
 }
 
 

@@ -10,4 +10,6 @@ public interface MainActivityTransaction {
     void showMessage(String message);
     void openFragment(BaseFragment fragment, Boolean addStack, Bundle bundle);
     void changeToolbar(ToolbarKind kind, String title);
+    void showSnackBar(String message);
+    boolean checkNetwork();
 }

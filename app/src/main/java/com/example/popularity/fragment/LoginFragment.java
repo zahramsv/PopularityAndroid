@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.widget.Button;
 
-import com.example.popularity.myInterface.GetLoginDataService;
+import com.example.popularity.myInterface.ApiServices;
 import com.example.popularity.logic.SocialLoginLogic;
 import com.example.popularity.model.User;
 import com.example.popularity.model.SocialRootModel;
@@ -71,10 +71,10 @@ public class LoginFragment extends BaseFragment {
         SocialLoginLogic socialLoginLogic = new SocialLoginLogic();
         socialLoginLogic.GetFirstUserLoginData();
 
-        GetLoginDataService getLoginDataService = retrofit.create(GetLoginDataService.class);
+        ApiServices apiServices = retrofit.create(ApiServices.class);
 
 
-        getLoginDataService.getLoginData(socialLoginLogic.GetFirstUserLoginData()).enqueue(new Callback<SocialRootModel>() {
+        apiServices.getLoginData(socialLoginLogic.GetFirstUserLoginData()).enqueue(new Callback<SocialRootModel>() {
             @Override
             public void onResponse(Call<SocialRootModel> call, Response<SocialRootModel> response) {
                 baseListener.showLoadingBar(false);

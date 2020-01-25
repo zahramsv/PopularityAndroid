@@ -12,7 +12,7 @@ import com.example.popularity.utils.ToolbarKind;
 public class AboutUsFragment extends BaseFragment {
 
     public AboutUsFragment() {
-        // Required empty public constructor
+
     }
 
     public static AboutUsFragment newInstance() {

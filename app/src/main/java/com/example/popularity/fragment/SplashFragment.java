@@ -69,7 +69,7 @@ public class SplashFragment extends BaseFragment {
             Retrofit retrofit = retrofitInstance.getRetrofitInstance();
 
             ApiServices apiServices = retrofit.create(ApiServices.class);
-            apiServices.GetUserInfo(token, social_primary).enqueue(new Callback<BaseResponse<User>>() {
+            apiServices.getUserInfo(token, social_primary).enqueue(new Callback<BaseResponse<User>>() {
                 @Override
                 public void onResponse(Call<BaseResponse<User>> call, Response<BaseResponse<User>> response) {
 

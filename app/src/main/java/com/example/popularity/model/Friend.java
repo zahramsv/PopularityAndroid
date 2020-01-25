@@ -22,6 +22,9 @@ public class Friend implements Serializable {
     public int id;
 
 
+    public Friend() {
+    }
+
     public Friend(String image, String name, boolean rate, String userId, int id) {
         this.image = image;
         this.name = name;

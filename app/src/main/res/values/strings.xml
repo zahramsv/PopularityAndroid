@@ -55,6 +55,7 @@ The terms used in this Privacy Policy have the same meanings as in our Terms and
     <string name="about_us_toolbar_txt">About Us</string>
     <string name="privacy_policy_toolbar_txt">Privacy Policy</string>
     <string name="rate_toolbar">Rate user</string>
+    <string name="login_with_mobile">Login With Phone Number</string>
 
 
     <!--errors-->

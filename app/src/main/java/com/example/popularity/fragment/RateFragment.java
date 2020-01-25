@@ -80,7 +80,7 @@ public class RateFragment extends BaseFragment {
                 RetrofitInstance retrofitInstance=new RetrofitInstance();
                 Retrofit retrofit=retrofitInstance.getRetrofitInstance();
                 ApiServices friendsRate=retrofit.create(ApiServices.class);
-                friendsRate.SubmitRateToFriend(submitRate).enqueue(new Callback<BaseResponse<String>>() {
+                friendsRate.submitRateToFriend(submitRate).enqueue(new Callback<BaseResponse<String>>() {
                     @Override
                     public void onResponse(Call<BaseResponse<String>> call, Response<BaseResponse<String>> response) {
 

@@ -1,41 +1,26 @@
 package com.example.popularity.fragment;
 
 import android.annotation.TargetApi;
-import android.content.ContentResolver;
-import android.content.pm.PackageManager;
-import android.database.Cursor;
 import android.os.Build;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatEditText;
-import androidx.core.app.ActivityCompat;
 
-import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.popularity.R;
-import com.example.popularity.model.Friend;
 import com.example.popularity.model.Login;
-import com.example.popularity.model.PhoneContact;
 import com.example.popularity.model.SocialRootModel;
 import com.example.popularity.model.User;
 import com.example.popularity.model.UserPopularity;
-import com.example.popularity.myInterface.GetLoginDataService;
+import com.example.popularity.myInterface.ApiServices;
 import com.example.popularity.utils.RetrofitInstance;
 import com.example.popularity.utils.SavePref;
 import com.example.popularity.utils.ToolbarKind;
-import com.example.popularity.utils.sms.SmsHandler;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -43,32 +28,36 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 
 
-public class MobileLoginFragment extends BaseFragment implements
-        SmsHandler.SmsHandlerListener {
+public class MobileLoginFragment extends BaseFragment {
 
-
-
-    private SmsHandler smsHandler;
     private AppCompatEditText edt_phone_number, edt_verify_code;
     private String userMobile;
+    private SocialRootModel socialRootModel;
+    private RetrofitInstance retrofitInstance;
+    private Retrofit retrofit;
+    private ApiServices apiServices;
+    private View view;
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public MobileLoginFragment() {
 
     }
 
+
     @Override
     public void onHiddenChanged(boolean hidden) {
         if (!hidden) {
-            baseListener.changeToolbar(ToolbarKind.HOME, "");
+            baseListener.changeToolbar(ToolbarKind.HOME, getString(R.string.login_with_mobile));
         }
     }
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
     }
+
 
     public static MobileLoginFragment newInstance() {
         MobileLoginFragment fragment = new MobileLoginFragment();
@@ -79,36 +68,89 @@ public class MobileLoginFragment extends BaseFragment implements
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_mobile_login, container, false);
-        edt_phone_number = view.findViewById(R.id.edt_phone_number);
-        edt_verify_code = view.findViewById(R.id.edt_verify_code);
 
-        smsHandler = new SmsHandler(this);
+        view = inflater.inflate(R.layout.fragment_mobile_login, container, false);
+        init();
+
         view.findViewById(R.id.btn_receive_code_btn).setOnClickListener(view1 -> {
-            smsHandler.requestSendSms(edt_phone_number.getText().toString());
+
+          if (baseListener.checkNetwork())
+          {
+              apiServices.sendSms(userMobile).enqueue(new Callback<SocialRootModel>() {
+                  @Override
+                  public void onResponse(Call<SocialRootModel> call, Response<SocialRootModel> response) {
+
+                      socialRootModel = response.body();
+
+                  }
+
+                  @Override
+                  public void onFailure(Call<SocialRootModel> call, Throwable t) {
+
+                  }
+              });
+          }
+          else {
+              baseListener.showSnackBar("Please check your connection");
+          }
+
 
         });
 
         view.findViewById(R.id.btn_verify_code).setOnClickListener(view1 -> {
-            if (smsHandler.isVerifyCodeValid(edt_verify_code.getText().toString())) {
-                loginToServer();
 
-            } else {
-                baseListener.showMessage("it is not valid.");
+        if (baseListener.checkNetwork())
+        {
+            if (socialRootModel!=null)
+            {
+
+                if (socialRootModel.getCode() == 200) {
+                    apiServices.varifySms(edt_phone_number.getText().toString(), edt_verify_code.getText().toString()).enqueue(new Callback<SocialRootModel>() {
+                        @Override
+                        public void onResponse(Call<SocialRootModel> call, Response<SocialRootModel> response) {
+
+                            SocialRootModel socialRootModel = response.body();
+                            if (socialRootModel.getCode() == 200) {
+                                loginToServer();
+                            } else {
+                                baseListener.showSnackBar("it is not valid");
+                                baseListener.showMessage("it is not valid");
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<SocialRootModel> call, Throwable t) {
+                            baseListener.showMessage(t.getMessage());
+                        }
+                    });
+                }
+
+                else {
+                    baseListener.showSnackBar("Code Do Not Receive");
+                    baseListener.showMessage("Code Do Not Receive");
+                }
             }
+            else {
+                baseListener.showSnackBar("Please Receive a Code ...");
+
+            }
+        }
+        else
+        {
+            baseListener.showSnackBar("Please check your connection");
+        }
         });
         return view;
     }
-
 
     private void loginToServer() {
 
         RetrofitInstance retrofitInstance = new RetrofitInstance();
         Retrofit retrofit = retrofitInstance.getRetrofitInstance();
 
-        GetLoginDataService getLoginDataService = retrofit.create(GetLoginDataService.class);
+        ApiServices apiServices = retrofit.create(ApiServices.class);
 
-        getLoginDataService.getLoginData(getLoginInfo()).enqueue(new Callback<SocialRootModel>() {
+        apiServices.getLoginData(getLoginInfo()).enqueue(new Callback<SocialRootModel>() {
             @Override
             public void onResponse(Call<SocialRootModel> call, Response<SocialRootModel> response) {
                 baseListener.showLoadingBar(false);
@@ -143,6 +185,7 @@ public class MobileLoginFragment extends BaseFragment implements
         });
     }
 
+
     private Login getLoginInfo() {
         Login user = new Login();
         user.setAvatar_url("myavatar.jpg");
@@ -154,11 +197,12 @@ public class MobileLoginFragment extends BaseFragment implements
     }
 
 
-
-    @Override
-    public void onSmsSendingResult(Boolean isSuccess, String message) {
-
+    public void init() {
+        retrofitInstance = new RetrofitInstance();
+        retrofit = retrofitInstance.getRetrofitInstance();
+        apiServices = retrofit.create(ApiServices.class);
+        edt_phone_number = view.findViewById(R.id.edt_phone_number);
+        edt_verify_code = view.findViewById(R.id.edt_verify_code);
         userMobile = edt_phone_number.getText().toString();
-        baseListener.showMessage(message);
     }
 }
