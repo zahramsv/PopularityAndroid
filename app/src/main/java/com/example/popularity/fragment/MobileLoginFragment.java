@@ -162,9 +162,7 @@ public class MobileLoginFragment extends BaseFragment {
 
         RetrofitInstance retrofitInstance = new RetrofitInstance();
         Retrofit retrofit = retrofitInstance.getRetrofitInstance();
-
         ApiServices apiServices = retrofit.create(ApiServices.class);
-
         apiServices.getLoginData(getLoginInfo()).enqueue(new Callback<SocialRootModel>() {
             @Override
             public void onResponse(Call<SocialRootModel> call, Response<SocialRootModel> response) {
