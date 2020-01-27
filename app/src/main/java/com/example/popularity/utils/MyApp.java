@@ -12,7 +12,7 @@ public class MyApp extends Application {
     public void onCreate() {
         super.onCreate();
         MultiDex.install(this);
-        mInstance=this;
+        mInstance = this;
     }
 
 

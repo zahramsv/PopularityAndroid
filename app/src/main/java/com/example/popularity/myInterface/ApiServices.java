@@ -2,7 +2,6 @@ package com.example.popularity.myInterface;
 
 import com.example.popularity.model.BaseResponse;
 import com.example.popularity.model.Login;
-import com.example.popularity.model.SocialRootModel;
 import com.example.popularity.model.SubmitRate;
 import com.example.popularity.model.User;
 import com.example.popularity.model.VerifySmsResponseData;
@@ -22,7 +21,7 @@ public interface ApiServices {
     // ☺
     @FormUrlEncoded
     @POST(URLS.SEND_SMS)
-    Call<SocialRootModel> sendSms(@Field("user_mobile") String user_mobile);
+    Call<BaseResponse> sendSms(@Field("user_mobile") String user_mobile);
 
     @FormUrlEncoded
     @POST(URLS.VERIFY_SMS)
@@ -31,12 +30,12 @@ public interface ApiServices {
             @Field("verify_code") String verify_code);
 
     @POST(URLS.LOGIN_TO_SOCIAL)
-    Call<SocialRootModel> getLoginData(@Body Login login);
+    Call<BaseResponse<User>> getLoginData(@Body Login login);
 
 
     @FormUrlEncoded
     @POST(URLS.LOGIN_TO_SOCIAL)
-    Call<SocialRootModel> login(
+    Call<BaseResponse<User>> login(
             @Field("social_primary") String socialPrimary,
             @Field("username") String username,
             @Field("full_name") String fullName,

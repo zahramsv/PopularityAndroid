@@ -3,7 +3,6 @@ package com.example.popularity.activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -22,33 +21,27 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.popularity.fragment.BaseFragment;
-import com.example.popularity.fragment.HomeFragment;
 import com.example.popularity.fragment.MenuDrawerFragment;
 import com.example.popularity.fragment.SplashFragment;
 import com.example.popularity.R;
 import com.example.popularity.logic.MockPresenter;
-import com.example.popularity.model.SocialRootModel;
 import com.example.popularity.model.User;
-import com.example.popularity.model.UserPopularity;
 import com.example.popularity.myInterface.ApiServices;
 import com.example.popularity.myInterface.MainActivityTransaction;
 import com.example.popularity.utils.ConnectivityReceiver;
 import com.example.popularity.utils.MyApp;
 import com.example.popularity.utils.RetrofitInstance;
-import com.example.popularity.utils.SavePref;
 import com.example.popularity.utils.ToolbarKind;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 import retrofit2.Retrofit;
 
 
 public class MainActivity extends AppCompatActivity implements
           MainActivityTransaction
-        , ConnectivityReceiver.ConnectivityReceiverListener {
+        , ConnectivityReceiver.ConnectivityReceiverListener
+{
 
     private Snackbar snackbar;
     ApiServices apiServices;
@@ -182,9 +175,6 @@ public class MainActivity extends AppCompatActivity implements
                 break;
 
             case R.id.btnLoginWithInstagram:
-
-
-                showCustomDialog();
                 break;
 
 
@@ -213,49 +203,11 @@ public class MainActivity extends AppCompatActivity implements
         username = dialog.findViewById(R.id.username);
         Button btn = dialog.findViewById(R.id.signIn_btn);
         password = dialog.findViewById(R.id.password);
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                login();
-            }
+        btn.setOnClickListener(v -> {
+            //fixme: login();
         });
 
 
-    }
-
-    public void login() {
-
-        apiServices.getLoginData(mockPresenter.GetFirstUserLoginData()).enqueue(new Callback<SocialRootModel>() {
-            @Override
-            public void onResponse(Call<SocialRootModel> call, Response<SocialRootModel> response) {
-
-                Log.i("app_tag", response.toString());
-                if ((response.isSuccessful())) {
-                    SocialRootModel obr = response.body();
-
-
-                    User data = obr.getData();
-                    UserPopularity userPopularity = obr.getData().getRates_summary_sum();
-                    SavePref savePref = new SavePref();
-                    data.setSocial_primary((mockPresenter.GetFirstUserLoginData().getSocial_primary()) + "");
-                    savePref.SaveUser(MainActivity.this, data, userPopularity);
-
-                    setMainUser(data);
-                    openFragment(new HomeFragment(), true, null);
-                    Log.i("app_tag", "info: " + obr.getCode());
-
-
-                } else {
-                    Log.i("app_tag", "error");
-                }
-            }
-
-            @Override
-            public void onFailure(Call<SocialRootModel> call, Throwable t) {
-                Log.i("app_tag", t.getMessage().toString());
-            }
-        });
-        dialog.dismiss();
     }
 
     int count = 0;
@@ -360,6 +312,7 @@ public class MainActivity extends AppCompatActivity implements
 
         apiServices = retrofit.create(ApiServices.class);
     }
+
 }
 
 
