@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.example.popularity.R;
 import com.example.popularity.model.Friend;
-import com.example.popularity.myInterface.itemClickListener;
+import com.example.popularity.myInterface.ItemClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,10 +24,10 @@ public class FriendsListAdapter extends RecyclerView.Adapter<FriendsListAdapter.
 
     private List<Friend> friends = new ArrayList<>();
     private Context context;
-    itemClickListener listener;
+    private ItemClickListener listener;
 
 
-    public void setOnItemClickListener(itemClickListener clickListener)
+    public void setOnItemClickListener(ItemClickListener clickListener)
     {
         listener=clickListener;
     }

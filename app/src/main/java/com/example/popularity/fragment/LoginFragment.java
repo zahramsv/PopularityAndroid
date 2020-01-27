@@ -9,7 +9,7 @@ import android.view.animation.Animation;
 import android.widget.Button;
 
 import com.example.popularity.myInterface.ApiServices;
-import com.example.popularity.logic.SocialLoginLogic;
+import com.example.popularity.logic.MockPresenter;
 import com.example.popularity.model.User;
 import com.example.popularity.model.SocialRootModel;
 import com.example.popularity.model.UserPopularity;
@@ -59,8 +59,8 @@ public class LoginFragment extends BaseFragment {
 
 
     public void init(View view) {
-        loginWithMockData = view.findViewById(R.id.login_api_button);
-        loginWithPhoneNumber = view.findViewById(R.id.login_with_phone_number);
+        loginWithMockData = view.findViewById(R.id.btnLoginWihMockData);
+        loginWithPhoneNumber = view.findViewById(R.id.btnLoginWithMobile);
     }
 
 
@@ -68,13 +68,13 @@ public class LoginFragment extends BaseFragment {
 
         RetrofitInstance retrofitInstance = new RetrofitInstance();
         Retrofit retrofit = retrofitInstance.getRetrofitInstance();
-        SocialLoginLogic socialLoginLogic = new SocialLoginLogic();
-        socialLoginLogic.GetFirstUserLoginData();
+        MockPresenter mockPresenter = new MockPresenter();
+        mockPresenter.GetFirstUserLoginData();
 
         ApiServices apiServices = retrofit.create(ApiServices.class);
 
 
-        apiServices.getLoginData(socialLoginLogic.GetFirstUserLoginData()).enqueue(new Callback<SocialRootModel>() {
+        apiServices.getLoginData(mockPresenter.GetFirstUserLoginData()).enqueue(new Callback<SocialRootModel>() {
             @Override
             public void onResponse(Call<SocialRootModel> call, Response<SocialRootModel> response) {
                 baseListener.showLoadingBar(false);
@@ -87,7 +87,7 @@ public class LoginFragment extends BaseFragment {
                     User data = obr.getData();
                     UserPopularity userPopularity = obr.getData().getRates_summary_sum();
                     SavePref savePref = new SavePref();
-                    data.setSocial_primary((socialLoginLogic.GetFirstUserLoginData().getSocial_primary()) + "");
+                    data.setSocial_primary((mockPresenter.GetFirstUserLoginData().getSocial_primary()) + "");
                     savePref.SaveUser(getContext(), data, userPopularity);
 
                     baseListener.setMainUser(data);

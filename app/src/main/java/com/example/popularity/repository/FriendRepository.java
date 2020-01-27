@@ -1,5 +1,6 @@
 package com.example.popularity.repository;
 
+import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.database.Cursor;
@@ -14,7 +15,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class FriendRepository {
-    List<Friend> phoneContacts;
+    List<Friend> phoneContacts=new ArrayList<>();
     private Friend friend;
 
     public List<Friend> getFriendsFromInstagramFollowers(){
@@ -29,7 +30,8 @@ public class FriendRepository {
         return null;
     }
 
-    public List<Friend> getFriendsFromPhoneContacts(Context context) {
+    public List<Friend> getFriendsFromPhoneContacts(Activity context) {
+
 
             ArrayList<String> nameList = new ArrayList<>();
             ContentResolver cr = context.getContentResolver();
@@ -44,6 +46,7 @@ public class FriendRepository {
                             ContactsContract.Contacts.DISPLAY_NAME));
                     nameList.add(friend.name);
                     if (cur.getInt(cur.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER)) > 0) {
+                        //Log.d("app_tag","name: "+friend.name);
                         Cursor pCur = cr.query(
                                 ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
                                 null,

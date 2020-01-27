@@ -32,7 +32,7 @@ import java.util.List;
 public class HomeFragment extends BaseFragment {
 
 
-    private RecyclerView favorites_recycler_view, friends_recycler_view;
+    private RecyclerView favoritesRecyclerView, friendsRecyclerView;
     List<Rate> rates = new ArrayList<>();
     private List<Friend> phoneContacts = new ArrayList<>();
     private HomePresenter homePresenter;
@@ -49,8 +49,7 @@ public class HomeFragment extends BaseFragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        homePresenter = new HomePresenter(getContext());
-        //phoneContacts = homePresenter.getContact();
+        homePresenter = new HomePresenter(getActivity());
         baseListener.changeToolbar(ToolbarKind.HOME, "");
         if (ActivityCompat.checkSelfPermission(getActivity(), android.Manifest.permission.READ_CONTACTS)
                 == PackageManager.PERMISSION_GRANTED) {
@@ -73,7 +72,7 @@ public class HomeFragment extends BaseFragment {
             UserFriendsRepository userFriendsRepository = new UserFriendsRepository();
             // friendList=userFriendsRepository.getUserFriendsMock(user.getSocial_primary());
             FriendsListAdapter friendsListAdapter = new FriendsListAdapter(phoneContacts, getActivity());
-            friends_recycler_view.setAdapter(friendsListAdapter);
+            friendsRecyclerView.setAdapter(friendsListAdapter);
             // List<Friend> finalFriendList = friendList;
             friendsListAdapter.setOnItemClickListener(pos -> {
                 Friend friend = phoneContacts.get(pos);
@@ -99,7 +98,7 @@ public class HomeFragment extends BaseFragment {
                     Toast.makeText(getContext(), "test", Toast.LENGTH_LONG).show();
                 }
             });
-            favorites_recycler_view.setAdapter(rateListAdapter);
+            favoritesRecyclerView.setAdapter(rateListAdapter);
 
         }
 
@@ -109,12 +108,12 @@ public class HomeFragment extends BaseFragment {
     public void init(View view) {
 
         baseListener.changeToolbar(ToolbarKind.HOME, getString(R.string.home_toolbar_txt));
-        friends_recycler_view = view.findViewById(R.id.friends_recycler_view);
+        friendsRecyclerView = view.findViewById(R.id.rvFriends);
         LinearLayoutManager layoutManager1 = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
-        friends_recycler_view.setLayoutManager(layoutManager1);
-        favorites_recycler_view = view.findViewById(R.id.favorites_recycler_view);
+        friendsRecyclerView.setLayoutManager(layoutManager1);
+        favoritesRecyclerView = view.findViewById(R.id.rvFavorites);
         @SuppressLint("WrongConstant") LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-        favorites_recycler_view.setLayoutManager(layoutManager);
+        favoritesRecyclerView.setLayoutManager(layoutManager);
 
 
     }

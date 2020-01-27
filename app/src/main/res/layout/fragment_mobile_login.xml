@@ -58,7 +58,7 @@
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
-                        android:id="@+id/edt_phone_number"
+                        android:id="@+id/edtMobile"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="-4dp"
                         android:layout_marginRight="-4dp"
@@ -80,7 +80,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Receive Code"
-                        android:id="@+id/btn_receive_code_btn"
+                        android:id="@+id/btnReceiveCode"
                         android:textColor="@color/white"
                         android:background="@drawable/login_btn_style"/>
                     <View
@@ -103,7 +103,7 @@
                         android:inputType="textPassword"
                         android:maxLength="50"
                         android:maxLines="1"
-                        android:id="@+id/edt_verify_code"
+                        android:id="@+id/edtVerifyCode"
                         android:singleLine="true"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
                         android:textColor="@color/blue_600"
@@ -121,7 +121,7 @@
                         android:layout_marginRight="-4dp"
                         android:layout_marginTop="@dimen/spacing_middle"
                         android:text="Register"
-                        android:id="@+id/btn_verify_code"
+                        android:id="@+id/btnVerifyCode"
                         android:background="@drawable/login_btn_style"
                         android:textColor="@color/white"
                         android:textStyle="bold"

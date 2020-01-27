@@ -13,8 +13,6 @@ import com.example.popularity.utils.ToolbarKind;
 public class PrivacyPolicyFragment extends BaseFragment {
 
 
-
-
     @Override
     public void onHiddenChanged(boolean hidden) {
         if (!hidden)

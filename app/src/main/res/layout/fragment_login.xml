@@ -19,7 +19,7 @@
         android:orientation="vertical">
 
         <Button
-            android:id="@+id/login_api_button"
+            android:id="@+id/btnLoginWihMockData"
             android:onClick="loginBtnClick"
             android:layout_centerInParent="true"
             android:padding="@dimen/spacing_large"
@@ -34,7 +34,7 @@
 
 
         <Button
-            android:id="@+id/login_with_phone_number"
+            android:id="@+id/btnLoginWithMobile"
             android:onClick="loginBtnClick"
             android:layout_centerInParent="true"
             android:padding="@dimen/spacing_large"
@@ -47,7 +47,7 @@
             android:layout_height="@dimen/login_btn_height"
             tools:ignore="OnClick" />
         <Button
-            android:id="@+id/instagram_btn"
+            android:id="@+id/btnLoginWithInstagram"
             android:onClick="loginBtnClick"
             android:layout_centerInParent="true"
             android:padding="@dimen/spacing_large"
@@ -60,7 +60,7 @@
             android:layout_height="@dimen/login_btn_height"
             tools:ignore="OnClick" />
         <Button
-            android:id="@+id/facebook_login_btn"
+            android:id="@+id/btnLoginWithFacebook"
             android:onClick="loginBtnClick"
             android:layout_centerInParent="true"
             android:padding="@dimen/spacing_large"
@@ -73,7 +73,7 @@
             android:layout_height="@dimen/login_btn_height"
             tools:ignore="OnClick" />
         <Button
-            android:id="@+id/twitter_login_btn"
+            android:id="@+id/btnLoginWithTwitter"
             android:onClick="loginBtnClick"
             android:layout_centerInParent="true"
             android:padding="@dimen/spacing_large"

@@ -1,5 +1,6 @@
 package com.example.popularity.logic;
 
+import android.app.Activity;
 import android.content.Context;
 
 import com.example.popularity.model.Friend;
@@ -8,10 +9,14 @@ import com.example.popularity.repository.FriendRepository;
 import java.util.List;
 
 public class HomePresenter {
-    FriendRepository friendRepository;
-    Context context;
+    private FriendRepository friendRepository;
+    private Activity context;
 
-    public HomePresenter(Context context) {
+
+    public HomePresenter() {
+    }
+
+    public HomePresenter(Activity context) {
         this.context = context;
         friendRepository = new FriendRepository();
     }

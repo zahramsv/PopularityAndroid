@@ -11,9 +11,7 @@ import com.example.popularity.utils.ToolbarKind;
 
 public class AboutUsFragment extends BaseFragment {
 
-    public AboutUsFragment() {
 
-    }
 
     public static AboutUsFragment newInstance() {
         AboutUsFragment fragment = new AboutUsFragment();

@@ -11,7 +11,6 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.popularity.R;
@@ -33,9 +32,7 @@ public class RateFragment extends BaseFragment {
 
     private TextView userName;
 
-    public RateFragment() {
-        // Required empty public constructor
-    }
+
 
     public static RateFragment newInstance() {
         RateFragment fragment = new RateFragment();
@@ -59,15 +56,15 @@ public class RateFragment extends BaseFragment {
         Friend friend= (Friend) bundle.getSerializable("Friend");
         User user= (User) bundle.getSerializable("User");
         View view= inflater.inflate(R.layout.fragment_rate, container, false);
-        AppCompatRatingBar look=view.findViewById(R.id.look_rate);
-        AppCompatRatingBar style=view.findViewById(R.id.style_rate);
-        AppCompatRatingBar popularity=view.findViewById(R.id.popularity_rate);
-        AppCompatRatingBar fitness=view.findViewById(R.id.fitness_rate);
-        AppCompatRatingBar trustworthy=view.findViewById(R.id.trustworthy_rate);
-        AppCompatRatingBar personality=view.findViewById(R.id.personality_rate);
+        AppCompatRatingBar look=view.findViewById(R.id.rtLook);
+        AppCompatRatingBar style=view.findViewById(R.id.rtStyle);
+        AppCompatRatingBar popularity=view.findViewById(R.id.rtPopularity);
+        AppCompatRatingBar fitness=view.findViewById(R.id.rtFitness);
+        AppCompatRatingBar trustworthy=view.findViewById(R.id.rtTrustworthy);
+        AppCompatRatingBar personality=view.findViewById(R.id.rtPersonality);
         userName= view.findViewById(R.id.username);
         userName.setText(friend.getName() + " - "+friend.getUserId()+" - "+user.getFull_name());
-        view.findViewById(R.id.save_btn).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.btnSave).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 

@@ -55,7 +55,7 @@
         android:backgroundTint="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/privacyPolicy"
+        android:id="@+id/btnPrivacyPolicy"
         android:background="@drawable/btn_rounded_white_outline"
         android:drawableLeft="@drawable/ic_privacy"
         android:paddingLeft="@dimen/spacing_middle"
@@ -66,7 +66,7 @@
         android:backgroundTint="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/settings"
+        android:id="@+id/btnSettings"
         android:background="@drawable/btn_rounded_white_outline"
         android:paddingLeft="@dimen/spacing_middle"
         android:drawableTint="@color/red_400"
@@ -79,7 +79,7 @@
         android:backgroundTint="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/rateUs"
+        android:id="@+id/btnRateUs"
         android:minHeight="0dp"
         android:minWidth="0dp"
         android:paddingLeft="@dimen/spacing_middle"
@@ -101,7 +101,7 @@
         android:drawableLeft="@drawable/ic_rate"
         android:drawableTint="@color/red_400"
         android:text="@string/about_us"
-        android:id="@+id/aboutUs"
+        android:id="@+id/btnAboutUs"
         />
 
 

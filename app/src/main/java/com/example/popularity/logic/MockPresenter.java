@@ -3,11 +3,11 @@ package com.example.popularity.logic;
 import com.example.popularity.model.Login;
 import com.example.popularity.repository.SocialLoginRepository;
 
-public class SocialLoginLogic {
+public class MockPresenter {
 
     SocialLoginRepository socialLoginRepository;
 
-    public SocialLoginLogic() {
+    public MockPresenter() {
         socialLoginRepository = new SocialLoginRepository();
     }
 

@@ -23,11 +23,10 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.popularity.fragment.BaseFragment;
 import com.example.popularity.fragment.HomeFragment;
-import com.example.popularity.fragment.LoginFragment;
 import com.example.popularity.fragment.MenuDrawerFragment;
 import com.example.popularity.fragment.SplashFragment;
 import com.example.popularity.R;
-import com.example.popularity.logic.SocialLoginLogic;
+import com.example.popularity.logic.MockPresenter;
 import com.example.popularity.model.SocialRootModel;
 import com.example.popularity.model.User;
 import com.example.popularity.model.UserPopularity;
@@ -53,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements
 
     private Snackbar snackbar;
     ApiServices apiServices;
-    private SocialLoginLogic socialLoginLogic;
+    private MockPresenter mockPresenter;
     private TextView toolbarTitle;
     private TextInputEditText username, password;
     private RetrofitInstance retrofitInstance;
@@ -112,6 +111,7 @@ public class MainActivity extends AppCompatActivity implements
         }
         transaction.commit();
         closeDrawer();
+
 
     }
 
@@ -177,11 +177,11 @@ public class MainActivity extends AppCompatActivity implements
         switch (view.getId()) {
 
 
-            case R.id.login_api_button:
+            case R.id.btnLoginWihMockData:
 
                 break;
 
-            case R.id.instagram_btn:
+            case R.id.btnLoginWithInstagram:
 
 
                 showCustomDialog();
@@ -225,7 +225,7 @@ public class MainActivity extends AppCompatActivity implements
 
     public void login() {
 
-        apiServices.getLoginData(socialLoginLogic.GetFirstUserLoginData()).enqueue(new Callback<SocialRootModel>() {
+        apiServices.getLoginData(mockPresenter.GetFirstUserLoginData()).enqueue(new Callback<SocialRootModel>() {
             @Override
             public void onResponse(Call<SocialRootModel> call, Response<SocialRootModel> response) {
 
@@ -237,7 +237,7 @@ public class MainActivity extends AppCompatActivity implements
                     User data = obr.getData();
                     UserPopularity userPopularity = obr.getData().getRates_summary_sum();
                     SavePref savePref = new SavePref();
-                    data.setSocial_primary((socialLoginLogic.GetFirstUserLoginData().getSocial_primary()) + "");
+                    data.setSocial_primary((mockPresenter.GetFirstUserLoginData().getSocial_primary()) + "");
                     savePref.SaveUser(MainActivity.this, data, userPopularity);
 
                     setMainUser(data);
@@ -355,8 +355,8 @@ public class MainActivity extends AppCompatActivity implements
         loadingBar = findViewById(R.id.loadingBar);
         retrofitInstance = new RetrofitInstance();
         Retrofit retrofit = retrofitInstance.getRetrofitInstance();
-        socialLoginLogic = new SocialLoginLogic();
-        socialLoginLogic.GetFirstUserLoginData();
+        mockPresenter = new MockPresenter();
+        mockPresenter.GetFirstUserLoginData();
 
         apiServices = retrofit.create(ApiServices.class);
     }

@@ -76,7 +76,7 @@
                         android:layout_weight="1" />
 
                     <androidx.appcompat.widget.AppCompatRatingBar
-                        android:id="@+id/look_rate"
+                        android:id="@+id/rtLook"
                         android:isIndicator="false"
                         style="@style/Yellow.Small.AppCompatRatingBar"
                         android:layout_width="wrap_content"
@@ -133,7 +133,7 @@
                         android:layout_weight="1" />
 
                     <androidx.appcompat.widget.AppCompatRatingBar
-                        android:id="@+id/fitness_rate"
+                        android:id="@+id/rtFitness"
                         style="@style/Yellow.Small.AppCompatRatingBar"
                         android:layout_width="wrap_content"
                         android:layout_height="22dp"
@@ -190,7 +190,7 @@
                         android:layout_weight="1" />
 
                     <androidx.appcompat.widget.AppCompatRatingBar
-                        android:id="@+id/style_rate"
+                        android:id="@+id/rtStyle"
                         style="@style/Yellow.Small.AppCompatRatingBar"
                         android:layout_width="wrap_content"
                         android:layout_height="22dp"
@@ -247,7 +247,7 @@
                         android:layout_weight="1" />
 
                     <androidx.appcompat.widget.AppCompatRatingBar
-                        android:id="@+id/personality_rate"
+                        android:id="@+id/rtPersonality"
                         style="@style/Yellow.Small.AppCompatRatingBar"
                         android:layout_width="wrap_content"
                         android:layout_height="22dp"
@@ -305,7 +305,7 @@
                         android:layout_weight="1" />
 
                     <androidx.appcompat.widget.AppCompatRatingBar
-                        android:id="@+id/trustworthy_rate"
+                        android:id="@+id/rtTrustworthy"
                         style="@style/Yellow.Small.AppCompatRatingBar"
                         android:layout_width="wrap_content"
                         android:layout_height="22dp"
@@ -362,7 +362,7 @@
                         android:layout_weight="1" />
 
                     <androidx.appcompat.widget.AppCompatRatingBar
-                        android:id="@+id/popularity_rate"
+                        android:id="@+id/rtPopularity"
                         style="@style/Yellow.Small.AppCompatRatingBar"
                         android:layout_width="wrap_content"
                         android:layout_height="22dp"
@@ -402,7 +402,7 @@
                 android:layout_height="@dimen/spacing_xxxlarge"
                 android:text="@string/Save"
                 android:layout_margin="@dimen/spacing_medium"
-                android:id="@+id/save_btn"
+                android:id="@+id/btnSave"
                 android:background="@drawable/sumbit_btn_style"/>
         </LinearLayout>
 

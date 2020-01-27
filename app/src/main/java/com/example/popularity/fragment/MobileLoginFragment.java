@@ -30,7 +30,7 @@ import retrofit2.Retrofit;
 
 public class MobileLoginFragment extends BaseFragment {
 
-    private AppCompatEditText edt_phone_number, edt_verify_code;
+    private AppCompatEditText edtPhoneNumber, edtVerifyCode;
     private String userMobile;
     private SocialRootModel socialRootModel;
     private RetrofitInstance retrofitInstance;
@@ -67,12 +67,10 @@ public class MobileLoginFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
 
         view = inflater.inflate(R.layout.fragment_mobile_login, container, false);
         init();
-
-        view.findViewById(R.id.btn_receive_code_btn).setOnClickListener(view1 -> {
+        view.findViewById(R.id.btnReceiveCode).setOnClickListener(view1 -> {
 
           if (baseListener.checkNetwork())
           {
@@ -97,7 +95,7 @@ public class MobileLoginFragment extends BaseFragment {
 
         });
 
-        view.findViewById(R.id.btn_verify_code).setOnClickListener(view1 -> {
+        view.findViewById(R.id.btnVerifyCode).setOnClickListener(view1 -> {
 
         if (baseListener.checkNetwork())
         {
@@ -105,7 +103,7 @@ public class MobileLoginFragment extends BaseFragment {
             {
 
                 if (socialRootModel.getCode() == 200) {
-                    apiServices.varifySms(edt_phone_number.getText().toString(), edt_verify_code.getText().toString()).enqueue(new Callback<SocialRootModel>() {
+                    apiServices.varifySms(edtPhoneNumber.getText().toString(), edtVerifyCode.getText().toString()).enqueue(new Callback<SocialRootModel>() {
                         @Override
                         public void onResponse(Call<SocialRootModel> call, Response<SocialRootModel> response) {
 
@@ -198,11 +196,12 @@ public class MobileLoginFragment extends BaseFragment {
 
 
     public void init() {
+        baseListener.changeToolbar(ToolbarKind.HOME,getString(R.string.login_with_mobile));
         retrofitInstance = new RetrofitInstance();
         retrofit = retrofitInstance.getRetrofitInstance();
         apiServices = retrofit.create(ApiServices.class);
-        edt_phone_number = view.findViewById(R.id.edt_phone_number);
-        edt_verify_code = view.findViewById(R.id.edt_verify_code);
-        userMobile = edt_phone_number.getText().toString();
+        edtPhoneNumber = view.findViewById(R.id.edtMobile);
+        edtVerifyCode = view.findViewById(R.id.edtVerifyCode);
+        userMobile = edtPhoneNumber.getText().toString();
     }
 }
