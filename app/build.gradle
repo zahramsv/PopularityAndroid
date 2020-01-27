@@ -4,7 +4,7 @@ android {
     compileSdkVersion 29
     defaultConfig {
         applicationId "com.example.popularity"
-        minSdkVersion 19
+        minSdkVersion 16
         targetSdkVersion 29
         versionCode 1
         versionName "@string/app_version"
@@ -36,6 +36,7 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    implementation 'androidx.multidex:multidex:2.0.1'
 
 
     //implementation 'com.facebook.android:facebook-android-sdk:5.0.0'

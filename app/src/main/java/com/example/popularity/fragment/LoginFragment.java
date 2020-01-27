@@ -8,12 +8,13 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.widget.Button;
 
+import com.example.popularity.model.BaseResponse;
 import com.example.popularity.myInterface.ApiServices;
 import com.example.popularity.logic.MockPresenter;
 import com.example.popularity.model.User;
-import com.example.popularity.model.SocialRootModel;
 import com.example.popularity.model.UserPopularity;
 import com.example.popularity.R;
+import com.example.popularity.repository.UserRepository;
 import com.example.popularity.utils.RetrofitInstance;
 import com.example.popularity.utils.SavePref;
 import com.example.popularity.utils.ToolbarKind;
@@ -23,7 +24,9 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-public class LoginFragment extends BaseFragment {
+public class LoginFragment extends BaseFragment
+    implements UserRepository.UserRepoListener
+{
 
 
     private Button loginWithPhoneNumber, loginWithMockData;
@@ -45,7 +48,7 @@ public class LoginFragment extends BaseFragment {
         init(view);
 
         loginWithPhoneNumber.setOnClickListener(view -> {
-            baseListener.openFragment(MobileLoginFragment.newInstance(),true,null);
+            baseListener.openFragment(new MobileLoginFragment(),true,null);
         });
         loginWithMockData.setOnClickListener(view -> {
             baseListener.showLoadingBar(true);
@@ -64,52 +67,11 @@ public class LoginFragment extends BaseFragment {
     }
 
 
+    private MockPresenter mockPresenter = new MockPresenter();
+
     private void loginToServer() {
-
-        RetrofitInstance retrofitInstance = new RetrofitInstance();
-        Retrofit retrofit = retrofitInstance.getRetrofitInstance();
-        MockPresenter mockPresenter = new MockPresenter();
-        mockPresenter.GetFirstUserLoginData();
-
-        ApiServices apiServices = retrofit.create(ApiServices.class);
-
-
-        apiServices.getLoginData(mockPresenter.GetFirstUserLoginData()).enqueue(new Callback<SocialRootModel>() {
-            @Override
-            public void onResponse(Call<SocialRootModel> call, Response<SocialRootModel> response) {
-                baseListener.showLoadingBar(false);
-
-                Log.i("app_tag", response.toString());
-                if ((response.isSuccessful())) {
-                    SocialRootModel obr = response.body();
-
-
-                    User data = obr.getData();
-                    UserPopularity userPopularity = obr.getData().getRates_summary_sum();
-                    SavePref savePref = new SavePref();
-                    data.setSocial_primary((mockPresenter.GetFirstUserLoginData().getSocial_primary()) + "");
-                    savePref.SaveUser(getContext(), data, userPopularity);
-
-                    baseListener.setMainUser(data);
-                    baseListener.openFragment(new HomeFragment(), true, null);
-
-                    Log.i("app_tag", "info: " + obr.getCode());
-
-
-                } else {
-                    baseListener.showMessage(getString(R.string.error_api_call));
-                    Log.i("app_tag", "error");
-                }
-            }
-
-            @Override
-            public void onFailure(Call<SocialRootModel> call, Throwable t) {
-                baseListener.showMessage(getString(R.string.error_api_call));
-                baseListener.showLoadingBar(false);
-
-                Log.i("app_tag", t.getMessage().toString());
-            }
-        });
+        UserRepository userRepository = new UserRepository();
+        userRepository.loginToServer(mockPresenter.GetFirstUserLoginData(), this);
     }
 
     @Override
@@ -117,4 +79,19 @@ public class LoginFragment extends BaseFragment {
         return super.onCreateAnimation(transit, enter, nextAnim);
     }
 
+    @Override
+    public void onDone(User user) {
+        UserPopularity userPopularity = user.getRates_summary_sum();
+        SavePref savePref = new SavePref();
+        user.setSocial_primary((mockPresenter.GetFirstUserLoginData().getSocial_primary()) + "");
+        savePref.SaveUser(getContext(), user, userPopularity);
+
+        baseListener.setMainUser(user);
+        baseListener.openFragment(new HomeFragment(), true, null);
+    }
+
+    @Override
+    public void onFailure(String message) {
+        baseListener.showMessage(message);
+    }
 }
