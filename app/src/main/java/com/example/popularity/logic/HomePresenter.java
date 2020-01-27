@@ -10,13 +10,13 @@ import java.util.List;
 
 public class HomePresenter {
     private FriendRepository friendRepository;
-    private Activity context;
+    private Context context;
 
 
     public HomePresenter() {
     }
 
-    public HomePresenter(Activity context) {
+    public HomePresenter(Context context) {
         this.context = context;
         friendRepository = new FriendRepository();
     }

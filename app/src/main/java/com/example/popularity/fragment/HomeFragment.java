@@ -49,11 +49,11 @@ public class HomeFragment extends BaseFragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        homePresenter = new HomePresenter(getActivity());
+        homePresenter = new HomePresenter(getContext());
         baseListener.changeToolbar(ToolbarKind.HOME, "");
         if (ActivityCompat.checkSelfPermission(getActivity(), android.Manifest.permission.READ_CONTACTS)
                 == PackageManager.PERMISSION_GRANTED) {
-            homePresenter.getFriends();
+           phoneContacts= homePresenter.getFriends();
         } else {
             requestPermission();
         }
@@ -69,8 +69,6 @@ public class HomeFragment extends BaseFragment {
         User user = baseListener.getMainUser();
         if (user != null) {
             UserPopularity userPopularity = user.getRates_summary_sum();
-            UserFriendsRepository userFriendsRepository = new UserFriendsRepository();
-            // friendList=userFriendsRepository.getUserFriendsMock(user.getSocial_primary());
             FriendsListAdapter friendsListAdapter = new FriendsListAdapter(phoneContacts, getActivity());
             friendsRecyclerView.setAdapter(friendsListAdapter);
             // List<Friend> finalFriendList = friendList;
@@ -80,7 +78,6 @@ public class HomeFragment extends BaseFragment {
                 bundle1.putSerializable("Friend", friend);
                 bundle1.putSerializable("User", user);
                 baseListener.openFragment(new RateFragment(), true, bundle1);
-                Log.i("app_tag", "tt");
 
             });
 

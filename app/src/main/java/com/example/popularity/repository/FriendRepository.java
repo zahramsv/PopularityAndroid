@@ -1,39 +1,77 @@
 package com.example.popularity.repository;
-
-import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.database.Cursor;
 import android.provider.ContactsContract;
-import android.util.Log;
-
 import com.example.popularity.model.Friend;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+
 public class FriendRepository {
-    List<Friend> phoneContacts=new ArrayList<>();
-    private Friend friend;
 
-    public List<Friend> getFriendsFromInstagramFollowers(){
+    public List<Friend> getFriendsFromInstagramFollowers() {
         return null;
     }
 
-    public List<Friend> getFriendsFromFacebookFriends(){
+    public List<Friend> getFriendsFromFacebookFriends() {
         return null;
     }
 
-    public List<Friend> getFriendsFromLinkedinConnections(){
+    public List<Friend> getFriendsFromLinkedinConnections() {
         return null;
     }
 
-    public List<Friend> getFriendsFromPhoneContacts(Activity context) {
+    public List<Friend> getFriendsFromPhoneContacts(Context context) {
+
+        List<Friend> phoneContacts = new ArrayList<>();
+
+        ContentResolver cr = context.getContentResolver();
+        Cursor cur = cr.query(ContactsContract.Contacts.CONTENT_URI,
+                null, null, null, null);
+        if ((cur != null ? cur.getCount() : 0) > 0) {
+            while (cur != null && cur.moveToNext()) {
+               Friend friend = new Friend();
+                String id = cur.getString(
+                        cur.getColumnIndex(ContactsContract.Contacts._ID));
+                String name = cur.getString(cur.getColumnIndex(
+                        ContactsContract.Contacts.DISPLAY_NAME));
+                friend.setId(Integer.parseInt(id));
+                friend.setName(name);
+                if (cur.getInt(cur.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER)) > 0) {
+                    Cursor pCur = cr.query(
+                            ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
+                            null,
+                            ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = ?",
+                            new String[]{id}, null);
+                    while (pCur.moveToNext()) {
+                        String phoneNo = pCur.getString(pCur.getColumnIndex(
+                                ContactsContract.CommonDataKinds.Phone.NUMBER));
+
+                        friend.setUserId(phoneNo);
+                        friend.userId = friend.userId.replace("+98", "0");
+                        friend.userId = friend.userId.replace(" ", "");
+                        friend.userId = friend.userId.trim();
+                        if (isValidMobileNumber(friend.userId) && friend.userId != null && friend.name != null) {
+                            phoneContacts.add(friend);
+                        }
 
 
-            ArrayList<String> nameList = new ArrayList<>();
+                    }
+                    pCur.close();
+                }
+            }
+        }
+        if (cur != null) {
+            cur.close();
+        }
+
+
+        return phoneContacts;
+
+            /*ArrayList<String> nameList = new ArrayList<>();
             ContentResolver cr = context.getContentResolver();
             Cursor cur = cr.query(ContactsContract.Contacts.CONTENT_URI,
                     null, null, null, null);
@@ -75,6 +113,7 @@ public class FriendRepository {
                 Log.i("app_tag", "correct");
             }
             return phoneContacts;
+*/
 
 
     }

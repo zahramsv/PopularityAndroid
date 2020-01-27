@@ -81,6 +81,7 @@ public class RateFragment extends BaseFragment {
                     @Override
                     public void onResponse(Call<BaseResponse<String>> call, Response<BaseResponse<String>> response) {
 
+                        ///$#check
                         baseListener.showMessage("امتیاز دهی با موفقیت انجام شد.");
                         final Handler handler = new Handler();
                         handler.postDelayed(new Runnable() {

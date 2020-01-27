@@ -5,6 +5,7 @@ import com.example.popularity.model.Login;
 import com.example.popularity.model.SocialRootModel;
 import com.example.popularity.model.SubmitRate;
 import com.example.popularity.model.User;
+import com.example.popularity.model.VerifySmsResponseData;
 import com.example.popularity.utils.URLS;
 
 import retrofit2.Call;
@@ -25,7 +26,7 @@ public interface ApiServices {
 
     @FormUrlEncoded
     @POST(URLS.VERIFY_SMS)
-    Call<SocialRootModel> varifySms(
+    Call<BaseResponse<VerifySmsResponseData>> verifySms(
             @Field("user_mobile") String user_mobile,
             @Field("verify_code") String verify_code);
 
