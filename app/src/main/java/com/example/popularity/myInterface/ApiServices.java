@@ -30,7 +30,7 @@ public interface ApiServices {
             @Field("verify_code") String verify_code);
 
     @POST(URLS.LOGIN_TO_SOCIAL)
-    Call<BaseResponse<User>> getLoginData(@Body Login login);
+    Call<BaseResponse<User>> loginToSocial(@Body Login login);
 
 
     @FormUrlEncoded

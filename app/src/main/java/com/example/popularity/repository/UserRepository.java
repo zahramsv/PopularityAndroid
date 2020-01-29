@@ -6,11 +6,9 @@ import com.example.popularity.R;
 import com.example.popularity.model.BaseResponse;
 import com.example.popularity.model.Login;
 import com.example.popularity.model.User;
-import com.example.popularity.model.UserPopularity;
 import com.example.popularity.myInterface.ApiServices;
 import com.example.popularity.utils.MyApp;
 import com.example.popularity.utils.RetrofitInstance;
-import com.example.popularity.utils.SavePref;
 
 import java.util.Objects;
 
@@ -25,16 +23,13 @@ public class UserRepository {
 
         RetrofitInstance retrofitInstance = new RetrofitInstance();
         Retrofit retrofit = retrofitInstance.getRetrofitInstance();
-
         ApiServices apiServices = retrofit.create(ApiServices.class);
 
-        apiServices.getLoginData(loginBody).enqueue(new Callback<BaseResponse<User>>() {
+        apiServices.loginToSocial(loginBody).enqueue(new Callback<BaseResponse<User>>() {
             @Override
             public void onResponse(Call<BaseResponse<User>> call, Response<BaseResponse<User>> response) {
 
-
                 Log.i("app_tag", response.toString());
-
                 if ((response.isSuccessful())) {
                     BaseResponse obr = response.body();
                     User user = (User) obr.getData();

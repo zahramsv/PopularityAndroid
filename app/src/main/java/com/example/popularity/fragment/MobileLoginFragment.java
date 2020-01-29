@@ -25,8 +25,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 
 public class MobileLoginFragment extends BaseFragment implements
-        UserRepository.UserRepoListener
-{
+        UserRepository.UserRepoListener {
 
     private AppCompatEditText edtMobile, edtVerifyCode;
     private String userMobile;
@@ -83,14 +82,14 @@ public class MobileLoginFragment extends BaseFragment implements
                         }
                     });
                 } else {
-                    baseListener.showSnackBar("Code Do Not Receive");
+                    baseListener.showSnackBar(getString(R.string.code_receive_error));
                 }
             } else {
-                baseListener.showSnackBar("Enter Your Number");
+                baseListener.showSnackBar(getString(R.string.error_api_call));
             }
 
         } else {
-            baseListener.showSnackBar("Please check your connection");
+            baseListener.showSnackBar(getString(R.string.network_connection));
         }
     }
 
@@ -114,7 +113,7 @@ public class MobileLoginFragment extends BaseFragment implements
         }
     }
 
-    private void  loginToServer() {
+    private void loginToServer() {
         baseListener.showLoadingBar(true);
 
         UserRepository userRepository = new UserRepository();

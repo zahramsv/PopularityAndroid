@@ -59,6 +59,8 @@ The terms used in this Privacy Policy have the same meanings as in our Terms and
 
 
     <!--errors-->
-    <string name="error_api_call">مشکلی در درخواست به سرور به وجود آمده است.</string>
+    <string name="error_api_call">There was a problem sending the request to the server.</string>
+    <string name="network_connection">Please check your connection</string>
+    <string name="code_receive_error">you should get a code...</string>
 </resources>
 
