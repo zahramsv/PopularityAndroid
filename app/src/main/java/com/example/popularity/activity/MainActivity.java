@@ -1,7 +1,6 @@
 package com.example.popularity.activity;
 
 import android.app.Dialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -12,7 +11,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -20,39 +18,25 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.popularity.R;
 import com.example.popularity.fragment.BaseFragment;
 import com.example.popularity.fragment.MenuDrawerFragment;
 import com.example.popularity.fragment.SplashFragment;
-import com.example.popularity.R;
-import com.example.popularity.logic.MockPresenter;
 import com.example.popularity.model.User;
-import com.example.popularity.myInterface.ApiServices;
 import com.example.popularity.myInterface.MainActivityTransaction;
 import com.example.popularity.utils.ConnectivityReceiver;
 import com.example.popularity.utils.MyApp;
-import com.example.popularity.utils.RetrofitInstance;
 import com.example.popularity.utils.ToolbarKind;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 
-import retrofit2.Retrofit;
-
 
 public class MainActivity extends AppCompatActivity implements
-          MainActivityTransaction
-        , ConnectivityReceiver.ConnectivityReceiverListener
-{
-
-    private Snackbar snackbar;
-    ApiServices apiServices;
-    private MockPresenter mockPresenter;
+        MainActivityTransaction
+        , ConnectivityReceiver.ConnectivityReceiverListener {
     private TextView toolbarTitle;
-    private TextInputEditText username, password;
-    private RetrofitInstance retrofitInstance;
     private DrawerLayout drawerLayout;
-    private MenuDrawerFragment slidingMenuFragment;
     private ProgressBar loadingBar;
-    private Dialog dialog;
     private User mainUser;
     private ImageView toolbar_icon;
     private View parent_view;
@@ -62,12 +46,10 @@ public class MainActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         init();
-        checkConnection();
-
+        initNavigationDrawer();
 
         openFragment(new SplashFragment(), false, null);
     }
-
 
     @Override
     public User getMainUser() {
@@ -108,7 +90,6 @@ public class MainActivity extends AppCompatActivity implements
 
     }
 
-
     @Override
     public void changeToolbar(ToolbarKind kind, String title) {
 
@@ -116,11 +97,13 @@ public class MainActivity extends AppCompatActivity implements
 
         switch (kind) {
             case EMPTY:
+                drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
                 findViewById(R.id.toolbar).setVisibility(View.GONE);
                 getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
                 break;
 
             case HOME:
+                drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
                 findViewById(R.id.toolbar).setVisibility(View.VISIBLE);
                 toolbar_icon.setImageResource(R.drawable.ic_menu);
                 toolbar_icon.setOnClickListener(v -> {
@@ -130,6 +113,7 @@ public class MainActivity extends AppCompatActivity implements
                 break;
 
             case BACK:
+                drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
                 findViewById(R.id.toolbar).setVisibility(View.VISIBLE);
                 toolbar_icon.setImageResource(R.drawable.ic_back);
                 toolbar_icon.setOnClickListener(v -> {
@@ -145,52 +129,18 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public void showSnackBar(String message) {
-        snackbar = Snackbar.make(parent_view, message, Snackbar.LENGTH_LONG)
-                .setAction("OK", new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        snackbar.dismiss();
-                        //Snackbar.make(parent_view, "UNDO CLICKED!", Snackbar.LENGTH_SHORT).show();
-                    }
-                });
+        Snackbar snackbar = Snackbar.make(parent_view, message, Snackbar.LENGTH_LONG);
+        snackbar.setAction(getString(R.string.okay), view -> {
+            snackbar.dismiss();
+            //Snackbar.make(parent_view, "UNDO CLICKED!", Snackbar.LENGTH_SHORT).show();
+        });
         snackbar.show();
     }
 
-    @Override
-    public boolean checkNetwork() {
-        return ConnectivityReceiver.isConnected();
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-    }
-
-    public void loginBtnClick(View view) {
-        switch (view.getId()) {
-
-
-            case R.id.btnLoginWihMockData:
-
-                break;
-
-            case R.id.btnLoginWithInstagram:
-                break;
-
-
-            case R.id.signIn_btn:
-
-
-                break;
-        }
-
-
-    }
-
     private void showCustomDialog() {
-        dialog = new Dialog(this);
+        Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.sign_in_dialog);
+        dialog.setContentView(R.layout.dialog_sign_in);
         dialog.setCancelable(true);
 
         WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
@@ -200,6 +150,7 @@ public class MainActivity extends AppCompatActivity implements
         dialog.show();
         dialog.getWindow().setAttributes(lp);
 
+        TextInputEditText username, password;
         username = dialog.findViewById(R.id.username);
         Button btn = dialog.findViewById(R.id.signIn_btn);
         password = dialog.findViewById(R.id.password);
@@ -256,12 +207,6 @@ public class MainActivity extends AppCompatActivity implements
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
-    private void checkConnection() {
-        boolean isConnected = ConnectivityReceiver.isConnected();
-        snackBarWithAction(isConnected);
-
-    }
-
     @Override
     protected void onResume() {
         super.onResume();
@@ -270,30 +215,10 @@ public class MainActivity extends AppCompatActivity implements
         MyApp.getInstance().setConnectivityListener(this);
     }
 
-    private void snackBarWithAction(boolean isConnected) {
-        String message = "";
-        if (!isConnected) {
-
-            message = "Disconnected";
-            snackbar = Snackbar.make(parent_view, message, Snackbar.LENGTH_LONG)
-                    .setAction("OK", new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            snackbar.dismiss();
-                            //Snackbar.make(parent_view, "UNDO CLICKED!", Snackbar.LENGTH_SHORT).show();
-                        }
-                    });
-            snackbar.show();
-        }
-
-    }
-
     @Override
     public void onNetworkConnectionChanged(boolean isConnected) {
         if (!isConnected)
-        showSnackBar("Disconnected");
-       // snackBarWithAction(isConnected);
-        //showSnack(isConnected);
+            showSnackBar(getString(R.string.error_disconnected));
     }
 
     private void init() {
@@ -301,17 +226,16 @@ public class MainActivity extends AppCompatActivity implements
         drawerLayout = findViewById(R.id.drawer_layout);
         toolbar_icon = findViewById(R.id.toolbar_icon);
         toolbarTitle = findViewById(R.id.txtToolbar);
-        slidingMenuFragment = (MenuDrawerFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_nd);
+        loadingBar = findViewById(R.id.loadingBar);
+    }
+
+    private void initNavigationDrawer() {
+        MenuDrawerFragment slidingMenuFragment = (MenuDrawerFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_nd);
         assert slidingMenuFragment != null;
         slidingMenuFragment.attachFragment(this);
-        loadingBar = findViewById(R.id.loadingBar);
-        retrofitInstance = new RetrofitInstance();
-        Retrofit retrofit = retrofitInstance.getRetrofitInstance();
-        mockPresenter = new MockPresenter();
-        mockPresenter.GetFirstUserLoginData();
-
-        apiServices = retrofit.create(ApiServices.class);
     }
+
+
 
 }
 

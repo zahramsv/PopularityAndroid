@@ -20,7 +20,6 @@
 
         <Button
             android:id="@+id/btnLoginWihMockData"
-            android:onClick="loginBtnClick"
             android:layout_centerInParent="true"
             android:padding="@dimen/spacing_large"
             android:background="@drawable/login_btn_style"
@@ -29,13 +28,11 @@
             android:textSize="12dp"
             android:layout_marginTop="10dp"
             android:textColor="@color/white"
-            android:layout_height="@dimen/login_btn_height"
-            tools:ignore="OnClick" />
+            android:layout_height="@dimen/login_btn_height" />
 
 
         <Button
             android:id="@+id/btnLoginWithMobile"
-            android:onClick="loginBtnClick"
             android:layout_centerInParent="true"
             android:padding="@dimen/spacing_large"
             android:background="@drawable/login_btn_style"
@@ -44,11 +41,9 @@
             android:textSize="12dp"
             android:layout_marginTop="10dp"
             android:textColor="@color/white"
-            android:layout_height="@dimen/login_btn_height"
-            tools:ignore="OnClick" />
+            android:layout_height="@dimen/login_btn_height" />
         <Button
             android:id="@+id/btnLoginWithInstagram"
-            android:onClick="loginBtnClick"
             android:layout_centerInParent="true"
             android:padding="@dimen/spacing_large"
             android:background="@drawable/login_btn_style"
@@ -57,11 +52,9 @@
             android:textSize="12dp"
             android:layout_marginTop="10dp"
             android:textColor="@color/white"
-            android:layout_height="@dimen/login_btn_height"
-            tools:ignore="OnClick" />
+            android:layout_height="@dimen/login_btn_height" />
         <Button
             android:id="@+id/btnLoginWithFacebook"
-            android:onClick="loginBtnClick"
             android:layout_centerInParent="true"
             android:padding="@dimen/spacing_large"
             android:background="@drawable/login_btn_style"
@@ -70,11 +63,9 @@
             android:textSize="12dp"
             android:layout_marginTop="10dp"
             android:textColor="@color/white"
-            android:layout_height="@dimen/login_btn_height"
-            tools:ignore="OnClick" />
+            android:layout_height="@dimen/login_btn_height"/>
         <Button
             android:id="@+id/btnLoginWithTwitter"
-            android:onClick="loginBtnClick"
             android:layout_centerInParent="true"
             android:padding="@dimen/spacing_large"
             android:background="@drawable/login_btn_style"
@@ -83,8 +74,7 @@
             android:textSize="12dp"
             android:layout_marginTop="10dp"
             android:textColor="@color/white"
-            android:layout_height="@dimen/login_btn_height"
-            tools:ignore="OnClick" />
+            android:layout_height="@dimen/login_btn_height" />
 
     </LinearLayout>
 

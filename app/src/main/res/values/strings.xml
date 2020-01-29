@@ -47,6 +47,7 @@ The terms used in this Privacy Policy have the same meanings as in our Terms and
     <string name="rate_popularity">Popularity</string>
     <string name="rate_to">What you think about ... </string>
     <string name="Save">Save</string>
+    <string name="okay">OK</string>
 
     <!--ToolBarTitles-->
     <string name="login_toolbar_txt">Login methods</string>
@@ -60,6 +61,9 @@ The terms used in this Privacy Policy have the same meanings as in our Terms and
 
     <!--errors-->
     <string name="error_api_call">There was a problem sending the request to the server.</string>
+    <string name="error_disconnected">Disconnected</string>
+
+
     <string name="network_connection">Please check your connection</string>
     <string name="code_receive_error">you should get a code...</string>
 </resources>

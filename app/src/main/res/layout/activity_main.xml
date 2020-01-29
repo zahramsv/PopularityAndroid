@@ -35,7 +35,8 @@
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:paddingTop="10dp"
-                        android:paddingEnd="10dp"
+                        android:paddingLeft="10dp"
+                        tools:src="@drawable/ic_menu"
                         android:paddingBottom="10dp"
                     />
 
@@ -45,9 +46,9 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:paddingEnd="50dp"
+                        android:paddingRight="50dp"
                         android:textColor="@color/white"
-                        tools:text="salam" />
+                        tools:text="@string/app_name" />
                 </LinearLayout>
             </androidx.appcompat.widget.Toolbar>
 

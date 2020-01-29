@@ -85,7 +85,6 @@
 
         <Button
             android:id="@+id/signIn_btn"
-            android:onClick="loginBtnClick"
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:layout_marginLeft="-4dp"

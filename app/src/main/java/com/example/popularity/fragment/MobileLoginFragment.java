@@ -15,6 +15,7 @@ import com.example.popularity.model.UserPopularity;
 import com.example.popularity.model.VerifySmsResponseData;
 import com.example.popularity.myInterface.ApiServices;
 import com.example.popularity.repository.UserRepository;
+import com.example.popularity.utils.ConnectivityReceiver;
 import com.example.popularity.utils.RetrofitInstance;
 import com.example.popularity.utils.SavePref;
 import com.example.popularity.utils.ToolbarKind;
@@ -58,7 +59,7 @@ public class MobileLoginFragment extends BaseFragment implements
 
     private void verifyCode() {
 
-        if (baseListener.checkNetwork()) {
+        if (ConnectivityReceiver.isConnected()) {
             if (sendSmsResult != null) {
                 if (sendSmsResult.getCode() == 200) {
 
@@ -94,7 +95,7 @@ public class MobileLoginFragment extends BaseFragment implements
     }
 
     private void sendSms() {
-        if (baseListener.checkNetwork()) {
+        if (ConnectivityReceiver.isConnected()) {
             apiServices.sendSms(edtMobile.getText().toString()).enqueue(new Callback<BaseResponse>() {
                 @Override
                 public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {

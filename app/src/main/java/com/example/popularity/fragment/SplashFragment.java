@@ -53,9 +53,13 @@ public class SplashFragment extends BaseFragment {
                 public void onResponse(Call<BaseResponse<User>> call, Response<BaseResponse<User>> response) {
 
                     assert response.body() != null;
-                    baseListener.setMainUser(response.body().getData());
-                    baseListener.openFragment(new HomeFragment(), false, null);
-
+                    BaseResponse<User> result = response.body();
+                    if(result.getCode() == 200) {
+                        baseListener.setMainUser(response.body().getData());
+                        baseListener.openFragment(new HomeFragment(), false, null);
+                    }else{
+                        baseListener.openFragment(new LoginFragment(), false, null);
+                    }
                 }
 
 
