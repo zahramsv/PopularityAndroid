@@ -13,7 +13,7 @@
 
         <Button
             android:layout_marginTop="@dimen/spacing_large"
-            android:id="@+id/log_out_btn"
+            android:id="@+id/btnLogout"
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:layout_marginLeft="@dimen/spacing_middle"

@@ -1,4 +1,4 @@
-package com.example.popularity.model;
+package com.example.popularity.utils;
 
 public enum ShowMessageType {
     TOAST,

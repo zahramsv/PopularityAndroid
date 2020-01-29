@@ -28,7 +28,7 @@
 
                 <TextView
                     android:layout_gravity="center"
-                    android:id="@+id/username"
+                    android:id="@+id/txtName"
                     style="@style/MyTextViewStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -402,8 +402,8 @@
                 android:layout_height="@dimen/spacing_xxxlarge"
                 android:text="@string/Save"
                 android:layout_margin="@dimen/spacing_medium"
-                android:id="@+id/btnSave"
-                android:background="@drawable/sumbit_btn_style"/>
+                android:id="@+id/btnSaveRates"
+                android:background="@drawable/submit_btn_style"/>
         </LinearLayout>
 
 

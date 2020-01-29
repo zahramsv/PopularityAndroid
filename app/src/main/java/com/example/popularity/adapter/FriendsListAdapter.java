@@ -79,7 +79,7 @@ public class FriendsListAdapter extends RecyclerView.Adapter<FriendsListAdapter.
             super(itemView);
             //profileImage = itemView.findViewById(R.id.profileimage);
            // rate = itemView.findViewById(R.id.rate);
-            username = itemView.findViewById(R.id.username);
+            username = itemView.findViewById(R.id.txtName);
         }
 
     }

@@ -3,14 +3,14 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/drawer_layout"
+    android:id="@+id/drawerLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
     tools:context=".activity.MainActivity">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:id="@+id/parent_view"
+        android:id="@+id/ctlParentView"
         android:layout_height="match_parent">
 
         <LinearLayout
@@ -31,7 +31,7 @@
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:id="@+id/toolbar_icon"
+                        android:id="@+id/imgToolbarIcon"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:paddingTop="10dp"
@@ -53,7 +53,7 @@
             </androidx.appcompat.widget.Toolbar>
 
             <FrameLayout
-                android:id="@+id/your_placeholder"
+                android:id="@+id/frmPlaceholder"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </LinearLayout>

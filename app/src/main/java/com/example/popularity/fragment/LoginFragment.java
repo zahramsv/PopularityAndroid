@@ -17,6 +17,7 @@ import com.example.popularity.R;
 import com.example.popularity.repository.UserRepository;
 import com.example.popularity.utils.RetrofitInstance;
 import com.example.popularity.utils.SavePref;
+import com.example.popularity.utils.ShowMessageType;
 import com.example.popularity.utils.ToolbarKind;
 
 import retrofit2.Call;
@@ -92,6 +93,6 @@ public class LoginFragment extends BaseFragment
 
     @Override
     public void onFailure(String message) {
-        baseListener.showMessage(message);
+        baseListener.showMessage(ShowMessageType.SNACK,message);
     }
 }

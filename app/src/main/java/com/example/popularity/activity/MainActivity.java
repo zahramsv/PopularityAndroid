@@ -1,11 +1,7 @@
 package com.example.popularity.activity;
 
-import android.app.Dialog;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -26,9 +22,9 @@ import com.example.popularity.model.User;
 import com.example.popularity.myInterface.MainActivityTransaction;
 import com.example.popularity.utils.ConnectivityReceiver;
 import com.example.popularity.utils.MyApp;
+import com.example.popularity.utils.ShowMessageType;
 import com.example.popularity.utils.ToolbarKind;
 import com.google.android.material.snackbar.Snackbar;
-import com.google.android.material.textfield.TextInputEditText;
 
 
 public class MainActivity extends AppCompatActivity implements
@@ -38,8 +34,8 @@ public class MainActivity extends AppCompatActivity implements
     private DrawerLayout drawerLayout;
     private ProgressBar loadingBar;
     private User mainUser;
-    private ImageView toolbar_icon;
-    private View parent_view;
+    private ImageView toolbarIcon;
+    private View parentView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +43,6 @@ public class MainActivity extends AppCompatActivity implements
         setContentView(R.layout.activity_main);
         init();
         initNavigationDrawer();
-
         openFragment(new SplashFragment(), false, null);
     }
 
@@ -62,6 +57,25 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     @Override
+    public void showMessage(ShowMessageType messageType, String message) {
+       switch (messageType)
+       {
+           case SNACK:
+               Snackbar snackbar = Snackbar.make(parentView, message, Snackbar.LENGTH_LONG);
+               snackbar.setAction(getString(R.string.okay), view -> {
+                   snackbar.dismiss();
+                   //Snackbar.make(parentView, "UNDO CLICKED!", Snackbar.LENGTH_SHORT).show();
+               });
+               snackbar.show();
+               break;
+
+           case TOAST:
+               Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+               break;
+       }
+    }
+
+    @Override
     public void openFragment(BaseFragment fragment, Boolean addStack, Bundle bundle) {
 
         if (bundle != null) {
@@ -72,16 +86,16 @@ public class MainActivity extends AppCompatActivity implements
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.pop_enter, R.anim.pop_exit);
         if (!addStack) {
-            transaction.replace(R.id.your_placeholder, fragment);
+            transaction.replace(R.id.frmPlaceholder, fragment);
         } else {
-            Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.your_placeholder);
+            Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.frmPlaceholder);
             if (currentFragment != null) {
                 transaction.hide(currentFragment);
                 transaction.commit();
             }
             transaction = getSupportFragmentManager().beginTransaction();
             transaction.setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.pop_enter, R.anim.pop_exit);
-            transaction.add(R.id.your_placeholder, fragment);
+            transaction.add(R.id.frmPlaceholder, fragment);
             transaction.addToBackStack(fragment.getClass().getName());
         }
         transaction.commit();
@@ -105,8 +119,8 @@ public class MainActivity extends AppCompatActivity implements
             case HOME:
                 drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
                 findViewById(R.id.toolbar).setVisibility(View.VISIBLE);
-                toolbar_icon.setImageResource(R.drawable.ic_menu);
-                toolbar_icon.setOnClickListener(v -> {
+                toolbarIcon.setImageResource(R.drawable.ic_menu);
+                toolbarIcon.setOnClickListener(v -> {
                     openDrawer();
                 });
                 getWindow().getDecorView().setSystemUiVisibility(View.VISIBLE);
@@ -115,8 +129,8 @@ public class MainActivity extends AppCompatActivity implements
             case BACK:
                 drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
                 findViewById(R.id.toolbar).setVisibility(View.VISIBLE);
-                toolbar_icon.setImageResource(R.drawable.ic_back);
-                toolbar_icon.setOnClickListener(v -> {
+                toolbarIcon.setImageResource(R.drawable.ic_back);
+                toolbarIcon.setOnClickListener(v -> {
                     onBackPressed();
                 });
                 getWindow().getDecorView().setSystemUiVisibility(View.VISIBLE);
@@ -127,40 +141,6 @@ public class MainActivity extends AppCompatActivity implements
         }
     }
 
-    @Override
-    public void showSnackBar(String message) {
-        Snackbar snackbar = Snackbar.make(parent_view, message, Snackbar.LENGTH_LONG);
-        snackbar.setAction(getString(R.string.okay), view -> {
-            snackbar.dismiss();
-            //Snackbar.make(parent_view, "UNDO CLICKED!", Snackbar.LENGTH_SHORT).show();
-        });
-        snackbar.show();
-    }
-
-    private void showCustomDialog() {
-        Dialog dialog = new Dialog(this);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.dialog_sign_in);
-        dialog.setCancelable(true);
-
-        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
-        lp.copyFrom(dialog.getWindow().getAttributes());
-        lp.width = WindowManager.LayoutParams.WRAP_CONTENT;
-        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
-        dialog.show();
-        dialog.getWindow().setAttributes(lp);
-
-        TextInputEditText username, password;
-        username = dialog.findViewById(R.id.username);
-        Button btn = dialog.findViewById(R.id.signIn_btn);
-        password = dialog.findViewById(R.id.password);
-        btn.setOnClickListener(v -> {
-            //fixme: login();
-        });
-
-
-    }
-
     int count = 0;
 
     @Override
@@ -168,13 +148,13 @@ public class MainActivity extends AppCompatActivity implements
         FragmentManager fm = getSupportFragmentManager();
         if (fm.getBackStackEntryCount() == 0) {
             if (count < 1) {
-                showMessage("are you sure?");
+                showMessage(ShowMessageType.TOAST,"are you sure?");
                 count++;
             } else
                 this.finish();
         } else {
             super.onBackPressed();
-            Fragment fragment = fm.findFragmentById(R.id.your_placeholder);
+            Fragment fragment = fm.findFragmentById(R.id.frmPlaceholder);
             FragmentTransaction ft = fm.beginTransaction();
             ft.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
             if (fragment != null) {
@@ -185,13 +165,16 @@ public class MainActivity extends AppCompatActivity implements
 
     }
 
+
     private void openDrawer() {
         drawerLayout.openDrawer(GravityCompat.START);
     }
 
+
     private void closeDrawer() {
         drawerLayout.closeDrawer(GravityCompat.START);
     }
+
 
     @Override
     public void showLoadingBar(boolean isShow) {
@@ -202,29 +185,24 @@ public class MainActivity extends AppCompatActivity implements
         }
     }
 
-    @Override
-    public void showMessage(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
-    }
 
     @Override
     protected void onResume() {
         super.onResume();
-
-        // register connection status listener
         MyApp.getInstance().setConnectivityListener(this);
     }
 
     @Override
     public void onNetworkConnectionChanged(boolean isConnected) {
         if (!isConnected)
-            showSnackBar(getString(R.string.error_disconnected));
+            showMessage(ShowMessageType.SNACK,getString(R.string.error_disconnected));
+
     }
 
     private void init() {
-        parent_view = findViewById(R.id.parent_view);
-        drawerLayout = findViewById(R.id.drawer_layout);
-        toolbar_icon = findViewById(R.id.toolbar_icon);
+        parentView = findViewById(R.id.ctlParentView);
+        drawerLayout = findViewById(R.id.drawerLayout);
+        toolbarIcon = findViewById(R.id.imgToolbarIcon);
         toolbarTitle = findViewById(R.id.txtToolbar);
         loadingBar = findViewById(R.id.loadingBar);
     }
@@ -235,8 +213,7 @@ public class MainActivity extends AppCompatActivity implements
         slidingMenuFragment.attachFragment(this);
     }
 
-
-
+    
 }
 
 

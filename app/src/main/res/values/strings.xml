@@ -48,6 +48,8 @@ The terms used in this Privacy Policy have the same meanings as in our Terms and
     <string name="rate_to">What you think about ... </string>
     <string name="Save">Save</string>
     <string name="okay">OK</string>
+    <string name="submitted_rates">Rates Submitted Successfully</string>
+    <string name="some_problems_when_use_api">There was some problem ...</string>
 
     <!--ToolBarTitles-->
     <string name="login_toolbar_txt">Login methods</string>
@@ -55,7 +57,7 @@ The terms used in this Privacy Policy have the same meanings as in our Terms and
     <string name="home_toolbar_txt">Home</string>
     <string name="about_us_toolbar_txt">About Us</string>
     <string name="privacy_policy_toolbar_txt">Privacy Policy</string>
-    <string name="rate_toolbar">Rate user</string>
+    <string name="rate_toolbar">Rate To Friends</string>
     <string name="login_with_mobile">Login With Phone Number</string>
 
 
@@ -64,7 +66,7 @@ The terms used in this Privacy Policy have the same meanings as in our Terms and
     <string name="error_disconnected">Disconnected</string>
 
 
-    <string name="network_connection">Please check your connection</string>
-    <string name="code_receive_error">you should get a code...</string>
+    <string name="network_connection_error">Please check your connection</string>
+    <string name="error_receive_code">you should get a code...</string>
 </resources>
 

@@ -67,7 +67,7 @@ public class RateListAdapter extends RecyclerView.Adapter<RateListAdapter.RateHo
         private AppCompatRatingBar rating;
         public RateHolder(@NonNull View itemView) {
             super(itemView);
-            attribute=itemView.findViewById(R.id.attribute);
+            attribute=itemView.findViewById(R.id.txtAttribute);
             rating=itemView.findViewById(R.id.rating);
         }
 

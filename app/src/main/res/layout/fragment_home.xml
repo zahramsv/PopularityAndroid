@@ -69,7 +69,6 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardElevation="@dimen/spacing_small"
             android:layout_marginTop="@dimen/spacing_small">
 
             <LinearLayout
@@ -91,13 +90,13 @@
                     android:text="@string/your_friends"
                     android:layout_gravity="center"
                     android:textSize="@dimen/spacing_large"
-                    android:textColor="@color/black"/>
+                    android:textColor="@color/green_900"/>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
 
         <androidx.recyclerview.widget.RecyclerView
-            android:layout_marginTop="@dimen/spacing_large"
+            android:layout_marginTop="@dimen/spacing_middle"
             android:orientation="horizontal"
             tools:listitem="@layout/item_friend"
             android:id="@+id/rvFriends"
@@ -117,7 +116,7 @@
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
             android:layout_margin="@dimen/spacing_middle"
             android:visibility="gone"

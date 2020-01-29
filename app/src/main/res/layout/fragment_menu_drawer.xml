@@ -25,7 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_margin="@dimen/spacing_large"
+            android:layout_margin="@dimen/spacing_middle"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
@@ -36,11 +36,12 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/name"
+                    android:id="@+id/txtName"
+                    android:layout_marginTop="@dimen/spacing_large"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/spacing_medium"
-                    android:text="Zahra Mousavi"
+                    tools:text="Zahra Mousavi"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
 
 

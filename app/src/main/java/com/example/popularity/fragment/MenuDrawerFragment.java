@@ -17,37 +17,34 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.popularity.R;
+import com.example.popularity.utils.ShowMessageType;
 
 
 public class MenuDrawerFragment extends BaseFragment {
 
     private ActionBarDrawerToggle drawerToogle;
     private DrawerLayout drawerLayout;
-    private ViewGroup layout;
-    private AppCompatButton rateUs, privacyPolicy, settings, aboutUs;
+    private View view;
+    private AppCompatButton btnRateUs, btnPrivacyPolicy, btnSettings, btnAboutUs;
 
-    public MenuDrawerFragment() {
 
-    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        layout = (ViewGroup) inflater.inflate(R.layout.fragment_menu_drawer, container, false);
-        TextView username = layout.findViewById(R.id.name);
+        view = inflater.inflate(R.layout.fragment_menu_drawer, container, false);
+        TextView username = view.findViewById(R.id.txtName);
         SharedPreferences preferences=getActivity().getSharedPreferences("user_data",Context.MODE_PRIVATE);
         username.setText(preferences.getString("full_name",null));
-        return layout;
+        return view;
     }
-
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        define();
+        init();
     }
 
     public void setUp(final DrawerLayout dl, final Toolbar toolbar) {
         drawerLayout = dl;
-
         drawerToogle = new ActionBarDrawerToggle(getActivity(), dl, toolbar, R.string.drawer_open, R.string.drawer_close) {
 
             @Override
@@ -67,31 +64,31 @@ public class MenuDrawerFragment extends BaseFragment {
 
     }
 
-    private void define() {
+    private void init() {
 
-        aboutUs = layout.findViewById(R.id.btnAboutUs);
-        rateUs = layout.findViewById(R.id.btnRateUs);
-        settings = layout.findViewById(R.id.btnSettings);
-        privacyPolicy = layout.findViewById(R.id.btnPrivacyPolicy);
+        btnAboutUs = view.findViewById(R.id.btnAboutUs);
+        btnRateUs = view.findViewById(R.id.btnRateUs);
+        btnSettings = view.findViewById(R.id.btnSettings);
+        btnPrivacyPolicy = view.findViewById(R.id.btnPrivacyPolicy);
 
 
-        aboutUs.setOnClickListener(v -> {
+        btnAboutUs.setOnClickListener(v -> {
             if (baseListener != null) {
                 baseListener.openFragment(AboutUsFragment.newInstance(), true, null);
             }
         });
 
-        privacyPolicy.setOnClickListener(v -> {
+        btnPrivacyPolicy.setOnClickListener(v -> {
             if (baseListener != null) {
                 baseListener.openFragment(PrivacyPolicyFragment.newInstance(), true, null);
             }
         });
 
-        rateUs.setOnClickListener(view -> {
-            baseListener.showMessage(getString(R.string.error_under_construction));
+        btnRateUs.setOnClickListener(view -> {
+            baseListener.showMessage(ShowMessageType.SNACK,getString(R.string.error_under_construction));
         });
 
-        settings.setOnClickListener(view -> {
+        btnSettings.setOnClickListener(view -> {
             if (baseListener != null) {
                 baseListener.openFragment(SettingFragment.newInstance(), true, null);
             }

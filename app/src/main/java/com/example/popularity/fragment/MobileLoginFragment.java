@@ -18,6 +18,7 @@ import com.example.popularity.repository.UserRepository;
 import com.example.popularity.utils.ConnectivityReceiver;
 import com.example.popularity.utils.RetrofitInstance;
 import com.example.popularity.utils.SavePref;
+import com.example.popularity.utils.ShowMessageType;
 import com.example.popularity.utils.ToolbarKind;
 
 import retrofit2.Call;
@@ -73,24 +74,24 @@ public class MobileLoginFragment extends BaseFragment implements
                             if (response.body().getData().isRegistered) {
                                 loginToServer();
                             } else {
-                                baseListener.showSnackBar("Some Problem");
+                                baseListener.showMessage(ShowMessageType.TOAST,getString(R.string.some_problems_when_use_api));
                             }
                         }
 
                         @Override
                         public void onFailure(Call<BaseResponse<VerifySmsResponseData>> call, Throwable t) {
-                            baseListener.showMessage(t.getMessage());
+                            baseListener.showMessage(ShowMessageType.TOAST,t.getMessage());
                         }
                     });
                 } else {
-                    baseListener.showSnackBar(getString(R.string.code_receive_error));
+                    baseListener.showMessage(ShowMessageType.TOAST,getString(R.string.error_receive_code));
                 }
             } else {
-                baseListener.showSnackBar(getString(R.string.error_api_call));
+                baseListener.showMessage(ShowMessageType.TOAST,getString(R.string.error_api_call));
             }
 
         } else {
-            baseListener.showSnackBar(getString(R.string.network_connection));
+            baseListener.showMessage(ShowMessageType.TOAST,getString(R.string.network_connection_error));
         }
     }
 
@@ -110,7 +111,7 @@ public class MobileLoginFragment extends BaseFragment implements
                 }
             });
         } else {
-            baseListener.showSnackBar("Please check your connection");
+            baseListener.showMessage(ShowMessageType.SNACK,getString(R.string.network_connection_error));
         }
     }
 
@@ -155,6 +156,6 @@ public class MobileLoginFragment extends BaseFragment implements
     @Override
     public void onFailure(String message) {
         baseListener.showLoadingBar(false);
-        baseListener.showMessage(message);
+        baseListener.showMessage(ShowMessageType.TOAST,message);
     }
 }

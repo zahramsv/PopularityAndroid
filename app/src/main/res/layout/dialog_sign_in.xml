@@ -20,7 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:src="@drawable/instagram_ic"
+            android:src="@drawable/instagram_icon"
              />
 
         <View
@@ -41,7 +41,7 @@
             android:textColor="@color/blue_grey_200" />
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/username"
+            android:id="@+id/txtName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="-4dp"
@@ -66,7 +66,7 @@
             android:textColor="@color/blue_grey_200" />
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/password"
+            android:id="@+id/edtTxtPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="-4dp"
@@ -84,7 +84,7 @@
             android:layout_height="@dimen/spacing_mxlarge" />
 
         <Button
-            android:id="@+id/signIn_btn"
+            android:id="@+id/btnSignIn"
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:layout_marginLeft="-4dp"
