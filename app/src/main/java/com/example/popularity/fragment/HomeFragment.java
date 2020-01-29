@@ -23,7 +23,6 @@ import com.example.popularity.model.Friend;
 import com.example.popularity.model.Rate;
 import com.example.popularity.model.User;
 import com.example.popularity.model.UserPopularity;
-import com.example.popularity.repository.UserFriendsRepository;
 import com.example.popularity.utils.ToolbarKind;
 
 import java.util.ArrayList;

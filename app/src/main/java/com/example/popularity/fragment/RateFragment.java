@@ -31,7 +31,6 @@ import retrofit2.Retrofit;
 
 public class RateFragment extends BaseFragment {
 
-
     private Friend friend;
     private User user;
     private View view;

@@ -1,33 +1,23 @@
 package com.example.popularity.fragment;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.widget.Button;
 
-import com.example.popularity.model.BaseResponse;
-import com.example.popularity.myInterface.ApiServices;
-import com.example.popularity.logic.MockPresenter;
+import com.example.popularity.R;
+import com.example.popularity.model.Login;
 import com.example.popularity.model.User;
 import com.example.popularity.model.UserPopularity;
-import com.example.popularity.R;
 import com.example.popularity.repository.UserRepository;
-import com.example.popularity.utils.RetrofitInstance;
 import com.example.popularity.utils.SavePref;
 import com.example.popularity.utils.ShowMessageType;
 import com.example.popularity.utils.ToolbarKind;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-
 public class LoginFragment extends BaseFragment
-    implements UserRepository.UserRepoListener
-{
+        implements UserRepository.UserRepoListener {
 
 
     private Button loginWithPhoneNumber, loginWithMockData;
@@ -49,7 +39,7 @@ public class LoginFragment extends BaseFragment
         init(view);
 
         loginWithPhoneNumber.setOnClickListener(view -> {
-            baseListener.openFragment(new MobileLoginFragment(),true,null);
+            baseListener.openFragment(new MobileLoginFragment(), true, null);
         });
         loginWithMockData.setOnClickListener(view -> {
             baseListener.showLoadingBar(true);
@@ -67,12 +57,9 @@ public class LoginFragment extends BaseFragment
         loginWithPhoneNumber = view.findViewById(R.id.btnLoginWithMobile);
     }
 
-
-    private MockPresenter mockPresenter = new MockPresenter();
-
     private void loginToServer() {
         UserRepository userRepository = new UserRepository();
-        userRepository.loginToServer(mockPresenter.GetFirstUserLoginData(), this);
+        userRepository.loginToServer(new Login().getMockData(), this);
     }
 
     @Override
@@ -84,7 +71,7 @@ public class LoginFragment extends BaseFragment
     public void onDone(User user) {
         UserPopularity userPopularity = user.getRates_summary_sum();
         SavePref savePref = new SavePref();
-        user.setSocial_primary((mockPresenter.GetFirstUserLoginData().getSocial_primary()) + "");
+        user.setSocial_primary(new Login().getMockData().getSocial_primary());
         savePref.SaveUser(getContext(), user, userPopularity);
 
         baseListener.setMainUser(user);
@@ -93,6 +80,6 @@ public class LoginFragment extends BaseFragment
 
     @Override
     public void onFailure(String message) {
-        baseListener.showMessage(ShowMessageType.SNACK,message);
+        baseListener.showMessage(ShowMessageType.SNACK, message);
     }
 }

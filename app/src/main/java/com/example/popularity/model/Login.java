@@ -16,6 +16,16 @@ public class Login {
         this.avatar_url = avatar_url;
     }
 
+    public Login getMockData() {
+        return new Login(
+                "401",
+                2,
+                "mohad",
+                "Asqar Farhadi",
+                "image1.jpg"
+        );
+    }
+
 
     public String getSocial_primary() {
         return social_primary;
