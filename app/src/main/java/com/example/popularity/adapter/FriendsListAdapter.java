@@ -50,16 +50,11 @@ public class FriendsListAdapter extends RecyclerView.Adapter<FriendsListAdapter.
     public void onBindViewHolder(@NonNull FriendsHolder friendsHolder, int i) {
 
         if (friendsHolder instanceof FriendsHolder) {
-            FriendsHolder view = (FriendsHolder) friendsHolder;
+            FriendsHolder view = friendsHolder;
             final Friend obj = friends.get(i);
             view.username.setText(obj.getName());
 
-            friendsHolder.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    listener.onItemClick(i);
-                }
-            });
+            friendsHolder.itemView.setOnClickListener(view1 -> listener.onItemClick(i));
         }
     }
 

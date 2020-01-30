@@ -12,6 +12,7 @@ import com.example.popularity.model.Login;
 import com.example.popularity.model.User;
 import com.example.popularity.model.UserPopularity;
 import com.example.popularity.repository.UserRepository;
+import com.example.popularity.utils.LoginKind;
 import com.example.popularity.utils.SavePref;
 import com.example.popularity.utils.ShowMessageType;
 import com.example.popularity.utils.ToolbarKind;
@@ -39,9 +40,11 @@ public class LoginFragment extends BaseFragment
         init(view);
 
         loginWithPhoneNumber.setOnClickListener(view -> {
+            baseListener.setLoginKind(LoginKind.SMS);
             baseListener.openFragment(new MobileLoginFragment(), true, null);
         });
         loginWithMockData.setOnClickListener(view -> {
+            baseListener.setLoginKind(LoginKind.MOCK);
             baseListener.showLoadingBar(true);
             loginToServer();
         });
@@ -69,6 +72,7 @@ public class LoginFragment extends BaseFragment
 
     @Override
     public void onDone(User user) {
+        baseListener.showLoadingBar(false);
         UserPopularity userPopularity = user.getRates_summary_sum();
         SavePref savePref = new SavePref();
         user.setSocial_primary(new Login().getMockData().getSocial_primary());

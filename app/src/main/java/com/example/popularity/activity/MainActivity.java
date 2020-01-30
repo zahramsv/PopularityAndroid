@@ -21,6 +21,7 @@ import com.example.popularity.fragment.SplashFragment;
 import com.example.popularity.model.User;
 import com.example.popularity.myInterface.MainActivityTransaction;
 import com.example.popularity.utils.ConnectivityReceiver;
+import com.example.popularity.utils.LoginKind;
 import com.example.popularity.utils.MyApp;
 import com.example.popularity.utils.ShowMessageType;
 import com.example.popularity.utils.ToolbarKind;
@@ -73,6 +74,19 @@ public class MainActivity extends AppCompatActivity implements
                Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
                break;
        }
+    }
+
+
+    private LoginKind loginKind = LoginKind.MOCK;
+
+    @Override
+    public void setLoginKind(LoginKind kind) {
+        loginKind = kind;
+    }
+
+    @Override
+    public LoginKind getLoginKind() {
+        return loginKind;
     }
 
     @Override

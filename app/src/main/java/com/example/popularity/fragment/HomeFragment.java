@@ -23,19 +23,22 @@ import com.example.popularity.model.Friend;
 import com.example.popularity.model.Rate;
 import com.example.popularity.model.User;
 import com.example.popularity.model.UserPopularity;
+import com.example.popularity.utils.LoginKind;
 import com.example.popularity.utils.ToolbarKind;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.popularity.utils.Configs.BUNDLE_FRIEND;
+import static com.example.popularity.utils.Configs.REQUEST_READ_CONTACTS;
+
 public class HomeFragment extends BaseFragment {
 
 
     private RecyclerView favoritesRecyclerView, friendsRecyclerView;
-    List<Rate> rates = new ArrayList<>();
-    private List<Friend> phoneContacts = new ArrayList<>();
+    private List<Rate> rates = new ArrayList<>();
+    private List<Friend> friendsList = new ArrayList<>();
     private HomePresenter homePresenter;
-    public static final int REQUEST_READ_CONTACTS = 79;
 
 
     @Override
@@ -50,34 +53,37 @@ public class HomeFragment extends BaseFragment {
 
         homePresenter = new HomePresenter(getContext());
         baseListener.changeToolbar(ToolbarKind.HOME, "");
-        if (ActivityCompat.checkSelfPermission(getActivity(), android.Manifest.permission.READ_CONTACTS)
-                == PackageManager.PERMISSION_GRANTED) {
-           phoneContacts= homePresenter.getFriends();
-        } else {
-            requestPermission();
+        if(baseListener.getLoginKind()== LoginKind.SMS)
+        {
+            if (ActivityCompat.checkSelfPermission(getActivity(), android.Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_GRANTED) {
+                friendsList= homePresenter.getFriends(LoginKind.SMS, "");
+            } else {
+                requestPermission();
+            }
+        }
+        if (baseListener.getLoginKind()==LoginKind.MOCK)
+        {
+            friendsList = homePresenter.getFriends(LoginKind.MOCK, baseListener.getMainUser().getSocial_primary());
         }
     }
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         init(view);
         User user = baseListener.getMainUser();
         if (user != null) {
             UserPopularity userPopularity = user.getRates_summary_sum();
-            FriendsListAdapter friendsListAdapter = new FriendsListAdapter(phoneContacts, getActivity());
+            FriendsListAdapter friendsListAdapter = new FriendsListAdapter(friendsList, getActivity());
             friendsRecyclerView.setAdapter(friendsListAdapter);
             // List<Friend> finalFriendList = friendList;
             friendsListAdapter.setOnItemClickListener(pos -> {
-                Friend friend = phoneContacts.get(pos);
+                Friend friend = friendsList.get(pos);
                 Bundle bundle1 = new Bundle();
-                bundle1.putSerializable("Friend", friend);
-                bundle1.putSerializable("User", user);
+                bundle1.putSerializable(BUNDLE_FRIEND, friend);
                 baseListener.openFragment(new RateFragment(), true, bundle1);
-
             });
 
 
@@ -120,7 +126,7 @@ public class HomeFragment extends BaseFragment {
             case REQUEST_READ_CONTACTS: {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
-                    homePresenter.getFriends();
+                    friendsList = homePresenter.getFriends(LoginKind.SMS, "");
                 } else {
                     // permission denied,Disable the
                     // functionality that depends on this permission.
