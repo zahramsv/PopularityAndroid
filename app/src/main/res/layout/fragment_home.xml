@@ -59,7 +59,7 @@
           </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-       <!-- <View
+       <!-- <RateView
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginTop="@dimen/spacing_large"
