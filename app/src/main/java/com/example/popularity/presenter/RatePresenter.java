@@ -1,9 +1,6 @@
-package com.example.popularity.logic;
+package com.example.popularity.presenter;
 
 import android.os.Handler;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.example.popularity.R;
 

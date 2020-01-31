@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.popularity.R;
-import com.example.popularity.logic.SplashPresenter;
+import com.example.popularity.presenter.SplashPresenter;
 import com.example.popularity.model.User;
 import com.example.popularity.mvp.SplashMvp;
 import com.example.popularity.utils.ToolbarKind;

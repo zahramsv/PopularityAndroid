@@ -11,21 +11,26 @@ import com.example.popularity.utils.ToolbarKind;
 
 public interface LoginFragmentMvp {
 
-    interface View{
+    interface View {
 
         void openFragment(BaseFragment fragment, Boolean addStack, Bundle bundle);
-        void changeToolbar(ToolbarKind kind,String title);
+
+        void changeToolbar(ToolbarKind kind, String title);
+
         void showLoadingBar(boolean isShow);
+
         void showMessage(ShowMessageType messageType, String message);
+
         Context getViewContext();
+
         void setMainUser(User user);
+
         void setLoginKind(LoginKind kind);
     }
 
 
-    interface Presenter
-    {
-        void loginToServer();
-
+    interface Presenter {
+        void setLoginKind(LoginKind kind);
+        void loginUser();
     }
 }

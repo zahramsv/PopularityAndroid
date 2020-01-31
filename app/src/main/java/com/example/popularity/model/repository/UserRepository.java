@@ -1,4 +1,4 @@
-package com.example.popularity.repository;
+package com.example.popularity.model.repository;
 
 import android.util.Log;
 

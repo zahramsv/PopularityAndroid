@@ -11,19 +11,20 @@ import android.widget.Button;
 import androidx.annotation.Nullable;
 
 import com.example.popularity.R;
-import com.example.popularity.logic.LoginPresenter;
 import com.example.popularity.model.Login;
 import com.example.popularity.model.User;
 import com.example.popularity.model.UserPopularity;
+import com.example.popularity.model.repository.UserRepository;
 import com.example.popularity.mvp.LoginFragmentMvp;
-import com.example.popularity.repository.UserRepository;
+import com.example.popularity.presenter.LoginPresenter;
 import com.example.popularity.utils.LoginKind;
 import com.example.popularity.utils.SavePref;
 import com.example.popularity.utils.ShowMessageType;
 import com.example.popularity.utils.ToolbarKind;
 
-public class LoginFragment extends BaseFragment
-        implements UserRepository.UserRepoListener, LoginFragmentMvp.View {
+public class LoginFragment extends BaseFragment implements
+        LoginFragmentMvp.View
+{
 
 
     private Button loginWithPhoneNumber, loginWithMockData;
@@ -33,34 +34,31 @@ public class LoginFragment extends BaseFragment
     @Override
     public void onHiddenChanged(boolean hidden) {
         if (!hidden)
-            baseListener.changeToolbar(ToolbarKind.HOME, getString(R.string.login_toolbar_txt));
-
+            changeToolbar(ToolbarKind.HOME, getString(R.string.login_toolbar_txt));
     }
 
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        presenter=new LoginPresenter(this);
+        presenter = new LoginPresenter(this);
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-
-        changeToolbar(ToolbarKind.HOME,getString(R.string.login_toolbar_txt));
+        changeToolbar(ToolbarKind.HOME, getString(R.string.login_toolbar_txt));
         view = inflater.inflate(R.layout.fragment_login, container, false);
         init(view);
 
         loginWithPhoneNumber.setOnClickListener(view -> {
-            setLoginKind(LoginKind.SMS);
+            presenter.setLoginKind(LoginKind.SMS);
             openFragment(new MobileLoginFragment(), true, null);
         });
         loginWithMockData.setOnClickListener(view -> {
-            setLoginKind(LoginKind.MOCK);
+            presenter.setLoginKind(LoginKind.MOCK);
             showLoadingBar(true);
-            presenter.loginToServer();
+            presenter.loginUser();
         });
 
 
@@ -69,11 +67,10 @@ public class LoginFragment extends BaseFragment
     }
 
 
-    public void init(View view) {
+    private void init(View view) {
         loginWithMockData = view.findViewById(R.id.btnLoginWihMockData);
         loginWithPhoneNumber = view.findViewById(R.id.btnLoginWithMobile);
     }
-
 
 
     @Override
@@ -82,32 +79,13 @@ public class LoginFragment extends BaseFragment
     }
 
     @Override
-    public void onDone(User user) {
-        baseListener.showLoadingBar(false);
-        UserPopularity userPopularity = user.getRates_summary_sum();
-        SavePref savePref = new SavePref();
-        user.setSocial_primary(new Login().getMockData().getSocial_primary());
-        savePref.SaveUser(getContext(), user, userPopularity);
-
-        baseListener.setMainUser(user);
-        baseListener.openFragment(new HomeFragment(), true, null);
-    }
-
-    @Override
-    public void onFailure(String message) {
-        baseListener.showMessage(ShowMessageType.SNACK, message);
-    }
-
-    @Override
     public void openFragment(BaseFragment fragment, Boolean addStack, Bundle bundle) {
-
-        baseListener.openFragment(fragment,addStack,bundle);
+        baseListener.openFragment(fragment, addStack, bundle);
     }
 
     @Override
     public void changeToolbar(ToolbarKind kind, String title) {
-
-        baseListener.changeToolbar(kind,title);
+        baseListener.changeToolbar(kind, title);
     }
 
     @Override
@@ -117,7 +95,7 @@ public class LoginFragment extends BaseFragment
 
     @Override
     public void showMessage(ShowMessageType messageType, String message) {
-        baseListener.showMessage(messageType,message);
+        baseListener.showMessage(messageType, message);
     }
 
     @Override

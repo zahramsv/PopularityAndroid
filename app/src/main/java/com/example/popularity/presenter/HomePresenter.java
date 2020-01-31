@@ -1,9 +1,9 @@
-package com.example.popularity.logic;
+package com.example.popularity.presenter;
 
 import android.content.Context;
 
 import com.example.popularity.model.Friend;
-import com.example.popularity.repository.FriendRepository;
+import com.example.popularity.model.repository.FriendRepository;
 import com.example.popularity.utils.LoginKind;
 
 import java.util.List;

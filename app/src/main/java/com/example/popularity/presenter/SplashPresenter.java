@@ -1,4 +1,4 @@
-package com.example.popularity.logic;
+package com.example.popularity.presenter;
 
 import android.content.Context;
 import android.content.SharedPreferences;

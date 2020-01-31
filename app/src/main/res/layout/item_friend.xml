@@ -1,68 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="80dp"
     android:layout_height="130dp"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_marginBottom="@dimen/spacing_small"
     android:layout_marginLeft="@dimen/spacing_xmedium"
-    android:layout_marginRight="@dimen/spacing_xmedium"
     android:layout_marginTop="@dimen/spacing_middle"
-    android:visibility="visible"
-    app:cardCornerRadius="3dp"
-    app:cardElevation="2dp"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_marginRight="@dimen/spacing_xmedium"
+    android:layout_marginBottom="@dimen/spacing_small"
+    app:cardCornerRadius="3dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="@dimen/spacing_medium">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imgUserProfile"
+            android:layout_width="57dp"
+            android:layout_height="57dp"
+            android:layout_marginTop="@dimen/spacing_small" />
 
 
+        <!-- <de.hdodenhof.circleimageview.CircleImageView
+             xmlns:app="http://schemas.android.com/apk/res-auto"
+             android:id="@+id/profile_image"
+             android:layout_width="96dp"
+             android:layout_height="96dp"
+             android:src="@drawable/photo_female_1"
+             app:civ_border_width="2dp"
+             app:civ_border_color="#FF000000"/>-->
 
 
-        <LinearLayout
+        <ImageView
+            android:id="@+id/rate"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/ic_rate"
+            android:tint="@color/red_500"/>
 
-            android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/txtName"
+            android:layout_width="match_parent"
+            android:gravity="center"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:padding="@dimen/spacing_medium"
-            android:orientation="vertical">
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textColor="@color/grey_40"
+            tools:text="sara" />
 
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/imgUserProfile"
-                android:layout_width="57dp"
-                android:layout_height="57dp"
-                android:layout_marginTop="@dimen/spacing_small"
-                android:src="@drawable/photo_female_1" />
-
-
-
-           <!-- <de.hdodenhof.circleimageview.CircleImageView
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/profile_image"
-                android:layout_width="96dp"
-                android:layout_height="96dp"
-                android:src="@drawable/photo_female_1"
-                app:civ_border_width="2dp"
-                app:civ_border_color="#FF000000"/>-->
-
-
-
-            <ImageView
-                android:id="@+id/rate"
-                android:background="@drawable/ic_rate"
-               android:backgroundTint="@color/red_600"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                />
-
-            <TextView
-                android:id="@+id/txtName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:text="sara"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textColor="@color/grey_40" />
-
-
-
-
-        </LinearLayout>
-
+    </LinearLayout>
 </androidx.cardview.widget.CardView>

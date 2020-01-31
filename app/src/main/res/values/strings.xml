@@ -22,7 +22,7 @@
 
     <string name="drawer_open">open</string>
     <string name="drawer_close">close</string>
-    <string name="about_us_txt">Me And You \n Try To join Coding ...</string>
+    <string name="about_us_txt">Me And You \n Try To join Coding ..</string>
     <string name="privacy_policy_txt">[Developer/Company name] built the [App Name] app as [open source/free/freemium/ad-supported/commercial] app. This SERVICE is provided by [Developer/Company name] [at no cost] and is intended for use as is.
 
 This page is used to inform visitors regarding [my/our] policies with the collection, use, and disclosure of Personal Information if anyone decided to use [my/our] Service.
@@ -45,11 +45,11 @@ The terms used in this Privacy Policy have the same meanings as in our Terms and
     <string name="rate_personality">Personality</string>
     <string name="rate_trustworthy">Trustworthy</string>
     <string name="rate_popularity">Popularity</string>
-    <string name="rate_to">What you think about ... </string>
+    <string name="rate_to">What you think about .. </string>
     <string name="Save">Save</string>
     <string name="okay">OK</string>
     <string name="submitted_rates">Rates Submitted Successfully</string>
-    <string name="some_problems_when_use_api">There was some problem ...</string>
+    <string name="some_problems_when_use_api">There was some problem …</string>
 
     <!--ToolBarTitles-->
     <string name="login_toolbar_txt">Login methods</string>
@@ -67,7 +67,7 @@ The terms used in this Privacy Policy have the same meanings as in our Terms and
 
 
     <string name="network_connection_error">Please check your connection</string>
-    <string name="error_receive_code">you should get a code...</string>
+    <string name="error_receive_code">you should get a code..</string>
     <string name="rate_to_friend">Rate To:</string>
 </resources>
 

@@ -14,7 +14,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.popularity.R;
-import com.example.popularity.logic.RatePresenter;
+import com.example.popularity.presenter.RatePresenter;
 import com.example.popularity.model.Friend;
 import com.example.popularity.model.SubmitRate;
 import com.example.popularity.model.User;
