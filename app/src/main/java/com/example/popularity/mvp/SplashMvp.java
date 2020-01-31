@@ -10,10 +10,6 @@ public interface SplashMvp {
 
     interface View {
         Context getViewContext();
-
-        void setUserData(User user);
-
-        void openFragment(BaseFragment fragment, Boolean addStack, Bundle bundle);
     }
 
     interface Presenter {

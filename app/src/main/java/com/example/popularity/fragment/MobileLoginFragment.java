@@ -42,7 +42,7 @@ public class MobileLoginFragment extends BaseFragment
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        presenter = new MobileLoginPresenter(this);
+        presenter = new MobileLoginPresenter(this, baseListener);
     }
 
     @Override
@@ -71,28 +71,8 @@ public class MobileLoginFragment extends BaseFragment
     }
 
     @Override
-    public void showMessage(ShowMessageType messageType, String message) {
-        baseListener.showMessage(messageType, message);
-    }
-
-    @Override
     public Context getViewContext() {
         return getContext();
-    }
-
-    @Override
-    public void showLoadingBar(boolean isShow) {
-        baseListener.showLoadingBar(isShow);
-    }
-
-    @Override
-    public void setMainUser(User user) {
-        baseListener.setMainUser(user);
-    }
-
-    @Override
-    public void openFragment(BaseFragment fragment, Boolean addStack, Bundle bundle) {
-        baseListener.openFragment(fragment, addStack, bundle);
     }
 
 }

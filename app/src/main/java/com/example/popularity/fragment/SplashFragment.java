@@ -20,7 +20,7 @@ public class SplashFragment extends BaseFragment implements SplashMvp.View {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        presenter = new SplashPresenter(this);
+        presenter = new SplashPresenter(this, baseListener);
         presenter.getUserInfoAfterWait();
 
     }
@@ -34,16 +34,6 @@ public class SplashFragment extends BaseFragment implements SplashMvp.View {
     @Override
     public Context getViewContext() {
         return getActivity();
-    }
-
-    @Override
-    public void setUserData(User user) {
-        baseListener.setMainUser(user);
-    }
-
-    @Override
-    public void openFragment(BaseFragment fragment, Boolean addStack, Bundle bundle) {
-        baseListener.openFragment(fragment, addStack, bundle);
     }
 
 }

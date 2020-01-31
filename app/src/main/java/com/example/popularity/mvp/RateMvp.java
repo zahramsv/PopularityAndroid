@@ -17,7 +17,6 @@ public interface RateMvp {
     interface View {
         void comeBackToHomeAfterRateDone();
         Context getViewContext();
-        void showMessage(ShowMessageType messageType, String message);
     }
 
     interface Presenter {

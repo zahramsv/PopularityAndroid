@@ -34,7 +34,7 @@ public class RateFragment extends BaseFragment implements RateMvp.View {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        presenter = new RatePresenter(this);
+        presenter = new RatePresenter(this, baseListener);
     }
 
     @Override
@@ -94,11 +94,5 @@ public class RateFragment extends BaseFragment implements RateMvp.View {
     public Context getViewContext() {
         return getContext();
     }
-
-    @Override
-    public void showMessage(ShowMessageType messageType, String message) {
-        baseListener.showMessage(messageType, message);
-    }
-
 
 }

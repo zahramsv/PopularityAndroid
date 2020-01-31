@@ -8,6 +8,7 @@ import com.example.popularity.model.BaseResponse;
 import com.example.popularity.model.SubmitRate;
 import com.example.popularity.mvp.RateMvp;
 import com.example.popularity.myInterface.ApiServices;
+import com.example.popularity.myInterface.MainActivityTransaction;
 import com.example.popularity.utils.RetrofitInstance;
 import com.example.popularity.utils.ShowMessageType;
 
@@ -18,10 +19,12 @@ import retrofit2.Retrofit;
 
 public class RatePresenter implements RateMvp.Presenter {
 
-    RateMvp.View rateView;
+    private RateMvp.View rateView;
+    private MainActivityTransaction.Components baseComponents;
 
-    public RatePresenter(RateMvp.View rateView) {
+    public RatePresenter(RateMvp.View rateView, MainActivityTransaction.Components baseComponents) {
         this.rateView = rateView;
+        this.baseComponents = baseComponents;
     }
 
     @Override
@@ -33,9 +36,7 @@ public class RatePresenter implements RateMvp.Presenter {
         friendsRate.submitRateToFriend(submitRate).enqueue(new Callback<BaseResponse<String>>() {
             @Override
             public void onResponse(Call<BaseResponse<String>> call, Response<BaseResponse<String>> response) {
-
-
-                rateView.showMessage(ShowMessageType.TOAST, rateView.getViewContext().getString(R.string.submitted_rates));
+                baseComponents.showMessage(ShowMessageType.TOAST, rateView.getViewContext().getString(R.string.submitted_rates));
                 final Handler handler = new Handler();
                 handler.postDelayed(() -> {
                     rateView.comeBackToHomeAfterRateDone();
@@ -45,8 +46,7 @@ public class RatePresenter implements RateMvp.Presenter {
 
             @Override
             public void onFailure(Call<BaseResponse<String>> call, Throwable t) {
-
-                rateView.showMessage(ShowMessageType.TOAST,rateView.getViewContext().getString(R.string.some_problems_when_use_api));
+                baseComponents.showMessage(ShowMessageType.TOAST,rateView.getViewContext().getString(R.string.some_problems_when_use_api));
             }
         });
 

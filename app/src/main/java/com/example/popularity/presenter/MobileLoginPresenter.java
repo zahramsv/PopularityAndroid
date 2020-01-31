@@ -11,6 +11,7 @@ import com.example.popularity.model.VerifySmsResponseData;
 import com.example.popularity.model.repository.UserRepository;
 import com.example.popularity.mvp.MobileLoginMvp;
 import com.example.popularity.myInterface.ApiServices;
+import com.example.popularity.myInterface.MainActivityTransaction;
 import com.example.popularity.utils.ConnectivityReceiver;
 import com.example.popularity.utils.RetrofitInstance;
 import com.example.popularity.utils.SavePref;
@@ -33,9 +34,11 @@ public class MobileLoginPresenter implements
     private RetrofitInstance retrofitInstance;
     private Retrofit retrofit;
     private ApiServices apiServices;
+    private MainActivityTransaction.Components baseComponent;
 
-    public MobileLoginPresenter(MobileLoginMvp.View view) {
+    public MobileLoginPresenter(MobileLoginMvp.View view, MainActivityTransaction.Components baseComponent) {
         this.view = view;
+        this.baseComponent = baseComponent;
         retrofitInstance = new RetrofitInstance();
         retrofit = retrofitInstance.getRetrofitInstance();
         apiServices = retrofit.create(ApiServices.class);
@@ -63,18 +66,18 @@ public class MobileLoginPresenter implements
 
                         @Override
                         public void onFailure(Call<BaseResponse<VerifySmsResponseData>> call, Throwable t) {
-                            view.showMessage(ShowMessageType.TOAST, t.getMessage());
+                            baseComponent.showMessage(ShowMessageType.TOAST, t.getMessage());
                         }
                     });
                 } else {
-                    view.showMessage(ShowMessageType.TOAST, view.getViewContext().getString(R.string.error_receive_code));
+                    baseComponent.showMessage(ShowMessageType.TOAST, view.getViewContext().getString(R.string.error_receive_code));
                 }
             } else {
-                view.showMessage(ShowMessageType.TOAST, view.getViewContext().getString(R.string.error_api_call));
+                baseComponent.showMessage(ShowMessageType.TOAST, view.getViewContext().getString(R.string.error_api_call));
             }
 
         } else {
-            view.showMessage(ShowMessageType.TOAST, view.getViewContext().getString(R.string.network_connection_error));
+            baseComponent.showMessage(ShowMessageType.TOAST, view.getViewContext().getString(R.string.network_connection_error));
         }
     }
 
@@ -93,17 +96,17 @@ public class MobileLoginPresenter implements
 
                 @Override
                 public void onFailure(Call<BaseResponse> call, Throwable t) {
-                    view.showMessage(ShowMessageType.SNACK, view.getViewContext().getString(R.string.some_problems_when_use_api));
+                    baseComponent.showMessage(ShowMessageType.SNACK, view.getViewContext().getString(R.string.some_problems_when_use_api));
                 }
             });
         } else {
-            view.showMessage(ShowMessageType.SNACK, view.getViewContext().getString(R.string.network_connection_error));
+            baseComponent.showMessage(ShowMessageType.SNACK, view.getViewContext().getString(R.string.network_connection_error));
         }
     }
 
     @Override
     public void loginToServer() {
-        view.showLoadingBar(true);
+        baseComponent.showLoadingBar(true);
         UserRepository userRepository = new UserRepository();
         userRepository.loginToServer(getLoginInfo(), this);
 
@@ -122,20 +125,20 @@ public class MobileLoginPresenter implements
 
     @Override
     public void onDone(User user) {
-        view.showLoadingBar(false);
+        baseComponent.showLoadingBar(false);
 
         UserPopularity userPopularity = user.getRates_summary_sum();
         SavePref savePref = new SavePref();
         user.setSocial_primary(userMobile);
         savePref.SaveUser(view.getViewContext(), user, userPopularity);
-        view.setMainUser(user);
-        view.openFragment(new HomeFragment(), true, null);
+        baseComponent.setMainUser(user);
+        baseComponent.openFragment(new HomeFragment(), true, null);
     }
 
     @Override
     public void onFailure(String message) {
-        view.showLoadingBar(false);
-        view.showMessage(ShowMessageType.TOAST, message);
+        baseComponent.showLoadingBar(false);
+        baseComponent.showMessage(ShowMessageType.TOAST, message);
     }
 
 

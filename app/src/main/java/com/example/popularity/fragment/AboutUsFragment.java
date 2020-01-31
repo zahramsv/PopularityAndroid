@@ -27,26 +27,21 @@ public class AboutUsFragment extends BaseFragment implements AboutUsMvp.View {
     @Override
     public void onHiddenChanged(boolean hidden) {
         if (!hidden)
-            changeToolbar(ToolbarKind.BACK, getString(R.string.about_us_toolbar_txt));
+            baseListener.changeToolbar(ToolbarKind.BACK, getString(R.string.about_us_toolbar_txt));
     }
 
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        presenter = new AboutUsPresenter(this);
+        presenter = new AboutUsPresenter(this, baseListener);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        changeToolbar(ToolbarKind.BACK, getString(R.string.about_us_toolbar_txt));
+        baseListener.changeToolbar(ToolbarKind.BACK, getString(R.string.about_us_toolbar_txt));
         view = inflater.inflate(R.layout.fragment_about_us, container, false);
         return view;
-    }
-
-    @Override
-    public void changeToolbar(ToolbarKind kind, String title) {
-        baseListener.changeToolbar(kind, title);
     }
 
     @Override

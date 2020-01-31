@@ -11,16 +11,7 @@ import com.example.popularity.utils.ShowMessageType;
 public interface MobileLoginMvp {
 
     interface View {
-        void showMessage(ShowMessageType messageType, String message);
-
         Context getViewContext();
-
-        void showLoadingBar(boolean isShow);
-
-        void setMainUser(User user);
-
-        void openFragment(BaseFragment fragment, Boolean addStack, Bundle bundle);
-
     }
 
     interface Presenter {

@@ -19,7 +19,9 @@ import com.example.popularity.fragment.BaseFragment;
 import com.example.popularity.fragment.MenuDrawerFragment;
 import com.example.popularity.fragment.SplashFragment;
 import com.example.popularity.model.User;
+import com.example.popularity.mvp.MainMvp;
 import com.example.popularity.myInterface.MainActivityTransaction;
+import com.example.popularity.presenter.MainPresenter;
 import com.example.popularity.utils.ConnectivityReceiver;
 import com.example.popularity.utils.LoginKind;
 import com.example.popularity.utils.MyApp;
@@ -29,19 +31,22 @@ import com.google.android.material.snackbar.Snackbar;
 
 
 public class MainActivity extends AppCompatActivity implements
-        MainActivityTransaction
-        , ConnectivityReceiver.ConnectivityReceiverListener {
+        MainActivityTransaction.Components
+        , ConnectivityReceiver.ConnectivityReceiverListener
+    , MainMvp.View
+{
     private TextView toolbarTitle;
     private DrawerLayout drawerLayout;
     private ProgressBar loadingBar;
-    private User mainUser;
     private ImageView toolbarIcon;
     private View parentView;
+    private MainMvp.Presenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        presenter = new MainPresenter();
         init();
         initNavigationDrawer();
         openFragment(new SplashFragment(), false, null);
@@ -49,44 +54,41 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public User getMainUser() {
-        return mainUser;
+        return presenter.getMainUser();
     }
 
     @Override
     public void setMainUser(User mainUser) {
-        this.mainUser = mainUser;
+        presenter.setMainUser(mainUser);
     }
-
-    @Override
-    public void showMessage(ShowMessageType messageType, String message) {
-       switch (messageType)
-       {
-           case SNACK:
-               Snackbar snackbar = Snackbar.make(parentView, message, Snackbar.LENGTH_LONG);
-               snackbar.setAction(getString(R.string.okay), view -> {
-                   snackbar.dismiss();
-                   //Snackbar.make(parentView, "UNDO CLICKED!", Snackbar.LENGTH_SHORT).show();
-               });
-               snackbar.show();
-               break;
-
-           case TOAST:
-               Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
-               break;
-       }
-    }
-
-
-    private LoginKind loginKind = LoginKind.MOCK;
 
     @Override
     public void setLoginKind(LoginKind kind) {
-        loginKind = kind;
+        presenter.setLoginKind(kind);
     }
 
     @Override
     public LoginKind getLoginKind() {
-        return loginKind;
+        return presenter.getLoginKind();
+    }
+
+    @Override
+    public void showMessage(ShowMessageType messageType, String message) {
+        switch (messageType)
+        {
+            case SNACK:
+                Snackbar snackbar = Snackbar.make(parentView, message, Snackbar.LENGTH_LONG);
+                snackbar.setAction(getString(R.string.okay), view -> {
+                    snackbar.dismiss();
+                    //Snackbar.make(parentView, "UNDO CLICKED!", Snackbar.LENGTH_SHORT).show();
+                });
+                snackbar.show();
+                break;
+
+            case TOAST:
+                Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+                break;
+        }
     }
 
     @Override

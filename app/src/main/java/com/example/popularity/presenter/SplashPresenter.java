@@ -11,6 +11,7 @@ import com.example.popularity.model.BaseResponse;
 import com.example.popularity.model.User;
 import com.example.popularity.mvp.SplashMvp;
 import com.example.popularity.myInterface.ApiServices;
+import com.example.popularity.myInterface.MainActivityTransaction;
 import com.example.popularity.utils.RetrofitInstance;
 
 import retrofit2.Call;
@@ -21,9 +22,11 @@ import retrofit2.Retrofit;
 public class SplashPresenter implements SplashMvp.Presenter {
 
     private SplashMvp.View view;
+    private MainActivityTransaction.Components baseComponent;
 
-    public SplashPresenter(SplashMvp.View view) {
+    public SplashPresenter(SplashMvp.View view, MainActivityTransaction.Components baseComponent) {
         this.view = view;
+        this.baseComponent = baseComponent;
     }
 
     @Override
@@ -52,10 +55,10 @@ public class SplashPresenter implements SplashMvp.Presenter {
                     assert response.body() != null;
                     BaseResponse<User> result = response.body();
                     if (result.getCode() == 200) {
-                        view.setUserData(result.getData());
-                        view.openFragment(new HomeFragment(), false, null);
+                        baseComponent.setMainUser(result.getData());
+                        baseComponent.openFragment(new HomeFragment(), false, null);
                     } else {
-                        view.openFragment(new LoginFragment(), false, null);
+                        baseComponent.openFragment(new LoginFragment(), false, null);
                     }
                 }
 
@@ -68,7 +71,7 @@ public class SplashPresenter implements SplashMvp.Presenter {
 
 
         } else {
-            view.openFragment(new LoginFragment(), false, null);
+            baseComponent.openFragment(new LoginFragment(), false, null);
         }
         Log.i("app_tag", token + "");
     }

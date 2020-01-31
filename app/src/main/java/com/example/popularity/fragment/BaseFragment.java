@@ -2,16 +2,15 @@ package com.example.popularity.fragment;
 
 import androidx.fragment.app.Fragment;
 
-import com.example.popularity.myInterface.FragmentNavigationListener;
 import com.example.popularity.myInterface.MainActivityTransaction;
 
 
-public class BaseFragment extends Fragment implements FragmentNavigationListener {
+public class BaseFragment extends Fragment implements MainActivityTransaction.Attacher {
 
-    MainActivityTransaction baseListener;
+    MainActivityTransaction.Components baseListener;
 
     @Override
-    public void attachFragment(MainActivityTransaction baseListener) {
+    public void attachFragment(MainActivityTransaction.Components baseListener) {
         this.baseListener = baseListener;
     }
 
