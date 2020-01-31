@@ -24,7 +24,7 @@
             android:orientation="vertical">
 
 
-            <de.hdodenhof.circleimageview.CircleImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/imgUserProfile"
                 android:layout_width="57dp"
                 android:layout_height="57dp"

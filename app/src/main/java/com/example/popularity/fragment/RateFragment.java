@@ -55,7 +55,7 @@ public class RateFragment extends BaseFragment implements RateMvp.View {
         view.findViewById(R.id.btnSaveRates).setOnClickListener(
                 view1 -> {
                     TextView txtName = view.findViewById(R.id.txtName);
-                    String str = getContext().getString(R.string.rate_a_friend) + " " + friend.getName();
+                    String str = getContext().getString(R.string.rate_to_friend) + " " + friend.getName();
                     txtName.setText(str);
                     User user = baseListener.getMainUser();
                     AppCompatRatingBar rtLook = view.findViewById(R.id.rtLook);

@@ -68,6 +68,6 @@ The terms used in this Privacy Policy have the same meanings as in our Terms and
 
     <string name="network_connection_error">Please check your connection</string>
     <string name="error_receive_code">you should get a code...</string>
-    <string name="rate_a_friend">Rate To:</string>
+    <string name="rate_to_friend">Rate To:</string>
 </resources>
 

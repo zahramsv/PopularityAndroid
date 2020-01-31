@@ -65,7 +65,6 @@ public class FriendsListAdapter extends RecyclerView.Adapter<FriendsListAdapter.
 
     public class FriendsHolder extends RecyclerView.ViewHolder {
 
-        //CircleImageView profile_image;
         private ImageView rate;
         private TextView username;
         private ImageView profileimage;
