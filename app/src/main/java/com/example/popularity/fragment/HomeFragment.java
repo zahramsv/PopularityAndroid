@@ -1,19 +1,18 @@
 package com.example.popularity.fragment;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.popularity.R;
 import com.example.popularity.adapter.FriendsListAdapter;
 import com.example.popularity.adapter.RateListAdapter;
@@ -24,7 +23,6 @@ import com.example.popularity.model.User;
 import com.example.popularity.model.UserPopularity;
 import com.example.popularity.utils.LoginKind;
 import com.example.popularity.utils.ToolbarKind;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,15 +47,15 @@ public class HomeFragment extends BaseFragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         homePresenter = new HomePresenter(getContext());
+
         baseListener.changeToolbar(ToolbarKind.HOME, "");
         if(baseListener.getLoginKind()== LoginKind.SMS)
         {
             if (ActivityCompat.checkSelfPermission(getActivity(), android.Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_GRANTED) {
                 friendsList= homePresenter.getFriends(LoginKind.SMS, "");
             } else {
-                requestPermission();
+                homePresenter.requestPermission(getActivity());
             }
         }
         if (baseListener.getLoginKind()==LoginKind.MOCK)
@@ -65,7 +63,6 @@ public class HomeFragment extends BaseFragment {
             friendsList = homePresenter.getFriends(LoginKind.MOCK, baseListener.getMainUser().getSocial_primary());
         }
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -135,18 +132,7 @@ public class HomeFragment extends BaseFragment {
         }
     }
 
-    private void requestPermission() {
-        if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), android.Manifest.permission.READ_CONTACTS)) {
-            // show UI part if you want here to show some rationale !!!
-        } else {
-            ActivityCompat.requestPermissions(getActivity(), new String[]{android.Manifest.permission.READ_CONTACTS}, REQUEST_READ_CONTACTS);
-        }
-        if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), android.Manifest.permission.READ_CONTACTS)) {
-        } else {
-            ActivityCompat.requestPermissions(getActivity(), new String[]{android.Manifest.permission.READ_CONTACTS},
-                    REQUEST_READ_CONTACTS);
-        }
-    }
+
 
 
 }

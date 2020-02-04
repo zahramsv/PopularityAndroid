@@ -7,10 +7,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.popularity.R;
+import com.example.popularity.mvp.PrivacyPolicyMvp;
 import com.example.popularity.utils.ToolbarKind;
 
 
-public class PrivacyPolicyFragment extends BaseFragment {
+public class PrivacyPolicyFragment extends BaseFragment implements PrivacyPolicyMvp.View {
 
 
     @Override

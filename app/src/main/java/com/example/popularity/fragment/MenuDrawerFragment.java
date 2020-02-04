@@ -17,13 +17,12 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.popularity.R;
+import com.example.popularity.mvp.MenuDrawerMvp;
 import com.example.popularity.utils.ShowMessageType;
 
 
-public class MenuDrawerFragment extends BaseFragment {
+public class MenuDrawerFragment extends BaseFragment implements MenuDrawerMvp.View {
 
-    private ActionBarDrawerToggle drawerToogle;
-    private DrawerLayout drawerLayout;
     private View view;
     private AppCompatButton btnRateUs, btnPrivacyPolicy, btnSettings, btnAboutUs;
 
@@ -32,8 +31,8 @@ public class MenuDrawerFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_menu_drawer, container, false);
         TextView username = view.findViewById(R.id.txtName);
-        SharedPreferences preferences=getActivity().getSharedPreferences("user_data",Context.MODE_PRIVATE);
-        username.setText(preferences.getString("full_name",null));
+        SharedPreferences preferences = getActivity().getSharedPreferences("user_data", Context.MODE_PRIVATE);
+        username.setText(preferences.getString("full_name", null));
         return view;
     }
 
@@ -43,26 +42,6 @@ public class MenuDrawerFragment extends BaseFragment {
         init();
     }
 
-    public void setUp(final DrawerLayout dl, final Toolbar toolbar) {
-        drawerLayout = dl;
-        drawerToogle = new ActionBarDrawerToggle(getActivity(), dl, toolbar, R.string.drawer_open, R.string.drawer_close) {
-
-            @Override
-            public boolean onOptionsItemSelected(MenuItem item) {
-                if (item != null && item.getItemId() == android.R.id.home) {
-                    if (dl.isDrawerOpen(Gravity.RIGHT)) {
-                        dl.closeDrawer(Gravity.RIGHT);
-                    } else {
-                        dl.openDrawer(Gravity.RIGHT);
-                    }
-                }
-                return false;
-            }
-
-
-        };
-
-    }
 
     private void init() {
 
@@ -85,7 +64,7 @@ public class MenuDrawerFragment extends BaseFragment {
         });
 
         btnRateUs.setOnClickListener(view -> {
-            baseListener.showMessage(ShowMessageType.SNACK,getString(R.string.error_under_construction));
+            baseListener.showMessage(ShowMessageType.SNACK, getString(R.string.error_under_construction));
         });
 
         btnSettings.setOnClickListener(view -> {
@@ -94,6 +73,8 @@ public class MenuDrawerFragment extends BaseFragment {
             }
         });
 
-    }
 
+    }
 }
+
+

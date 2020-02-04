@@ -9,11 +9,12 @@ import android.view.ViewGroup;
 
 import com.example.popularity.R;
 import com.example.popularity.activity.MainActivity;
+import com.example.popularity.mvp.SettingMvp;
 import com.example.popularity.utils.SavePref;
 import com.example.popularity.utils.ToolbarKind;
 
 
-public class SettingFragment extends BaseFragment {
+public class SettingFragment extends BaseFragment implements SettingMvp.View {
 
 
     @Override
