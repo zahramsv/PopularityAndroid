@@ -16,12 +16,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.popularity.R;
 import com.example.popularity.adapter.FriendsListAdapter;
 import com.example.popularity.adapter.RateListAdapter;
+import com.example.popularity.model.repository.UserRepository;
 import com.example.popularity.presenter.HomePresenter;
 import com.example.popularity.model.Friend;
 import com.example.popularity.model.Rate;
 import com.example.popularity.model.User;
 import com.example.popularity.model.UserPopularity;
 import com.example.popularity.utils.LoginKind;
+import com.example.popularity.utils.MyApp;
 import com.example.popularity.utils.ToolbarKind;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,12 +33,11 @@ import static com.example.popularity.utils.Configs.REQUEST_READ_CONTACTS;
 
 public class HomeFragment extends BaseFragment {
 
-
     private RecyclerView favoritesRecyclerView, friendsRecyclerView;
     private List<Rate> rates = new ArrayList<>();
     private List<Friend> friendsList = new ArrayList<>();
     private HomePresenter homePresenter;
-
+    private UserRepository userRepository;
 
     @Override
     public void onHiddenChanged(boolean hidden) {
@@ -49,6 +50,8 @@ public class HomeFragment extends BaseFragment {
         super.onCreate(savedInstanceState);
         homePresenter = new HomePresenter(getContext());
 
+        userRepository = MyApp.getInstance().getBaseComponent().provideUserRepository();
+
         baseListener.changeToolbar(ToolbarKind.HOME, "");
         if(baseListener.getLoginKind()== LoginKind.SMS)
         {
@@ -60,7 +63,7 @@ public class HomeFragment extends BaseFragment {
         }
         if (baseListener.getLoginKind()==LoginKind.MOCK)
         {
-            friendsList = homePresenter.getFriends(LoginKind.MOCK, baseListener.getMainUser().getSocial_primary());
+            friendsList = homePresenter.getFriends(LoginKind.MOCK, userRepository.getCurrentUser().getSocial_primary());
         }
     }
 
@@ -69,7 +72,7 @@ public class HomeFragment extends BaseFragment {
 
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         init(view);
-        User user = baseListener.getMainUser();
+        User user = userRepository.getCurrentUser();
         if (user != null) {
             UserPopularity userPopularity = user.getRates_summary_sum();
             FriendsListAdapter friendsListAdapter = new FriendsListAdapter(friendsList, getActivity());

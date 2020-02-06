@@ -6,9 +6,12 @@ import com.example.popularity.R;
 
 import com.example.popularity.model.BaseResponse;
 import com.example.popularity.model.SubmitRate;
+import com.example.popularity.model.User;
+import com.example.popularity.model.repository.UserRepository;
 import com.example.popularity.mvp.RateMvp;
 import com.example.popularity.myInterface.ApiServices;
 import com.example.popularity.myInterface.MainActivityTransaction;
+import com.example.popularity.utils.MyApp;
 import com.example.popularity.utils.RetrofitInstance;
 import com.example.popularity.utils.ShowMessageType;
 
@@ -21,10 +24,12 @@ public class RatePresenter implements RateMvp.Presenter {
 
     private RateMvp.View rateView;
     private MainActivityTransaction.Components baseComponents;
+    private UserRepository userRepository;
 
     public RatePresenter(RateMvp.View rateView, MainActivityTransaction.Components baseComponents) {
         this.rateView = rateView;
         this.baseComponents = baseComponents;
+        userRepository = MyApp.getInstance().getBaseComponent().provideUserRepository();
     }
 
     @Override
@@ -50,6 +55,11 @@ public class RatePresenter implements RateMvp.Presenter {
             }
         });
 
+    }
+
+    @Override
+    public User getCurrentUser() {
+        return userRepository.getCurrentUser();
     }
 
 

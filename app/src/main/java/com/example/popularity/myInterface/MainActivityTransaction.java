@@ -13,8 +13,6 @@ public interface MainActivityTransaction {
         void showLoadingBar(boolean isShow);
         void openFragment(BaseFragment fragment, Boolean addStack, Bundle bundle);
         void changeToolbar(ToolbarKind kind, String title);
-        User getMainUser();
-        void setMainUser(User user);
         void showMessage(ShowMessageType messageType,String message);
         void setLoginKind(LoginKind kind);
         LoginKind getLoginKind();

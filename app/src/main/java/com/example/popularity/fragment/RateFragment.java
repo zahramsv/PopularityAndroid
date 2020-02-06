@@ -19,7 +19,6 @@ import com.example.popularity.model.Friend;
 import com.example.popularity.model.SubmitRate;
 import com.example.popularity.model.User;
 import com.example.popularity.mvp.RateMvp;
-import com.example.popularity.utils.ShowMessageType;
 import com.example.popularity.utils.ToolbarKind;
 
 import static com.example.popularity.utils.Configs.BUNDLE_FRIEND;
@@ -57,7 +56,7 @@ public class RateFragment extends BaseFragment implements RateMvp.View {
                     TextView txtName = view.findViewById(R.id.txtName);
                     String str = getContext().getString(R.string.rate_to_friend) + " " + friend.getName();
                     txtName.setText(str);
-                    User user = baseListener.getMainUser();
+                    User user = presenter.getCurrentUser();
                     AppCompatRatingBar rtLook = view.findViewById(R.id.rtLook);
                     AppCompatRatingBar rtStyle = view.findViewById(R.id.rtStyle);
                     AppCompatRatingBar rtPopularity = view.findViewById(R.id.rtPopularity);

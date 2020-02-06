@@ -6,8 +6,6 @@ import com.example.popularity.utils.LoginKind;
 public interface MainMvp {
 
     interface Presenter {
-        User getMainUser();
-        void setMainUser(User user);
         void setLoginKind(LoginKind kind);
         LoginKind getLoginKind();
     }

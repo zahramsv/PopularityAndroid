@@ -22,7 +22,8 @@
             android:id="@+id/imgUserProfile"
             android:layout_width="57dp"
             android:layout_height="57dp"
-            android:layout_marginTop="@dimen/spacing_small" />
+            android:layout_marginTop="@dimen/spacing_small"
+            android:src="@drawable/girl"/>
 
 
         <!-- <de.hdodenhof.circleimageview.CircleImageView

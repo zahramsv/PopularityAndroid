@@ -8,24 +8,28 @@ import com.example.popularity.model.Login;
 import com.example.popularity.model.User;
 import com.example.popularity.myInterface.ApiServices;
 import com.example.popularity.utils.MyApp;
-import com.example.popularity.utils.RetrofitInstance;
 
 import java.util.Objects;
+
+import javax.inject.Inject;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 public class UserRepository {
 
+    private User currentUser;
+
+    private ApiServices api;
+
+    public UserRepository(ApiServices api){
+        this.api = api;
+    }
+
     public void loginToServer(Login loginBody, UserRepoListener listener) {
 
-        RetrofitInstance retrofitInstance = new RetrofitInstance();
-        Retrofit retrofit = retrofitInstance.getRetrofitInstance();
-        ApiServices apiServices = retrofit.create(ApiServices.class);
-
-        apiServices.loginToSocial(loginBody).enqueue(new Callback<BaseResponse<User>>() {
+        api.loginToSocial(loginBody).enqueue(new Callback<BaseResponse<User>>() {
             @Override
             public void onResponse(Call<BaseResponse<User>> call, Response<BaseResponse<User>> response) {
 
@@ -34,6 +38,8 @@ public class UserRepository {
                     BaseResponse obr = response.body();
                     User user = (User) obr.getData();
                     listener.onDone(user);
+                    user.setSocial_primary(loginBody.getSocial_primary());
+                    setCurrentUser(user);
 
                 } else {
                     listener.onFailure(MyApp.getInstance().getApplicationContext().getString(R.string.error_api_call));
@@ -47,6 +53,14 @@ public class UserRepository {
 
             }
         });
+    }
+
+    public User getCurrentUser() {
+        return currentUser;
+    }
+
+    public void setCurrentUser(User currentUser) {
+        this.currentUser = currentUser;
     }
 
 

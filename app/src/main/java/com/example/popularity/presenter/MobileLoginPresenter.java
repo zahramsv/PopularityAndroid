@@ -13,35 +13,32 @@ import com.example.popularity.mvp.MobileLoginMvp;
 import com.example.popularity.myInterface.ApiServices;
 import com.example.popularity.myInterface.MainActivityTransaction;
 import com.example.popularity.utils.ConnectivityReceiver;
-import com.example.popularity.utils.RetrofitInstance;
+import com.example.popularity.utils.MyApp;
 import com.example.popularity.utils.SavePref;
 import com.example.popularity.utils.ShowMessageType;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 public class MobileLoginPresenter implements
         MobileLoginMvp.Presenter ,
         UserRepository.UserRepoListener
 {
-
-
     private MobileLoginMvp.View view;
     private String userMobile;
     private BaseResponse sendSmsResult;
-    private RetrofitInstance retrofitInstance;
-    private Retrofit retrofit;
-    private ApiServices apiServices;
     private MainActivityTransaction.Components baseComponent;
+
+    private UserRepository userRepository;
+    private ApiServices apiServices;
 
     public MobileLoginPresenter(MobileLoginMvp.View view, MainActivityTransaction.Components baseComponent) {
         this.view = view;
         this.baseComponent = baseComponent;
-        retrofitInstance = new RetrofitInstance();
-        retrofit = retrofitInstance.getRetrofitInstance();
-        apiServices = retrofit.create(ApiServices.class);
+
+        this.apiServices = MyApp.getInstance().getBaseComponent().provideApiService();
+        this.userRepository = MyApp.getInstance().getBaseComponent().provideUserRepository();
     }
 
     @Override
@@ -107,9 +104,7 @@ public class MobileLoginPresenter implements
     @Override
     public void loginToServer() {
         baseComponent.showLoadingBar(true);
-        UserRepository userRepository = new UserRepository();
         userRepository.loginToServer(getLoginInfo(), this);
-
     }
 
     @Override
@@ -131,7 +126,6 @@ public class MobileLoginPresenter implements
         SavePref savePref = new SavePref();
         user.setSocial_primary(userMobile);
         savePref.SaveUser(view.getViewContext(), user, userPopularity);
-        baseComponent.setMainUser(user);
         baseComponent.openFragment(new HomeFragment(), true, null);
     }
 

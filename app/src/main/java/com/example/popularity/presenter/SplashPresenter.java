@@ -9,9 +9,11 @@ import com.example.popularity.fragment.HomeFragment;
 import com.example.popularity.fragment.LoginFragment;
 import com.example.popularity.model.BaseResponse;
 import com.example.popularity.model.User;
+import com.example.popularity.model.repository.UserRepository;
 import com.example.popularity.mvp.SplashMvp;
 import com.example.popularity.myInterface.ApiServices;
 import com.example.popularity.myInterface.MainActivityTransaction;
+import com.example.popularity.utils.MyApp;
 import com.example.popularity.utils.RetrofitInstance;
 
 import retrofit2.Call;
@@ -23,10 +25,12 @@ public class SplashPresenter implements SplashMvp.Presenter {
 
     private SplashMvp.View view;
     private MainActivityTransaction.Components baseComponent;
+    private UserRepository userRepository;
 
     public SplashPresenter(SplashMvp.View view, MainActivityTransaction.Components baseComponent) {
         this.view = view;
         this.baseComponent = baseComponent;
+        this.userRepository = MyApp.getInstance().getBaseComponent().provideUserRepository();
     }
 
     @Override
@@ -55,7 +59,7 @@ public class SplashPresenter implements SplashMvp.Presenter {
                     assert response.body() != null;
                     BaseResponse<User> result = response.body();
                     if (result.getCode() == 200) {
-                        baseComponent.setMainUser(result.getData());
+                        userRepository.setCurrentUser(result.getData());
                         baseComponent.openFragment(new HomeFragment(), false, null);
                     } else {
                         baseComponent.openFragment(new LoginFragment(), false, null);

@@ -53,16 +53,6 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     @Override
-    public User getMainUser() {
-        return presenter.getMainUser();
-    }
-
-    @Override
-    public void setMainUser(User mainUser) {
-        presenter.setMainUser(mainUser);
-    }
-
-    @Override
     public void setLoginKind(LoginKind kind) {
         presenter.setLoginKind(kind);
     }

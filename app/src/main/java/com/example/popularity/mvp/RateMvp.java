@@ -21,6 +21,7 @@ public interface RateMvp {
 
     interface Presenter {
         void submitRate(SubmitRate submitRate );
+        User getCurrentUser();
 
     }
 }
