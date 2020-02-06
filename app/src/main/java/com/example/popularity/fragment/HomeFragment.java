@@ -16,7 +16,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.popularity.R;
 import com.example.popularity.adapter.FriendsListAdapter;
 import com.example.popularity.adapter.RateListAdapter;
+import com.example.popularity.model.repository.LoginHandler;
 import com.example.popularity.model.repository.UserRepository;
+import com.example.popularity.mvp.HomeMvp;
 import com.example.popularity.presenter.HomePresenter;
 import com.example.popularity.model.Friend;
 import com.example.popularity.model.Rate;
@@ -31,13 +33,14 @@ import java.util.List;
 import static com.example.popularity.utils.Configs.BUNDLE_FRIEND;
 import static com.example.popularity.utils.Configs.REQUEST_READ_CONTACTS;
 
-public class HomeFragment extends BaseFragment {
+public class HomeFragment extends BaseFragment implements
+        HomeMvp.View
+{
 
     private RecyclerView favoritesRecyclerView, friendsRecyclerView;
     private List<Rate> rates = new ArrayList<>();
     private List<Friend> friendsList = new ArrayList<>();
     private HomePresenter homePresenter;
-    private UserRepository userRepository;
 
     @Override
     public void onHiddenChanged(boolean hidden) {
@@ -50,21 +53,10 @@ public class HomeFragment extends BaseFragment {
         super.onCreate(savedInstanceState);
         homePresenter = new HomePresenter(getContext());
 
-        userRepository = MyApp.getInstance().getBaseComponent().provideUserRepository();
-
         baseListener.changeToolbar(ToolbarKind.HOME, "");
-        if(baseListener.getLoginKind()== LoginKind.SMS)
-        {
-            if (ActivityCompat.checkSelfPermission(getActivity(), android.Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_GRANTED) {
-                friendsList= homePresenter.getFriends(LoginKind.SMS, "");
-            } else {
-                homePresenter.requestPermission(getActivity());
-            }
-        }
-        if (baseListener.getLoginKind()==LoginKind.MOCK)
-        {
-            friendsList = homePresenter.getFriends(LoginKind.MOCK, userRepository.getCurrentUser().getSocial_primary());
-        }
+
+        friendsList = homePresenter.getFriends(getContext());
+
     }
 
     @Override
@@ -72,7 +64,7 @@ public class HomeFragment extends BaseFragment {
 
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         init(view);
-        User user = userRepository.getCurrentUser();
+        User user = homePresenter.getUser();
         if (user != null) {
             UserPopularity userPopularity = user.getRates_summary_sum();
             FriendsListAdapter friendsListAdapter = new FriendsListAdapter(friendsList, getActivity());
@@ -125,7 +117,7 @@ public class HomeFragment extends BaseFragment {
             case REQUEST_READ_CONTACTS: {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
-                    friendsList = homePresenter.getFriends(LoginKind.SMS, "");
+                    friendsList = homePresenter.getFriends(getContext());
                 } else {
                     // permission denied,Disable the
                     // functionality that depends on this permission.
@@ -134,8 +126,6 @@ public class HomeFragment extends BaseFragment {
             }
         }
     }
-
-
 
 
 }

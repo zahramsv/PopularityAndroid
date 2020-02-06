@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import com.example.popularity.R;
 import com.example.popularity.activity.MainActivity;
 import com.example.popularity.mvp.SettingMvp;
-import com.example.popularity.utils.SavePref;
+import com.example.popularity.model.repository.SharedPrefsRepository;
 import com.example.popularity.utils.ToolbarKind;
 
 
@@ -37,8 +37,8 @@ public class SettingFragment extends BaseFragment implements SettingMvp.View {
         View view= inflater.inflate(R.layout.fragment_setting, container, false);
         view.findViewById(R.id.btnLogout).setOnClickListener(view1 -> {
 
-            SavePref savePref=new SavePref();
-            savePref.DeleteUser(getContext());
+            SharedPrefsRepository sharedPrefsRepository = new SharedPrefsRepository(getContext());
+            sharedPrefsRepository.DeleteUser();
             getActivity().finish();
             Intent intent=new Intent(getContext(),MainActivity.class);
             startActivity(intent);

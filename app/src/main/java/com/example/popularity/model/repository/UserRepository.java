@@ -11,8 +11,6 @@ import com.example.popularity.utils.MyApp;
 
 import java.util.Objects;
 
-import javax.inject.Inject;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -37,18 +35,18 @@ public class UserRepository {
                 if ((response.isSuccessful())) {
                     BaseResponse obr = response.body();
                     User user = (User) obr.getData();
-                    listener.onDone(user);
+                    listener.onLoginDone(user);
                     user.setSocial_primary(loginBody.getSocial_primary());
                     setCurrentUser(user);
 
                 } else {
-                    listener.onFailure(MyApp.getInstance().getApplicationContext().getString(R.string.error_api_call));
+                    listener.onLoginFailure(MyApp.getInstance().getApplicationContext().getString(R.string.error_api_call));
                 }
             }
 
             @Override
             public void onFailure(Call<BaseResponse<User>> call, Throwable t) {
-                listener.onFailure(MyApp.getInstance().getApplicationContext().getString(R.string.error_api_call));
+                listener.onLoginFailure(MyApp.getInstance().getApplicationContext().getString(R.string.error_api_call));
                 Log.i("app_tag", Objects.requireNonNull(t.getMessage()));
 
             }
@@ -63,10 +61,9 @@ public class UserRepository {
         this.currentUser = currentUser;
     }
 
-
     public interface UserRepoListener {
-        void onDone(User user);
-        void onFailure(String message);
+        void onLoginDone(User user);
+        void onLoginFailure(String message);
     }
 
 }

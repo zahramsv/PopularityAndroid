@@ -14,8 +14,6 @@ public interface MainActivityTransaction {
         void openFragment(BaseFragment fragment, Boolean addStack, Bundle bundle);
         void changeToolbar(ToolbarKind kind, String title);
         void showMessage(ShowMessageType messageType,String message);
-        void setLoginKind(LoginKind kind);
-        LoginKind getLoginKind();
     }
 
     interface Attacher {

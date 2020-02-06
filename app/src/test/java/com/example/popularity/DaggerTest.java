@@ -1,15 +1,19 @@
-package com.example.popularity.test;
+package com.example.popularity;
+
+import org.junit.Test;
+
+import javax.inject.Inject;
 
 public class DaggerTest {
 
-    /*@Inject
+    @Inject
     Person person;
+
+    @Test
     public void main(){
 
-        person.getName();
         //Person person = new Person(new Body());
-
-
+        person.getName();
 
     }
 
@@ -32,8 +36,8 @@ public class DaggerTest {
         }
 
         public String getName(){
-            return "";
+            return "zahra";
         }
-    }*/
+    }
 
 }

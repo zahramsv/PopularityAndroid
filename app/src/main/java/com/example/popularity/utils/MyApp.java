@@ -30,7 +30,8 @@ public class MyApp extends Application {
     }
 
     public static synchronized MyApp getInstance() {
-        return mInstance;
+        if(mInstance!=null) return  mInstance;
+        else return new MyApp();
     }
 
     public void setConnectivityListener(ConnectivityReceiver.ConnectivityReceiverListener listener) {

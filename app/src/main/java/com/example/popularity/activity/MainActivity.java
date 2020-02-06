@@ -53,16 +53,6 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void setLoginKind(LoginKind kind) {
-        presenter.setLoginKind(kind);
-    }
-
-    @Override
-    public LoginKind getLoginKind() {
-        return presenter.getLoginKind();
-    }
-
-    @Override
     public void showMessage(ShowMessageType messageType, String message) {
         switch (messageType)
         {

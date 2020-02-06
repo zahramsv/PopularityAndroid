@@ -6,15 +6,14 @@ import com.example.popularity.fragment.HomeFragment;
 import com.example.popularity.model.BaseResponse;
 import com.example.popularity.model.Login;
 import com.example.popularity.model.User;
-import com.example.popularity.model.UserPopularity;
 import com.example.popularity.model.VerifySmsResponseData;
+import com.example.popularity.model.repository.LoginHandler;
 import com.example.popularity.model.repository.UserRepository;
 import com.example.popularity.mvp.MobileLoginMvp;
 import com.example.popularity.myInterface.ApiServices;
 import com.example.popularity.myInterface.MainActivityTransaction;
 import com.example.popularity.utils.ConnectivityReceiver;
 import com.example.popularity.utils.MyApp;
-import com.example.popularity.utils.SavePref;
 import com.example.popularity.utils.ShowMessageType;
 
 import retrofit2.Call;
@@ -32,11 +31,13 @@ public class MobileLoginPresenter implements
 
     private UserRepository userRepository;
     private ApiServices apiServices;
+    private LoginHandler loginHandler;
 
     public MobileLoginPresenter(MobileLoginMvp.View view, MainActivityTransaction.Components baseComponent) {
         this.view = view;
         this.baseComponent = baseComponent;
 
+        this.loginHandler = MyApp.getInstance().getBaseComponent().provideLoginHandler();
         this.apiServices = MyApp.getInstance().getBaseComponent().provideApiService();
         this.userRepository = MyApp.getInstance().getBaseComponent().provideUserRepository();
     }
@@ -119,18 +120,15 @@ public class MobileLoginPresenter implements
     }
 
     @Override
-    public void onDone(User user) {
+    public void onLoginDone(User user) {
         baseComponent.showLoadingBar(false);
-
-        UserPopularity userPopularity = user.getRates_summary_sum();
-        SavePref savePref = new SavePref();
         user.setSocial_primary(userMobile);
-        savePref.SaveUser(view.getViewContext(), user, userPopularity);
+        loginHandler.saveLoginInfo(user, user.getRates_summary_sum());
         baseComponent.openFragment(new HomeFragment(), true, null);
     }
 
     @Override
-    public void onFailure(String message) {
+    public void onLoginFailure(String message) {
         baseComponent.showLoadingBar(false);
         baseComponent.showMessage(ShowMessageType.TOAST, message);
     }

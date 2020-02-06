@@ -10,13 +10,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatButton;
 
 import com.example.popularity.R;
-import com.example.popularity.model.User;
-import com.example.popularity.model.UserPopularity;
-import com.example.popularity.model.repository.UserRepository;
 import com.example.popularity.mvp.MobileLoginMvp;
 import com.example.popularity.presenter.MobileLoginPresenter;
-import com.example.popularity.utils.SavePref;
-import com.example.popularity.utils.ShowMessageType;
 import com.example.popularity.utils.ToolbarKind;
 import com.google.android.material.textfield.TextInputEditText;
 
