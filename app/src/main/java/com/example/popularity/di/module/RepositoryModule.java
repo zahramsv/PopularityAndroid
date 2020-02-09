@@ -30,7 +30,7 @@ public class RepositoryModule {
 
     @Singleton
     @Provides
-    public SharedPrefsRepository provideSharedPreferrences(Context context){
+    public SharedPrefsRepository provideSharedPreferences(Context context){
         return new SharedPrefsRepository(context);
     }
 

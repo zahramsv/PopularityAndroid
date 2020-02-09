@@ -2,7 +2,9 @@ package com.example.popularity.fragment;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,6 +29,8 @@ import com.example.popularity.model.UserPopularity;
 import com.example.popularity.utils.LoginKind;
 import com.example.popularity.utils.MyApp;
 import com.example.popularity.utils.ToolbarKind;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,6 +45,7 @@ public class HomeFragment extends BaseFragment implements
     private List<Rate> rates = new ArrayList<>();
     private List<Friend> friendsList = new ArrayList<>();
     private HomePresenter homePresenter;
+    private FloatingActionButton btnShare;
 
     @Override
     public void onHiddenChanged(boolean hidden) {
@@ -51,7 +56,7 @@ public class HomeFragment extends BaseFragment implements
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        homePresenter = new HomePresenter(getContext());
+        homePresenter = new HomePresenter(this,getContext());
 
         baseListener.changeToolbar(ToolbarKind.HOME, "");
 
@@ -61,6 +66,7 @@ public class HomeFragment extends BaseFragment implements
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
 
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         init(view);
@@ -95,11 +101,16 @@ public class HomeFragment extends BaseFragment implements
 
         }
 
+        btnShare.setOnClickListener(view1 -> {
+            View view2=getActivity().getWindow().getDecorView().getRootView().findViewById(R.id.cardUserRates);
+            homePresenter.takeScreenShot(view2);
+        });
         return view;
     }
 
     public void init(View view) {
 
+        btnShare=view.findViewById(R.id.btnShare);
         baseListener.changeToolbar(ToolbarKind.HOME, getString(R.string.home_toolbar_txt));
         friendsRecyclerView = view.findViewById(R.id.rvFriends);
         LinearLayoutManager layoutManager1 = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
@@ -107,6 +118,7 @@ public class HomeFragment extends BaseFragment implements
         favoritesRecyclerView = view.findViewById(R.id.rvFavorites);
         @SuppressLint("WrongConstant") LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         favoritesRecyclerView.setLayoutManager(layoutManager);
+
 
 
     }
@@ -128,4 +140,18 @@ public class HomeFragment extends BaseFragment implements
     }
 
 
+    @Override
+    public void ShareScreenShot(Uri uri) {
+
+            if (uri != null) {
+                Intent shareIntent = new Intent();
+                shareIntent.setAction(Intent.ACTION_SEND);
+                shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION); // temp permission for receiving app to read this file
+                shareIntent.setDataAndType(uri, getActivity().getContentResolver().getType(uri));
+                shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
+                startActivity(Intent.createChooser(shareIntent, "Choose an app"));
+            }
+
+
+    }
 }

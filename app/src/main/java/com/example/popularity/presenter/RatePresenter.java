@@ -25,20 +25,20 @@ public class RatePresenter implements RateMvp.Presenter {
     private RateMvp.View rateView;
     private MainActivityTransaction.Components baseComponents;
     private UserRepository userRepository;
+    private ApiServices apiServices;
 
     public RatePresenter(RateMvp.View rateView, MainActivityTransaction.Components baseComponents) {
         this.rateView = rateView;
         this.baseComponents = baseComponents;
         userRepository = MyApp.getInstance().getBaseComponent().provideUserRepository();
+        apiServices=MyApp.getInstance().getBaseComponent().provideApiService();
     }
 
     @Override
     public void submitRate(SubmitRate submitRate ) {
 
-        RetrofitInstance retrofitInstance = new RetrofitInstance();
-        Retrofit retrofit = retrofitInstance.getRetrofitInstance();
-        ApiServices friendsRate = retrofit.create(ApiServices.class);
-        friendsRate.submitRateToFriend(submitRate).enqueue(new Callback<BaseResponse<String>>() {
+
+        apiServices.submitRateToFriend(submitRate).enqueue(new Callback<BaseResponse<String>>() {
             @Override
             public void onResponse(Call<BaseResponse<String>> call, Response<BaseResponse<String>> response) {
                 baseComponents.showMessage(ShowMessageType.TOAST, rateView.getViewContext().getString(R.string.submitted_rates));

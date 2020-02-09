@@ -19,10 +19,11 @@ public class MyApp extends Application {
         MultiDex.install(this);
         mInstance = this;
 
-        component = DaggerBaseComponent
+        component= DaggerBaseComponent
                 .builder()
                 .contextModule(new ContextModule(this))
                 .build();
+
     }
 
     public BaseComponent getBaseComponent(){
