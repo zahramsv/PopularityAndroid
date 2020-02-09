@@ -8,6 +8,18 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="PrimaryButton" parent="Widget.AppCompat.Button">
+
+        <item name="android:textSize">@dimen/button_text_size</item>
+        <item name="android:layout_height">@dimen/primary_button_height</item>
+        <item name="android:textColor">@color/selector_primary_button_text</item>
+        <item name="android:background">@drawable/bg_primary_button</item>
+        <item name="android:gravity">center</item>
+        <item name="android:fontFamily">@font/iransans_bold</item>
+        <item name="textAllCaps">true</item>
+
+    </style>
+
 
     <style name="EditText.Grey" parent="@style/AppTheme">
         <item name="colorControlActivated">@color/grey_60</item>
