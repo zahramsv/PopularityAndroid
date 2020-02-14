@@ -13,6 +13,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.popularity.R;
@@ -47,10 +48,17 @@ public class HomeFragment extends BaseFragment implements
     private HomePresenter homePresenter;
     private FloatingActionButton btnShare;
 
+
+
+    public static HomeFragment newInstance() {
+        HomeFragment fragment = new HomeFragment();
+        return fragment;
+    }
+
     @Override
     public void onHiddenChanged(boolean hidden) {
         if (!hidden)
-            baseListener.changeToolbar(ToolbarKind.HOME, getString(R.string.home_toolbar_txt));
+            baseListener.changeToolbar(ToolbarKind.HOME, getString(R.string.app_name));
     }
 
     @Override
@@ -111,12 +119,12 @@ public class HomeFragment extends BaseFragment implements
     public void init(View view) {
 
         btnShare=view.findViewById(R.id.btnShare);
-        baseListener.changeToolbar(ToolbarKind.HOME, getString(R.string.home_toolbar_txt));
+        baseListener.changeToolbar(ToolbarKind.HOME, getString(R.string.app_name));
         friendsRecyclerView = view.findViewById(R.id.rvFriends);
-        LinearLayoutManager layoutManager1 = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+        GridLayoutManager layoutManager1 = new GridLayoutManager(getActivity(),2,RecyclerView.HORIZONTAL,false);
         friendsRecyclerView.setLayoutManager(layoutManager1);
         favoritesRecyclerView = view.findViewById(R.id.rvFavorites);
-        @SuppressLint("WrongConstant") LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+        GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 2);
         favoritesRecyclerView.setLayoutManager(layoutManager);
 
 

@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -24,7 +25,7 @@ import com.example.popularity.utils.ShowMessageType;
 public class MenuDrawerFragment extends BaseFragment implements MenuDrawerMvp.View {
 
     private View view;
-    private AppCompatButton btnRateUs, btnPrivacyPolicy, btnSettings, btnAboutUs;
+    private LinearLayout btnRateUs, btnPrivacyPolicy, btnSettings, btnAboutUs,btnHome;
 
 
     @Override
@@ -49,13 +50,19 @@ public class MenuDrawerFragment extends BaseFragment implements MenuDrawerMvp.Vi
         btnRateUs = view.findViewById(R.id.btnRateUs);
         btnSettings = view.findViewById(R.id.btnSettings);
         btnPrivacyPolicy = view.findViewById(R.id.btnPrivacyPolicy);
+        btnHome = view.findViewById(R.id.btnHome);
 
 
+        btnHome.setOnClickListener(view -> {
+            baseListener.openFragment(HomeFragment.newInstance(),true,null);
+        });
         btnAboutUs.setOnClickListener(v -> {
             if (baseListener != null) {
                 baseListener.openFragment(AboutUsFragment.newInstance(), true, null);
             }
         });
+
+
 
         btnPrivacyPolicy.setOnClickListener(v -> {
             if (baseListener != null) {

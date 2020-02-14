@@ -1,6 +1,11 @@
 package com.example.popularity.presenter;
 
+import android.app.Dialog;
 import android.os.Handler;
+import android.view.View;
+import android.widget.Button;
+
+import androidx.appcompat.widget.AppCompatButton;
 
 import com.example.popularity.R;
 
@@ -26,32 +31,54 @@ public class RatePresenter implements RateMvp.Presenter {
     private MainActivityTransaction.Components baseComponents;
     private UserRepository userRepository;
     private ApiServices apiServices;
+    private AppCompatButton btnRateDone;
 
     public RatePresenter(RateMvp.View rateView, MainActivityTransaction.Components baseComponents) {
         this.rateView = rateView;
         this.baseComponents = baseComponents;
         userRepository = MyApp.getInstance().getBaseComponent().provideUserRepository();
-        apiServices=MyApp.getInstance().getBaseComponent().provideApiService();
+        apiServices = MyApp.getInstance().getBaseComponent().provideApiService();
     }
 
     @Override
-    public void submitRate(SubmitRate submitRate ) {
+    public void submitRate(SubmitRate submitRate) {
 
 
         apiServices.submitRateToFriend(submitRate).enqueue(new Callback<BaseResponse<String>>() {
             @Override
             public void onResponse(Call<BaseResponse<String>> call, Response<BaseResponse<String>> response) {
-                baseComponents.showMessage(ShowMessageType.TOAST, rateView.getViewContext().getString(R.string.submitted_rates));
-                final Handler handler = new Handler();
-                handler.postDelayed(() -> {
-                    rateView.comeBackToHomeAfterRateDone();
-                }, 2000);
+
+                if (response.body().getCode() == 200) {
+                    Dialog dialog = new Dialog(rateView.getViewContext());
+                    dialog.setContentView(R.layout.submit_rate_dialog);
+                    dialog.show();
+                    btnRateDone=dialog.findViewById(R.id.btnRateDone);
+                    btnRateDone.setOnClickListener(view -> {
+
+                        final Handler handler = new Handler();
+                        handler.postDelayed(() -> {
+                            rateView.comeBackToHomeAfterRateDone();
+                            dialog.dismiss();
+                        }, 2000);
+                    });
+                  //  baseComponents.showMessage(ShowMessageType.TOAST, rateView.getViewContext().getString(R.string.submitted_rates));
+
+                }
+
+                if (response.body().getCode()==401)
+                {
+                    baseComponents.showMessage(ShowMessageType.TOAST, rateView.getViewContext().getString(R.string.rate_before));
+
+                }
+
+
 
             }
 
+
             @Override
             public void onFailure(Call<BaseResponse<String>> call, Throwable t) {
-                baseComponents.showMessage(ShowMessageType.TOAST,rateView.getViewContext().getString(R.string.some_problems_when_use_api));
+                baseComponents.showMessage(ShowMessageType.TOAST, rateView.getViewContext().getString(R.string.some_problems_when_use_api));
             }
         });
 

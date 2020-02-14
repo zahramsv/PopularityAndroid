@@ -40,7 +40,7 @@ public class RateListAdapter extends RecyclerView.Adapter<RateListAdapter.RateHo
     @NonNull
     @Override
     public RateHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_rate, viewGroup, false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.receive_rate_item, viewGroup, false);
         return new RateHolder(view);
     }
 
@@ -50,8 +50,12 @@ public class RateListAdapter extends RecyclerView.Adapter<RateListAdapter.RateHo
         if (rateHolder instanceof RateHolder) {
             RateHolder view =  rateHolder;
             final Rate o = rates.get(i);
-            view.attribute.setText(o.getAttribute());
-            view.rating.setRating(rates.get(i).getRate());
+          /*  view.attribute.setText(o.getAttribute());
+            view.rating.setRating(rates.get(i).getRate());*/
+          view.TxtRateItem.setText(rates.get(i).getAttribute());
+          view.TxtRateCount.setText(rates.get(i).getRate().toString());
+
+
         }
     }
 
@@ -65,10 +69,13 @@ public class RateListAdapter extends RecyclerView.Adapter<RateListAdapter.RateHo
 
         private TextView attribute;
         private AppCompatRatingBar rating;
+        private TextView TxtRateItem,TxtRateCount;
         public RateHolder(@NonNull View itemView) {
             super(itemView);
-            attribute=itemView.findViewById(R.id.txtAttribute);
-            rating=itemView.findViewById(R.id.rating);
+           /* attribute=itemView.findViewById(R.id.txtAttribute);
+            rating=itemView.findViewById(R.id.rating);*/
+           TxtRateCount=itemView.findViewById(R.id.TxtRateCount);
+            TxtRateItem=itemView.findViewById(R.id.TxtRateItem);
         }
 
         @Override

@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.appcompat.widget.AppCompatEditText;
+import androidx.cardview.widget.CardView;
 
 import com.example.popularity.R;
 import com.example.popularity.mvp.MobileLoginMvp;
@@ -19,17 +21,17 @@ public class MobileLoginFragment extends BaseFragment
         implements MobileLoginMvp.View
 {
 
-
     private MobileLoginMvp.Presenter presenter;
-    private TextInputEditText edtMobile, edtVerifyCode;
+    private AppCompatEditText edtMobile, edtVerifyCode;
     private AppCompatButton btnReceiveCode;
     private AppCompatButton btnVerifyCode;
+    private CardView cardViewVerifyCode,cardViewMobileRegister;
 
 
     @Override
     public void onHiddenChanged(boolean hidden) {
         if (!hidden) {
-            baseListener.changeToolbar(ToolbarKind.HOME, getString(R.string.login_with_mobile));
+            baseListener.changeToolbar(ToolbarKind.HOME, getString(R.string.empty));
         }
     }
 
@@ -49,6 +51,8 @@ public class MobileLoginFragment extends BaseFragment
 
         btnReceiveCode.setOnClickListener(view1 -> {
             presenter.sendSMS(edtMobile.getText().toString());
+            cardViewVerifyCode.setVisibility(View.VISIBLE);
+            cardViewMobileRegister.setVisibility(View.GONE);
         });
 
         btnVerifyCode.setOnClickListener(view1 -> {
@@ -58,11 +62,14 @@ public class MobileLoginFragment extends BaseFragment
     }
 
     private void init(View view) {
-        baseListener.changeToolbar(ToolbarKind.HOME, getString(R.string.login_with_mobile));
+        baseListener.changeToolbar(ToolbarKind.HOME, getString(R.string.empty));
         edtVerifyCode = view.findViewById(R.id.edtVerifyCode);
         edtMobile = view.findViewById(R.id.edtMobile);
         btnVerifyCode = view.findViewById(R.id.btnVerifyCode);
         btnReceiveCode = view.findViewById(R.id.btnReceiveCode);
+        cardViewMobileRegister=view.findViewById(R.id.cardViewMobileRegister);
+        cardViewVerifyCode=view.findViewById(R.id.cardViewVerifyCode);
+
     }
 
     @Override

@@ -26,7 +26,7 @@ public class LoginFragment extends BaseFragment implements
     @Override
     public void onHiddenChanged(boolean hidden) {
         if (!hidden)
-            baseListener.changeToolbar(ToolbarKind.HOME, getString(R.string.login_toolbar_txt));
+            baseListener.changeToolbar(ToolbarKind.HOME, getString(R.string.empty));
     }
 
 
@@ -39,7 +39,7 @@ public class LoginFragment extends BaseFragment implements
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        baseListener.changeToolbar(ToolbarKind.HOME, getString(R.string.login_toolbar_txt));
+        baseListener.changeToolbar(ToolbarKind.HOME, getString(R.string.empty));
         view = inflater.inflate(R.layout.fragment_login, container, false);
         init(view);
 

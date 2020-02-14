@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="280dp"
     android:layout_height="match_parent"
@@ -11,99 +10,144 @@
 
 
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="170dp">
+        android:background="@color/colorPrimary"
+        android:orientation="vertical"
+        android:layout_height="200dp">
 
         <ImageView
 
             android:layout_width="match_parent"
             android:layout_height="170dp"
             android:scaleType="fitCenter"
-            android:src="@drawable/popularity_2" />
-        <LinearLayout
+            android:src="@drawable/ic_launcher" />
+
+
+
+
+
+        <TextView
+            android:id="@+id/txtName"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_margin="@dimen/spacing_middle"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:layout_gravity="center"
+            android:layout_height="@dimen/input_edit_text_height"
+            tools:text="Zahra Mousavi"
+            android:layout_marginLeft="@dimen/spacing_middle"
+            style="@style/SecondaryTextStyle"
+            />
 
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/txtName"
-                    android:layout_marginTop="@dimen/spacing_large"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/spacing_medium"
-                    tools:text="Zahra Mousavi"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+    </LinearLayout>
 
 
-            </LinearLayout>
+
+   <LinearLayout
+       android:id="@+id/btnHome"
+       android:layout_width="match_parent"
+       android:background="@color/white"
+       android:layout_height="@dimen/login_way_button_height_size"
+       android:orientation="horizontal">
+
+       <androidx.appcompat.widget.AppCompatImageView
+           android:layout_width="@dimen/app_icon_small_height"
+           android:layout_height="@dimen/app_icon_small_height"
+           android:src="@drawable/ic_balloon"
+           android:padding="@dimen/spacing_medium"/>
+       <TextView
+           style="@style/MenuDrawerItemStyle"
+           android:text="@string/home_toolbar_txt"
+           />
+   </LinearLayout>
 
 
-        </LinearLayout>
-    </RelativeLayout>
-
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:backgroundTint="@color/white"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/btnPrivacyPolicy"
-        android:background="@drawable/btn_rounded_white_outline"
-        android:drawableLeft="@drawable/ic_privacy"
-        android:paddingLeft="@dimen/spacing_middle"
-        android:drawableTint="@color/red_400"
-        android:text="@string/privacy_policy"
-        />
-    <androidx.appcompat.widget.AppCompatButton
-        android:backgroundTint="@color/white"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+    <LinearLayout
         android:id="@+id/btnSettings"
-        android:background="@drawable/btn_rounded_white_outline"
-        android:paddingLeft="@dimen/spacing_middle"
-        android:drawableTint="@color/red_400"
-        android:drawableLeft="@drawable/ic_settings"
-        android:text="@string/settings"
-
-        />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:backgroundTint="@color/white"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/btnRateUs"
-        android:minHeight="0dp"
-        android:minWidth="0dp"
-        android:paddingLeft="@dimen/spacing_middle"
-        android:background="@drawable/btn_rounded_white_outline"
-        android:drawableLeft="@drawable/ic_rate"
-        android:drawableTint="@color/red_400"
-        android:text="@string/rate_us"
-        />
+        android:background="@color/white"
+        android:layout_height="@dimen/login_way_button_height_size"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="@dimen/app_icon_small_height"
+            android:layout_height="@dimen/app_icon_small_height"
+            android:src="@drawable/ic_setting"
+            android:padding="@dimen/menu_drawer_icon_padding"/>
+        <TextView
+            style="@style/MenuDrawerItemStyle"
+            android:text="@string/settings"
+            />
+    </LinearLayout>
 
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:backgroundTint="@color/white"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:minHeight="0dp"
-        android:minWidth="0dp"
-        android:paddingLeft="@dimen/spacing_middle"
-        android:background="@drawable/btn_rounded_white_outline"
-        android:drawableLeft="@drawable/ic_rate"
-        android:drawableTint="@color/red_400"
-        android:text="@string/about_us"
+    <LinearLayout
         android:id="@+id/btnAboutUs"
-        />
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:layout_height="@dimen/login_way_button_height_size"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="@dimen/app_icon_small_height"
+            android:layout_height="@dimen/app_icon_small_height"
+            android:src="@drawable/ic_about_us"
+            android:padding="@dimen/menu_drawer_icon_padding"/>
+        <TextView
+            style="@style/MenuDrawerItemStyle"
+            android:text="@string/about_us"
+            />
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:layout_marginTop="@dimen/spacing_xxlarge"
+        android:id="@+id/btnPrivacyPolicy"
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:layout_height="@dimen/login_way_button_height_size"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:src="@drawable/ic_privacy"
+            android:layout_width="@dimen/app_icon_small_height"
+            android:layout_height="@dimen/app_icon_small_height"
+            android:padding="@dimen/menu_drawer_icon_padding"/>
+        <TextView
+            style="@style/MenuDrawerItemStyle"
+            android:text="@string/privacy_policy"
+            />
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:id="@+id/btnRateUs"
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:layout_height="@dimen/login_way_button_height_size"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:src="@drawable/ic_rate_us"
+            android:tint="@color/black"
+            android:layout_width="@dimen/app_icon_small_height"
+            android:layout_height="@dimen/app_icon_small_height"
+            android:padding="@dimen/menu_drawer_icon_padding"/>
+        <TextView
+            style="@style/MenuDrawerItemStyle"
+            android:text="@string/rate_us"
+            />
+    </LinearLayout>
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -2,6 +2,8 @@ package com.example.popularity.mvp;
 
 import android.content.Context;
 import com.example.popularity.model.Login;
+import com.example.popularity.model.User;
+
 public interface MobileLoginMvp {
 
     interface View {
@@ -13,7 +15,7 @@ public interface MobileLoginMvp {
 
         void sendSMS(String mobile);
 
-        void loginToServer();
+        void loginToServer(Login user);
 
         Login getLoginInfo();
     }

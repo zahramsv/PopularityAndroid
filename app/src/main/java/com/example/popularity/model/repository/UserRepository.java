@@ -39,6 +39,7 @@ public class UserRepository {
                     user.setSocial_primary(loginBody.getSocial_primary());
                     setCurrentUser(user);
 
+
                 } else {
                     listener.onLoginFailure(MyApp.getInstance().getApplicationContext().getString(R.string.error_api_call));
                 }

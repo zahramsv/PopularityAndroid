@@ -51,11 +51,15 @@ public class RateFragment extends BaseFragment implements RateMvp.View {
         Bundle bundle = getArguments();
         friend = (Friend) bundle.getSerializable(BUNDLE_FRIEND);
         view = inflater.inflate(R.layout.fragment_rate, container, false);
+
+        TextView txtName = view.findViewById(R.id.txtFriendName);
+        String str = friend.getName();
+        txtName.setText(str);
+
         view.findViewById(R.id.btnSaveRates).setOnClickListener(
                 view1 -> {
-                    TextView txtName = view.findViewById(R.id.txtName);
-                    String str = getContext().getString(R.string.rate_to_friend) + " " + friend.getName();
-                    txtName.setText(str);
+
+
                     User user = presenter.getCurrentUser();
                     AppCompatRatingBar rtLook = view.findViewById(R.id.rtLook);
                     AppCompatRatingBar rtStyle = view.findViewById(R.id.rtStyle);

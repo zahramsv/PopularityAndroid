@@ -49,7 +49,15 @@
                         android:paddingRight="50dp"
                         android:textColor="@color/white"
                         tools:text="@string/app_name" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="@dimen/app_icon_small_width"
+                        android:src="@drawable/ic_launcher"
+                        android:layout_margin="@dimen/spacing_small"
+                        android:layout_height="@dimen/app_icon_small_height" />
+
                 </LinearLayout>
+
             </androidx.appcompat.widget.Toolbar>
 
             <FrameLayout

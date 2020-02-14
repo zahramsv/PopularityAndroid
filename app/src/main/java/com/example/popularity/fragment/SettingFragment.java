@@ -35,7 +35,8 @@ public class SettingFragment extends BaseFragment implements SettingMvp.View {
 
         baseListener.changeToolbar(ToolbarKind.BACK,getString(R.string.setting_toolbar_txt));
         View view= inflater.inflate(R.layout.fragment_setting, container, false);
-        view.findViewById(R.id.btnLogout).setOnClickListener(view1 -> {
+
+        view.findViewById(R.id.btnPhoneLogout).setOnClickListener(view1 -> {
 
             SharedPrefsRepository sharedPrefsRepository = new SharedPrefsRepository(getContext());
             sharedPrefsRepository.DeleteUser();

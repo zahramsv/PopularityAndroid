@@ -1,8 +1,11 @@
 
 package com.example.popularity.presenter;
 
+import android.os.Bundle;
+
 import com.example.popularity.R;
 import com.example.popularity.fragment.HomeFragment;
+import com.example.popularity.fragment.RegisterFragment;
 import com.example.popularity.model.BaseResponse;
 import com.example.popularity.model.Login;
 import com.example.popularity.model.User;
@@ -45,21 +48,22 @@ public class MobileLoginPresenter implements
     @Override
     public void verifyCode(String verifyCode) {
         if (ConnectivityReceiver.isConnected()) {
-            if (sendSmsResult != null) {
-                if (sendSmsResult.getCode() == 200) {
+
 
                     apiServices.verifySms(userMobile, verifyCode).enqueue(new Callback<BaseResponse<VerifySmsResponseData>>() {
                         @Override
                         public void onResponse(Call<BaseResponse<VerifySmsResponseData>> call, Response<BaseResponse<VerifySmsResponseData>> response) {
 
-                            loginToServer();
 
-                            /*fixme:
-                               if (response.body().getData().isRegistered) {
-                                loginToServer();
-                            } else {
-                                view.showMessage(ShowMessageType.TOAST, view.getViewContext().getString(R.string.some_problems_when_use_api));
-                            }*/
+                            if (response.body().getData().isRegistered) {
+                                loginToServer(getLoginInfo());
+                            }
+                                else
+                                {
+                                    Bundle bundle=new Bundle();
+                                    bundle.putString("primary_key",userMobile);
+                                  baseComponent.openFragment(RegisterFragment.newInstance(),false,bundle);
+                                }
                         }
 
                         @Override
@@ -70,17 +74,11 @@ public class MobileLoginPresenter implements
                 } else {
                     baseComponent.showMessage(ShowMessageType.TOAST, view.getViewContext().getString(R.string.error_receive_code));
                 }
-            } else {
-                baseComponent.showMessage(ShowMessageType.TOAST, view.getViewContext().getString(R.string.error_api_call));
             }
-
-        } else {
-            baseComponent.showMessage(ShowMessageType.TOAST, view.getViewContext().getString(R.string.network_connection_error));
-        }
-    }
 
     @Override
     public void sendSMS(String mobile) {
+
 
         userMobile = mobile;
         if (ConnectivityReceiver.isConnected()) {
@@ -103,14 +101,15 @@ public class MobileLoginPresenter implements
     }
 
     @Override
-    public void loginToServer() {
+    public void loginToServer(Login user) {
         baseComponent.showLoadingBar(true);
-        userRepository.loginToServer(getLoginInfo(), this);
+        userRepository.loginToServer(user, this);
     }
 
     @Override
     public Login getLoginInfo() {
         Login user = new Login();
+       // return userRepository.getCurrentUser();
         user.setAvatar_url("myavatar.jpg");
         user.setFull_name("zahra hadi");
         user.setSocial_primary(userMobile);

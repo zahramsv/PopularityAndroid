@@ -41,7 +41,7 @@ public class SplashPresenter implements SplashMvp.Presenter {
         final Handler handler = new Handler();
         handler.postDelayed(() -> {
             getUserInfoFromServer();
-        }, 2000);
+        }, 1000);
     }
 
 

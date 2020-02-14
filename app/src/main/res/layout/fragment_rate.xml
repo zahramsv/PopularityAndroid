@@ -3,33 +3,43 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     tools:context=".fragment.RateFragment">
 
 
 
 
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        style="@style/CardViewStyle">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/spacing_medium"
+            android:layout_marginLeft="@dimen/spacing_medium"
             android:orientation="vertical">
+
+
+
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_middle"
-                android:orientation="vertical">
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    style="@style/MyBoldTextViewStyle"
-                    android:layout_gravity="center"
+                    style="@style/AccentNormalTextStyle"
                     android:text="@string/rate_to"/>
 
                 <TextView
                     android:layout_gravity="center"
-                    android:id="@+id/txtName"
-                    style="@style/MyTextViewStyle"
+                    android:id="@+id/txtFriendName"
+                    style="@style/AccentNormalTextStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
 
@@ -46,19 +56,13 @@
 
 
 
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/spacing_medium" />
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
-                    <View
-                        android:layout_width="@dimen/spacing_large"
-                        android:layout_height="0dp" />
+
 
                     <TextView
 
@@ -69,7 +73,6 @@
                         android:textColor="@color/black"
                         android:textStyle="bold" />
 
-
                     <View
                         android:layout_width="0dp"
                         android:layout_height="0dp"
@@ -77,13 +80,25 @@
 
                     <androidx.appcompat.widget.AppCompatRatingBar
                         android:id="@+id/rtLook"
-                        android:isIndicator="false"
-                        style="@style/Yellow.Small.AppCompatRatingBar"
                         android:layout_width="wrap_content"
-                        android:layout_height="24dp"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="@dimen/spacing_large"
+                        android:layout_gravity="right"
                         android:numStars="10"
                         android:stepSize="1"
-                        android:theme="@style/Yellow.Small.AppCompatRatingBar" />
+                        android:progressDrawable="@drawable/my_rating_display"/>
+
+                    <androidx.appcompat.widget.AppCompatRatingBar
+
+                        android:visibility="gone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="@dimen/spacing_large"
+                        android:layout_gravity="right"
+                        android:numStars="10"
+                        android:stepSize="1"
+                        android:progressDrawable="@drawable/my_rating_display"/>
+
 
                     <View
                         android:layout_width="@dimen/spacing_xlarge"
@@ -114,9 +129,6 @@
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
-                    <View
-                        android:layout_width="@dimen/spacing_large"
-                        android:layout_height="0dp" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -132,15 +144,17 @@
                         android:layout_height="0dp"
                         android:layout_weight="1" />
 
+
                     <androidx.appcompat.widget.AppCompatRatingBar
                         android:id="@+id/rtFitness"
-                        style="@style/Yellow.Small.AppCompatRatingBar"
                         android:layout_width="wrap_content"
-                        android:layout_height="22dp"
-                        android:isIndicator="false"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="@dimen/spacing_large"
+                        android:layout_gravity="right"
                         android:numStars="10"
                         android:stepSize="1"
-                        android:theme="@style/Yellow.Small.AppCompatRatingBar" />
+                        android:progressDrawable="@drawable/my_rating_display"/>
+
 
                     <View
                         android:layout_width="@dimen/spacing_xlarge"
@@ -171,9 +185,7 @@
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
-                    <View
-                        android:layout_width="@dimen/spacing_large"
-                        android:layout_height="0dp" />
+
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -191,13 +203,19 @@
 
                     <androidx.appcompat.widget.AppCompatRatingBar
                         android:id="@+id/rtStyle"
-                        style="@style/Yellow.Small.AppCompatRatingBar"
                         android:layout_width="wrap_content"
-                        android:layout_height="22dp"
-                        android:isIndicator="false"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="@dimen/spacing_large"
+                        android:layout_gravity="right"
                         android:numStars="10"
                         android:stepSize="1"
-                        android:theme="@style/Yellow.Small.AppCompatRatingBar" />
+                        android:progressDrawable="@drawable/my_rating_display"/>
+
+
+
+
+
+
 
                     <View
                         android:layout_width="@dimen/spacing_xlarge"
@@ -228,9 +246,7 @@
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
-                    <View
-                        android:layout_width="@dimen/spacing_large"
-                        android:layout_height="0dp" />
+
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -246,15 +262,19 @@
                         android:layout_height="0dp"
                         android:layout_weight="1" />
 
+
                     <androidx.appcompat.widget.AppCompatRatingBar
                         android:id="@+id/rtPersonality"
-                        style="@style/Yellow.Small.AppCompatRatingBar"
                         android:layout_width="wrap_content"
-                        android:layout_height="22dp"
-                        android:isIndicator="false"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="@dimen/spacing_large"
+                        android:layout_gravity="right"
                         android:numStars="10"
                         android:stepSize="1"
-                        android:theme="@style/Yellow.Small.AppCompatRatingBar" />
+                        android:progressDrawable="@drawable/my_rating_display"/>
+
+
+
 
                     <View
                         android:layout_width="@dimen/spacing_xlarge"
@@ -275,19 +295,13 @@
 
 
 
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/spacing_medium" />
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
-                    <View
-                        android:layout_width="@dimen/spacing_large"
-                        android:layout_height="0dp" />
+
 
                     <TextView
 
@@ -304,15 +318,20 @@
                         android:layout_height="0dp"
                         android:layout_weight="1" />
 
+
                     <androidx.appcompat.widget.AppCompatRatingBar
                         android:id="@+id/rtTrustworthy"
-                        style="@style/Yellow.Small.AppCompatRatingBar"
                         android:layout_width="wrap_content"
-                        android:layout_height="22dp"
-                        android:isIndicator="false"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="@dimen/spacing_large"
+                        android:layout_gravity="right"
                         android:numStars="10"
                         android:stepSize="1"
-                        android:theme="@style/Yellow.Small.AppCompatRatingBar" />
+                        android:progressDrawable="@drawable/my_rating_display"/>
+
+
+
+
 
                     <View
                         android:layout_width="@dimen/spacing_xlarge"
@@ -343,9 +362,7 @@
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
-                    <View
-                        android:layout_width="@dimen/spacing_large"
-                        android:layout_height="0dp" />
+
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -363,13 +380,16 @@
 
                     <androidx.appcompat.widget.AppCompatRatingBar
                         android:id="@+id/rtPopularity"
-                        style="@style/Yellow.Small.AppCompatRatingBar"
                         android:layout_width="wrap_content"
-                        android:layout_height="22dp"
-                        android:isIndicator="false"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="@dimen/spacing_large"
+                        android:layout_gravity="right"
                         android:numStars="10"
                         android:stepSize="1"
-                        android:theme="@style/Yellow.Small.AppCompatRatingBar" />
+                        android:progressDrawable="@drawable/my_rating_display"/>
+
+
+
 
                     <View
                         android:layout_width="@dimen/spacing_xlarge"
@@ -397,14 +417,20 @@
 
             </LinearLayout>
 
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/spacing_xxxlarge"
-                android:text="@string/Save"
-                android:layout_margin="@dimen/spacing_medium"
-                android:id="@+id/btnSaveRates"
-                android:background="@drawable/submit_btn_style"/>
+           <RelativeLayout
+               android:layout_width="match_parent"
+               android:layout_height="match_parent">
+               <Button
+                   style="@style/SendReceiveButtonStyle"
+                   android:layout_centerHorizontal="true"
+                   android:layout_alignParentBottom="true"
+                   android:text="@string/submit"
+                   android:id="@+id/btnSaveRates"
+                   />
+           </RelativeLayout>
         </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
 
 
 </FrameLayout>
