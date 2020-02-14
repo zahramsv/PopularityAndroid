@@ -101,8 +101,6 @@
     <style name="RateItemsTextStyle" parent="android:Widget.TextView">
         <item name="android:textColor">@color/colorAccent</item>
         <item name="android:textStyle">normal</item>
-        <item name="android:layout_height">@dimen/secondary_text_view_height</item>
-        <item name="android:layout_width">@dimen/secondary_text_view_width</item>
         <item name="android:textSize">@dimen/secondary_text_size</item>
         <item name="android:gravity">left</item>
         <item name="android:textAlignment" tools:targetApi="jelly_bean_mr1">viewStart</item>
