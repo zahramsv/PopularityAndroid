@@ -42,9 +42,6 @@ public class HomePresenter extends FileProvider implements HomeMvp.Presenter {
     private FileOutputStream outputStream2;
     private HomeMvp.View view;
 
-    public HomePresenter() {
-    }
-
     public HomePresenter(HomeMvp.View view, Context context) {
         this.view = view;
         this.context = context;
