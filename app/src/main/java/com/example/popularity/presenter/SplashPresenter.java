@@ -15,12 +15,9 @@ import com.example.popularity.mvp.SplashMvp;
 import com.example.popularity.myInterface.ApiServices;
 import com.example.popularity.myInterface.MainActivityTransaction;
 import com.example.popularity.utils.MyApp;
-import com.example.popularity.utils.RetrofitInstance;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 public class SplashPresenter implements SplashMvp.Presenter {
 
@@ -51,10 +48,8 @@ public class SplashPresenter implements SplashMvp.Presenter {
         String social_primary = prefs.getString("social_primary", null);
 
         if (token != null && social_primary != null) {
-            RetrofitInstance retrofitInstance = new RetrofitInstance();
-            Retrofit retrofit = retrofitInstance.getRetrofitInstance();
 
-            ApiServices apiServices = retrofit.create(ApiServices.class);
+            ApiServices apiServices = MyApp.getInstance().getBaseComponent().provideApiService();
             apiServices.getUserInfo(token, social_primary).enqueue(new Callback<BaseResponse<User>>() {
                 @Override
                 public void onResponse(Call<BaseResponse<User>> call, Response<BaseResponse<User>> response) {

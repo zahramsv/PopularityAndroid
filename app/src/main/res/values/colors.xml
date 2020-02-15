@@ -4,12 +4,12 @@
     <color name="colorPrimaryDark">#550025</color>
     <color name="colorPrimaryLight">#bc477b</color>
     <color name="colorAccent">#005609</color>
-    <color name="secondary_text">#B0BCA6</color>
-    <color name="primary_text">#fff</color>
+
+    <color name="primary_text">@color/black</color>
+    <color name="secondary_text">#2b2b2b</color>
+
     <color name="colorAccentDark">#F50057</color>
     <color name="colorAccentLight">#d05ce3</color>
-
-
 
     <color name="accent_click">#03480B</color>
     <color name="primary_click">#6F0C40</color>

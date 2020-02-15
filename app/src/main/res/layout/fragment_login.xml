@@ -33,7 +33,7 @@
                 android:layout_height="@dimen/app_icon_normal_width"
                 android:layout_alignParentRight="true"
                 android:layout_margin="@dimen/spacing_large"
-                android:src="@drawable/ic_launcher" />
+                android:src="@drawable/ic_app" />
         </RelativeLayout>
 
 
@@ -52,7 +52,7 @@
 
 
 
-                <TextView
+                <me.biubiubiu.justifytext.library.JustifyTextView
                     android:layout_width="match_parent"
                     style="@style/LoginWayDescriptionStyle"
                     android:text="@string/login_way_description"

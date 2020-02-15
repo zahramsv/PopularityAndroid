@@ -6,7 +6,6 @@
     android:background="@color/colorPrimaryDark"
     tools:context=".fragment.SplashFragment">
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -14,47 +13,30 @@
 
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:gravity="center"
+            style="@style/HeaderTextStyle"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/spacing_xlarge"
+            android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_xxxlarge"
-            android:text="@string/social_popularity"
-            style="@style/PrimaryTextStyle" />
+            android:gravity="center"
+            android:textSize="30sp"
+            android:text="@string/social_popularity" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="@dimen/splash_pic_width"
+            android:layout_height="@dimen/splash_pic_height"
             android:layout_gravity="center"
-            android:layout_marginBottom="@dimen/spacing_xxxxlarge"
-            >
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="@dimen/splash_pic_width"
-                android:layout_height="@dimen/splash_pic_height"
-                android:layout_centerInParent="true"
-                android:src="@drawable/ic_launcher"/>
-
-        </RelativeLayout>
-
+            android:layout_marginTop="100dp"
+            android:src="@drawable/ic_app" />
 
     </LinearLayout>
 
-    <RelativeLayout
+
+    <androidx.appcompat.widget.AppCompatTextView
+        style="@style/SecondaryTextStyle"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-       >
-
-       <androidx.appcompat.widget.AppCompatTextView
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:gravity="center"
-           android:layout_marginBottom="@dimen/spacing_large"
-           android:text="@string/app_version"
-           style="@style/SecondaryTextStyle"
-            />
-
-    </RelativeLayout>
-
+        android:layout_height="100dp"
+        android:gravity="center"
+        android:layout_gravity="bottom"
+        android:text="@string/app_version" />
 
 </FrameLayout>

@@ -28,7 +28,7 @@
 
 
                 <TextView
-                    style="@style/AccentNormalTextStyle"
+                    style="@style/PrimaryTextStyle"
                     android:layout_width="@dimen/input_edit_text_width"
                     android:layout_height="@dimen/input_edit_text_height"
                     android:layout_marginLeft="@dimen/spacing_large"
@@ -44,7 +44,7 @@
 
 
             <TextView
-                style="@style/AccentSecondaryTextStyle"
+                style="@style/SecondaryTextStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAlignment="center"

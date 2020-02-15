@@ -13,7 +13,7 @@
     <string name="about_us">About us</string>
     <string name="settings">Settings</string>
     <string name="rate_us">Rate us</string>
-    <string name="rate_to_friends">Rate to friends</string>
+    <string name="rate_to_friends">Rate</string>
     <string name="login_page">Login Page</string>
     <string name="login_with">Choose Login Way </string>
     <string name="error_under_construction">This part is under construction!</string>
@@ -24,7 +24,7 @@
         application and now we made it, we made popularity application in grady way, and we are so
         confused that how we made it, but the important thing is that done it quickly and now in
         this whole world we are the people made our goal and have fun with it.
-        \n \n our team members : \n Zahra Mousavi \n Mohammad Hadi</string>
+        \n our team members : \n Zahra Mousavi \n Mohammad Hadi</string>
 
     <string name="privacy_policy_txt">
      the Many privacy laws around the world require businesses to provide their
@@ -57,7 +57,7 @@
     <string name="rate_personality">Personality</string>
     <string name="rate_trustworthy">Trustworthy</string>
     <string name="rate_popularity">Popularity</string>
-    <string name="rate_to">What you think about </string>
+    <string name="rate_to">What you think about your friend</string>
     <string name="submit">Submit</string>
     <string name="rate_done">Rate Done !!</string>
     <string name="okay">OKAY</string>
@@ -84,7 +84,7 @@
 
 
     <string name="login_with_instagram_btn_txt">Login with Instagram</string>
-    <string name="login_with_twitter_btn_txt">Login with Twitter</string>
+    <string name="login_with_twitter_btn_txt">Login Twitter</string>
     <string name="login_with_facebook_btn_txt">Login with FaceBook</string>
     <string name="login_with_phone_number_btn_txt">Login With Phone Number</string>
     <string name="login_with_mock_btn_txt">Login With Mock</string>

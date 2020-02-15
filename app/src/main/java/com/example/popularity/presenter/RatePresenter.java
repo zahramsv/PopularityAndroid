@@ -17,13 +17,11 @@ import com.example.popularity.mvp.RateMvp;
 import com.example.popularity.myInterface.ApiServices;
 import com.example.popularity.myInterface.MainActivityTransaction;
 import com.example.popularity.utils.MyApp;
-import com.example.popularity.utils.RetrofitInstance;
 import com.example.popularity.utils.ShowMessageType;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 public class RatePresenter implements RateMvp.Presenter {
 

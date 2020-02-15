@@ -8,7 +8,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatImageView;
 import androidx.core.view.GravityCompat;
+import androidx.core.widget.ImageViewCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -36,6 +38,7 @@ public class MainActivity extends AppCompatActivity implements
     , MainMvp.View
 {
     private TextView toolbarTitle;
+    private AppCompatImageView imageToolbarAppIcon;
     private DrawerLayout drawerLayout;
     private ProgressBar loadingBar;
     private ImageView toolbarIcon;
@@ -60,13 +63,12 @@ public class MainActivity extends AppCompatActivity implements
                 Snackbar snackbar = Snackbar.make(parentView, message, Snackbar.LENGTH_LONG);
                 snackbar.setAction(getString(R.string.okay), view -> {
                     snackbar.dismiss();
-                    //Snackbar.make(parentView, "UNDO CLICKED!", Snackbar.LENGTH_SHORT).show();
                 });
                 snackbar.show();
                 break;
 
             case TOAST:
-                Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, message, Toast.LENGTH_LONG).show();
                 break;
         }
     }
@@ -116,6 +118,7 @@ public class MainActivity extends AppCompatActivity implements
                 drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
                 findViewById(R.id.toolbar).setVisibility(View.VISIBLE);
                 toolbarIcon.setImageResource(R.drawable.ic_menu);
+                imageToolbarAppIcon.setVisibility(View.INVISIBLE);
                 toolbarIcon.setOnClickListener(v -> {
                     openDrawer();
                 });
@@ -125,6 +128,7 @@ public class MainActivity extends AppCompatActivity implements
             case BACK:
                 drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
                 findViewById(R.id.toolbar).setVisibility(View.VISIBLE);
+                imageToolbarAppIcon.setVisibility(View.VISIBLE);
                 toolbarIcon.setImageResource(R.drawable.ic_back);
                 toolbarIcon.setOnClickListener(v -> {
                     onBackPressed();
@@ -200,6 +204,7 @@ public class MainActivity extends AppCompatActivity implements
         drawerLayout = findViewById(R.id.drawerLayout);
         toolbarIcon = findViewById(R.id.imgToolbarIcon);
         toolbarTitle = findViewById(R.id.txtToolbar);
+        imageToolbarAppIcon=findViewById(R.id.imageToolbarAppIcon);
         loadingBar = findViewById(R.id.loadingBar);
     }
 

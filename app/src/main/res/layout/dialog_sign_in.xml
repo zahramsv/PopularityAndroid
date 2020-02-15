@@ -96,14 +96,7 @@
             android:textColor="@color/deep_purple_800"
             android:textStyle="bold" />
 
-        <View
-            android:layout_width="0dp"
-            android:layout_height="@dimen/spacing_medium" />
 
-
-        <View
-            android:layout_width="0dp"
-            android:layout_height="@dimen/spacing_xlarge" />
 
     </LinearLayout>
 

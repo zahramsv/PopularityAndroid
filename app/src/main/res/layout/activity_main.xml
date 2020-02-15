@@ -22,7 +22,7 @@
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="55dp"
                 android:background="@color/colorPrimary">
 
                 <LinearLayout
@@ -32,29 +32,34 @@
 
                     <ImageView
                         android:id="@+id/imgToolbarIcon"
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:paddingTop="10dp"
-                        android:paddingLeft="10dp"
+                        android:layout_width="@dimen/toolbar_app_icon_small_width"
+                        android:layout_height="match_parent"
+                        android:padding="@dimen/spacing_small"
                         tools:src="@drawable/ic_menu"
-                        android:paddingBottom="10dp"
                     />
 
                     <TextView
+                        style="@style/HeaderTextStyle"
                         android:id="@+id/txtToolbar"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:gravity="center"
-                        android:paddingRight="50dp"
-                        android:textColor="@color/white"
                         tools:text="@string/app_name" />
 
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:layout_width="@dimen/app_icon_small_width"
-                        android:src="@drawable/ic_launcher"
-                        android:layout_margin="@dimen/spacing_small"
-                        android:layout_height="@dimen/app_icon_small_height" />
+                 <RelativeLayout
+                     android:layout_width="wrap_content"
+                     android:layout_height="match_parent">
+s
+                     <androidx.appcompat.widget.AppCompatImageView
+                         android:layout_centerInParent="true"
+                         android:layout_width="@dimen/toolbar_app_icon_small_width"
+                         android:layout_height="@dimen/toolbar_app_icon_small_height"
+                         android:id="@+id/imageToolbarAppIcon"
+                         android:src="@drawable/toolbar_ic_launcher"
+                         android:layout_marginRight="@dimen/spacing_xxlarge"
+                         android:layout_gravity="center_horizontal"
+                          />
+                 </RelativeLayout>
 
                 </LinearLayout>
 

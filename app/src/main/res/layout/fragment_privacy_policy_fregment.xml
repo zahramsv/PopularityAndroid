@@ -25,7 +25,8 @@
                 android:layout_height="match_parent"
                 >
 
-            <TextView
+            <com.codesgood.views.JustifiedTextView
+                android:lineSpacingExtra="@dimen/spacing_small"
                 style="@style/LoginWayDescriptionStyle"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

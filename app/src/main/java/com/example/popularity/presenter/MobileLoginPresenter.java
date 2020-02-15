@@ -72,7 +72,7 @@ public class MobileLoginPresenter implements
                         }
                     });
                 } else {
-                    baseComponent.showMessage(ShowMessageType.TOAST, view.getViewContext().getString(R.string.error_receive_code));
+                    baseComponent.showMessage(ShowMessageType.TOAST, view.getViewContext().getString(R.string.network_connection_error));
                 }
             }
 
@@ -81,7 +81,6 @@ public class MobileLoginPresenter implements
 
 
         userMobile = mobile;
-        if (ConnectivityReceiver.isConnected()) {
 
             apiServices.sendSms(mobile).enqueue(new Callback<BaseResponse>() {
                 @Override
@@ -95,10 +94,8 @@ public class MobileLoginPresenter implements
                     baseComponent.showMessage(ShowMessageType.SNACK, view.getViewContext().getString(R.string.some_problems_when_use_api));
                 }
             });
-        } else {
-            baseComponent.showMessage(ShowMessageType.SNACK, view.getViewContext().getString(R.string.network_connection_error));
         }
-    }
+
 
     @Override
     public void loginToServer(Login user) {

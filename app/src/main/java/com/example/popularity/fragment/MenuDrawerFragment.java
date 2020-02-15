@@ -18,7 +18,10 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.popularity.R;
+import com.example.popularity.model.Login;
+import com.example.popularity.model.repository.UserRepository;
 import com.example.popularity.mvp.MenuDrawerMvp;
+import com.example.popularity.utils.MyApp;
 import com.example.popularity.utils.ShowMessageType;
 
 
@@ -26,12 +29,14 @@ public class MenuDrawerFragment extends BaseFragment implements MenuDrawerMvp.Vi
 
     private View view;
     private LinearLayout btnRateUs, btnPrivacyPolicy, btnSettings, btnAboutUs,btnHome;
+    private UserRepository userRepository;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_menu_drawer, container, false);
         TextView username = view.findViewById(R.id.txtName);
+        userRepository=new UserRepository(MyApp.getInstance().getBaseComponent().provideApiService());
         SharedPreferences preferences = getActivity().getSharedPreferences("user_data", Context.MODE_PRIVATE);
         username.setText(preferences.getString("full_name", null));
         return view;
@@ -54,7 +59,15 @@ public class MenuDrawerFragment extends BaseFragment implements MenuDrawerMvp.Vi
 
 
         btnHome.setOnClickListener(view -> {
-            baseListener.openFragment(HomeFragment.newInstance(),true,null);
+            if (userRepository.getCurrentUser()!=null)
+            {
+                baseListener.openFragment(HomeFragment.newInstance(),true,null);
+            }
+            else
+            {
+                baseListener.openFragment(LoginFragment.newInstance(),true,null);
+
+            }
         });
         btnAboutUs.setOnClickListener(v -> {
             if (baseListener != null) {
@@ -76,6 +89,7 @@ public class MenuDrawerFragment extends BaseFragment implements MenuDrawerMvp.Vi
 
         btnSettings.setOnClickListener(view -> {
             if (baseListener != null) {
+
                 baseListener.openFragment(SettingFragment.newInstance(), true, null);
             }
         });

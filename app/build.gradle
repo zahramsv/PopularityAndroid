@@ -52,4 +52,7 @@ dependencies {
     annotationProcessor 'com.google.dagger:dagger-compiler:2.26'
 
 
+
+    implementation 'com.codesgood:justifiedtextview:1.1.0'
+    implementation 'me.biubiubiu.justifytext:library:1.1'
 }

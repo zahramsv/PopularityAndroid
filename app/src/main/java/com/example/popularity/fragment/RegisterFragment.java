@@ -64,17 +64,14 @@ public class RegisterFragment extends BaseFragment implements MobileLoginMvp.Vie
         init(view);
         Bundle bundle=getArguments();
         String primaryKey=bundle.getString("primary_key");
-        btnRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Login user=new Login();
-                user.setSocial_type(0);
-                user.setUsername(edtUserName.getText().toString());
-                user.setFull_name(edtFullName.getText().toString());
-                user.setSocial_primary(primaryKey);
-                user.setAvatar_url("test.jpg");
-                presenter.loginToServer(user);
-            }
+        btnRegister.setOnClickListener(view1 -> {
+            Login user=new Login();
+            user.setSocial_type(0);
+            user.setUsername(edtUserName.getText().toString());
+            user.setFull_name(edtFullName.getText().toString());
+            user.setSocial_primary(primaryKey);
+            user.setAvatar_url("test.jpg");
+            presenter.loginToServer(user);
         });
 
 

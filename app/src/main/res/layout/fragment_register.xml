@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,185 +7,136 @@
     android:orientation="vertical">
 
 
-    <LinearLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/app_icon_normal_height"
-            android:layout_marginTop="@dimen/margin_top_from_toolbar">
-
-            <TextView
-                style="@style/HeaderTextStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_marginLeft="@dimen/spacing_xxlarge"
-                android:layout_marginBottom="@dimen/spacing_xlarge"
-                android:text="@string/app_name"
-                android:textColor="@color/white" />
-
-
-            <ImageView
-                android:layout_width="@dimen/app_icon_normal_height"
-                android:layout_height="@dimen/app_icon_normal_width"
-                android:layout_alignParentRight="true"
-                android:layout_margin="@dimen/spacing_large"
-                android:src="@drawable/ic_launcher" />
-        </RelativeLayout>
-
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardViewMobileRegister"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="@dimen/login_type_card_view_margin"
-            app:cardCornerRadius="@dimen/login_type_card_view_corner_radius">
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/app_icon_normal_height"
+                android:layout_marginTop="@dimen/margin_top_from_toolbar">
+
+                <TextView
+                    style="@style/HeaderTextStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="@dimen/spacing_xxlarge"
+                    android:layout_marginBottom="@dimen/spacing_xlarge"
+                    android:text="@string/app_name"
+                    android:textColor="@color/white" />
 
 
-            <LinearLayout
+                <ImageView
+                    android:layout_width="@dimen/app_icon_normal_height"
+                    android:layout_height="@dimen/app_icon_normal_width"
+                    android:layout_alignParentRight="true"
+                    android:layout_margin="@dimen/spacing_large"
+                    android:src="@drawable/ic_app" />
+            </RelativeLayout>
+
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardViewMobileRegister"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="center"
-                android:orientation="vertical">
+                android:layout_margin="@dimen/login_type_card_view_margin"
+                app:cardCornerRadius="@dimen/login_type_card_view_corner_radius">
 
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical">
 
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:layout_width="match_parent"
+                    <com.codesgood.views.JustifiedTextView
                         style="@style/LoginWayDescriptionStyle"
-                        android:text="@string/register_description"
-                        />
-                </RelativeLayout>
-
-
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="@dimen/app_icon_normal_width"
-                    android:layout_height="@dimen/app_icon_normal_height"
-                    android:src="@drawable/ic_avatar_white"
-                    android:tint="@color/black"
-                    />
-
-
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_margin="@dimen/spacing_large"
-                    android:hint="@string/full_name">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/edtFullName"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+                        android:layout_marginTop="@dimen/spacing_large"
+                        android:text="@string/register_description" />
 
-                </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_margin="@dimen/spacing_large"
-                    android:hint="@string/user_name">
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="@dimen/app_icon_normal_width"
+                        android:layout_height="@dimen/app_icon_normal_height"
+                        android:src="@drawable/ic_avatar_white"
+                        android:tint="@color/colorAccent" />
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/edtUserName"
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="@dimen/spacing_xxxlarge"
+                        android:layout_marginLeft="@dimen/spacing_large"
+                        android:layout_marginTop="@dimen/spacing_xxxlarge"
+                        android:layout_marginRight="@dimen/spacing_large"
+                        android:hint="@string/full_name">
 
-                </com.google.android.material.textfield.TextInputLayout>
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edtFullName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/normal_text_size" />
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    </com.google.android.material.textfield.TextInputLayout>
 
-                    <androidx.appcompat.widget.AppCompatButton
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/spacing_xxxlarge"
+                        android:layout_marginLeft="@dimen/spacing_large"
+                        android:layout_marginTop="@dimen/spacing_middle"
+                        android:layout_marginRight="@dimen/spacing_large"
+                        android:hint="@string/user_name"
+                        app:boxStrokeColor="@color/colorAccent">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edtUserName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/normal_text_size" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/register"
-                        android:id="@+id/btnRegister"
-                        android:layout_alignParentBottom="true"
-                        style="@style/SendReceiveButtonStyle"/>
-                </RelativeLayout>
+                        android:layout_marginBottom="@dimen/spacing_large">
 
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/btnRegister"
+                            style="@style/SendReceiveButtonStyle"
+                            android:layout_alignParentBottom="true"
+                            android:text="@string/register" />
+                    </RelativeLayout>
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
 
 
-        <androidx.cardview.widget.CardView
-            android:visibility="gone"
-            android:id="@+id/cardViewVerifyCode"
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            style="@style/SecondaryTextStyle"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/login_type_card_view_height"
-            android:layout_margin="@dimen/login_type_card_view_margin"
-            app:cardCornerRadius="@dimen/login_type_card_view_corner_radius">
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:orientation="vertical">
-
-
-
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:layout_width="match_parent"
-                        style="@style/LoginWayDescriptionStyle"
-                        android:text="@string/login_with_phone_number_description"
-                        />
-                </RelativeLayout>
-
-
-
-                <androidx.appcompat.widget.AppCompatEditText
-                    android:layout_marginTop="@dimen/spacing_xxxxlarge"
-                    android:layout_width="match_parent"
-                    android:id="@+id/edtVerifyCode"
-                    android:layout_marginLeft="@dimen/spacing_middle"
-                    android:layout_marginRight="@dimen/spacing_middle"
-                    android:layout_height="wrap_content"
-                    />
-
-
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/verify_code"
-                    android:id="@+id/btnVerifyCode"
-                    style="@style/SendReceiveButtonStyle"/>
-
-
-
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:layout_marginBottom="@dimen/spacing_large"
-                style="@style/SecondaryTextStyle"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/secondary_text_view_height"
-                android:layout_alignParentBottom="true"
-                android:text="@string/copy_right"
-                android:gravity="center"/>
-        </RelativeLayout>
-    </LinearLayout>
+            android:layout_height="@dimen/secondary_text_view_height"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/spacing_large"
+            android:gravity="center"
+            android:text="@string/copy_right" />
+    </RelativeLayout>
 
 
 </LinearLayout>

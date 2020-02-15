@@ -23,6 +23,12 @@ public class LoginFragment extends BaseFragment implements
     private View view;
     private LoginFragmentMvp.Presenter presenter;
 
+
+    public static LoginFragment newInstance()
+    {
+        LoginFragment loginFragment=new LoginFragment();
+        return loginFragment;
+    }
     @Override
     public void onHiddenChanged(boolean hidden) {
         if (!hidden)
