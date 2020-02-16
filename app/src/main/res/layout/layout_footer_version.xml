@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.AppCompatTextView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="80dp"
+    android:layout_width="match_parent"
+    style="@style/SecondaryTextStyle"
+    android:textColor="@color/white"
+    android:layout_gravity="bottom"
+    android:gravity="center"
+    android:text="@string/app_version" />

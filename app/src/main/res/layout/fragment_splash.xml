@@ -1,42 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimaryDark"
-    tools:context=".fragment.SplashFragment">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-
-        <androidx.appcompat.widget.AppCompatTextView
-            style="@style/HeaderTextStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_xxxlarge"
-            android:gravity="center"
-            android:textSize="30sp"
-            android:text="@string/social_popularity" />
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="@dimen/splash_pic_width"
-            android:layout_height="@dimen/splash_pic_height"
-            android:layout_gravity="center"
-            android:layout_marginTop="100dp"
-            android:src="@drawable/ic_app" />
-
-    </LinearLayout>
-
+    tools:context=".fragment.SplashFragment"
+    android:orientation="vertical">
 
     <androidx.appcompat.widget.AppCompatTextView
-        style="@style/SecondaryTextStyle"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:gravity="center"
-        android:layout_gravity="bottom"
-        android:text="@string/app_version" />
+        style="@style/HeaderTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="55dp"
+        android:text="@string/social_popularity"
+        android:textSize="30sp" />
 
-</FrameLayout>
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="100dp"
+        android:src="@drawable/ic_app" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <include layout="@layout/layout_footer_version"/>
+</LinearLayout>

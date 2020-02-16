@@ -8,80 +8,75 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     tools:context=".activity.MainActivity">
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:id="@+id/ctlParentView"
-        android:layout_height="match_parent">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ctlParentView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <!--content of page-->
         <LinearLayout
-            android:id="@+id/linearLayout"
+            android:id="@+id/linearLayout2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-
+            <!--toolbar-->
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="55dp"
+                android:layout_height="?attr/actionBarSize"
                 android:background="@color/colorPrimary">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
-
+                    <!--navigation button-->
                     <ImageView
                         android:id="@+id/imgToolbarIcon"
-                        android:layout_width="@dimen/toolbar_app_icon_small_width"
+                        android:layout_width="@dimen/toolbar_icon_size"
                         android:layout_height="match_parent"
-                        android:padding="@dimen/spacing_small"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                        android:paddingRight="10dp"
                         tools:src="@drawable/ic_menu"
-                    />
-
+                        android:contentDescription="@string/image_hint_navigation_toolbar" />
+                    <!--toolbar title-->
                     <TextView
-                        style="@style/HeaderTextStyle"
                         android:id="@+id/txtToolbar"
+                        style="@style/HeaderTextStyle"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         tools:text="@string/app_name" />
-
-                 <RelativeLayout
-                     android:layout_width="wrap_content"
-                     android:layout_height="match_parent">
-s
-                     <androidx.appcompat.widget.AppCompatImageView
-                         android:layout_centerInParent="true"
-                         android:layout_width="@dimen/toolbar_app_icon_small_width"
-                         android:layout_height="@dimen/toolbar_app_icon_small_height"
-                         android:id="@+id/imageToolbarAppIcon"
-                         android:src="@drawable/toolbar_ic_launcher"
-                         android:layout_marginRight="@dimen/spacing_xxlarge"
-                         android:layout_gravity="center_horizontal"
-                          />
-                 </RelativeLayout>
-
+                    <!--logo image-->
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/imageToolbarAppIcon"
+                        android:layout_width="@dimen/toolbar_icon_size"
+                        android:layout_height="@dimen/toolbar_icon_size"
+                        android:src="@drawable/ic_app"
+                        android:padding="10dp"/>
                 </LinearLayout>
 
             </androidx.appcompat.widget.Toolbar>
-
+            <!--content of each fragment-->
             <FrameLayout
                 android:id="@+id/frmPlaceholder"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </LinearLayout>
-
+        <!--loading bar-->
         <ProgressBar
             android:id="@+id/loadingBar"
-            android:layout_width="@dimen/spacing_xxxlarge"
-            android:layout_height="@dimen/spacing_xxlarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:visibility="gone"
-            tools:visibility="visible"
-            app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
-            app:layout_constraintEnd_toEndOf="@+id/linearLayout"
-            app:layout_constraintStart_toStartOf="@+id/linearLayout"
-            app:layout_constraintTop_toTopOf="@+id/linearLayout" />
+            app:layout_constraintBottom_toTopOf="parent"
+            app:layout_constraintLeft_toRightOf="parent"
+            app:layout_constraintRight_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="parent"
+            tools:visibility="visible" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+    <!--sliding menu-->
     <fragment
         android:id="@+id/fragment_nd"
         android:name="com.example.popularity.fragment.MenuDrawerFragment"

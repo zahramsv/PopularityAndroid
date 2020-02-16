@@ -40,13 +40,17 @@
     <dimen name="login_type_card_view_corner_radius">20dp</dimen>
     <dimen name="login_type_card_view_margin">20dp</dimen>
 
+    <dimen name="main_cardview_content_margin">20dp</dimen>
+    <dimen name="main_cardview_content_corner_radius">20dp</dimen>
+    <dimen name="main_cardview_inside_padding">10dp</dimen>
+
 
 
      <!--new_______________________ -->
 
     <!-- icon size in toolbar-->
 
-    <dimen name="toolbar_app_icon_small_width">40dp</dimen>
+    <dimen name="toolbar_icon_size">56dp</dimen>
     <dimen name="toolbar_app_icon_small_height">40dp</dimen>
     <dimen name="app_icon_small_width">46dp</dimen>
     <dimen name="app_icon_small_height">46dp</dimen>

@@ -73,7 +73,7 @@
     <string name="rate_toolbar">Rate To Friends</string>
     <string name="empty"></string>
     <string name="rate_before">You Rate to this Friend Before</string>
-    <string name="login_way_description">welcome to popularity.\n please choose your data source…</string>
+    <string name="login_way_description"> welcome to popularity.\nplease choose your data source…</string>
     <string name="login_with_phone_number_description">enter your mobile number which you want to login with</string>
     <string name="register_description">submit your base data to register it the world of popularity</string>
 
@@ -89,6 +89,7 @@
     <string name="login_with_phone_number_btn_txt">Login With Phone Number</string>
     <string name="login_with_mock_btn_txt">Login With Mock</string>
 
+    <string name="hint_verify_code">verify code</string>
     <string name="network_connection_error">Please check your connection</string>
     <string name="error_receive_code">you should get a code..</string>
     <string name="rate_to_friend">Rate To:</string>
@@ -107,5 +108,8 @@
     <string name="rate_submit_description">you rate to your friend done successfully
         he she will see the result when she login to his her popularity account
         but would not distinguish who rate him her</string>
+
+
+    <string name="image_hint_navigation_toolbar">this button open drawer menu for more navigation control.</string>
 </resources>
 

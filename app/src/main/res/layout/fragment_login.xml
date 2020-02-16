@@ -1,117 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary">
+    android:background="@color/colorPrimary"
+    android:orientation="vertical">
+    <!--header-->
+    <include layout="@layout/layout_auth_header" />
 
-
-    <LinearLayout
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_margin="@dimen/main_cardview_content_margin"
+        app:cardCornerRadius="@dimen/main_cardview_content_corner_radius">
 
-        <RelativeLayout
+        <!--button list-->
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="@dimen/app_icon_normal_height"
-            android:layout_marginTop="@dimen/margin_top_from_toolbar">
-
-            <TextView
-                style="@style/HeaderTextStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_marginLeft="@dimen/spacing_xxlarge"
-                android:layout_marginBottom="@dimen/spacing_xlarge"
-                android:text="@string/app_name"
-                android:textColor="@color/white" />
-
-
-            <ImageView
-                android:layout_width="@dimen/app_icon_normal_height"
-                android:layout_height="@dimen/app_icon_normal_width"
-                android:layout_alignParentRight="true"
-                android:layout_margin="@dimen/spacing_large"
-                android:src="@drawable/ic_app" />
-        </RelativeLayout>
-
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/login_type_card_view_height"
-            android:layout_margin="@dimen/login_type_card_view_margin"
-            app:cardCornerRadius="@dimen/login_type_card_view_corner_radius">
-
+            android:layout_height="match_parent">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/main_cardview_inside_padding"
                 android:gravity="center"
                 android:orientation="vertical">
 
-
-
-                <me.biubiubiu.justifytext.library.JustifyTextView
+                <TextView
+                    style="@style/PrimaryTextStyle"
                     android:layout_width="match_parent"
-                    style="@style/LoginWayDescriptionStyle"
-                    android:text="@string/login_way_description"
-                    />
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:layout_marginBottom="20dp"
+                    android:text="@string/login_way_description" />
 
                 <Button
-                    android:text="@string/login_with_phone_number_btn_txt"
                     android:id="@+id/btnLoginWithMobile"
                     style="@style/LoginButtonStyle"
                     android:drawableLeft="@drawable/mobile_ic"
-
-
-                    />
+                    android:text="@string/login_with_phone_number_btn_txt"/>
 
                 <Button
                     android:id="@+id/btnLoginWihMockData"
                     style="@style/LoginButtonStyle"
-                    android:text="@string/login_with_mock_btn_txt"
                     android:drawableLeft="@drawable/mock_data_ic"
-                     />
-
+                    android:text="@string/login_with_mock_btn_txt" />
 
                 <Button
-                    android:drawableLeft="@drawable/ic_instagram"
                     android:id="@+id/btnLoginWithInstagram"
                     style="@style/LoginButtonStyle"
+                    android:drawableLeft="@drawable/ic_instagram"
                     android:text="@string/login_with_instagram_btn_txt" />
 
                 <Button
-                    android:drawableLeft="@drawable/ic_facebook"
                     android:id="@+id/btnLoginWithFacebook"
                     style="@style/LoginButtonStyle"
+                    android:drawableLeft="@drawable/ic_facebook"
                     android:text="@string/login_with_facebook_btn_txt" />
 
                 <Button
-                    android:drawableLeft="@drawable/twitter_ic"
                     android:id="@+id/btnLoginWithTwitter"
                     style="@style/LoginButtonStyle"
+                    android:drawableLeft="@drawable/twitter_ic"
                     android:text="@string/login_with_twitter_btn_txt" />
 
             </LinearLayout>
-
-
-        </androidx.cardview.widget.CardView>
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:layout_marginBottom="@dimen/spacing_large"
-                style="@style/SecondaryTextStyle"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/secondary_text_view_height"
-                android:layout_alignParentBottom="true"
-                android:text="@string/copy_right"
-                android:gravity="center"/>
-        </RelativeLayout>
-    </LinearLayout>
-
-
-</FrameLayout>
+        </ScrollView>
+    </androidx.cardview.widget.CardView>
+    <!--version footer-->
+    <include layout="@layout/layout_footer_version" />
+</LinearLayout>

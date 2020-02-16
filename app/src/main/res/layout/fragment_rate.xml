@@ -276,7 +276,7 @@
 
                  <Button
                      android:id="@+id/btnSaveRates"
-                     style="@style/SendReceiveButtonStyle"
+                     style="@style/AccentButtonStyle"
                      android:layout_alignParentBottom="true"
                      android:text="@string/submit" />
              </RelativeLayout>
