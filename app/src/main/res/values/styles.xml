@@ -60,8 +60,6 @@
 
     <style name="MenuDrawerItemStyle" parent="Widget.AppCompat.TextView">
         <item name="android:textColor">@color/colorAccent</item>
-        <item name="android:layout_width">@dimen/login_way_button_width_size</item>
-        <item name="android:layout_height">@dimen/login_way_button_height_size</item>
         <item name="android:textSize">@dimen/menu_text_size</item>
         <item name="android:background">@drawable/menu_drawer_click_style</item>
         <item name="android:gravity">center_vertical</item>
@@ -128,38 +126,14 @@
 
 
     <style name="EditText.Green" parent="@style/AppTheme">
-        <item name="colorControlActivated">@color/green_500</item>
-        <item name="colorControlHighlight">@color/green_500</item>
-        <item name="colorControlNormal">@color/green_400</item>
+        <item name="colorControlActivated">@color/colorPrimary</item>
+        <item name="colorControlHighlight">@color/colorAccent</item>
+        <item name="colorControlNormal">@color/black</item>
     </style>
 
-    <style name="Yellow.Small.AppCompatRatingBar" parent="Base.Widget.AppCompat.RatingBar.Small">
-        <item name="colorControlNormal">@color/grey_60</item>
-        <item name="colorControlActivated">@color/yellow_600</item>
-    </style>
 
-    <style name="Yellow.Small.AppCompatRatingBar.White" parent="Base.Widget.AppCompat.RatingBar.Small">
-        <item name="colorControlNormal">@color/grey_20</item>
-        <item name="colorControlActivated">@color/yellow_600</item>
-    </style>
 
-    <style name="Yellow.Very.Small.AppCompatRatingBar" parent="@style/Yellow.Small.AppCompatRatingBar">
-        <item name="android:minHeight">8dp</item>
-        <item name="android:maxHeight">8dp</item>
-    </style>
 
-    <style name="Yellow.AppCompatRatingBar" parent="Base.Widget.AppCompat.RatingBar.Indicator">
-        <item name="colorControlNormal">@color/grey_60</item>
-        <item name="colorControlActivated">@color/yellow_600</item>
-    </style>
 
-    <style name="Yellow.Custom.AppCompatRatingBar" parent="@style/Yellow.Small.AppCompatRatingBar">
 
-        <item name="android:progressDrawable">@drawable/abc_ratingbar_small_material</item>
-        <item name="android:indeterminateDrawable">@drawable/abc_ratingbar_small_material</item>
-        <item name="android:minHeight">20dp</item>
-        <item name="android:maxHeight">20dp</item>
-        <item name="android:isIndicator">true</item>
-        <item name="android:thumb">@null</item>
-    </style>
 </resources>

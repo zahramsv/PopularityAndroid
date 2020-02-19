@@ -17,22 +17,22 @@
       <LinearLayout
           android:layout_width="match_parent"
           android:layout_height="match_parent"
+          android:padding="10dp"
           android:orientation="vertical">
 
 
           <LinearLayout
               android:layout_width="match_parent"
-              android:layout_marginTop="@dimen/spacing_xlarge"
-              android:layout_height="@dimen/about_us_image_icon_height"
+              android:layout_marginTop="40dp"
+              android:layout_height="50dp"
               android:orientation="horizontal">
 
 
 
               <TextView
-                  android:layout_width="@dimen/input_edit_text_width"
-                  android:layout_height="@dimen/rate_item_height"
-                  style="@style/RateItemsTextStyle"
-                  android:layout_marginLeft="@dimen/spacing_large"
+                  android:layout_width="150dp"
+                  android:layout_height="match_parent"
+                  style="@style/PrimaryTextStyle"
                   android:text="@string/phone_number_logout"
                   />
 
@@ -40,9 +40,7 @@
               <androidx.appcompat.widget.SwitchCompat
                   android:id="@+id/btnPhoneLogout"
                   android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:layout_marginRight="@dimen/spacing_large"
-
+                  android:layout_height="match_parent"
                   />
 
 
@@ -50,16 +48,15 @@
 
           <LinearLayout
               android:layout_width="match_parent"
-              android:layout_height="@dimen/about_us_image_icon_height"
+              android:layout_height="50dp"
               android:orientation="horizontal">
 
 
 
               <TextView
-                  android:layout_width="@dimen/input_edit_text_width"
-                  android:layout_height="@dimen/rate_item_height"
-                  style="@style/RateItemsTextStyle"
-                  android:layout_marginLeft="@dimen/spacing_large"
+                  android:layout_width="150dp"
+                  android:layout_height="match_parent"
+                  style="@style/PrimaryTextStyle"
                   android:text="@string/btn_setting_login_twitter"
                   />
 
@@ -67,9 +64,7 @@
               <androidx.appcompat.widget.SwitchCompat
                   android:id="@+id/btnTwitterLogin"
                   android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:layout_marginRight="@dimen/spacing_large"
-
+                  android:layout_height="match_parent"
                   />
 
 

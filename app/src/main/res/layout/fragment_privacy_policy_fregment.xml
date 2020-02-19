@@ -8,10 +8,6 @@
     tools:context=".fragment.HomeFragment">
 
 
-
-
-
-
         <androidx.cardview.widget.CardView
             android:id="@+id/cardUserRates"
             style="@style/CardViewStyle"

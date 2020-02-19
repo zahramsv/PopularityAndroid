@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -21,37 +22,31 @@
             <RelativeLayout
                 android:id="@+id/relativeLayout"
                 android:layout_width="match_parent"
-                android:layout_height="240dp"
-                android:layout_gravity="center">
+                android:layout_height="185dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp">
 
-                <RelativeLayout
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardUserRates"
+                    style="@style/CardViewStyle"
+                    android:layout_alignParentTop="true"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="@dimen/spacing_middle"
-                    android:gravity="center">
+                    android:layout_height="150dp">
 
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/cardUserRates"
-                        style="@style/CardViewStyle"
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvFavorites"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_margin="@dimen/spacing_middle"
-                        android:paddingTop="@dimen/spacing_middle">
+                        android:layout_gravity="center"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        tools:listitem="@layout/receive_rate_item" />
 
 
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/rvFavorites"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_centerInParent="true"
-                            android:layout_marginTop="@dimen/spacing_xlarge"
-                            tools:listitem="@layout/receive_rate_item" />
+                </androidx.cardview.widget.CardView>
 
-
-                    </androidx.cardview.widget.CardView>
-
-
-                </RelativeLayout>
 
                 <com.google.android.material.floatingactionbutton.FloatingActionButton
                     android:id="@+id/btnShare"
@@ -59,25 +54,24 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
-                    android:layout_gravity="bottom|end"
-                    android:layout_marginTop="185dp"
+                    android:layout_marginEnd="30dp"
                     android:layout_marginRight="30dp"
+                    android:layout_alignParentBottom="true"
                     android:src="@drawable/ic_share" />
             </RelativeLayout>
 
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/spacing_large">
+                android:layout_height="match_parent">
 
 
                 <androidx.cardview.widget.CardView
                     style="@style/CardViewStyle"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginBottom="@dimen/spacing_medium"
-                    android:layout_alignParentBottom="true">
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="@dimen/spacing_medium">
 
 
                     <LinearLayout
@@ -90,31 +84,38 @@
 
                             style="@style/PrimaryTextStyle"
                             android:layout_width="match_parent"
-                            android:layout_height="@dimen/spacing_xlarge"
+                            android:layout_height="30dp"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginBottom="10dp"
                             android:gravity="center_vertical"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginLeft="15dp"
                             android:text="@string/phone_contacts" />
 
 
                         <androidx.cardview.widget.CardView
                             style="@style/CardViewStyle"
                             android:layout_width="match_parent"
-                            android:layout_height="@dimen/friend_item_height"
-                            android:backgroundTint="@color/grey_40">
+                            android:layout_height="250dp"
+                            android:layout_margin="1dp"
+                            android:backgroundTint="@color/menu_press_state_color">
 
                             <androidx.recyclerview.widget.RecyclerView
                                 android:id="@+id/rvFriends"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_margin="@dimen/spacing_medium"
                                 android:orientation="horizontal"
+                                android:padding="10dp"
                                 tools:listitem="@layout/item_friend" />
                         </androidx.cardview.widget.CardView>
 
 
                         <androidx.appcompat.widget.AppCompatButton
-                            style="@style/TwitterLoginButtonStyle"
+                            style="@style/AccentButtonStyle"
+                            android:layout_width="150dp"
+                            android:layout_gravity="left"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginTop="25dp"
+                            android:layout_marginBottom="15dp"
                             android:text="@string/login_with_twitter_btn_txt" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>

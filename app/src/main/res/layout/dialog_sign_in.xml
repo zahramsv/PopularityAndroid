@@ -38,7 +38,7 @@
             android:text="USERNAME"
             android:textAlignment="center"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
-            android:textColor="@color/blue_grey_200" />
+            android:textColor="@color/black" />
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/txtName"
@@ -50,7 +50,7 @@
             android:maxLength="50"
             android:maxLines="1"
             android:singleLine="true"
-            android:textColor="@color/blue_grey_800"
+            android:textColor="@color/colorAccent"
             android:theme="@style/EditText.Green" />
 
         <View
@@ -63,7 +63,7 @@
             android:text="PASSWORD"
             android:textAlignment="center"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
-            android:textColor="@color/blue_grey_200" />
+            android:textColor="@color/black" />
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edtTxtPassword"
@@ -75,7 +75,7 @@
             android:maxLength="50"
             android:maxLines="1"
             android:singleLine="true"
-            android:textColor="@color/blue_grey_800"
+            android:textColor="@color/black"
             android:theme="@style/EditText.Green" />
 
 
@@ -90,10 +90,10 @@
             android:layout_marginLeft="-4dp"
             android:layout_marginRight="-4dp"
             android:background="@drawable/btn_rounded_white_outline"
-            android:backgroundTint="@color/black"
+            android:backgroundTint="@color/colorPrimary"
             android:text="S I G N  I N"
             android:textAllCaps="false"
-            android:textColor="@color/deep_purple_800"
+            android:textColor="@color/colorAccent"
             android:textStyle="bold" />
 
 

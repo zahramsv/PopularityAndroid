@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:background="@color/colorPrimary"
         android:orientation="vertical"
-        android:layout_height="200dp">
+        android:layout_height="205dp">
 
         <ImageView
 
@@ -31,9 +31,9 @@
             android:id="@+id/txtName"
             android:layout_width="match_parent"
             android:layout_gravity="center"
-            android:layout_height="@dimen/input_edit_text_height"
+            android:layout_height="35dp"
             tools:text="Zahra Mousavi"
-            android:layout_marginLeft="@dimen/spacing_middle"
+            android:textColor="@color/white"
             style="@style/SecondaryTextStyle"
             />
 
@@ -44,21 +44,24 @@
    <LinearLayout
        android:layout_marginTop="@dimen/spacing_middle"
        android:id="@+id/btnHome"
+       android:layout_height="@dimen/menu_drawer_items_height"
        android:layout_width="match_parent"
        android:background="@drawable/menu_drawer_click_style"
-       android:layout_height="@dimen/login_way_button_height_size"
+
        android:orientation="horizontal">
 
        <androidx.appcompat.widget.AppCompatImageView
+           android:layout_width="@dimen/menu_drawer_pic_width"
+           android:layout_height="match_parent"
            android:layout_gravity="center"
            android:background="@drawable/menu_drawer_click_style"
-           android:layout_width="@dimen/app_icon_small_height"
-           android:layout_height="@dimen/app_icon_small_height"
-           android:src="@drawable/ic_balloon"
-           android:padding="@dimen/spacing_medium"/>
+           android:padding="@dimen/menu_drawer_icon_padding"
+           android:src="@drawable/ic_balloon" />
        <TextView
-           style="@style/MenuDrawerItemStyle"
-           android:layout_gravity="center"
+           style="@style/PrimaryTextStyle"
+           android:layout_width="0dp"
+           android:layout_weight="1"
+           android:layout_height="match_parent"
            android:gravity="center_vertical"
            android:text="@string/home_toolbar_txt"
            />
@@ -69,18 +72,22 @@
         android:background="@drawable/menu_drawer_click_style"
         android:id="@+id/btnSettings"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/login_way_button_height_size"
+        android:layout_height="@dimen/menu_drawer_items_height"
         android:orientation="horizontal">
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="@dimen/app_icon_small_height"
-            android:layout_height="@dimen/app_icon_small_height"
+            android:layout_width="@dimen/menu_drawer_pic_width"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
             android:background="@drawable/menu_drawer_click_style"
             android:src="@drawable/ic_setting"
             android:padding="@dimen/menu_drawer_icon_padding"/>
         <TextView
-            style="@style/MenuDrawerItemStyle"
+            style="@style/PrimaryTextStyle"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
             android:text="@string/settings"
 
             />
@@ -91,18 +98,22 @@
         android:id="@+id/btnAboutUs"
         android:layout_width="match_parent"
         android:background="@drawable/menu_drawer_click_style"
-        android:layout_height="@dimen/login_way_button_height_size"
+        android:layout_height="40dp"
         android:orientation="horizontal">
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="@dimen/app_icon_small_height"
-            android:layout_height="@dimen/app_icon_small_height"
+            android:layout_width="@dimen/menu_drawer_pic_width"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
             android:src="@drawable/ic_about_us"
             android:background="@drawable/menu_drawer_click_style"
             android:padding="@dimen/menu_drawer_icon_padding"/>
         <TextView
-            style="@style/MenuDrawerItemStyle"
+            style="@style/PrimaryTextStyle"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
             android:text="@string/about_us"
             />
     </LinearLayout>
@@ -114,18 +125,22 @@
         android:id="@+id/btnPrivacyPolicy"
         android:layout_width="match_parent"
         android:background="@drawable/menu_drawer_click_style"
-        android:layout_height="@dimen/login_way_button_height_size"
+        android:layout_height="@dimen/menu_drawer_items_height"
         android:orientation="horizontal">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:src="@drawable/ic_privacy"
-            android:layout_width="@dimen/app_icon_small_height"
-            android:layout_height="@dimen/app_icon_small_height"
+            android:layout_width="@dimen/menu_drawer_pic_width"
+            android:layout_height="match_parent"
             android:background="@drawable/menu_drawer_click_style"
             android:layout_gravity="center"
             android:padding="@dimen/menu_drawer_icon_padding"/>
         <TextView
-            style="@style/MenuDrawerItemStyle"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            style="@style/PrimaryTextStyle"
             android:text="@string/privacy_policy"
             />
     </LinearLayout>
@@ -136,19 +151,23 @@
         android:background="@drawable/menu_drawer_click_style"
         android:id="@+id/btnRateUs"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/login_way_button_height_size"
+        android:layout_height="@dimen/menu_drawer_items_height"
         android:orientation="horizontal">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:src="@drawable/ic_rate_us"
             android:tint="@color/black"
-            android:layout_width="@dimen/app_icon_small_height"
+            android:layout_width="@dimen/menu_drawer_pic_width"
+            android:layout_height="match_parent"
             android:background="@drawable/menu_drawer_click_style"
-            android:layout_height="@dimen/app_icon_small_height"
             android:layout_gravity="center"
             android:padding="@dimen/menu_drawer_icon_padding"/>
         <TextView
-            style="@style/MenuDrawerItemStyle"
+            style="@style/PrimaryTextStyle"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
             android:text="@string/rate_us"
             />
     </LinearLayout>

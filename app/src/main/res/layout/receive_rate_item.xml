@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/rate_item_height"
+    android:layout_height="30dp"
     android:layout_marginLeft="@dimen/spacing_middle"
     android:layout_marginRight="@dimen/spacing_middle"
     android:layout_marginTop="@dimen/spacing_medium"
@@ -10,23 +10,26 @@
 
     <TextView
         android:id="@+id/TxtRateItem"
-        style="@style/RateItemsTextStyle"
+        style="@style/PrimaryTextStyle"
+        android:gravity="left"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
+        android:textSize="17sp"
         tools:text="popularity item" />
 
 
     <TextView
         android:id="@+id/TxtRateCount"
-        style="@style/RateItemsTextStyle"
-        android:layout_width="@dimen/rate_item_height"
-        android:layout_height="@dimen/rate_item_height"
+        style="@style/SecondaryTextStyle"
+        android:layout_width="25dp"
+        android:layout_height="match_parent"
         android:gravity="center"
         tools:text="8" />
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:layout_width="@dimen/rate_item_image_width"
-        android:layout_height="@dimen/rate_item_image_height"
+        android:layout_width="30dp"
+        android:layout_height="match_parent"
+        android:padding="2dp"
         android:src="@drawable/ic_balloon" />
 </LinearLayout>

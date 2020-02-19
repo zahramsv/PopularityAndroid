@@ -3,8 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="@dimen/friend_item_width"
-    android:layout_height="@dimen/friend_item_width"
+    android:layout_width="105dp"
+    android:layout_height="110dp"
     android:layout_margin="@dimen/spacing_small"
     app:cardCornerRadius="3dp">
 
@@ -17,16 +17,16 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/imgUserProfile"
-            android:layout_width="@dimen/image_friend_profile_width"
-            android:layout_height="@dimen/image_friend_profile_height"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
             android:src="@drawable/ic_user"/>
 
 
 
         <LinearLayout
-            android:layout_margin="@dimen/spacing_small"
+
             android:layout_width="match_parent"
-            android:layout_height="@dimen/friend_item_text_view_height"
+            android:layout_height="30dp"
             android:orientation="horizontal">
 
 
@@ -35,23 +35,21 @@
             <TextView
                 style="@style/SecondaryTextStyle"
                 android:id="@+id/txtName"
-                android:layout_marginRight="@dimen/spacing_small"
-                android:layout_marginLeft="@dimen/spacing_small"
+                android:textSize="10sp"
                 android:layout_width="80dp"
+                android:padding="2dp"
                 android:layout_height="match_parent"
                 tools:text="sara" />
 
             <ImageView
                 android:id="@+id/rate"
-                android:layout_width="@dimen/friend_item_text_view_height"
-                android:layout_height="@dimen/friend_item_text_view_height"
+                android:layout_width="25dp"
+                android:layout_height="match_parent"
                 android:src="@drawable/ic_heart"
                 />
 
 
-
         </LinearLayout>
-
 
 
 

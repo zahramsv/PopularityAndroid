@@ -96,7 +96,7 @@
     <string name="copy_right">copy right all reserved</string>
     <string name="send_sms_btn_txt">Send SMS</string>
     <string name="verify_code">Verify code</string>
-    <string name="phone_contacts">Phone Contacts</string>
+    <string name="phone_contacts">Phone Contacts :</string>
     <string name="login_twitter_btn_text">Login Twitter</string>
     <string name="fallow_us">fallow us in social medias : </string>
     <string name="phone_number_logout">Logout Phone </string>
