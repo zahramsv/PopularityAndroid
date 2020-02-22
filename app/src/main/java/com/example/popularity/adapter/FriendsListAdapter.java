@@ -10,8 +10,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.example.popularity.R;
 import com.example.popularity.model.Friend;
 import com.example.popularity.myInterface.ItemClickListener;
