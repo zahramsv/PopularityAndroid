@@ -22,10 +22,10 @@ public interface HomeMvp {
     interface View {
         void ShareScreenShot(Uri uri);
         Context getViewContext();
+        void setFriendsList(List<Friend> friends);
     }
 
     interface Presenter {
-        List<Friend> getFriends(Context context);
         Observable<List<Friend>> getObservable();
         void provideFriends();
         User getUser();

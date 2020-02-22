@@ -1,10 +1,7 @@
 package com.example.popularity.fragment;
 
-import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,24 +10,18 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
-import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.popularity.R;
 import com.example.popularity.adapter.FriendsListAdapter;
 import com.example.popularity.adapter.RateListAdapter;
-import com.example.popularity.model.repository.LoginHandler;
-import com.example.popularity.model.repository.UserRepository;
 import com.example.popularity.mvp.HomeMvp;
 import com.example.popularity.presenter.HomePresenter;
 import com.example.popularity.model.Friend;
 import com.example.popularity.model.Rate;
 import com.example.popularity.model.User;
 import com.example.popularity.model.UserPopularity;
-import com.example.popularity.utils.LoginKind;
-import com.example.popularity.utils.MyApp;
 import com.example.popularity.utils.ToolBarIconKind;
 import com.example.popularity.utils.ToolbarKind;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -38,14 +29,11 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
 import java.util.List;
 
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.core.Observer;
 import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
-
 import static com.example.popularity.utils.Configs.BUNDLE_FRIEND;
-import static com.example.popularity.utils.Configs.REQUEST_READ_CONTACTS;
 
 public class HomeFragment extends BaseFragment implements
         HomeMvp.View {
@@ -190,5 +178,10 @@ public class HomeFragment extends BaseFragment implements
     @Override
     public Context getViewContext() {
         return getContext();
+    }
+
+    @Override
+    public void setFriendsList(List<Friend> friends) {
+        friendsListAdapter.addAllItems(friends);
     }
 }

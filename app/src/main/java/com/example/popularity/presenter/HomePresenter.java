@@ -2,24 +2,15 @@ package com.example.popularity.presenter;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.os.Environment;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 import androidx.core.content.FileProvider;
 
 import com.example.popularity.R;
-import com.example.popularity.activity.MainActivity;
-import com.example.popularity.fragment.HomeFragment;
 import com.example.popularity.model.Friend;
 import com.example.popularity.model.User;
 import com.example.popularity.model.repository.FriendRepository;
@@ -28,25 +19,19 @@ import com.example.popularity.model.repository.UserRepository;
 import com.example.popularity.mvp.HomeMvp;
 import com.example.popularity.myInterface.MainActivityTransaction;
 import com.example.popularity.utils.MyApp;
-import com.example.popularity.utils.PermissionStatus;
 import com.example.popularity.utils.ShowMessageType;
 import com.tedpark.tedpermission.rx2.TedRx2Permission;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.OutputStream;
-import java.net.URI;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.core.Observer;
 
-import static com.example.popularity.utils.Configs.REQUEST_READ_CONTACTS;
-
-public class HomePresenter extends FileProvider implements HomeMvp.Presenter {
+public class HomePresenter implements HomeMvp.Presenter {
     private FriendRepository friendRepository;
     private Context context;
     private LoginHandler loginHandler;
@@ -76,11 +61,6 @@ public class HomePresenter extends FileProvider implements HomeMvp.Presenter {
         userRepository = MyApp.getInstance().getBaseComponent().provideUserRepository();
 
         this.context = MyApp.getInstance().getBaseContext().getApplicationContext();
-    }
-
-    @Override
-    public List<Friend> getFriends(Context context) {
-        return friendsList;
     }
 
     @Override
@@ -150,7 +130,8 @@ public class HomePresenter extends FileProvider implements HomeMvp.Presenter {
                         Log.d("app_tag", "granted");
 
                         friendsList = friendRepository.getFriendsFromPhoneContacts(view.getViewContext());
-                        friendObservableList = Observable.just(friendsList);
+                        view.setFriendsList(friendsList);
+                        //friendObservableList = Observable.just(friendsList);
                     } else {
 
                         Log.d("app_tag", "not granted");
