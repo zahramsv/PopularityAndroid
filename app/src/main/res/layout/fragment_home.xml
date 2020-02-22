@@ -112,6 +112,7 @@
                         <androidx.appcompat.widget.AppCompatButton
                             style="@style/AccentButtonStyle"
                             android:layout_width="150dp"
+                            android:layout_height="@dimen/login_btn_height"
                             android:layout_gravity="left"
                             android:layout_marginLeft="15dp"
                             android:layout_marginTop="25dp"

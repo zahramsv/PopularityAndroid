@@ -14,6 +14,7 @@ import androidx.cardview.widget.CardView;
 import com.example.popularity.R;
 import com.example.popularity.mvp.MobileLoginMvp;
 import com.example.popularity.presenter.MobileLoginPresenter;
+import com.example.popularity.utils.ToolBarIconKind;
 import com.example.popularity.utils.ToolbarKind;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -63,6 +64,7 @@ public class MobileLoginFragment extends BaseFragment
 
     private void init(View view) {
         baseListener.changeToolbar(ToolbarKind.HOME, getString(R.string.empty));
+        baseListener.showToolbarIcon(ToolBarIconKind.INVISIBLE);
         edtVerifyCode = view.findViewById(R.id.edtVerifyCode);
         edtMobile = view.findViewById(R.id.edtMobile);
         btnVerifyCode = view.findViewById(R.id.btnVerifyCode);

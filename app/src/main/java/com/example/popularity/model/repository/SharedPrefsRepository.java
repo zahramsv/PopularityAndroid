@@ -16,7 +16,16 @@ public class SharedPrefsRepository {
     }
 
     public final static String USER_DATA = "user_data";
+    public final static String LOGOUT_STATUS = "logout_status";
     SharedPreferences sharedPref = null;
+
+    public void SaveLogoutStatus(boolean twitterLogin,boolean phoneNumberLogin )
+    {
+        sharedPref = context.getSharedPreferences(LOGOUT_STATUS, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putBoolean("phone_number_login",phoneNumberLogin);
+        editor.putBoolean("twitter_login",twitterLogin);
+    }
 
     public void SaveUser(User user, UserPopularity userPopularity) {
         sharedPref = context.getSharedPreferences(USER_DATA, Context.MODE_PRIVATE);
@@ -53,12 +62,6 @@ public class SharedPrefsRepository {
 
     }
 
-    public String getUser(String key) {
-        if (sharedPref != null) {
-            return sharedPref.getString(key, "");
-        }
-        return "";
-    }
 
     public void saveLoginKind(String loginKind){
 
@@ -67,6 +70,7 @@ public class SharedPrefsRepository {
         editor.commit();
         editor.apply();
     }
+
 
     public String getLoginKind(){
         return sharedPref.getString("login_kind","");

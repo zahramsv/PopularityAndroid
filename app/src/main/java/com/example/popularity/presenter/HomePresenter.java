@@ -1,5 +1,6 @@
 package com.example.popularity.presenter;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -23,7 +24,9 @@ import com.example.popularity.model.repository.FriendRepository;
 import com.example.popularity.model.repository.LoginHandler;
 import com.example.popularity.model.repository.UserRepository;
 import com.example.popularity.mvp.HomeMvp;
+import com.example.popularity.myInterface.MainActivityTransaction;
 import com.example.popularity.utils.MyApp;
+import com.example.popularity.utils.PermissionStatus;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -31,6 +34,8 @@ import java.io.OutputStream;
 import java.net.URI;
 import java.util.Date;
 import java.util.List;
+
+import io.reactivex.rxjava3.core.Observer;
 
 import static com.example.popularity.utils.Configs.REQUEST_READ_CONTACTS;
 
@@ -41,8 +46,14 @@ public class HomePresenter extends FileProvider implements HomeMvp.Presenter {
     private UserRepository userRepository;
     private FileOutputStream outputStream2;
     private HomeMvp.View view;
+    private MainActivityTransaction.Components baseListener;
 
-    public HomePresenter(HomeMvp.View view, Context context) {
+    public HomePresenter(
+            HomeMvp.View view,
+            Context context,
+            MainActivityTransaction.Components baseListener
+    ) {
+        this.baseListener = baseListener;
         this.view = view;
         this.context = context;
         friendRepository = new FriendRepository();
@@ -61,13 +72,9 @@ public class HomePresenter extends FileProvider implements HomeMvp.Presenter {
                 return friendRepository.getFriendsFromMock(userRepository.getCurrentUser().getSocial_primary());
 
             case SMS: {
-                if (ActivityCompat.checkSelfPermission(MyApp.getInstance(), android.Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_GRANTED) {
-                    return friendRepository.getFriendsFromPhoneContacts(context);
-                } else {
-                    // fixme:
-                    requestPermission(context);
-                    return null;
-                }
+                baseListener.getPermission(Manifest.permission.READ_CONTACTS);
+
+                return null;
             }
 
             default:
@@ -109,21 +116,6 @@ public class HomePresenter extends FileProvider implements HomeMvp.Presenter {
         intent.setAction(Intent.ACTION_VIEW);
         Uri uri = FileProvider.getUriForFile(context, context.getApplicationContext().getPackageName() + ".provider", imageFile);
         view.ShareScreenShot(uri);
-    }
-
-
-    public void requestPermission(Context context) {
-
-        if (ActivityCompat.shouldShowRequestPermissionRationale((Activity) context, android.Manifest.permission.READ_CONTACTS)) {
-            // show UI part if you want here to show some rationale !!!
-        } else {
-            ActivityCompat.requestPermissions((Activity) context, new String[]{android.Manifest.permission.READ_CONTACTS}, REQUEST_READ_CONTACTS);
-        }
-        if (ActivityCompat.shouldShowRequestPermissionRationale((Activity) context, android.Manifest.permission.READ_CONTACTS)) {
-        } else {
-            ActivityCompat.requestPermissions((Activity) context, new String[]{android.Manifest.permission.READ_CONTACTS},
-                    REQUEST_READ_CONTACTS);
-        }
     }
 
 }

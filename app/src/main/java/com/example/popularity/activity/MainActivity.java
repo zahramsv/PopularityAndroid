@@ -1,6 +1,10 @@
 package com.example.popularity.activity;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.text.BoringLayout;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -27,16 +31,30 @@ import com.example.popularity.presenter.MainPresenter;
 import com.example.popularity.utils.ConnectivityReceiver;
 import com.example.popularity.utils.LoginKind;
 import com.example.popularity.utils.MyApp;
+import com.example.popularity.utils.PermissionStatus;
 import com.example.popularity.utils.ShowMessageType;
+import com.example.popularity.utils.ToolBarIconKind;
 import com.example.popularity.utils.ToolbarKind;
 import com.google.android.material.snackbar.Snackbar;
+import com.gun0912.tedpermission.PermissionListener;
+import com.tedpark.tedpermission.rx2.TedRx2Permission;
+
+import org.reactivestreams.Subscriber;
+
+import java.util.List;
+
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.rxjava3.annotations.NonNull;
+import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.core.ObservableEmitter;
+import io.reactivex.rxjava3.core.ObservableOnSubscribe;
 
 
 public class MainActivity extends AppCompatActivity implements
         MainActivityTransaction.Components
         , ConnectivityReceiver.ConnectivityReceiverListener
-    , MainMvp.View
-{
+        , MainMvp.View {
     private TextView toolbarTitle;
     private AppCompatImageView imageToolbarAppIcon;
     private DrawerLayout drawerLayout;
@@ -57,8 +75,7 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public void showMessage(ShowMessageType messageType, String message) {
-        switch (messageType)
-        {
+        switch (messageType) {
             case SNACK:
                 Snackbar snackbar = Snackbar.make(parentView, message, Snackbar.LENGTH_LONG);
                 snackbar.setAction(getString(R.string.okay), view -> {
@@ -71,6 +88,76 @@ public class MainActivity extends AppCompatActivity implements
                 Toast.makeText(this, message, Toast.LENGTH_LONG).show();
                 break;
         }
+    }
+
+
+    PermissionListener permissionlistener = new PermissionListener() {
+        @Override
+        public void onPermissionGranted() {
+            Toast.makeText(MainActivity.this, "Permission Granted", Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void onPermissionDenied(List<String> deniedPermissions) {
+            Toast.makeText(MainActivity.this, "Permission Denied\n" + deniedPermissions.toString(), Toast.LENGTH_SHORT).show();
+        }
+    };
+
+
+
+    Observer<Void> animalsObserver = getPhonePermission();
+    private Observer<Void> getPhonePermission() {
+
+        return new Observer<Void>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+                Log.d("TAG_RX", "onSubscribe");
+            }
+
+            @Override
+            public void onNext(Void aVoid) {
+
+                Log.d("TAG_RX", "Name: ");
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+                Log.e("TAG_RX", "onError: " + e.getMessage());
+            }
+
+            @Override
+            public void onComplete() {
+
+                Log.d("TAG_RX", "All items are emitted!");
+            }
+        };
+    }
+
+
+    @SuppressLint("CheckResult")
+    @Override
+    public void getPermission(String permission) {
+        TedRx2Permission.with(this)
+                .setRationaleTitle(R.string.hint_get_permissions)
+                //.setRationaleMessage(R.string.rationale_message) // "we need permission for read contact and find your location"
+                .setPermissions(permission)
+                .request()
+                .subscribe(tedPermissionResult -> {
+                    if (tedPermissionResult.isGranted()) {
+                        PermissionStatus.getInstance().observePermission().create(
+                                (ObservableOnSubscribe<Boolean>) emitter -> {
+
+                        }
+                        );
+                        showMessage(ShowMessageType.TOAST, "ohhh you did it");
+
+                    } else {
+                        showMessage(ShowMessageType.TOAST, getString(R.string.hint_you_should_confirm_permissions));
+                    }
+                }, throwable -> {
+
+                });
     }
 
     @Override
@@ -118,7 +205,6 @@ public class MainActivity extends AppCompatActivity implements
                 drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
                 findViewById(R.id.toolbar).setVisibility(View.VISIBLE);
                 toolbarIcon.setImageResource(R.drawable.ic_menu);
-                imageToolbarAppIcon.setVisibility(View.INVISIBLE);
                 toolbarIcon.setOnClickListener(v -> {
                     openDrawer();
                 });
@@ -128,12 +214,27 @@ public class MainActivity extends AppCompatActivity implements
             case BACK:
                 drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
                 findViewById(R.id.toolbar).setVisibility(View.VISIBLE);
-                imageToolbarAppIcon.setVisibility(View.VISIBLE);
                 toolbarIcon.setImageResource(R.drawable.ic_back);
                 toolbarIcon.setOnClickListener(v -> {
                     onBackPressed();
                 });
                 getWindow().getDecorView().setSystemUiVisibility(View.VISIBLE);
+                break;
+
+            default:
+                break;
+        }
+    }
+
+    @Override
+    public void showToolbarIcon(ToolBarIconKind iconKind) {
+        switch (iconKind) {
+            case VISIBLEL:
+                imageToolbarAppIcon.setVisibility(View.VISIBLE);
+                break;
+
+            case INVISIBLE:
+                imageToolbarAppIcon.setVisibility(View.INVISIBLE);
                 break;
 
             default:
@@ -148,7 +249,7 @@ public class MainActivity extends AppCompatActivity implements
         FragmentManager fm = getSupportFragmentManager();
         if (fm.getBackStackEntryCount() == 0) {
             if (count < 1) {
-                showMessage(ShowMessageType.TOAST,"are you sure?");
+                showMessage(ShowMessageType.TOAST, "are you sure?");
                 count++;
             } else
                 this.finish();
@@ -195,7 +296,7 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     public void onNetworkConnectionChanged(boolean isConnected) {
         if (!isConnected)
-            showMessage(ShowMessageType.SNACK,getString(R.string.error_disconnected));
+            showMessage(ShowMessageType.SNACK, getString(R.string.error_disconnected));
 
     }
 
@@ -204,7 +305,7 @@ public class MainActivity extends AppCompatActivity implements
         drawerLayout = findViewById(R.id.drawerLayout);
         toolbarIcon = findViewById(R.id.imgToolbarIcon);
         toolbarTitle = findViewById(R.id.txtToolbar);
-        imageToolbarAppIcon=findViewById(R.id.imageToolbarAppIcon);
+        imageToolbarAppIcon = findViewById(R.id.imageToolbarAppIcon);
         loadingBar = findViewById(R.id.loadingBar);
     }
 
@@ -214,7 +315,7 @@ public class MainActivity extends AppCompatActivity implements
         slidingMenuFragment.attachFragment(this);
     }
 
-    
+
 }
 
 

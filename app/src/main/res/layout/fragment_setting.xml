@@ -62,7 +62,7 @@
 
 
               <androidx.appcompat.widget.SwitchCompat
-                  android:id="@+id/btnTwitterLogin"
+                  android:id="@+id/btnTwitterLogout"
                   android:layout_width="match_parent"
                   android:layout_height="match_parent"
                   />

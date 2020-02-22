@@ -50,18 +50,19 @@
 
     <!-- icon size in toolbar-->
 
-    <dimen name="toolbar_icon_size">56dp</dimen>
+    <dimen name="toolbar_icon_size">50dp</dimen>
     <dimen name="toolbar_app_icon_small_height">40dp</dimen>
     <dimen name="app_icon_small_width">46dp</dimen>
     <dimen name="app_icon_small_height">46dp</dimen>
 
     <dimen name="menu_drawer_pic_width">46dp</dimen>
     <dimen name="menu_drawer_pic_height">46dp</dimen>
-    <dimen name="menu_drawer_items_height">40dp</dimen>
+    <dimen name="menu_drawer_items_height">55dp</dimen>
 
-    <dimen name="menu_text_size">13sp</dimen>
+    <dimen name="menu_drawer_text_size">15sp</dimen>
     <dimen name="menu_drawer_text_margin_right">15dp</dimen>
     <dimen name="menu_drawer_icon_padding">10dp</dimen>
+    <dimen name="menu_drawer_item_text_left_padding">30dp</dimen>
 
 
 

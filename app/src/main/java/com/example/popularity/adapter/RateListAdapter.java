@@ -53,7 +53,7 @@ public class RateListAdapter extends RecyclerView.Adapter<RateListAdapter.RateHo
           /*  view.attribute.setText(o.getAttribute());
             view.rating.setRating(rates.get(i).getRate());*/
           view.TxtRateItem.setText(rates.get(i).getAttribute());
-          view.TxtRateCount.setText(rates.get(i).getRate().toString());
+          view.TxtRateCount.setText(rates.get(i).getRate()+"");
 
 
         }

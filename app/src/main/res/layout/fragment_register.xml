@@ -6,8 +6,7 @@
     android:background="@color/colorPrimary"
     android:orientation="vertical">
 
-    <include
-        layout="@layout/layout_auth_header"/>
+    <include layout="@layout/layout_auth_header" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -27,37 +26,42 @@
             <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
+
                 <LinearLayout
-                    android:layout_margin="@dimen/main_cardview_inside_padding"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_margin="@dimen/main_cardview_inside_padding"
                     android:gravity="center"
                     android:orientation="vertical">
 
                     <TextView
-                        android:layout_height="wrap_content"
-                        android:layout_width="match_parent"
-                        android:gravity="left"
-                        android:layout_marginBottom="10dp"
                         style="@style/PrimaryTextStyle"
-                        android:layout_marginTop="@dimen/spacing_large"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginBottom="10dp"
+                        android:gravity="left"
                         android:text="@string/register_description" />
 
 
                     <androidx.appcompat.widget.AppCompatImageView
-                        android:layout_width="@dimen/app_icon_normal_width"
-                        android:layout_height="@dimen/app_icon_normal_height"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:padding="10dp"
+                        android:background="@drawable/shape_circelur_grade"
                         android:src="@drawable/ic_avatar_white"
-                        android:tint="@color/colorAccent" />
+                         />
 
 
                     <com.google.android.material.textfield.TextInputLayout
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/spacing_xxxlarge"
-                        android:layout_marginLeft="@dimen/spacing_large"
-                        android:layout_marginTop="@dimen/spacing_xxxlarge"
-                        android:layout_marginRight="@dimen/spacing_large"
+                        android:layout_height="55dp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginRight="15dp"
                         android:hint="@string/full_name">
 
                         <com.google.android.material.textfield.TextInputEditText
@@ -74,10 +78,10 @@
                     <com.google.android.material.textfield.TextInputLayout
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/spacing_xxxlarge"
-                        android:layout_marginLeft="@dimen/spacing_large"
-                        android:layout_marginTop="@dimen/spacing_middle"
-                        android:layout_marginRight="@dimen/spacing_large"
+                        android:layout_height="55dp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="15dp"
                         android:hint="@string/user_name"
                         app:boxStrokeColor="@color/colorAccent">
 
@@ -85,9 +89,9 @@
                             android:id="@+id/edtUserName"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:maxLength="15"
-                            android:inputType="text"
                             android:imeOptions="actionDone"
+                            android:inputType="text"
+                            android:maxLength="15"
                             android:textSize="@dimen/normal_text_size" />
 
                     </com.google.android.material.textfield.TextInputLayout>
@@ -95,9 +99,10 @@
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/btnRegister"
                         style="@style/AccentButtonStyle"
-                        android:text="@string/register"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/login_btn_height"
                         android:layout_marginTop="10dp"
-                        />
+                        android:text="@string/register" />
 
                 </LinearLayout>
             </androidx.core.widget.NestedScrollView>
@@ -107,7 +112,6 @@
     </LinearLayout>
 
 
-    <include
-        layout="@layout/layout_footer_version"/>
+    <include layout="@layout/layout_footer_version" />
 
 </LinearLayout>

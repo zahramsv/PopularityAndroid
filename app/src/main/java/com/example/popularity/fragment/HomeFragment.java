@@ -29,6 +29,7 @@ import com.example.popularity.model.User;
 import com.example.popularity.model.UserPopularity;
 import com.example.popularity.utils.LoginKind;
 import com.example.popularity.utils.MyApp;
+import com.example.popularity.utils.ToolBarIconKind;
 import com.example.popularity.utils.ToolbarKind;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -64,10 +65,9 @@ public class HomeFragment extends BaseFragment implements
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        homePresenter = new HomePresenter(this,getContext());
+        homePresenter = new HomePresenter(this,getContext(), baseListener);
 
         baseListener.changeToolbar(ToolbarKind.HOME, "");
-
         friendsList = homePresenter.getFriends(getContext());
 
     }
@@ -92,12 +92,12 @@ public class HomeFragment extends BaseFragment implements
             });
 
 
-            rates.add(new Rate("Look", Float.parseFloat(userPopularity.getRate_look())));
-            rates.add(new Rate("Fitness", Float.parseFloat(userPopularity.getRate_fitness())));
-            rates.add(new Rate("Style", Float.parseFloat(userPopularity.getRate_style())));
-            rates.add(new Rate("Personality", Float.parseFloat(userPopularity.getRate_personality())));
-            rates.add(new Rate("Trustworthy", Float.parseFloat(userPopularity.getRate_trustworthy())));
-            rates.add(new Rate("Popularity", Float.parseFloat(userPopularity.getRate_popularity())));
+            rates.add(new Rate("Look", Integer.parseInt(userPopularity.getRate_look())));
+            rates.add(new Rate("Fitness", Integer.parseInt(userPopularity.getRate_fitness())));
+            rates.add(new Rate("Style", Integer.parseInt(userPopularity.getRate_style())));
+            rates.add(new Rate("Personality", Integer.parseInt(userPopularity.getRate_personality())));
+            rates.add(new Rate("Trustworthy", Integer.parseInt(userPopularity.getRate_trustworthy())));
+            rates.add(new Rate("Popularity", Integer.parseInt(userPopularity.getRate_popularity())));
             RateListAdapter rateListAdapter = new RateListAdapter(rates, getActivity());
             rateListAdapter.setOnItemClickListener(new RateListAdapter.ClickListener() {
                 @Override
@@ -120,6 +120,7 @@ public class HomeFragment extends BaseFragment implements
 
         btnShare=view.findViewById(R.id.btnShare);
         baseListener.changeToolbar(ToolbarKind.HOME, getString(R.string.app_name));
+        baseListener.showToolbarIcon(ToolBarIconKind.VISIBLEL);
         friendsRecyclerView = view.findViewById(R.id.rvFriends);
         GridLayoutManager layoutManager1 = new GridLayoutManager(getActivity(),2,RecyclerView.HORIZONTAL,false);
         friendsRecyclerView.setLayoutManager(layoutManager1);

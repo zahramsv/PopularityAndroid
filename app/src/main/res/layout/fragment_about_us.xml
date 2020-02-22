@@ -24,26 +24,37 @@
                 style="@style/CardViewStyle"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="@dimen/spacing_middle"
                 android:paddingTop="@dimen/spacing_middle">
 
 
-                <me.biubiubiu.justifytext.library.JustifyTextView
-                    android:lineSpacingExtra="@dimen/spacing_small"
-                    style="@style/LoginWayDescriptionStyle"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="@string/about_us_txt" />
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
+                    <com.codesgood.views.JustifiedTextView
+                        android:lineSpacingExtra="@dimen/spacing_small"
+                        style="@style/LoginWayDescriptionStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/about_us_desc" />
+
+                    <com.codesgood.views.JustifiedTextView
+                        style="@style/LoginWayDescriptionStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/about_us_team_member"/>
+
+                </LinearLayout>
 
             </androidx.cardview.widget.CardView>
 
 
             <TextView
-                style="@style/HeaderTextStyle"
+                style="@style/PrimaryTextStyle"
+                android:textColor="@color/white"
                 android:layout_width="match_parent"
-                android:layout_marginTop="@dimen/spacing_xlarge"
-                android:layout_height="@dimen/spacing_xxlarge"
+                android:layout_height="40dp"
                 android:text="@string/fallow_us" />
 
 
@@ -51,7 +62,7 @@
                 style="@style/CardViewStyle"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/spacing_middle"
+                android:layout_marginTop="10dp"
                 >
 
 
@@ -66,29 +77,34 @@
                     <LinearLayout
                         android:layout_marginTop="@dimen/spacing_middle"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/media_fallow_row_height"
+                        android:layout_height="70dp"
                         android:gravity="center"
                         android:weightSum="3"
                         android:orientation="horizontal">
 
                         <androidx.appcompat.widget.AppCompatImageView
-                            android:layout_weight="1"
                             android:padding="@dimen/spacing_small"
+                            android:background="@drawable/about_us_btn_styles"
+                            android:id="@+id/imgFacebook"
                             android:layout_width="@dimen/about_us_image_icon_height"
                             android:layout_height="@dimen/about_us_image_icon_height"
                             android:src="@drawable/icon_facebook" />
 
                         <androidx.appcompat.widget.AppCompatImageView
-                            android:layout_weight="1"
+                            android:layout_marginRight="40dp"
+                            android:layout_marginLeft="40dp"
+                            android:background="@drawable/about_us_btn_styles"
                             android:padding="@dimen/spacing_small"
+                            android:id="@+id/imgLinkedIn"
                             android:layout_width="@dimen/about_us_image_icon_height"
                             android:layout_height="@dimen/about_us_image_icon_height"
                             android:src="@drawable/icon_linkedin" />
 
 
                         <androidx.appcompat.widget.AppCompatImageView
-                            android:layout_weight="1"
                             android:padding="@dimen/spacing_small"
+                            android:id="@+id/imgTwitter"
+                            android:background="@drawable/about_us_btn_styles"
                             android:layout_width="@dimen/about_us_image_icon_height"
                             android:layout_height="@dimen/about_us_image_icon_height"
                             android:src="@drawable/icon_twitter"/>
@@ -102,29 +118,35 @@
                         android:weightSum="3"
                         android:gravity="center"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/media_fallow_row_height"
+                        android:layout_height="70dp"
                         android:orientation="horizontal">
 
                         <androidx.appcompat.widget.AppCompatImageView
-                            android:layout_weight="1"
                             android:padding="@dimen/spacing_small"
+                            android:id="@+id/imgInstagram"
                             android:src="@drawable/icon_instagram"
+                            android:background="@drawable/about_us_btn_styles"
                             android:layout_width="@dimen/about_us_image_icon_height"
                             android:layout_height="@dimen/about_us_image_icon_height" />
 
                         <androidx.appcompat.widget.AppCompatImageView
-                            android:layout_weight="1"
+                           android:layout_marginLeft="40dp"
+                            android:layout_marginRight="40dp"
                             android:padding="@dimen/spacing_small"
+                            android:id="@+id/imgYoutube"
+                            android:background="@drawable/about_us_btn_styles"
                             android:layout_width="@dimen/about_us_image_icon_height"
                             android:layout_height="@dimen/about_us_image_icon_height"
                             android:src="@drawable/ic_youtube"/>
 
 
                         <androidx.appcompat.widget.AppCompatImageView
-                            android:layout_weight="1"
+
                             android:padding="@dimen/spacing_small"
+                            android:id="@+id/imgWhatsApp"
                             android:layout_width="@dimen/about_us_image_icon_height"
                             android:layout_height="@dimen/about_us_image_icon_height"
+                            android:background="@drawable/about_us_btn_styles"
                             android:src="@drawable/icon_whatsapp"/>
 
                     </LinearLayout>

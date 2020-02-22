@@ -5,6 +5,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.provider.ContactsContract;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+import com.example.popularity.R;
 import com.example.popularity.model.Friend;
 
 import java.util.ArrayList;
@@ -56,6 +59,7 @@ public class FriendRepository {
                 String name = cur.getString(cur.getColumnIndex(
                         ContactsContract.Contacts.DISPLAY_NAME));
                 friend.setId(Integer.parseInt(id));
+               // friend.setImage(String.valueOf(R.drawable.ic_user));
                 friend.setName(name);
                 if (cur.getInt(cur.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER)) > 0) {
                     Cursor pCur = cr.query(

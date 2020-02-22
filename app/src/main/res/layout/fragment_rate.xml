@@ -258,6 +258,8 @@
 
                 <Button
                     android:id="@+id/btnSaveRates"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/login_btn_height"
                     style="@style/AccentButtonStyle"
                     android:layout_alignParentBottom="true"
                     android:text="@string/submit" />

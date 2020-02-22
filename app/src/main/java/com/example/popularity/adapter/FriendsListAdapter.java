@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.popularity.R;
 import com.example.popularity.model.Friend;
 import com.example.popularity.myInterface.ItemClickListener;
@@ -54,6 +56,7 @@ public class FriendsListAdapter extends RecyclerView.Adapter<FriendsListAdapter.
             final Friend obj = friends.get(i);
             view.username.setText(obj.getName());
 
+
             friendsHolder.itemView.setOnClickListener(view1 -> listener.onItemClick(i));
         }
     }
@@ -74,6 +77,7 @@ public class FriendsListAdapter extends RecyclerView.Adapter<FriendsListAdapter.
             //profileImage = itemView.findViewById(R.id.profileimage);
            // rate = itemView.findViewById(R.id.rate);
             username = itemView.findViewById(R.id.txtName);
+            profileimage=itemView.findViewById(R.id.imgUserProfile);
         }
 
     }

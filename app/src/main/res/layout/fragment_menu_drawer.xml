@@ -30,7 +30,8 @@
         <TextView
             android:id="@+id/txtName"
             android:layout_width="match_parent"
-            android:layout_gravity="center"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="10dp"
             android:layout_height="35dp"
             tools:text="Zahra Mousavi"
             android:textColor="@color/white"
@@ -61,6 +62,8 @@
            style="@style/PrimaryTextStyle"
            android:layout_width="0dp"
            android:layout_weight="1"
+           android:paddingLeft="@dimen/menu_drawer_item_text_left_padding"
+           android:textSize="@dimen/menu_drawer_text_size"
            android:layout_height="match_parent"
            android:gravity="center_vertical"
            android:text="@string/home_toolbar_txt"
@@ -87,7 +90,9 @@
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:paddingLeft="@dimen/menu_drawer_item_text_left_padding"
             android:gravity="center_vertical"
+            android:textSize="@dimen/menu_drawer_text_size"
             android:text="@string/settings"
 
             />
@@ -98,7 +103,7 @@
         android:id="@+id/btnAboutUs"
         android:layout_width="match_parent"
         android:background="@drawable/menu_drawer_click_style"
-        android:layout_height="40dp"
+        android:layout_height="@dimen/menu_drawer_items_height"
         android:orientation="horizontal">
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -112,8 +117,10 @@
             style="@style/PrimaryTextStyle"
             android:layout_width="0dp"
             android:layout_weight="1"
+            android:paddingLeft="@dimen/menu_drawer_item_text_left_padding"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
+            android:textSize="@dimen/menu_drawer_text_size"
             android:text="@string/about_us"
             />
     </LinearLayout>
@@ -139,8 +146,10 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="match_parent"
+            android:paddingLeft="@dimen/menu_drawer_item_text_left_padding"
             android:gravity="center_vertical"
             style="@style/PrimaryTextStyle"
+            android:textSize="@dimen/menu_drawer_text_size"
             android:text="@string/privacy_policy"
             />
     </LinearLayout>
@@ -169,6 +178,8 @@
             android:layout_height="match_parent"
             android:gravity="center_vertical"
             android:text="@string/rate_us"
+            android:paddingLeft="@dimen/menu_drawer_item_text_left_padding"
+            android:textSize="@dimen/menu_drawer_text_size"
             />
     </LinearLayout>
 

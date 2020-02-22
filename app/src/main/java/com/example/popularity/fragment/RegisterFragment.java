@@ -17,6 +17,7 @@ import com.example.popularity.model.Login;
 import com.example.popularity.model.User;
 import com.example.popularity.mvp.MobileLoginMvp;
 import com.example.popularity.presenter.MobileLoginPresenter;
+import com.example.popularity.utils.ToolBarIconKind;
 import com.example.popularity.utils.ToolbarKind;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -82,6 +83,7 @@ public class RegisterFragment extends BaseFragment implements MobileLoginMvp.Vie
     public void init(View view)
     {
         baseListener.changeToolbar(ToolbarKind.HOME, getString(R.string.empty));
+        baseListener.showToolbarIcon(ToolBarIconKind.INVISIBLE);
         btnRegister=view.findViewById(R.id.btnRegister);
         edtFullName=view.findViewById(R.id.edtFullName);
         edtUserName=view.findViewById(R.id.edtUserName);
