@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -183,5 +184,10 @@ public class HomeFragment extends BaseFragment implements
     @Override
     public void setFriendsList(List<Friend> friends) {
         friendsListAdapter.addAllItems(friends);
+    }
+
+    @Override
+    public AppCompatActivity getFragActivity() {
+        return (AppCompatActivity) getActivity();
     }
 }

@@ -23,6 +23,7 @@ public interface HomeMvp {
         void ShareScreenShot(Uri uri);
         Context getViewContext();
         void setFriendsList(List<Friend> friends);
+        AppCompatActivity getFragActivity();
     }
 
     interface Presenter {

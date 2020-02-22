@@ -26,6 +26,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Handler;
 
 import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.core.Observable;
@@ -129,8 +130,26 @@ public class HomePresenter implements HomeMvp.Presenter {
 
                         Log.d("app_tag", "granted");
 
-                        friendsList = friendRepository.getFriendsFromPhoneContacts(view.getViewContext());
-                        view.setFriendsList(friendsList);
+                        baseListener.showLoadingBar(true);
+
+
+                        new Thread() {
+                            public void run() {
+                                friendsList = friendRepository.getFriendsFromPhoneContacts(view.getViewContext());
+                                try {
+                                        view.getFragActivity().runOnUiThread(() -> {
+
+                                            view.setFriendsList(friendsList);
+                                            baseListener.showLoadingBar(false);
+                                        });
+                                        Thread.sleep(300);
+                                    } catch (InterruptedException e) {
+                                        e.printStackTrace();
+                                    }
+                            }
+                        }.start();
+
+
                         //friendObservableList = Observable.just(friendsList);
                     } else {
 
