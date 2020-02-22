@@ -16,7 +16,6 @@ public interface MainActivityTransaction {
         void changeToolbar(ToolbarKind kind, String title);
         void showToolbarIcon(ToolBarIconKind iconKind);
         void showMessage(ShowMessageType messageType,String message);
-        void getPermission(String permission);
     }
 
     interface Attacher {

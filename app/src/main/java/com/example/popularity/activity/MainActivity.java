@@ -1,10 +1,6 @@
 package com.example.popularity.activity;
 
-import android.Manifest;
-import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.text.BoringLayout;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -14,7 +10,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.core.view.GravityCompat;
-import androidx.core.widget.ImageViewCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -24,32 +19,17 @@ import com.example.popularity.R;
 import com.example.popularity.fragment.BaseFragment;
 import com.example.popularity.fragment.MenuDrawerFragment;
 import com.example.popularity.fragment.SplashFragment;
-import com.example.popularity.model.User;
 import com.example.popularity.mvp.MainMvp;
 import com.example.popularity.myInterface.MainActivityTransaction;
 import com.example.popularity.presenter.MainPresenter;
 import com.example.popularity.utils.ConnectivityReceiver;
-import com.example.popularity.utils.LoginKind;
 import com.example.popularity.utils.MyApp;
-import com.example.popularity.utils.PermissionStatus;
 import com.example.popularity.utils.ShowMessageType;
 import com.example.popularity.utils.ToolBarIconKind;
 import com.example.popularity.utils.ToolbarKind;
 import com.google.android.material.snackbar.Snackbar;
 import com.gun0912.tedpermission.PermissionListener;
-import com.tedpark.tedpermission.rx2.TedRx2Permission;
-
-import org.reactivestreams.Subscriber;
-
 import java.util.List;
-
-import io.reactivex.Observer;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.rxjava3.annotations.NonNull;
-import io.reactivex.rxjava3.core.Observable;
-import io.reactivex.rxjava3.core.ObservableEmitter;
-import io.reactivex.rxjava3.core.ObservableOnSubscribe;
-
 
 public class MainActivity extends AppCompatActivity implements
         MainActivityTransaction.Components
@@ -88,76 +68,6 @@ public class MainActivity extends AppCompatActivity implements
                 Toast.makeText(this, message, Toast.LENGTH_LONG).show();
                 break;
         }
-    }
-
-
-    PermissionListener permissionlistener = new PermissionListener() {
-        @Override
-        public void onPermissionGranted() {
-            Toast.makeText(MainActivity.this, "Permission Granted", Toast.LENGTH_SHORT).show();
-        }
-
-        @Override
-        public void onPermissionDenied(List<String> deniedPermissions) {
-            Toast.makeText(MainActivity.this, "Permission Denied\n" + deniedPermissions.toString(), Toast.LENGTH_SHORT).show();
-        }
-    };
-
-
-
-    Observer<Void> animalsObserver = getPhonePermission();
-    private Observer<Void> getPhonePermission() {
-
-        return new Observer<Void>() {
-            @Override
-            public void onSubscribe(Disposable d) {
-                Log.d("TAG_RX", "onSubscribe");
-            }
-
-            @Override
-            public void onNext(Void aVoid) {
-
-                Log.d("TAG_RX", "Name: ");
-            }
-
-            @Override
-            public void onError(Throwable e) {
-
-                Log.e("TAG_RX", "onError: " + e.getMessage());
-            }
-
-            @Override
-            public void onComplete() {
-
-                Log.d("TAG_RX", "All items are emitted!");
-            }
-        };
-    }
-
-
-    @SuppressLint("CheckResult")
-    @Override
-    public void getPermission(String permission) {
-        TedRx2Permission.with(this)
-                .setRationaleTitle(R.string.hint_get_permissions)
-                //.setRationaleMessage(R.string.rationale_message) // "we need permission for read contact and find your location"
-                .setPermissions(permission)
-                .request()
-                .subscribe(tedPermissionResult -> {
-                    if (tedPermissionResult.isGranted()) {
-                        PermissionStatus.getInstance().observePermission().create(
-                                (ObservableOnSubscribe<Boolean>) emitter -> {
-
-                        }
-                        );
-                        showMessage(ShowMessageType.TOAST, "ohhh you did it");
-
-                    } else {
-                        showMessage(ShowMessageType.TOAST, getString(R.string.hint_you_should_confirm_permissions));
-                    }
-                }, throwable -> {
-
-                });
     }
 
     @Override

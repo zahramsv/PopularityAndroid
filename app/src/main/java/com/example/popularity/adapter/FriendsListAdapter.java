@@ -48,6 +48,16 @@ public class FriendsListAdapter extends RecyclerView.Adapter<FriendsListAdapter.
 
     }
 
+    public void addItem(Friend item){
+        friends.add(item);
+        this.notifyDataSetChanged();
+    }
+
+    public void addAllItems(List<Friend> items){
+        friends.addAll(items);
+        this.notifyDataSetChanged();
+    }
+
     @Override
     public void onBindViewHolder(@NonNull FriendsHolder friendsHolder, int i) {
 

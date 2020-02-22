@@ -1,6 +1,7 @@
 package com.example.popularity.presenter;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -8,6 +9,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Environment;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -27,14 +29,19 @@ import com.example.popularity.mvp.HomeMvp;
 import com.example.popularity.myInterface.MainActivityTransaction;
 import com.example.popularity.utils.MyApp;
 import com.example.popularity.utils.PermissionStatus;
+import com.example.popularity.utils.ShowMessageType;
+import com.tedpark.tedpermission.rx2.TedRx2Permission;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import io.reactivex.rxjava3.annotations.NonNull;
+import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.core.Observer;
 
 import static com.example.popularity.utils.Configs.REQUEST_READ_CONTACTS;
@@ -47,6 +54,13 @@ public class HomePresenter extends FileProvider implements HomeMvp.Presenter {
     private FileOutputStream outputStream2;
     private HomeMvp.View view;
     private MainActivityTransaction.Components baseListener;
+    private List<Friend> friendsList = new ArrayList<>();
+    private Observable<List<Friend>> friendObservableList = new Observable<List<Friend>>() {
+        @Override
+        protected void subscribeActual(@NonNull Observer<? super List<Friend>> observer) {
+
+        }
+    } ;
 
     public HomePresenter(
             HomeMvp.View view,
@@ -66,19 +80,24 @@ public class HomePresenter extends FileProvider implements HomeMvp.Presenter {
 
     @Override
     public List<Friend> getFriends(Context context) {
+        return friendsList;
+    }
 
+    @Override
+    public Observable<List<Friend>> getObservable(){
+        return friendObservableList;
+    }
+
+    @Override
+    public void provideFriends() {
         switch (loginHandler.getLoginKind()) {
             case MOCK:
-                return friendRepository.getFriendsFromMock(userRepository.getCurrentUser().getSocial_primary());
-
+                friendsList = friendRepository.getFriendsFromMock(userRepository.getCurrentUser().getSocial_primary());
+                friendObservableList = Observable.just(friendsList);
+                break;
             case SMS: {
-                baseListener.getPermission(Manifest.permission.READ_CONTACTS);
-
-                return null;
+                getPermission(Manifest.permission.READ_CONTACTS);
             }
-
-            default:
-                return null;
         }
     }
 
@@ -116,6 +135,31 @@ public class HomePresenter extends FileProvider implements HomeMvp.Presenter {
         intent.setAction(Intent.ACTION_VIEW);
         Uri uri = FileProvider.getUriForFile(context, context.getApplicationContext().getPackageName() + ".provider", imageFile);
         view.ShareScreenShot(uri);
+    }
+
+    @SuppressLint("CheckResult")
+    private void getPermission(String permission) {
+        TedRx2Permission.with(view.getViewContext())
+                .setRationaleTitle(R.string.hint_get_permissions)
+                //.setRationaleMessage(R.string.rationale_message) // "we need permission for read contact and find your location"
+                .setPermissions(permission)
+                .request()
+                .subscribe(tedPermissionResult -> {
+                    if (tedPermissionResult.isGranted()) {
+
+                        Log.d("app_tag", "granted");
+
+                        friendsList = friendRepository.getFriendsFromPhoneContacts(view.getViewContext());
+                        friendObservableList = Observable.just(friendsList);
+                    } else {
+
+                        Log.d("app_tag", "not granted");
+                        baseListener.showMessage(ShowMessageType.TOAST, view.getViewContext().getString(R.string.hint_you_should_confirm_permissions));
+                    }
+                }, throwable -> {
+                    Log.d("app_tag", "throw error");
+
+                });
     }
 
 }

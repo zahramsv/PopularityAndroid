@@ -14,15 +14,20 @@ import java.io.File;
 import java.net.URI;
 import java.util.List;
 
+import io.reactivex.rxjava3.core.Observable;
+
 public interface HomeMvp {
 
 
     interface View {
         void ShareScreenShot(Uri uri);
+        Context getViewContext();
     }
 
     interface Presenter {
         List<Friend> getFriends(Context context);
+        Observable<List<Friend>> getObservable();
+        void provideFriends();
         User getUser();
         void takeScreenShot(android.view.View view);
         void openScreenShot(File file);
