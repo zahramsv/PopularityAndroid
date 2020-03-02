@@ -20,7 +20,7 @@
 
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/cardUserRates"
+                android:id="@+id/cardViewUserRates"
                 style="@style/CardViewStyle"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

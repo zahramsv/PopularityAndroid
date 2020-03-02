@@ -1,6 +1,7 @@
 package com.example.popularity.adapter;
 
 import android.content.Context;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatRatingBar;
 import androidx.recyclerview.widget.RecyclerView;
@@ -27,11 +28,11 @@ public class RateListAdapter extends RecyclerView.Adapter<RateListAdapter.RateHo
         void onItemClick(int position, View v);
     }
 
-    public void setOnItemClickListener(ClickListener clickListener)
-    {
-       RateListAdapter.clickListener=clickListener;
+    public void setOnItemClickListener(ClickListener clickListener) {
+        RateListAdapter.clickListener = clickListener;
 
     }
+
     public RateListAdapter(List<Rate> rates, Context context) {
         this.rates = rates;
         this.context = context;
@@ -48,12 +49,9 @@ public class RateListAdapter extends RecyclerView.Adapter<RateListAdapter.RateHo
     public void onBindViewHolder(@NonNull RateHolder rateHolder, int i) {
 
         if (rateHolder instanceof RateHolder) {
-            RateHolder view =  rateHolder;
-            final Rate o = rates.get(i);
-          /*  view.attribute.setText(o.getAttribute());
-            view.rating.setRating(rates.get(i).getRate());*/
-          view.TxtRateItem.setText(rates.get(i).getAttribute());
-          view.TxtRateCount.setText(rates.get(i).getRate()+"");
+            RateHolder view = rateHolder;
+            view.TxtRateItem.setText(rates.get(i).getAttribute());
+            view.TxtRateCount.setText(rates.get(i).getRate() + "");
 
 
         }
@@ -67,20 +65,18 @@ public class RateListAdapter extends RecyclerView.Adapter<RateListAdapter.RateHo
     public class RateHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
 
-        private TextView attribute;
-        private AppCompatRatingBar rating;
-        private TextView TxtRateItem,TxtRateCount;
+        private TextView TxtRateItem, TxtRateCount;
+
         public RateHolder(@NonNull View itemView) {
             super(itemView);
-           /* attribute=itemView.findViewById(R.id.txtAttribute);
-            rating=itemView.findViewById(R.id.rating);*/
-           TxtRateCount=itemView.findViewById(R.id.TxtRateCount);
-            TxtRateItem=itemView.findViewById(R.id.TxtRateItem);
+
+            TxtRateCount = itemView.findViewById(R.id.TxtRateCount);
+            TxtRateItem = itemView.findViewById(R.id.TxtRateItem);
         }
 
         @Override
         public void onClick(View view) {
-            clickListener.onItemClick(getAdapterPosition(),view);
+            clickListener.onItemClick(getAdapterPosition(), view);
         }
     }
 }

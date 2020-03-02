@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import com.example.popularity.R;
 import com.example.popularity.model.Login;
 import com.example.popularity.model.User;
+import com.example.popularity.model.repository.SharedPrefsRepository;
 import com.example.popularity.mvp.MobileLoginMvp;
 import com.example.popularity.presenter.MobileLoginPresenter;
 import com.example.popularity.utils.ToolBarIconKind;
@@ -73,6 +74,10 @@ public class RegisterFragment extends BaseFragment implements MobileLoginMvp.Vie
             user.setSocial_primary(primaryKey);
             user.setAvatar_url("test.jpg");
             presenter.loginToServer(user);
+
+
+
+
         });
 
 

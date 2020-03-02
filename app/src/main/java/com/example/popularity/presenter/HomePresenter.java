@@ -61,7 +61,7 @@ public class HomePresenter implements HomeMvp.Presenter {
         loginHandler = MyApp.getInstance().getBaseComponent().provideLoginHandler();
         userRepository = MyApp.getInstance().getBaseComponent().provideUserRepository();
 
-        this.context = MyApp.getInstance().getBaseContext().getApplicationContext();
+       // this.context = MyApp.getInstance().getBaseContext().getApplicationContext();
     }
 
     @Override
@@ -74,7 +74,8 @@ public class HomePresenter implements HomeMvp.Presenter {
         switch (loginHandler.getLoginKind()) {
             case MOCK:
                 friendsList = friendRepository.getFriendsFromMock(userRepository.getCurrentUser().getSocial_primary());
-                friendObservableList = Observable.just(friendsList);
+                view.setFriendsList(friendsList);
+
                 break;
             case SMS: {
                 getPermission(Manifest.permission.READ_CONTACTS);
@@ -102,6 +103,7 @@ public class HomePresenter implements HomeMvp.Presenter {
             bitmap.compress(Bitmap.CompressFormat.JPEG, quality, outputStream2);
             outputStream2.flush();
             outputStream2.close();
+
             openScreenShot(MyApp.getInstance().getBaseComponent().provideFile());
         } catch (Throwable e) {
             // Several error may come out with file handling or DOM

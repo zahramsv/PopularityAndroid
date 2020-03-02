@@ -1,8 +1,14 @@
 package com.example.popularity.model;
 
-public class Rate {
+import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
+public class Rate implements Serializable {
+
+    @SerializedName("attribute")
     private String attribute;
+    @SerializedName("Rate")
     private int Rate;
 
     public Rate(String attribute, int rate) {

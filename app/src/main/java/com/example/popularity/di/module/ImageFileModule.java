@@ -5,6 +5,7 @@ import android.os.Environment;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.util.Date;
 
 import javax.inject.Singleton;
 
@@ -30,7 +31,9 @@ public class ImageFileModule {
 
     @Provides
     public File getImageFile() {
-        return new File(Environment.getExternalStorageDirectory().toString() + "/" + "share" + ".jpg");
+        Date now = new Date();
+        android.text.format.DateFormat.format("MM-dd_hh:mm:ss", now);
+        return new File(Environment.getExternalStorageDirectory().toString() + "/" + now + ".jpg");
     }
 
 

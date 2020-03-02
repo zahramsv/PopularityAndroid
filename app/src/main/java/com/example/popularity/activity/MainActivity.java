@@ -1,5 +1,6 @@
 package com.example.popularity.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -7,6 +8,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.core.view.GravityCompat;
@@ -14,7 +16,6 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-
 import com.example.popularity.R;
 import com.example.popularity.fragment.BaseFragment;
 import com.example.popularity.fragment.MenuDrawerFragment;
@@ -28,8 +29,6 @@ import com.example.popularity.utils.ShowMessageType;
 import com.example.popularity.utils.ToolBarIconKind;
 import com.example.popularity.utils.ToolbarKind;
 import com.google.android.material.snackbar.Snackbar;
-import com.gun0912.tedpermission.PermissionListener;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements
         MainActivityTransaction.Components
@@ -98,6 +97,8 @@ public class MainActivity extends AppCompatActivity implements
 
 
     }
+
+
 
     @Override
     public void changeToolbar(ToolbarKind kind, String title) {

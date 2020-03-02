@@ -71,7 +71,6 @@ public class MobileLoginFragment extends BaseFragment
         btnReceiveCode = view.findViewById(R.id.btnReceiveCode);
         cardViewMobileRegister=view.findViewById(R.id.cardViewMobileRegister);
         cardViewVerifyCode=view.findViewById(R.id.cardViewVerifyCode);
-
     }
 
     @Override

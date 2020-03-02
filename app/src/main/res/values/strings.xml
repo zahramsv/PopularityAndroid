@@ -18,6 +18,7 @@
     <string name="rate_to_friends">Rate</string>
     <string name="login_page">Login Page</string>
     <string name="login_with">Choose Login Way </string>
+    <string name="share">Share</string>
     <string name="error_under_construction">This part is under construction!</string>
 
     <string name="drawer_open">open</string>
@@ -102,6 +103,7 @@
     <string name="send_sms_btn_txt">Send SMS</string>
     <string name="verify_code">Verify code</string>
     <string name="phone_contacts">Phone Contacts :</string>
+
     <string name="login_twitter_btn_text">Login Twitter</string>
     <string name="fallow_us">fallow us in social medias : </string>
     <string name="phone_number_logout">Logout Phone </string>
@@ -111,6 +113,9 @@
     <string name="full_name">Full Name</string>
     <string name="register">Register</string>
     <string name="logout_submit">Are you sure for logout?</string>
+
+    <string name="share_desc">you can share this on your social network or send it to
+    your friends and inviting them to popularity have chance to see more result about yourself </string>
     <string name="rate_submit_description">you rate to your friend done successfully
         he she will see the result when she login to his her popularity account
         but would not distinguish who rate him her</string>
