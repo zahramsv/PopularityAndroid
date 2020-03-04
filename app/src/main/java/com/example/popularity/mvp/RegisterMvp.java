@@ -18,5 +18,7 @@ public interface RegisterMvp {
 
         void loginToServer(Login user);
 
+        boolean userRegisterInformationValidation(String fullName, String userName);
+
     }
 }

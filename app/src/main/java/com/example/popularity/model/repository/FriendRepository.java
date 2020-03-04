@@ -56,7 +56,6 @@ public class FriendRepository {
                 String name = cur.getString(cur.getColumnIndex(
                         ContactsContract.Contacts.DISPLAY_NAME));
                 friend.setId(Integer.parseInt(id));
-               // friend.setImage(String.valueOf(R.drawable.ic_user));
                 friend.setName(name);
                 if (cur.getInt(cur.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER)) > 0) {
                     Cursor pCur = cr.query(
@@ -73,7 +72,11 @@ public class FriendRepository {
                         friend.userId = friend.userId.replace(" ", "");
                         friend.userId = friend.userId.trim();
                         if (isValidMobileNumber(friend.userId) && friend.userId != null && friend.name != null) {
-                            friends.add(friend);
+                            if(!friends.contains(friend))
+                            {
+                                friends.add(friend);
+                            }
+
                         }
 
 
@@ -91,7 +94,6 @@ public class FriendRepository {
 
     private boolean isValidMobileNumber(String input) {
 
-        //(0|\+98)?([ ]|,|-|[()]){0,2}9[1|2|3|4]([ ]|,|-|[()]){0,2}(?:[0-9]([ ]|,|-|[()]){0,2}){8}
         Pattern pattern = Pattern.compile("^09[0|1|2|3][0-9]{8}$");
         Matcher matcher = pattern.matcher(input);
         if (matcher.matches()) {

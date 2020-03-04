@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 
 import androidx.appcompat.widget.AppCompatButton;
 
@@ -14,6 +15,7 @@ import com.example.popularity.mvp.MobileLoginMvp;
 import com.example.popularity.mvp.RegisterMvp;
 import com.example.popularity.presenter.MobileLoginPresenter;
 import com.example.popularity.presenter.RegisterPresenter;
+import com.example.popularity.utils.ShowMessageType;
 import com.example.popularity.utils.ToolBarIconKind;
 import com.example.popularity.utils.ToolbarKind;
 import com.google.android.material.textfield.TextInputEditText;
@@ -57,16 +59,26 @@ public class RegisterFragment extends BaseFragment implements RegisterMvp.View {
         View view = inflater.inflate(R.layout.fragment_register, container, false);
         init(view);
         Bundle bundle = getArguments();
+
         String primaryKey = bundle.getString("primary_key");
 
         presenter.setUserSocialPrimary(primaryKey);
 
         btnRegister.setOnClickListener(view1 -> {
-            Login user = presenter.getLoginInfo(
-                    edtFullName.getText().toString(),
-                    edtUserName.getText().toString()
-            );
-            presenter.loginToServer(user);
+            baseListener.closeKeyboard();
+            if (presenter.userRegisterInformationValidation(edtFullName.getText().toString(),edtUserName.getText().toString()))
+            {
+                Login user = presenter.getLoginInfo(
+                        edtFullName.getText().toString(),
+                        edtUserName.getText().toString()
+                );
+                presenter.loginToServer(user);
+            }
+            else
+            {
+                baseListener.showMessage(ShowMessageType.TOAST,getString(R.string.full_name_username_validation));
+            }
+
         });
 
 

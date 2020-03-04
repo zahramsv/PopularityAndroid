@@ -11,6 +11,7 @@ import com.example.popularity.model.repository.SharedPrefsRepository;
 import com.example.popularity.mvp.SettingMvp;
 import com.example.popularity.myInterface.MainActivityTransaction;
 import com.example.popularity.utils.MyApp;
+import com.example.popularity.utils.ShowMessageType;
 
 public class SettingPresenter implements SettingMvp.Presenter {
 
@@ -24,17 +25,16 @@ public class SettingPresenter implements SettingMvp.Presenter {
     }
 
     @Override
-    public void logout(int btnId,SwitchCompat switchCompat) {
+    public void logout(int btnId, SwitchCompat switchCompat) {
 
-        if (btnId==R.id.btnPhoneLogout)
-        {
+        if (btnId == R.id.btnPhoneLogout) {
             Dialog dialog = new Dialog(view.getViewContext());
             dialog.setContentView(R.layout.logout_confirm_dialog);
             dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
             dialog.show();
             dialog.findViewById(R.id.btnNo).setOnClickListener(view2 -> {
                 dialog.dismiss();
-               switchCompat.setChecked(false);
+                switchCompat.setChecked(true);
                 return;
             });
 
@@ -43,13 +43,14 @@ public class SettingPresenter implements SettingMvp.Presenter {
                 SharedPrefsRepository sharedPrefsRepository = new SharedPrefsRepository(view.getViewContext());
                 sharedPrefsRepository.DeleteUser();
                 dialog.dismiss();
-                baseComponent.openFragment(LoginFragment.newInstance(),true,null);
+                switchCompat.setChecked(false);
+                baseComponent.openFragment(LoginFragment.newInstance(), true, null);
             });
         }
 
-        if (btnId==R.id.btnTwitterLogout)
-        {
+        if (btnId == R.id.btnTwitterLogout) {
 
+            baseComponent.showMessage(ShowMessageType.TOAST,"Coming soon ...");
         }
     }
 }

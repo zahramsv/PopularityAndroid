@@ -5,6 +5,11 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+
+    <string name="phone_number_validation">please enter correct phone number</string>
+    <string name="verify_code_validation">please check your sms inbox and enter verify code</string>
+    <string name="full_name_username_validation">please enter correct information</string>
+
     <string name="facebook_login">My Facebook Popularity</string>
     <string name="navigation_drawer_open">Open Navigation</string>
     <string name="navigation_drawer_close">Close Navigation</string>
@@ -62,7 +67,7 @@
     <string name="rate_trustworthy">Trustworthy</string>
     <string name="rate_popularity">Popularity</string>
     <string name="rate_to">What you think about your friend</string>
-    <string name="submit">Submit</string>
+    <string name="submit">Submit Rates</string>
     <string name="rate_done">Rate Done !!</string>
     <string name="okay">OKAY</string>
     <string name="yes">Yes</string>

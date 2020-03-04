@@ -35,7 +35,7 @@ public class ShareFragment extends BaseFragment implements ShareMvp.View {
     private RateListAdapter rateListAdapter;
     private List<Rate> rates;
     private RecyclerView rvYourRates;
-    private AppCompatImageView imgUploadProfile;
+    private AppCompatImageView imgUploadProfile, imgViewEditProfile;
     private LinearLayout linearUserProfile;
     private LinearLayout layoutScreenShot;
 
@@ -65,6 +65,8 @@ public class ShareFragment extends BaseFragment implements ShareMvp.View {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_share, container, false);
+        imgViewEditProfile = view.findViewById(R.id.imgViewEditProfile);
+        imgViewEditProfile.setVisibility(View.GONE);
         layoutScreenShot = view.findViewById(R.id.layoutScreenShot);
         imgUploadProfile = view.findViewById(R.id.imgUploadProfile);
         rvYourRates = view.findViewById(R.id.rvYourRates);
@@ -73,22 +75,30 @@ public class ShareFragment extends BaseFragment implements ShareMvp.View {
         rvYourRates.setLayoutManager(layoutManager1);
         rvYourRates.setAdapter(rateListAdapter);
         view.findViewById(R.id.btnShare).setOnClickListener(view1 -> {
+            imgViewEditProfile.setVisibility(View.GONE);
             View view2 = getActivity().getWindow().getDecorView().getRootView().findViewById(R.id.layoutScreenShot);
             presenter.takeScreenShot(view2);
 
         });
 
         imgUploadProfile.setOnClickListener(view12 -> {
-            CropImage.activity()
-                    .setGuidelines(CropImageView.Guidelines.ON)
-                    .setAspectRatio(3, 1)
-                    .setFixAspectRatio(true)
-                    .start(getContext(), this);
+            selectAndCropImage();
+        });
+
+        imgViewEditProfile.setOnClickListener(view13 -> {
+            selectAndCropImage();
         });
 
         return view;
     }
 
+    public void selectAndCropImage() {
+        CropImage.activity()
+                .setGuidelines(CropImageView.Guidelines.ON)
+                .setAspectRatio(3, 1)
+                .setFixAspectRatio(true)
+                .start(getContext(), this);
+    }
 
     @SuppressLint("ResourceAsColor")
     @Override
@@ -102,7 +112,8 @@ public class ShareFragment extends BaseFragment implements ShareMvp.View {
             Drawable myDrawable = imgUploadProfile.getDrawable();
             imgUploadProfile.setImageBitmap(null);
             linearUserProfile.setBackground(myDrawable);
-            layoutScreenShot.setBackgroundResource(R.color.colorPrimary);
+            imgViewEditProfile.setVisibility(View.VISIBLE);
+            layoutScreenShot.setBackgroundResource(R.color.white);
         }
     }
 

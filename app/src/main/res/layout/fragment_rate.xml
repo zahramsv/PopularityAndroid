@@ -12,62 +12,53 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ScrollView
+
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-        </ScrollView>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="10dp">
-
+            android:layout_height="match_parent">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginTop="40dp"
-                android:gravity="center"
-                android:orientation="horizontal">
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="10dp">
 
-                <TextView
-                    style="@style/PrimaryTextStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="@string/rate_to" />
 
-                <TextView
-
-                    android:id="@+id/txtFriendName"
-                    style="@style/SecondaryTextStyle"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="2dp"
-                    android:textColor="@color/colorPrimary"
-                    android:gravity="center_vertical"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="30dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
 
-                    />
+                    <TextView
+                        style="@style/PrimaryTextStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="@string/rate_to" />
 
-            </LinearLayout>
+                    <TextView
 
+                        android:id="@+id/txtFriendName"
+                        style="@style/SecondaryTextStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="1dp"
+                        android:gravity="center_vertical"
+                        android:textColor="@color/colorPrimary"
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
+                        />
+
+                </LinearLayout>
 
 
                 <TextView
                     style="@style/PrimaryTextStyle"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="match_parent"
-                    android:text="@string/rate_look"
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="20dp"
                     android:gravity="left"
+                    android:text="@string/rate_look"
                     android:textSize="16sp" />
 
 
@@ -81,192 +72,126 @@
                     android:stepSize="1" />
 
 
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_mxlarge"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-
                 <TextView
                     style="@style/PrimaryTextStyle"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="10dp"
                     android:gravity="left"
-                    android:layout_height="match_parent"
                     android:text="@string/rate_fitness"
                     android:textSize="16sp" />
 
 
-
-
-                    <androidx.appcompat.widget.AppCompatRatingBar
-                        android:id="@+id/rtFitness"
-                        android:layout_width="wrap_content"
-                        android:layout_height="30dp"
-                        android:numStars="10"
-                        android:progressDrawable="@drawable/my_rating_display"
-                        android:stepSize="1" />
-
-
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="33dp"
-                android:layout_marginTop="@dimen/spacing_mxlarge"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
+                <androidx.appcompat.widget.AppCompatRatingBar
+                    android:id="@+id/rtFitness"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_gravity="right"
+                    android:numStars="10"
+                    android:progressDrawable="@drawable/my_rating_display"
+                    android:stepSize="1" />
 
 
                 <TextView
                     style="@style/PrimaryTextStyle"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="10dp"
                     android:gravity="left"
-                    android:layout_height="match_parent"
                     android:text="@string/rate_style"
                     android:textSize="16sp" />
 
 
-
-
-                    <androidx.appcompat.widget.AppCompatRatingBar
-                        android:id="@+id/rtStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="30dp"
-                        android:numStars="10"
-                        android:progressDrawable="@drawable/my_rating_display"
-                        android:stepSize="1" />
-
-
-
-
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_mxlarge"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
+                <androidx.appcompat.widget.AppCompatRatingBar
+                    android:id="@+id/rtStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_gravity="right"
+                    android:numStars="10"
+                    android:progressDrawable="@drawable/my_rating_display"
+                    android:stepSize="1" />
 
 
                 <TextView
                     style="@style/PrimaryTextStyle"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="10dp"
                     android:gravity="left"
-                    android:layout_height="match_parent"
                     android:text="@string/rate_personality"
                     android:textSize="16sp" />
 
 
-
-
-                    <androidx.appcompat.widget.AppCompatRatingBar
-                        android:id="@+id/rtPersonality"
-                        android:layout_width="wrap_content"
-                        android:layout_height="30dp"
-                        android:numStars="10"
-                        android:progressDrawable="@drawable/my_rating_display"
-                        android:stepSize="1" />
-
-
-
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_mxlarge"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
+                <androidx.appcompat.widget.AppCompatRatingBar
+                    android:id="@+id/rtPersonality"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_gravity="right"
+                    android:numStars="10"
+                    android:progressDrawable="@drawable/my_rating_display"
+                    android:stepSize="1" />
 
 
                 <TextView
                     style="@style/PrimaryTextStyle"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="10dp"
                     android:gravity="left"
-                    android:layout_height="match_parent"
                     android:text="@string/rate_trustworthy"
                     android:textSize="16sp" />
 
 
+                <androidx.appcompat.widget.AppCompatRatingBar
+                    android:id="@+id/rtTrustworthy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_gravity="right"
+                    android:numStars="10"
+                    android:progressDrawable="@drawable/my_rating_display"
+                    android:stepSize="1" />
 
-
-                    <androidx.appcompat.widget.AppCompatRatingBar
-                        android:id="@+id/rtTrustworthy"
-                        android:layout_width="wrap_content"
-                        android:layout_height="30dp"
-                        android:numStars="10"
-                        android:progressDrawable="@drawable/my_rating_display"
-                        android:stepSize="1" />
-
-
-
-
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_mxlarge"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
 
                 <TextView
                     style="@style/PrimaryTextStyle"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_gravity="left"
-                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="left"
                     android:text="@string/rate_popularity"
                     android:textSize="16sp" />
 
+                <androidx.appcompat.widget.AppCompatRatingBar
+                    android:id="@+id/rtPopularity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_gravity="right"
+                    android:numStars="10"
+                    android:progressDrawable="@drawable/my_rating_display"
+                    android:stepSize="1" />
 
 
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"/>
 
-                    <androidx.appcompat.widget.AppCompatRatingBar
-                        android:id="@+id/rtPopularity"
-                        android:layout_width="wrap_content"
-                        android:layout_height="30dp"
-                        android:layout_alignParentRight="true"
-                        android:layout_gravity="right"
-                        android:layout_marginLeft="@dimen/spacing_large"
-                        android:numStars="10"
-                        android:progressDrawable="@drawable/my_rating_display"
-                        android:stepSize="1" />
 
+                <Button
+                    android:layout_marginTop="40dp"
+                    android:id="@+id/btnSaveRates"
+                    style="@style/AccentButtonStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/login_btn_height"
+                    android:text="@string/submit" />
 
 
             </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
 
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
 
-                <Button
-                    android:id="@+id/btnSaveRates"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/login_btn_height"
-                    style="@style/AccentButtonStyle"
-                    android:layout_alignParentBottom="true"
-                    android:text="@string/submit" />
-            </RelativeLayout>
-
-
-        </LinearLayout>
 
     </androidx.cardview.widget.CardView>
 

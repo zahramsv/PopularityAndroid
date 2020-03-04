@@ -10,10 +10,12 @@ import com.example.popularity.myInterface.MainActivityTransaction;
 import com.example.popularity.utils.MyApp;
 import com.example.popularity.utils.ShowMessageType;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class RegisterPresenter implements
         RegisterMvp.Presenter
-    , UserRepository.UserRepoListener
-{
+        , UserRepository.UserRepoListener {
 
     private RegisterMvp.View view;
     private MainActivityTransaction.Components baseComponent;
@@ -66,6 +68,25 @@ public class RegisterPresenter implements
     public void onLoginFailure(String message) {
         baseComponent.showLoadingBar(false);
         baseComponent.showMessage(ShowMessageType.TOAST, message);
+    }
+
+
+    private static final String USERNAME_PATTERN = "^[a-z0-9_-]{3,15}$";
+
+    @Override
+    public boolean userRegisterInformationValidation(String fullName, String userName) {
+
+        if (fullName.trim().length() > 0 && userName.trim().length() > 0) {
+            Pattern pattern = Pattern.compile(USERNAME_PATTERN);
+            Matcher matcher = pattern.matcher(userName);
+            if (matcher.matches()) {
+                return true;
+            } else
+                return false;
+        } else
+
+            return false;
+
     }
 
 }

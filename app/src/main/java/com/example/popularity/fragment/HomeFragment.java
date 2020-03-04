@@ -8,6 +8,7 @@ import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -69,6 +70,8 @@ public class HomeFragment extends BaseFragment implements
 
 
         View view = inflater.inflate(R.layout.fragment_home, container, false);
+
+
         init(view);
         User user = homePresenter.getUser();
 
