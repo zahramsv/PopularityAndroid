@@ -56,7 +56,7 @@ public class LoginFragment extends BaseFragment implements
 
         loginWithPhoneNumber.setOnClickListener(view -> {
             presenter.setLoginKind(LoginKind.SMS);
-            baseListener.openFragment(new MobileLoginFragment(), true, null);
+            baseListener.openFragment(new MobileLoginFragment(), false, null);
 
             //SharedPrefsRepository sharedPrefsRepository=getViewContext().getSharedPreferences();
 

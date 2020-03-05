@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Handler;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.example.popularity.fragment.HomeFragment;
 import com.example.popularity.fragment.LoginFragment;
@@ -15,6 +16,8 @@ import com.example.popularity.mvp.SplashMvp;
 import com.example.popularity.myInterface.ApiServices;
 import com.example.popularity.myInterface.MainActivityTransaction;
 import com.example.popularity.utils.MyApp;
+import com.example.popularity.utils.ShowMessageType;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -47,6 +50,7 @@ public class SplashPresenter implements SplashMvp.Presenter {
         String token = prefs.getString("token", null);
         String social_primary = prefs.getString("social_primary", null);
 
+
         if (token != null && social_primary != null) {
 
             ApiServices apiServices = MyApp.getInstance().getBaseComponent().provideApiService();
@@ -74,7 +78,8 @@ public class SplashPresenter implements SplashMvp.Presenter {
             });
 
 
-        } else {
+        }
+        else {
             baseComponent.openFragment(new LoginFragment(), false, null);
         }
         Log.i("app_tag", token + "");

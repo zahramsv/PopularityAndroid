@@ -1,32 +1,19 @@
 package com.example.popularity.fragment;
 
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.os.Bundle;
 
-import android.view.Gravity;
+import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.widget.AppCompatButton;
-import androidx.appcompat.widget.Toolbar;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-
 import com.example.popularity.R;
-import com.example.popularity.model.Login;
+import com.example.popularity.model.User;
 import com.example.popularity.model.repository.UserRepository;
 import com.example.popularity.mvp.MenuDrawerMvp;
 import com.example.popularity.utils.MyApp;
 import com.example.popularity.utils.ShowMessageType;
-import com.example.popularity.utils.ToolBarIconKind;
-import com.example.popularity.utils.ToolbarKind;
+
 
 
 public class MenuDrawerFragment extends BaseFragment implements MenuDrawerMvp.View {
@@ -40,9 +27,17 @@ public class MenuDrawerFragment extends BaseFragment implements MenuDrawerMvp.Vi
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_menu_drawer, container, false);
         TextView username = view.findViewById(R.id.txtName);
+
         userRepository=new UserRepository(MyApp.getInstance().getBaseComponent().provideApiService());
-        SharedPreferences preferences = getActivity().getSharedPreferences("user_data", Context.MODE_PRIVATE);
-        username.setText(preferences.getString("full_name", null));
+        if (userRepository.getCurrentUser()!=null)
+        {
+            User user=userRepository.getCurrentUser();
+            username.setText(user.getFull_name());
+        }
+
+       /* SharedPreferences preferences = getActivity().getSharedPreferences("user_data", Context.MODE_PRIVATE);
+        username.setText(preferences.getString("full_name", null));*/
+
         return view;
     }
 
@@ -52,12 +47,6 @@ public class MenuDrawerFragment extends BaseFragment implements MenuDrawerMvp.Vi
         init();
     }
 
-    private Fragment getCurrentFragment(){
-        FragmentManager fragmentManager = getFragmentManager();
-        String fragmentTag = fragmentManager.getBackStackEntryAt(fragmentManager.getBackStackEntryCount() - 1).getName();
-        Fragment currentFragment = fragmentManager.findFragmentByTag(fragmentTag);
-        return currentFragment;
-    }
 
     private void init() {
 

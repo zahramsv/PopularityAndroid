@@ -53,7 +53,6 @@ dependencies {
     annotationProcessor 'com.google.dagger:dagger-compiler:2.26'
 
 
-
     implementation 'com.codesgood:justifiedtextview:1.1.0'
     implementation 'me.biubiubiu.justifytext:library:1.1'
 
@@ -62,5 +61,9 @@ dependencies {
     implementation 'gun0912.ted:tedpermission-rx2:2.2.3'
     //implementation "io.reactivex.rxjava3:rxjava:3.0.0"
     implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
+
+    implementation 'com.theartofdev.edmodo:android-image-cropper:2.8.0'
+    // If you have a problem with Glide, please use the same Glide version or simply open an issue
+  //  implementation 'com.github.bumptech.glide:glide:4.5.0'
 
 }

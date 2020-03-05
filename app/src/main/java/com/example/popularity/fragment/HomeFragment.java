@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.popularity.R;
 import com.example.popularity.adapter.FriendsListAdapter;
 import com.example.popularity.adapter.RateListAdapter;
+import com.example.popularity.model.repository.SharedPrefsRepository;
 import com.example.popularity.mvp.HomeMvp;
 import com.example.popularity.presenter.HomePresenter;
 import com.example.popularity.model.Friend;
@@ -27,13 +29,9 @@ import com.example.popularity.utils.ToolBarIconKind;
 import com.example.popularity.utils.ToolbarKind;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
-import io.reactivex.rxjava3.annotations.NonNull;
-import io.reactivex.rxjava3.core.Observer;
-import io.reactivex.rxjava3.disposables.Disposable;
-import io.reactivex.rxjava3.schedulers.Schedulers;
 import static com.example.popularity.utils.Configs.BUNDLE_FRIEND;
 
 public class HomeFragment extends BaseFragment implements
@@ -47,10 +45,6 @@ public class HomeFragment extends BaseFragment implements
     private FriendsListAdapter friendsListAdapter;
 
 
-    public static HomeFragment newInstance() {
-        HomeFragment fragment = new HomeFragment();
-        return fragment;
-    }
 
     @Override
     public void onHiddenChanged(boolean hidden) {
@@ -64,43 +58,11 @@ public class HomeFragment extends BaseFragment implements
         homePresenter = new HomePresenter(this, getContext(), baseListener);
 
         baseListener.changeToolbar(ToolbarKind.HOME, "");
-        homePresenter.provideFriends();
 
-        homePresenter.getObservable()
-                .subscribeOn(Schedulers.io())
-                .observeOn(Schedulers.io())
-                .subscribe(getObserver());
-
-        //friendsList = homePresenter.getFriends(getContext());
 
 
     }
 
-    private Observer<List<Friend>> getObserver() {
-        return new Observer<List<Friend>>() {
-            @Override
-            public void onSubscribe(@NonNull Disposable d) {
-
-            }
-
-            @Override
-            public void onNext(@NonNull List<Friend> friends) {
-                friendsList = friends;
-                friendsListAdapter.addAllItems(friendsList);
-            }
-
-            @Override
-            public void onError(@NonNull Throwable e) {
-
-            }
-
-            @Override
-            public void onComplete() {
-
-            }
-        };
-
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -109,11 +71,11 @@ public class HomeFragment extends BaseFragment implements
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         init(view);
         User user = homePresenter.getUser();
+
         if (user != null) {
             UserPopularity userPopularity = user.getRates_summary_sum();
             friendsListAdapter = new FriendsListAdapter(friendsList, getActivity());
             friendsRecyclerView.setAdapter(friendsListAdapter);
-            // List<Friend> finalFriendList = friendList;
             friendsListAdapter.setOnItemClickListener(pos -> {
                 Friend friend = friendsList.get(pos);
                 Bundle bundle1 = new Bundle();
@@ -137,11 +99,15 @@ public class HomeFragment extends BaseFragment implements
             });
             favoritesRecyclerView.setAdapter(rateListAdapter);
 
+            //fixme
+            SharedPrefsRepository sharedPrefsRepository=new SharedPrefsRepository(getContext());
+            sharedPrefsRepository.SaveUser(user,userPopularity);
         }
-
+        homePresenter.provideFriends();
+        Bundle bundle=new Bundle();
+        bundle.putSerializable("rates", (Serializable) rates);
         btnShare.setOnClickListener(view1 -> {
-            View view2 = getActivity().getWindow().getDecorView().getRootView().findViewById(R.id.cardUserRates);
-            homePresenter.takeScreenShot(view2);
+            baseListener.openFragment(ShareFragment.newInstance(),false,bundle);
         });
         return view;
     }
@@ -183,7 +149,10 @@ public class HomeFragment extends BaseFragment implements
 
     @Override
     public void setFriendsList(List<Friend> friends) {
-        friendsListAdapter.addAllItems(friends);
+       if (friends!=null)
+       {
+           friendsListAdapter.addAllItems(friends);
+       }
     }
 
     @Override

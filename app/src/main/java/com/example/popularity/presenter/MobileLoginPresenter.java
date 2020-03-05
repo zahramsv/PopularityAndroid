@@ -16,6 +16,7 @@ import com.example.popularity.mvp.MobileLoginMvp;
 import com.example.popularity.myInterface.ApiServices;
 import com.example.popularity.myInterface.MainActivityTransaction;
 import com.example.popularity.utils.ConnectivityReceiver;
+import com.example.popularity.utils.LoginKind;
 import com.example.popularity.utils.MyApp;
 import com.example.popularity.utils.ShowMessageType;
 
@@ -24,9 +25,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MobileLoginPresenter implements
-        MobileLoginMvp.Presenter ,
-        UserRepository.UserRepoListener
-{
+        MobileLoginMvp.Presenter,
+        UserRepository.UserRepoListener {
     private MobileLoginMvp.View view;
     private String userMobile;
     private BaseResponse sendSmsResult;
@@ -49,32 +49,33 @@ public class MobileLoginPresenter implements
     public void verifyCode(String verifyCode) {
         if (ConnectivityReceiver.isConnected()) {
 
+            apiServices.verifySms(userMobile, verifyCode).enqueue(new Callback<BaseResponse<VerifySmsResponseData>>() {
+                @Override
+                public void onResponse(Call<BaseResponse<VerifySmsResponseData>> call, Response<BaseResponse<VerifySmsResponseData>> response) {
 
-                    apiServices.verifySms(userMobile, verifyCode).enqueue(new Callback<BaseResponse<VerifySmsResponseData>>() {
-                        @Override
-                        public void onResponse(Call<BaseResponse<VerifySmsResponseData>> call, Response<BaseResponse<VerifySmsResponseData>> response) {
-
-
-                            if (response.body().getData().isRegistered) {
-                                loginToServer(getLoginInfo());
-                            }
-                                else
-                                {
-                                    Bundle bundle=new Bundle();
-                                    bundle.putString("primary_key",userMobile);
-                                  baseComponent.openFragment(RegisterFragment.newInstance(),false,bundle);
-                                }
+                    if ((response.isSuccessful())) {
+                        if (response.body().getData().isRegistered) {
+                            loginToServer(getLoginInfo());
+                        } else {
+                            Bundle bundle = new Bundle();
+                            bundle.putString("primary_key", userMobile);
+                            baseComponent.openFragment(RegisterFragment.newInstance(), false, bundle);
                         }
+                    }else{
+                        baseComponent.showMessage(ShowMessageType.TOAST, MyApp.getInstance().getApplicationContext().getString(R.string.error_api_call));
+                    }
 
-                        @Override
-                        public void onFailure(Call<BaseResponse<VerifySmsResponseData>> call, Throwable t) {
-                            baseComponent.showMessage(ShowMessageType.TOAST, t.getMessage());
-                        }
-                    });
-                } else {
-                    baseComponent.showMessage(ShowMessageType.TOAST, view.getViewContext().getString(R.string.network_connection_error));
                 }
-            }
+
+                @Override
+                public void onFailure(Call<BaseResponse<VerifySmsResponseData>> call, Throwable t) {
+                    baseComponent.showMessage(ShowMessageType.TOAST, t.getMessage());
+                }
+            });
+        } else {
+            baseComponent.showMessage(ShowMessageType.TOAST, view.getViewContext().getString(R.string.network_connection_error));
+        }
+    }
 
     @Override
     public void sendSMS(String mobile) {
@@ -82,19 +83,19 @@ public class MobileLoginPresenter implements
 
         userMobile = mobile;
 
-            apiServices.sendSms(mobile).enqueue(new Callback<BaseResponse>() {
-                @Override
-                public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
+        apiServices.sendSms(mobile).enqueue(new Callback<BaseResponse>() {
+            @Override
+            public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
 
-                    sendSmsResult = response.body();
-                }
+                sendSmsResult = response.body();
+            }
 
-                @Override
-                public void onFailure(Call<BaseResponse> call, Throwable t) {
-                    baseComponent.showMessage(ShowMessageType.SNACK, view.getViewContext().getString(R.string.some_problems_when_use_api));
-                }
-            });
-        }
+            @Override
+            public void onFailure(Call<BaseResponse> call, Throwable t) {
+                baseComponent.showMessage(ShowMessageType.SNACK, view.getViewContext().getString(R.string.some_problems_when_use_api));
+            }
+        });
+    }
 
 
     @Override
@@ -105,13 +106,26 @@ public class MobileLoginPresenter implements
 
     @Override
     public Login getLoginInfo() {
+
         Login user = new Login();
-       // return userRepository.getCurrentUser();
-        user.setAvatar_url("myavatar.jpg");
-        user.setFull_name("zahra hadi");
-        user.setSocial_primary(userMobile);
-        user.setUsername("z.hadi");
-        user.setSocial_type(0);
+
+        if (loginHandler.getLoginKind() == LoginKind.MOCK) {
+            // return userRepository.getCurrentUser();
+            user.setAvatar_url("test.jpg");
+            user.setFull_name("zahra hadi");
+            user.setSocial_primary(userMobile);
+            user.setUsername("z.hadi");
+            user.setSocial_type(0);
+        }
+        else if (loginHandler.getLoginKind() == LoginKind.SMS) {
+            user.setAvatar_url("");
+            user.setFull_name("");
+            user.setSocial_primary(userMobile);
+            user.setUsername("");
+            user.setSocial_type(0);
+        }
+
+
         return user;
     }
 

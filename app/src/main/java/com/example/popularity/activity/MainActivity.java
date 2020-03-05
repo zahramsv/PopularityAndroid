@@ -14,7 +14,6 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-
 import com.example.popularity.R;
 import com.example.popularity.fragment.BaseFragment;
 import com.example.popularity.fragment.MenuDrawerFragment;
@@ -28,8 +27,6 @@ import com.example.popularity.utils.ShowMessageType;
 import com.example.popularity.utils.ToolBarIconKind;
 import com.example.popularity.utils.ToolbarKind;
 import com.google.android.material.snackbar.Snackbar;
-import com.gun0912.tedpermission.PermissionListener;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements
         MainActivityTransaction.Components
@@ -98,6 +95,8 @@ public class MainActivity extends AppCompatActivity implements
 
 
     }
+
+
 
     @Override
     public void changeToolbar(ToolbarKind kind, String title) {
