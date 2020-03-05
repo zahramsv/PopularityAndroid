@@ -43,7 +43,7 @@
 
 
    <LinearLayout
-       android:layout_marginTop="@dimen/spacing_middle"
+       android:layout_marginTop="10dp"
        android:id="@+id/btnHome"
        android:layout_height="@dimen/menu_drawer_items_height"
        android:layout_width="match_parent"
@@ -128,7 +128,7 @@
 
 
     <LinearLayout
-        android:layout_marginTop="@dimen/spacing_xxlarge"
+        android:layout_marginTop="40dp"
         android:id="@+id/btnPrivacyPolicy"
         android:layout_width="match_parent"
         android:background="@drawable/menu_drawer_click_style"

@@ -8,6 +8,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -22,6 +23,7 @@ import com.example.popularity.adapter.RateListAdapter;
 import com.example.popularity.model.Rate;
 import com.example.popularity.mvp.ShareMvp;
 import com.example.popularity.presenter.SharePresenter;
+import com.example.popularity.utils.ToolbarKind;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
@@ -38,6 +40,7 @@ public class ShareFragment extends BaseFragment implements ShareMvp.View {
     private AppCompatImageView imgUploadProfile, imgViewEditProfile;
     private LinearLayout linearUserProfile;
     private LinearLayout layoutScreenShot;
+    private AppCompatButton btnShare;
 
     public ShareFragment() {
 
@@ -49,11 +52,18 @@ public class ShareFragment extends BaseFragment implements ShareMvp.View {
     }
 
     @Override
+    public void onHiddenChanged(boolean hidden) {
+        if (!hidden)
+        {
+            baseListener.changeToolbar(ToolbarKind.BACK,getString(R.string.share_your_rates));
+        }
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         presenter = new SharePresenter(getContext(), baseListener, this);
-
-
+        baseListener.changeToolbar(ToolbarKind.BACK, getString(R.string.share_your_rates));
         Bundle bundle = getArguments();
         rates = (List<Rate>) bundle.getSerializable("rates");
         rateListAdapter = new RateListAdapter(rates, getActivity());
@@ -65,19 +75,12 @@ public class ShareFragment extends BaseFragment implements ShareMvp.View {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_share, container, false);
-        imgViewEditProfile = view.findViewById(R.id.imgViewEditProfile);
-        imgViewEditProfile.setVisibility(View.GONE);
-        layoutScreenShot = view.findViewById(R.id.layoutScreenShot);
-        imgUploadProfile = view.findViewById(R.id.imgUploadProfile);
-        rvYourRates = view.findViewById(R.id.rvYourRates);
-        linearUserProfile = view.findViewById(R.id.linearUserProfile);
-        GridLayoutManager layoutManager1 = new GridLayoutManager(getActivity(), 2, RecyclerView.VERTICAL, false);
-        rvYourRates.setLayoutManager(layoutManager1);
-        rvYourRates.setAdapter(rateListAdapter);
-        view.findViewById(R.id.btnShare).setOnClickListener(view1 -> {
+        init(view);
+
+        btnShare.setOnClickListener(view1 -> {
             imgViewEditProfile.setVisibility(View.GONE);
-            View view2 = getActivity().getWindow().getDecorView().getRootView().findViewById(R.id.layoutScreenShot);
-            presenter.takeScreenShot(view2);
+            View screenView = getActivity().getWindow().getDecorView().getRootView().findViewById(R.id.layoutScreenShot);
+            presenter.takeScreenShot(screenView);
 
         });
 
@@ -90,6 +93,19 @@ public class ShareFragment extends BaseFragment implements ShareMvp.View {
         });
 
         return view;
+    }
+
+    private void init(View view) {
+        btnShare = view.findViewById(R.id.btnShare);
+        imgViewEditProfile = view.findViewById(R.id.imgViewEditProfile);
+        imgViewEditProfile.setVisibility(View.GONE);
+        layoutScreenShot = view.findViewById(R.id.layoutScreenShot);
+        imgUploadProfile = view.findViewById(R.id.imgUploadProfile);
+        rvYourRates = view.findViewById(R.id.rvYourRates);
+        linearUserProfile = view.findViewById(R.id.linearUserProfile);
+        GridLayoutManager layoutManager1 = new GridLayoutManager(getActivity(), 2, RecyclerView.VERTICAL, false);
+        rvYourRates.setLayoutManager(layoutManager1);
+        rvYourRates.setAdapter(rateListAdapter);
     }
 
     public void selectAndCropImage() {

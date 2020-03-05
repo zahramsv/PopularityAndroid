@@ -1,18 +1,30 @@
 package com.example.popularity.fragment;
 
+import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Parcelable;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -26,6 +38,7 @@ import com.example.popularity.model.Friend;
 import com.example.popularity.model.Rate;
 import com.example.popularity.model.User;
 import com.example.popularity.model.UserPopularity;
+import com.example.popularity.utils.ShowMessageType;
 import com.example.popularity.utils.ToolBarIconKind;
 import com.example.popularity.utils.ToolbarKind;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -33,6 +46,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
 import static com.example.popularity.utils.Configs.BUNDLE_FRIEND;
 
 public class HomeFragment extends BaseFragment implements
@@ -44,7 +58,8 @@ public class HomeFragment extends BaseFragment implements
     private HomePresenter homePresenter;
     private FloatingActionButton btnShare;
     private FriendsListAdapter friendsListAdapter;
-
+    private AppCompatImageButton btnSearch;
+    private ImageButton bt_clear;
 
 
     @Override
@@ -57,9 +72,7 @@ public class HomeFragment extends BaseFragment implements
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         homePresenter = new HomePresenter(this, getContext(), baseListener);
-
         baseListener.changeToolbar(ToolbarKind.HOME, "");
-
 
 
     }
@@ -70,11 +83,21 @@ public class HomeFragment extends BaseFragment implements
 
 
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-
-
         init(view);
-        User user = homePresenter.getUser();
 
+        //fixme  Search recyclerView item
+      /*  EditText et_search;
+        et_search = view.findViewById(R.id.txtSearch);
+
+        btnSearch.setOnClickListener(view12 -> {
+
+            baseListener.closeKeyboard();
+            friendsListAdapter.getFilter().filter(et_search.getText());
+            friendsListAdapter.notifyDataSetChanged();
+        });*/
+
+
+        User user = homePresenter.getUser();
         if (user != null) {
             UserPopularity userPopularity = user.getRates_summary_sum();
             friendsListAdapter = new FriendsListAdapter(friendsList, getActivity());
@@ -103,20 +126,22 @@ public class HomeFragment extends BaseFragment implements
             favoritesRecyclerView.setAdapter(rateListAdapter);
 
             //fixme
-            SharedPrefsRepository sharedPrefsRepository=new SharedPrefsRepository(getContext());
-            sharedPrefsRepository.SaveUser(user,userPopularity);
+            SharedPrefsRepository sharedPrefsRepository = new SharedPrefsRepository(getContext());
+            sharedPrefsRepository.SaveUser(user, userPopularity);
         }
         homePresenter.provideFriends();
-        Bundle bundle=new Bundle();
+        Bundle bundle = new Bundle();
         bundle.putSerializable("rates", (Serializable) rates);
         btnShare.setOnClickListener(view1 -> {
-            baseListener.openFragment(ShareFragment.newInstance(),false,bundle);
+            baseListener.openFragment(ShareFragment.newInstance(), true, bundle);
         });
+
         return view;
     }
 
     public void init(View view) {
 
+        //btnSearch = view.findViewById(R.id.btnSearch);
         btnShare = view.findViewById(R.id.btnShare);
         baseListener.changeToolbar(ToolbarKind.HOME, getString(R.string.app_name));
         baseListener.showToolbarIcon(ToolBarIconKind.VISIBLEL);
@@ -152,10 +177,9 @@ public class HomeFragment extends BaseFragment implements
 
     @Override
     public void setFriendsList(List<Friend> friends) {
-       if (friends!=null)
-       {
-           friendsListAdapter.addAllItems(friends);
-       }
+        if (friends != null) {
+            friendsListAdapter.addAllItems(friends);
+        }
     }
 
     @Override

@@ -92,6 +92,61 @@
                             android:text="@string/phone_contacts" />
 
 
+
+                        <!--fixme vie of search recyclerView item -->
+                    <!--    <androidx.cardview.widget.CardView
+                            android:id="@+id/search_bar"
+                            style="@style/CardViewStyle"
+                            android:layout_width="match_parent"
+                            android:layout_marginTop="20dp"
+                            android:layout_height="50dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            app:layout_collapseMode="pin">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal">
+
+                                <androidx.appcompat.widget.AppCompatImageButton
+                                    android:id="@+id/btnSearch"
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
+                                    app:actionViewClass="android.support.v7.widget.SearchView"
+                                    android:background="@android:color/transparent"
+                                    android:tint="@color/grey_60"
+                                    app:srcCompat="@drawable/ic_search"
+                                     />
+
+                                <EditText
+                                    android:id="@+id/txtSearch"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:background="@android:color/transparent"
+                                    android:hint="@string/search_friend"
+                                    android:imeOptions="actionSearch"
+                                    android:maxLines="1"
+                                    android:singleLine="true">
+
+                                    <requestFocus />
+
+                                </EditText>
+
+                                <ImageButton
+                                    android:id="@+id/bt_clear"
+                                    android:layout_width="?attr/actionBarSize"
+                                    android:layout_height="?attr/actionBarSize"
+                                    android:background="@android:color/transparent"
+                                    android:clickable="true"
+                                    android:tint="@color/grey_60"
+                                    app:srcCompat="@drawable/ic_close" />
+                            </LinearLayout>
+
+                        </androidx.cardview.widget.CardView>-->
+
+
                         <androidx.cardview.widget.CardView
                             style="@style/CardViewStyle"
                             android:layout_marginBottom="20dp"

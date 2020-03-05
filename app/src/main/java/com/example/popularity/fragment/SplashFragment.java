@@ -11,6 +11,7 @@ import com.example.popularity.presenter.SplashPresenter;
 import com.example.popularity.mvp.SplashMvp;
 import com.example.popularity.utils.ConnectivityReceiver;
 import com.example.popularity.utils.ShowMessageType;
+import com.example.popularity.utils.ToolBarIconKind;
 import com.example.popularity.utils.ToolbarKind;
 
 public class SplashFragment extends BaseFragment implements SplashMvp.View {
@@ -38,6 +39,7 @@ public class SplashFragment extends BaseFragment implements SplashMvp.View {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         baseListener.changeToolbar(ToolbarKind.EMPTY, "");
+        baseListener.showToolbarIcon(ToolBarIconKind.VISIBLEL);
         return inflater.inflate(R.layout.fragment_splash, container, false);
     }
 

@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+
         presenter = new MainPresenter();
         init();
         initNavigationDrawer();
@@ -107,7 +107,6 @@ public class MainActivity extends AppCompatActivity implements
 
 
     }
-
 
 
     @Override

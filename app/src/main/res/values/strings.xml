@@ -10,6 +10,11 @@
     <string name="verify_code_validation">please check your sms inbox and enter verify code</string>
     <string name="full_name_username_validation">please enter correct information</string>
 
+    <string name="action_search">Search</string>
+    <string name="search_hint">Type name…</string>
+    <string name="rec_search">RecyclerView Search</string>
+    <string name="share_your_rates">Share Your Rates</string>
+
     <string name="facebook_login">My Facebook Popularity</string>
     <string name="navigation_drawer_open">Open Navigation</string>
     <string name="navigation_drawer_close">Close Navigation</string>
@@ -127,5 +132,6 @@
 
 
     <string name="image_hint_navigation_toolbar">this button open drawer menu for more navigation control.</string>
+    <string name="search_friend">Search Friend</string>
 </resources>
 

@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,7 +21,7 @@ import java.util.List;
 
 
 
-public class FriendsListAdapter extends RecyclerView.Adapter<FriendsListAdapter.FriendsHolder> {
+public class FriendsListAdapter extends RecyclerView.Adapter<FriendsListAdapter.FriendsHolder> implements Filterable {
 
 
     private List<Friend> friends = new ArrayList<>();
@@ -72,6 +74,52 @@ public class FriendsListAdapter extends RecyclerView.Adapter<FriendsListAdapter.
     @Override
     public int getItemCount() {
         return friends.size();
+    }
+
+
+    //fixMe  add for Search in recyclerView
+    List<Friend> contactListFiltered;
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence charSequence) {
+                String charString = charSequence.toString();
+                if (charString.isEmpty()) {
+                    contactListFiltered = friends;
+                } else {
+                    List<Friend> filteredList = new ArrayList<>();
+                    for (Friend row : friends) {
+
+                        // name match condition. this might differ depending on your requirement
+                        // here we are looking for name or phone number match
+                        if (row.getName().toLowerCase().contains(charString.toLowerCase()) || row.getUserId().contains(charSequence)) {
+                            filteredList.add(row);
+                        }
+                    }
+
+                    contactListFiltered = filteredList;
+                }
+
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = contactListFiltered;
+                return filterResults;
+            }
+
+
+
+
+            @Override
+            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+
+                contactListFiltered = (List<Friend>) filterResults.values;
+                notifyDataSetChanged();
+            }
+        };
+    }
+
+    public interface ContactAdapterListener {
+        void onContactSelected(Friend contact);
     }
 
     public class FriendsHolder extends RecyclerView.ViewHolder {

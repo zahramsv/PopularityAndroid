@@ -10,11 +10,11 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:orientation="vertical"
-        android:padding="@dimen/spacing_large">
+        android:padding="15dp">
 
         <View
             android:layout_width="0dp"
-            android:layout_height="@dimen/spacing_middle" />
+            android:layout_height="10dp" />
 
         <ImageView
             android:layout_width="wrap_content"
@@ -55,7 +55,7 @@
 
         <View
             android:layout_width="0dp"
-            android:layout_height="@dimen/spacing_mlarge" />
+            android:layout_height="20dp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -81,7 +81,7 @@
 
         <View
             android:layout_width="0dp"
-            android:layout_height="@dimen/spacing_mxlarge" />
+            android:layout_height="10dp" />
 
         <Button
             android:id="@+id/btnSignIn"
