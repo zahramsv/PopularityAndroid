@@ -69,6 +69,31 @@
 
 
           </LinearLayout>
+
+          <RadioGroup
+              android:id="@+id/rgLanguage"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+              <RadioButton
+                  android:id="@+id/rbFarsi"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:text="فارسی"
+                  android:tag="fa"/>
+              <RadioButton
+                  android:id="@+id/rbEnglish"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:text="English"
+                  android:tag="en"
+                  android:checked="true"/>
+          </RadioGroup>
+          <Button
+              android:id="@+id/btnSetLanguage"
+              android:layout_width="match_parent"
+              android:layout_height="@dimen/login_way_button_height_size"
+              style="@style/AccentButtonStyle"
+              android:text="ثبت"/>
       </LinearLayout>
   </androidx.cardview.widget.CardView>
 
