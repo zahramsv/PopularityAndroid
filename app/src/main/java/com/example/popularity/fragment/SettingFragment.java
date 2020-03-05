@@ -2,12 +2,14 @@ package com.example.popularity.fragment;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
-
-import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SwitchCompat;
@@ -20,11 +22,16 @@ import com.example.popularity.utils.LoginKind;
 import com.example.popularity.utils.MyApp;
 import com.example.popularity.utils.ToolbarKind;
 
+import java.util.Locale;
+
 
 public class SettingFragment extends BaseFragment implements SettingMvp.View {
 
     private SettingMvp.Presenter presenter;
     private LoginHandler loginHandler;
+    private Button btnSetLanguage;
+    private RadioGroup rgbLanguage;
+    private View view;
 
     @Override
     public void onHiddenChanged(boolean hidden) {
@@ -60,8 +67,7 @@ public class SettingFragment extends BaseFragment implements SettingMvp.View {
         SwitchCompat btnPhoneLogout = view.findViewById(R.id.btnPhoneLogout);
 
         LoginKind loginKind = loginHandler.getLoginKind();
-        if (loginKind==LoginKind.SMS)
-        {
+        if (loginKind == LoginKind.SMS) {
             btnPhoneLogout.setChecked(true);
         }
 
@@ -77,8 +83,31 @@ public class SettingFragment extends BaseFragment implements SettingMvp.View {
             }
         });
 
+        btnSetLanguage = view.findViewById(R.id.btnSetLanguage);
+        rgbLanguage = view.findViewById(R.id.rgLanguage);
 
+        btnSetLanguage.setOnClickListener(v -> {
+            setLocalLanguage();
+        });
+
+        this.view = view;
         return view;
+    }
+
+    private void setLocalLanguage() {
+        Configuration config = getActivity().getBaseContext().getResources().getConfiguration();
+        Locale locale = new Locale(getChosenLanguage());
+        Locale.setDefault(locale);
+        config.locale = locale;
+        getActivity().getBaseContext().getResources().updateConfiguration(
+                config,
+                getActivity().getBaseContext().getResources().getDisplayMetrics()
+        );
+    }
+
+    private String getChosenLanguage() {
+        RadioButton rbSelected = view.findViewById(rgbLanguage.getCheckedRadioButtonId());
+        return rbSelected.getTag().toString();
     }
 
     @Override
