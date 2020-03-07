@@ -104,7 +104,8 @@ public class ShareFragment extends BaseFragment implements ShareMvp.View {
         return view;
     }
 
-    public  void onbackhandle(){
+    @Override
+    public void onBackPressed(){
         getActivity().onBackPressed();
     }
 
@@ -146,23 +147,6 @@ public class ShareFragment extends BaseFragment implements ShareMvp.View {
         }
     }
 
-
-    @Override
-    public void shareScreenShot(Uri uri) {
-        if (uri != null) {
-            Intent shareIntent = new Intent();
-            shareIntent.setAction(Intent.ACTION_SEND);
-           // shareIntent.putExtra(Intent.EXTRA_STREAM, uriToImage);
-          //  shareIntent.setType("image/jpeg");
-            shareIntent.setType("image/*");
-            shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION); // temp permission for receiving app to read this file
-            shareIntent.setDataAndType(uri, getActivity().getContentResolver().getType(uri));
-            shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
-            startActivity(Intent.createChooser(shareIntent, "Choose an app"));
-
-        }
-    }
-
     @Override
     public AppCompatActivity getFragActivity() {
         return (AppCompatActivity) getActivity();
@@ -171,5 +155,10 @@ public class ShareFragment extends BaseFragment implements ShareMvp.View {
     @Override
     public Context getViewContext() {
         return getContext();
+    }
+
+    @Override
+    public void shareImageOnSocial(Intent intent) {
+        startActivity(Intent.createChooser(intent,"Choose an app"));
     }
 }

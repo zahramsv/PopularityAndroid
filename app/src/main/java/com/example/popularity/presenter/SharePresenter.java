@@ -4,12 +4,12 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
-
-import androidx.core.content.FileProvider;
 
 import com.example.popularity.R;
 import com.example.popularity.fragment.ShareFragment;
@@ -21,6 +21,8 @@ import com.tedpark.tedpermission.rx2.TedRx2Permission;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 
 public class SharePresenter implements ShareMvp.Presenter {
@@ -38,6 +40,8 @@ public class SharePresenter implements ShareMvp.Presenter {
         this.context = MyApp.getInstance().getBaseContext().getApplicationContext();
     }
 
+    private String SHARE_IMAGE_FILE_NAME = "popularity.jpg";
+
     @Override
     public void takeScreenShot(View view) {
 
@@ -45,20 +49,18 @@ public class SharePresenter implements ShareMvp.Presenter {
         try {
             // image naming and path  to include sd card  appending name you choose for file
             view.setDrawingCacheEnabled(true);
-            Bitmap bitmap = Bitmap.createBitmap(view.getDrawingCache());
-            view.setDrawingCacheEnabled(false);
+            Bitmap bit = view.getDrawingCache(true).copy(Bitmap.Config.ARGB_8888, false);
+            //Bitmap.createBitmap(view.getDrawingCache());
+            view.destroyDrawingCache();
+            File sdCard = new File(view.getContext().getApplicationContext().getFilesDir(), "shared");
+            if (!sdCard.exists()) sdCard.mkdir();
+            File file = new File(sdCard, SHARE_IMAGE_FILE_NAME);
+            FileOutputStream fos = new FileOutputStream(file);
+            bit.compress(Bitmap.CompressFormat.JPEG, 75, fos);
 
-            outputStream2 = MyApp.getInstance().getBaseComponent().provideOutputSteam();
-            int quality = 100;
-            bitmap.compress(Bitmap.CompressFormat.JPEG, quality, outputStream2);
-            outputStream2.flush();
-            outputStream2.close();
-           // openScreenShot(MyApp.getInstance().getBaseComponent().provideFile());
-            Intent intent = new Intent();
-            intent.setAction(Intent.ACTION_VIEW);
+            Intent shareIntent = getShareIntent(file.getPath());
+            shareView.shareImageOnSocial(shareIntent);
 
-            Uri uri = FileProvider.getUriForFile(context, context.getApplicationContext().getPackageName() + ".provider", MyApp.getInstance().getBaseComponent().provideFile());
-            shareView.shareScreenShot(uri);
         } catch (Throwable e) {
             // Several error may come out with file handling or DOM
             e.printStackTrace();
@@ -66,6 +68,45 @@ public class SharePresenter implements ShareMvp.Presenter {
         }
     }
 
+
+    private Intent getShareIntent(String medeImagePath) {
+        Intent shareIntent = new Intent();
+        shareIntent.setAction(Intent.ACTION_SEND);
+        shareIntent.setType("image/*");
+        shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        String path = null;
+        try {
+            path = MediaStore.Images.Media.insertImage(
+                    context.getContentResolver(),
+                    medeImagePath,
+                    SHARE_IMAGE_FILE_NAME,
+                    "Identified image"
+            );
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        String tempShareImagePathInGallery = getRealPathFromUriString(path);
+
+        shareIntent.putExtra(
+                Intent.EXTRA_STREAM, Uri.parse(path)
+        );
+        return shareIntent;
+    }
+
+
+    private String getRealPathFromUriString(String contentPath) {
+        Cursor cursor = null;
+        try {
+            Uri uri = Uri.parse(contentPath);
+            String[] project = new String[]{MediaStore.Images.Media.DATA};
+            cursor = context.getContentResolver().query(uri, project, null, null, null);
+            int columnIndex = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+            cursor.moveToFirst();
+            return cursor.getString(columnIndex);
+        } finally {
+            cursor.close();
+        }
+    }
 
     @Override
     public void selectAndCropImage() {
@@ -95,7 +136,7 @@ public class SharePresenter implements ShareMvp.Presenter {
 
                         Log.d("app_tag", "not granted");
                         baseListener.showMessage(ShowMessageType.TOAST, shareView.getViewContext().getString(R.string.hint_you_should_confirm_permissions));
-
+                        shareView.onBackPressed();
                     }
                 }, throwable -> {
                     Log.d("app_tag", "throw error");
