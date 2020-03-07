@@ -36,21 +36,19 @@
                     android:orientation="vertical">
 
                     <TextView
-                        style="@style/PrimaryTextStyle"
+                        style="@style/SecondaryTextStyle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginRight="5dp"
-                        android:layout_marginBottom="10dp"
+                        android:layout_margin="5dp"
+
                         android:gravity="left"
                         android:text="@string/register_description" />
 
 
                     <androidx.appcompat.widget.AppCompatImageView
-                        android:layout_width="120dp"
-                        android:layout_height="120dp"
-                        android:padding="10dp"
+                        android:layout_width="110dp"
+                        android:layout_height="110dp"
+                        android:padding="5dp"
                         android:background="@drawable/shape_circelur_grade"
                         android:src="@drawable/ic_avatar_white"
                          />
@@ -61,7 +59,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="52dp"
                         android:layout_marginLeft="15dp"
-                        android:layout_marginTop="15dp"
+                        android:layout_marginTop="5dp"
                         android:layout_marginRight="15dp"
                         android:hint="@string/full_name">
 

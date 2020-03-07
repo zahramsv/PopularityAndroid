@@ -59,7 +59,6 @@ public class RateFragment extends BaseFragment implements RateMvp.View {
         view.findViewById(R.id.btnSaveRates).setOnClickListener(
                 view1 -> {
 
-
                     User user = presenter.getCurrentUser();
                     AppCompatRatingBar rtLook = view.findViewById(R.id.rtLook);
                     AppCompatRatingBar rtStyle = view.findViewById(R.id.rtStyle);
@@ -76,6 +75,7 @@ public class RateFragment extends BaseFragment implements RateMvp.View {
                     );
 
                     presenter.submitRate(submitRate);
+
                 }
         );
         return view;
