@@ -7,12 +7,14 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 
 import com.example.popularity.R;
 import com.example.popularity.fragment.ShareFragment;
+import com.example.popularity.model.Rate;
 import com.example.popularity.mvp.ShareMvp;
 import com.example.popularity.myInterface.MainActivityTransaction;
 import com.example.popularity.utils.MyApp;
@@ -24,14 +26,15 @@ import com.theartofdev.edmodo.cropper.CropImageView;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.util.List;
 
 public class SharePresenter implements ShareMvp.Presenter {
-
 
     private FileOutputStream outputStream2;
     private Context context;
     private MainActivityTransaction.Components baseListener;
     private ShareMvp.View shareView;
+    private List<Rate> rates;
 
     public SharePresenter(Context context, MainActivityTransaction.Components baseListener, ShareMvp.View view) {
         this.context = context;
@@ -120,6 +123,12 @@ public class SharePresenter implements ShareMvp.Presenter {
     @Override
     public void getGalleryAccessPermission() {
         getPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+    }
+
+    @Override
+    public void setBundleContent(Bundle bundle) {
+        rates = (List<Rate>) bundle.getSerializable("rates");
+        shareView.setRatesList(rates);
     }
 
     @SuppressLint("CheckResult")

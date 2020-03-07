@@ -48,18 +48,21 @@
                     android:text="@string/login_with_mock_btn_txt" />
 
                 <Button
+                    android:visibility="gone"
                     android:id="@+id/btnLoginWithInstagram"
                     style="@style/LoginButtonStyle"
                     android:drawableLeft="@drawable/ic_instagram"
                     android:text="@string/login_with_instagram_btn_txt" />
 
                 <Button
+                    android:visibility="gone"
                     android:id="@+id/btnLoginWithFacebook"
                     style="@style/LoginButtonStyle"
                     android:drawableLeft="@drawable/ic_facebook"
                     android:text="@string/login_with_facebook_btn_txt" />
 
                 <Button
+                    android:visibility="gone"
                     android:id="@+id/btnLoginWithTwitter"
                     style="@style/LoginButtonStyle"
                     android:drawableLeft="@drawable/twitter_ic"

@@ -61,7 +61,7 @@ public class RegisterPresenter implements
         baseComponent.showLoadingBar(false);
         user.setSocial_primary(userSocialPrimary);
         loginHandler.saveLoginInfo(user, user.getRates_summary_sum());
-        baseComponent.openFragment(new HomeFragment(), true, null);
+        baseComponent.openFragment(new HomeFragment(), false, null);
     }
 
     @Override

@@ -2,13 +2,10 @@ package com.example.popularity.presenter;
 
 import android.app.Dialog;
 import android.os.Handler;
-import android.view.View;
-import android.widget.Button;
 
 import androidx.appcompat.widget.AppCompatButton;
 
 import com.example.popularity.R;
-
 import com.example.popularity.model.BaseResponse;
 import com.example.popularity.model.SubmitRate;
 import com.example.popularity.model.User;
@@ -46,38 +43,37 @@ public class RatePresenter implements RateMvp.Presenter {
         apiServices.submitRateToFriend(submitRate).enqueue(new Callback<BaseResponse<String>>() {
             @Override
             public void onResponse(Call<BaseResponse<String>> call, Response<BaseResponse<String>> response) {
+                baseComponents.showLoadingBar(false);
+                if (response.isSuccessful()) {
+                    if (response.body().getCode() == 200) {
+                        Dialog dialog = new Dialog(rateView.getViewContext());
+                        dialog.setContentView(R.layout.submit_rate_dialog);
+                        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+                        dialog.show();
+                        btnRateDone = dialog.findViewById(R.id.btnRateDone);
+                        btnRateDone.setOnClickListener(view -> {
 
+                            final Handler handler = new Handler();
+                            handler.postDelayed(() -> {
+                                rateView.comeBackToHomeAfterRateDone();
+                                dialog.dismiss();
+                            }, 300);
+                        });
+                        //  baseComponents.showMessage(ShowMessageType.TOAST, rateView.getViewContext().getString(R.string.submitted_rates));
+                    }
 
-                if (response.body().getCode() == 200) {
-                    Dialog dialog = new Dialog(rateView.getViewContext());
-                    dialog.setContentView(R.layout.submit_rate_dialog);
-                    dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-                    dialog.show();
-                    btnRateDone=dialog.findViewById(R.id.btnRateDone);
-                    btnRateDone.setOnClickListener(view -> {
-
-                        final Handler handler = new Handler();
-                        handler.postDelayed(() -> {
-                            rateView.comeBackToHomeAfterRateDone();
-                            dialog.dismiss();
-                        }, 300);
-                    });
-                  //  baseComponents.showMessage(ShowMessageType.TOAST, rateView.getViewContext().getString(R.string.submitted_rates));
-                    baseComponents.showLoadingBar(false);
+                    if (response.body().getCode() == 401) {
+                        baseComponents.showMessage(ShowMessageType.TOAST, rateView.getViewContext().getString(R.string.rate_before));
+                    }
+                } else {
+                    baseComponents.showMessage(ShowMessageType.TOAST, rateView.getViewContext().getString(R.string.error_api_call));
                 }
-
-                if (response.body().getCode()==401)
-                {
-                    baseComponents.showLoadingBar(false);
-                    baseComponents.showMessage(ShowMessageType.TOAST, rateView.getViewContext().getString(R.string.rate_before));
-
-                }
-
             }
 
 
             @Override
             public void onFailure(Call<BaseResponse<String>> call, Throwable t) {
+                baseComponents.showLoadingBar(false);
                 baseComponents.showMessage(ShowMessageType.TOAST, rateView.getViewContext().getString(R.string.some_problems_when_use_api));
             }
         });

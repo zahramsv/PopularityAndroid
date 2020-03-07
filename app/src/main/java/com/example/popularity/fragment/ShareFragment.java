@@ -8,6 +8,10 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
@@ -15,11 +19,6 @@ import androidx.appcompat.widget.AppCompatImageView;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
 import com.example.popularity.R;
 import com.example.popularity.adapter.RateListAdapter;
@@ -35,19 +34,13 @@ import java.util.List;
 
 public class ShareFragment extends BaseFragment implements ShareMvp.View {
 
-
     private SharePresenter presenter;
     private RateListAdapter rateListAdapter;
-    private List<Rate> rates;
     private RecyclerView rvYourRates;
     private AppCompatImageView imgUploadProfile, imgViewEditProfile;
     private LinearLayout linearUserProfile;
     private CardView layoutScreenShot;
     private AppCompatButton btnShare;
-
-    public ShareFragment() {
-
-    }
 
     public static ShareFragment newInstance() {
         ShareFragment fragment = new ShareFragment();
@@ -56,9 +49,8 @@ public class ShareFragment extends BaseFragment implements ShareMvp.View {
 
     @Override
     public void onHiddenChanged(boolean hidden) {
-        if (!hidden)
-        {
-            baseListener.changeToolbar(ToolbarKind.BACK,getString(R.string.share_your_rates));
+        if (!hidden) {
+            baseListener.changeToolbar(ToolbarKind.BACK, getString(R.string.share_your_rates));
         }
     }
 
@@ -68,34 +60,31 @@ public class ShareFragment extends BaseFragment implements ShareMvp.View {
 
         presenter = new SharePresenter(getContext(), baseListener, this);
         baseListener.changeToolbar(ToolbarKind.BACK, getString(R.string.share_your_rates));
-        Bundle bundle = getArguments();
-        rates = (List<Rate>) bundle.getSerializable("rates");
-        rateListAdapter = new RateListAdapter(rates, getActivity());
-
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_share, container, false);
         init(view);
 
+        presenter.setBundleContent(getArguments());
+
         btnShare.setOnClickListener(view1 -> {
             imgViewEditProfile.setVisibility(View.GONE);
-            View scrren=layoutScreenShot;
-          //  View screenView = getActivity().getWindow().getDecorView().getRootView().findViewById(R.id.layoutScreenShot);
+            View scrren = layoutScreenShot;
+            //  View screenView = getActivity().getWindow().getDecorView().getRootView().findViewById(R.id.layoutScreenShot);
             presenter.takeScreenShot(scrren);
 
         });
 
         imgUploadProfile.setOnClickListener(view12 -> {
-           // presenter.getGalleryAccessPermission();
+            // presenter.getGalleryAccessPermission();
             selectAndCropImage();
         });
 
         imgViewEditProfile.setOnClickListener(view13 -> {
-          //  presenter.getGalleryAccessPermission();
+            //  presenter.getGalleryAccessPermission();
             selectAndCropImage();
         });
 
@@ -105,8 +94,16 @@ public class ShareFragment extends BaseFragment implements ShareMvp.View {
     }
 
     @Override
-    public void onBackPressed(){
+    public void onBackPressed() {
         getActivity().onBackPressed();
+    }
+
+    @Override
+    public void setRatesList(List<Rate> rates) {
+        rateListAdapter = new RateListAdapter(rates, getActivity());
+        GridLayoutManager layoutManager1 = new GridLayoutManager(getActivity(), 2, RecyclerView.VERTICAL, false);
+        rvYourRates.setLayoutManager(layoutManager1);
+        rvYourRates.setAdapter(rateListAdapter);
     }
 
     private void init(View view) {
@@ -117,9 +114,6 @@ public class ShareFragment extends BaseFragment implements ShareMvp.View {
         imgUploadProfile = view.findViewById(R.id.imgUploadProfile);
         rvYourRates = view.findViewById(R.id.rvYourRates);
         linearUserProfile = view.findViewById(R.id.linearUserProfile);
-        GridLayoutManager layoutManager1 = new GridLayoutManager(getActivity(), 2, RecyclerView.VERTICAL, false);
-        rvYourRates.setLayoutManager(layoutManager1);
-        rvYourRates.setAdapter(rateListAdapter);
     }
 
     public void selectAndCropImage() {
@@ -159,6 +153,6 @@ public class ShareFragment extends BaseFragment implements ShareMvp.View {
 
     @Override
     public void shareImageOnSocial(Intent intent) {
-        startActivity(Intent.createChooser(intent,"Choose an app"));
+        startActivity(Intent.createChooser(intent, "Choose an app"));
     }
 }
