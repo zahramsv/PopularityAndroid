@@ -17,6 +17,7 @@
     <string name="share_your_rates">Share Your Rates</string>
 
 
+    <string name="gallery_hint_get_permissions">please confirm access gallery permissions for better performance.</string>
     <string name="hint_get_permissions">please confirm these permissions for better performance.</string>
     <string name="hint_you_should_confirm_permissions">you should confirm permissions</string>
     <string name="privacy_policy">Privacy Policy</string>

@@ -59,10 +59,12 @@ public class RegisterFragment extends BaseFragment implements RegisterMvp.View {
         View view = inflater.inflate(R.layout.fragment_register, container, false);
         init(view);
         Bundle bundle = getArguments();
+        if (bundle!=null)
+        {
+            String primaryKey = bundle.getString("primary_key");
+            presenter.setUserSocialPrimary(primaryKey);
+        }
 
-        String primaryKey = bundle.getString("primary_key");
-
-        presenter.setUserSocialPrimary(primaryKey);
 
         btnRegister.setOnClickListener(view1 -> {
             baseListener.closeKeyboard();

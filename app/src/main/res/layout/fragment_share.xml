@@ -16,6 +16,7 @@
 
         <androidx.cardview.widget.CardView
             style="@style/CardViewStyle"
+            android:id="@+id/layoutScreenShot"
             android:layout_width="match_parent"
             android:layout_height="300dp"
             android:backgroundTint="@color/secondary_text">
@@ -29,7 +30,6 @@
                 <!--layouts-->
                 <LinearLayout
 
-                    android:id="@+id/layoutScreenShot"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
@@ -121,6 +121,7 @@
 
                 <!--image tick-->
                 <androidx.appcompat.widget.AppCompatImageView
+
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_alignParentRight="true"

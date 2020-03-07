@@ -2,14 +2,17 @@ package com.example.popularity.fragment;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatImageView;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -39,7 +42,7 @@ public class ShareFragment extends BaseFragment implements ShareMvp.View {
     private RecyclerView rvYourRates;
     private AppCompatImageView imgUploadProfile, imgViewEditProfile;
     private LinearLayout linearUserProfile;
-    private LinearLayout layoutScreenShot;
+    private CardView layoutScreenShot;
     private AppCompatButton btnShare;
 
     public ShareFragment() {
@@ -62,6 +65,7 @@ public class ShareFragment extends BaseFragment implements ShareMvp.View {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         presenter = new SharePresenter(getContext(), baseListener, this);
         baseListener.changeToolbar(ToolbarKind.BACK, getString(R.string.share_your_rates));
         Bundle bundle = getArguments();
@@ -79,20 +83,29 @@ public class ShareFragment extends BaseFragment implements ShareMvp.View {
 
         btnShare.setOnClickListener(view1 -> {
             imgViewEditProfile.setVisibility(View.GONE);
-            View screenView = getActivity().getWindow().getDecorView().getRootView().findViewById(R.id.layoutScreenShot);
-            presenter.takeScreenShot(screenView);
+            View scrren=layoutScreenShot;
+          //  View screenView = getActivity().getWindow().getDecorView().getRootView().findViewById(R.id.layoutScreenShot);
+            presenter.takeScreenShot(scrren);
 
         });
 
         imgUploadProfile.setOnClickListener(view12 -> {
+           // presenter.getGalleryAccessPermission();
             selectAndCropImage();
         });
 
         imgViewEditProfile.setOnClickListener(view13 -> {
+          //  presenter.getGalleryAccessPermission();
             selectAndCropImage();
         });
 
+        presenter.getGalleryAccessPermission();
+
         return view;
+    }
+
+    public  void onbackhandle(){
+        getActivity().onBackPressed();
     }
 
     private void init(View view) {
@@ -139,10 +152,24 @@ public class ShareFragment extends BaseFragment implements ShareMvp.View {
         if (uri != null) {
             Intent shareIntent = new Intent();
             shareIntent.setAction(Intent.ACTION_SEND);
+           // shareIntent.putExtra(Intent.EXTRA_STREAM, uriToImage);
+          //  shareIntent.setType("image/jpeg");
+            shareIntent.setType("image/*");
             shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION); // temp permission for receiving app to read this file
             shareIntent.setDataAndType(uri, getActivity().getContentResolver().getType(uri));
             shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
             startActivity(Intent.createChooser(shareIntent, "Choose an app"));
+
         }
+    }
+
+    @Override
+    public AppCompatActivity getFragActivity() {
+        return (AppCompatActivity) getActivity();
+    }
+
+    @Override
+    public Context getViewContext() {
+        return getContext();
     }
 }
