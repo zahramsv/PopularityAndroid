@@ -20,10 +20,20 @@ public class SplashFragment extends BaseFragment implements SplashMvp.View {
 
 
     @Override
+    public void onHiddenChanged(boolean hidden) {
+        if (!hidden)
+        {
+            baseListener.changeToolbar(ToolbarKind.EMPTY,"");
+        }
+
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         presenter = new SplashPresenter(this, baseListener);
+       baseListener.changeToolbar(ToolbarKind.EMPTY,"");
         if (ConnectivityReceiver.isConnected())
         {
             presenter.getUserInfoAfterWait();
@@ -38,8 +48,7 @@ public class SplashFragment extends BaseFragment implements SplashMvp.View {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        baseListener.changeToolbar(ToolbarKind.EMPTY, "");
-        baseListener.showToolbarIcon(ToolBarIconKind.VISIBLEL);
+        //baseListener.changeToolbar(ToolbarKind.HOME, "ttt");
         return inflater.inflate(R.layout.fragment_splash, container, false);
     }
 

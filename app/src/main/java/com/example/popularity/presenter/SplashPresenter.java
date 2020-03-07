@@ -29,6 +29,7 @@ public class SplashPresenter implements SplashMvp.Presenter {
     private UserRepository userRepository;
     private LoginHandler loginHandler;
 
+
     public SplashPresenter(SplashMvp.View view, MainActivityTransaction.Components baseComponent) {
         this.view = view;
         this.baseComponent = baseComponent;

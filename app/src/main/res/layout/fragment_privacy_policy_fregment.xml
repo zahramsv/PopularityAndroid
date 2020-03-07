@@ -27,7 +27,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:justificationMode="inter_word"
-                android:text="@string/privacy_policy_txt" />
+                android:text="@string/privacy_policy_desc" />
 
             </androidx.core.widget.NestedScrollView>
 

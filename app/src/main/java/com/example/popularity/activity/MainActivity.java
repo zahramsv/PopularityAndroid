@@ -1,6 +1,9 @@
 package com.example.popularity.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
@@ -17,6 +20,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+
 import com.example.popularity.R;
 import com.example.popularity.fragment.BaseFragment;
 import com.example.popularity.fragment.MenuDrawerFragment;
@@ -30,6 +34,7 @@ import com.example.popularity.utils.ShowMessageType;
 import com.example.popularity.utils.ToolBarIconKind;
 import com.example.popularity.utils.ToolbarKind;
 import com.google.android.material.snackbar.Snackbar;
+
 
 public class MainActivity extends AppCompatActivity implements
         MainActivityTransaction.Components
@@ -73,7 +78,7 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public void closeKeyboard() {
-        if(getCurrentFocus()!=null) {
+        if (getCurrentFocus() != null) {
             InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
             inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
         }
@@ -88,8 +93,10 @@ public class MainActivity extends AppCompatActivity implements
 
         fragment.attachFragment(this);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.pop_enter, R.anim.pop_exit);
         if (!addStack) {
+
+            transaction.setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.pop_enter, R.anim.pop_exit);
+           // sharedElementEnterTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.move)
             transaction.replace(R.id.frmPlaceholder, fragment);
         } else {
             Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.frmPlaceholder);
@@ -109,6 +116,7 @@ public class MainActivity extends AppCompatActivity implements
     }
 
 
+    @SuppressLint("ResourceAsColor")
     @Override
     public void changeToolbar(ToolbarKind kind, String title) {
 
@@ -117,13 +125,17 @@ public class MainActivity extends AppCompatActivity implements
         switch (kind) {
             case EMPTY:
                 drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
-                findViewById(R.id.toolbar).setVisibility(View.GONE);
-                getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
+                findViewById(R.id.imgToolbarIcon).setVisibility(View.GONE);
+                findViewById(R.id.imageToolbarAppIcon).setVisibility(View.GONE);
+                findViewById(R.id.toolbar).setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
+
                 break;
 
             case HOME:
+                findViewById(R.id.toolbar).setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                 drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
-                findViewById(R.id.toolbar).setVisibility(View.VISIBLE);
+                findViewById(R.id.imgToolbarIcon).setVisibility(View.VISIBLE);
+                findViewById(R.id.imageToolbarAppIcon).setVisibility(View.VISIBLE);
                 toolbarIcon.setImageResource(R.drawable.ic_menu);
                 toolbarIcon.setOnClickListener(v -> {
                     openDrawer();
@@ -132,8 +144,10 @@ public class MainActivity extends AppCompatActivity implements
                 break;
 
             case BACK:
+                findViewById(R.id.toolbar).setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                 drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
-                findViewById(R.id.toolbar).setVisibility(View.VISIBLE);
+                findViewById(R.id.imgToolbarIcon).setVisibility(View.VISIBLE);
+                findViewById(R.id.imageToolbarAppIcon).setVisibility(View.VISIBLE);
                 toolbarIcon.setImageResource(R.drawable.ic_back);
                 toolbarIcon.setOnClickListener(v -> {
                     onBackPressed();
@@ -177,7 +191,7 @@ public class MainActivity extends AppCompatActivity implements
             super.onBackPressed();
             Fragment fragment = fm.findFragmentById(R.id.frmPlaceholder);
             FragmentTransaction ft = fm.beginTransaction();
-            ft.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
+            ft.setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.pop_enter, R.anim.pop_exit);
             if (fragment != null) {
                 ft.show(fragment);
                 ft.commit();

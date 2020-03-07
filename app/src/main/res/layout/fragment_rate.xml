@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/colorPrimary"
     tools:context=".fragment.RateFragment">
 
@@ -26,38 +27,51 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_marginTop="30dp"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="25dp"
                     android:gravity="center"
-                    android:orientation="horizontal">
+                    android:orientation="vertical">
 
                     <TextView
                         style="@style/PrimaryTextStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
                         android:text="@string/rate_to" />
 
+                    <View
+                        android:layout_width="170dp"
+                        android:layout_height="4dp"
+                        android:layout_marginTop="3dp"
+                        android:background="@color/colorAccent"
+                       />
                     <TextView
 
                         android:id="@+id/txtFriendName"
-                        style="@style/PrimaryTextStyle"
+                        style="@style/SecondaryTextStyle"
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="5dp"
-                        android:gravity="center_vertical"
-                        android:textColor="@color/colorPrimary"
+                        android:layout_height="30dp"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center"
+                        android:textColor="@color/colorAccent"
 
                         />
 
                 </LinearLayout>
 
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@color/colorAccent"
+                    />
                 <TextView
                     style="@style/PrimaryTextStyle"
                     android:layout_width="match_parent"
-                    android:layout_height="20dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_height="@dimen/text_rate_item_height"
                     android:gravity="left"
+                    android:layout_marginTop="3dp"
                     android:text="@string/rate_look"
                     android:textSize="16sp" />
 
@@ -72,11 +86,18 @@
                     android:stepSize="1" />
 
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/colorAccent"
+                    />
+
                 <TextView
                     style="@style/PrimaryTextStyle"
                     android:layout_width="match_parent"
-                    android:layout_height="20dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_height="@dimen/text_rate_item_height"
+                    android:layout_marginTop="3dp"
                     android:gravity="left"
                     android:text="@string/rate_fitness"
                     android:textSize="16sp" />
@@ -91,12 +112,18 @@
                     android:progressDrawable="@drawable/my_rating_display"
                     android:stepSize="1" />
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/colorAccent"
+                    />
 
                 <TextView
                     style="@style/PrimaryTextStyle"
                     android:layout_width="match_parent"
-                    android:layout_height="20dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_height="@dimen/text_rate_item_height"
+                    android:layout_marginTop="3dp"
                     android:gravity="left"
                     android:text="@string/rate_style"
                     android:textSize="16sp" />
@@ -106,17 +133,23 @@
                     android:id="@+id/rtStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
-                    android:layout_gravity="right"
+                    android:layout_gravity="right|center"
                     android:numStars="10"
                     android:progressDrawable="@drawable/my_rating_display"
                     android:stepSize="1" />
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/colorAccent"
+                    />
 
                 <TextView
                     style="@style/PrimaryTextStyle"
                     android:layout_width="match_parent"
-                    android:layout_height="20dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_height="25dp"
+                    android:layout_marginTop="3dp"
                     android:gravity="left"
                     android:text="@string/rate_personality"
                     android:textSize="16sp" />
@@ -132,11 +165,17 @@
                     android:stepSize="1" />
 
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/colorAccent"
+                    />
                 <TextView
                     style="@style/PrimaryTextStyle"
                     android:layout_width="match_parent"
-                    android:layout_height="20dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_height="@dimen/text_rate_item_height"
+                    android:layout_marginTop="3dp"
                     android:gravity="left"
                     android:text="@string/rate_trustworthy"
                     android:textSize="16sp" />
@@ -151,12 +190,18 @@
                     android:progressDrawable="@drawable/my_rating_display"
                     android:stepSize="1" />
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/colorAccent"
+                    />
 
                 <TextView
                     style="@style/PrimaryTextStyle"
                     android:layout_width="match_parent"
-                    android:layout_height="20dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_height="@dimen/text_rate_item_height"
+                    android:layout_marginTop="3dp"
                     android:gravity="left"
                     android:text="@string/rate_popularity"
                     android:textSize="16sp" />
@@ -165,11 +210,17 @@
                     android:id="@+id/rtPopularity"
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
-                    android:layout_alignParentRight="true"
                     android:layout_gravity="right"
                     android:numStars="10"
                     android:progressDrawable="@drawable/my_rating_display"
                     android:stepSize="1" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/colorAccent"
+                    />
 
 
                 <View
@@ -179,20 +230,16 @@
 
 
                 <Button
-                    android:layout_marginTop="40dp"
+                    android:layout_marginTop="30dp"
                     android:id="@+id/btnSaveRates"
                     style="@style/AccentButtonStyle"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/login_btn_height"
+                    android:layout_height="wrap_content"
                     android:text="@string/submit" />
 
 
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
-
-
-
-
     </androidx.cardview.widget.CardView>
 
 </FrameLayout>

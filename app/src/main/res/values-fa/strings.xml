@@ -3,26 +3,32 @@
     <string name="app_version">version 1.0.0 -beta01</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
-    <string name="facebook_login">My Facebook Popularity</string>
-    <string name="navigation_drawer_open">Open Navigation</string>
-    <string name="navigation_drawer_close">Close Navigation</string>
+    <string name="privacy_policy">حریم خصوصی</string>
+    <string name="about_us">درباره ما</string>
+    <string name="setting">تنظیمات</string>
+    <string name="rate_us">امتیاز به ما</string>
+    <string name="rate_to_friends">امتیاز به دوستان</string>
+
+    <string name="app_language">زبان</string>
+
+    <string name="phone_number_validation">لطفا شماره تلفن صحیح را وارد کنید</string>
+    <string name="verify_code_validation">لطفا کد دریافت شده از طریق پیامک را وارد کنید</string>
+    <string name="full_name_username_validation">لطفا نام و نام کاربری را وارد کنید</string>
+
+    <string name="action_search">جستجو</string>
+    <string name="search_hint">وارد کردن شماره تلفن</string>
+    <string name="rec_search">RecyclerView Search</string>
+    <string name="share_your_rates">به اشتراک گداری امتیاز ها</string>
+
 
     <string name="hint_get_permissions">please confirm these permissions for better performance.</string>
     <string name="hint_you_should_confirm_permissions">you should confirm permissions</string>
-    <string name="privacy_policy">Privacy Policy</string>
-    <string name="about_us">About us</string>
-    <string name="settings">Settings</string>
-    <string name="rate_us">Rate us</string>
-    <string name="rate_to_friends">Rate</string>
-    <string name="login_page">Login Page</string>
-    <string name="login_with">Choose Login Way </string>
-    <string name="share">Share</string>
+
+
+    <string name="share">به اشتراک گذاری</string>
     <string name="error_under_construction">This part is under construction!</string>
 
-    <string name="drawer_open">open</string>
-    <string name="drawer_close">close</string>
     <string name="about_us_desc">we are very good people who love making
         application and now we made it, we made popularity application in grady way, and we are so
         confused that how we made it, but the important thing is that done it quickly and now in
@@ -30,7 +36,7 @@
         </string>
 
     <string name="about_us_team_member">our team members : \n Zahra Mousavi \n Mohammad Hadi</string>
-    <string name="privacy_policy_txt">
+    <string name="privacy_policy_desc">
      the Many privacy laws around the world require businesses to provide their
         customers with a Privacy Policy. Privacy law is becoming stricter all the time,
         and intrusive mobile technology is a big reason for this.
@@ -47,33 +53,23 @@
         of Electronic Documents Act (PIPEDA) Australia: Privacy Act South
         Africa: Processing of Personal Information Act (POPI Act) </string>
 
-
-    <string name="your_popularity">what i get ?! </string>
-    <string name="your_friends">my Opinion about my friends</string>
-
-    <string name="facebook_app_id">424534631577046</string>
-    <string name="fb_login_protocol_scheme">fb424534631577046</string>
-
-    <string name="social_popularity">Popularity</string>
-    <string name="rate_look">Look</string>
-    <string name="rate_fitness">Fitness</string>
-    <string name="rate_style">Style</string>
-    <string name="rate_personality">Personality</string>
-    <string name="rate_trustworthy">Trustworthy</string>
-    <string name="rate_popularity">Popularity</string>
-    <string name="rate_to">What you think about your friend</string>
-    <string name="submit">Submit</string>
-    <string name="rate_done">Rate Done !!</string>
-    <string name="okay">OKAY</string>
-    <string name="yes">Yes</string>
-    <string name="no">No</string>
-    <string name="submitted_rates">Rates Submitted Successfully</string>
+    <string name="rate_look">ظاهر</string>
+    <string name="rate_fitness">تناسب اندام</string>
+    <string name="rate_style">استایل</string>
+    <string name="rate_personality">شخصیت</string>
+    <string name="rate_trustworthy">صداقت</string>
+    <string name="rate_popularity">محبوبیت</string>
+    <string name="rate_to">درباره دوست خود چه فکری می کنید </string>
+    <string name="submit">ارسال</string>
+    <string name="rate_done">ثبت امتیاز انجام شد</string>
+    <string name="okay">باشه</string>
+    <string name="yes">بله</string>
+    <string name="no">خیر</string>
     <string name="some_problems_when_use_api">There was some problem …</string>
 
     <!--ToolBarTitles-->
     <string name="login_toolbar_txt">Login methods</string>
-    <string name="setting_toolbar_txt">Setting</string>
-    <string name="home_toolbar_txt">Home</string>
+    <string name="home_toolbar_txt">خانه</string>
     <string name="about_us_toolbar_txt">About Us</string>
     <string name="privacy_policy_toolbar_txt">Privacy Policy</string>
     <string name="rate_toolbar">Rate To Friends</string>
@@ -89,11 +85,13 @@
     <string name="error_disconnected">Disconnected</string>
 
 
+    <!-- Login Buttons text-->
     <string name="login_with_instagram_btn_txt">Login with Instagram</string>
     <string name="login_with_twitter_btn_txt">Login Twitter</string>
     <string name="login_with_facebook_btn_txt">Login with FaceBook</string>
     <string name="login_with_phone_number_btn_txt">Login With Phone Number</string>
     <string name="login_with_mock_btn_txt">Login With Mock</string>
+
 
     <string name="hint_verify_code">verify code</string>
     <string name="network_connection_error">Please check your connection</string>
@@ -111,6 +109,7 @@
     <string name="phone_number">Phone Number </string>
     <string name="user_name">User Name</string>
     <string name="full_name">Full Name</string>
+    <string name="submitted_rates">Rates Submitted Successfully</string>
     <string name="register">Register</string>
     <string name="logout_submit">Are you sure for logout?</string>
 
@@ -122,5 +121,7 @@
 
 
     <string name="image_hint_navigation_toolbar">this button open drawer menu for more navigation control.</string>
+    <string name="search_friend">جستجوی دوست</string>
+    <string name="back_button_press_hint">برای بستن برنامه یکبار دیگر دکمه بازگشت را بزنید</string>
 </resources>
 

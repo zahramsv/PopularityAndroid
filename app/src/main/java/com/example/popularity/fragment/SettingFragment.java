@@ -36,7 +36,7 @@ public class SettingFragment extends BaseFragment implements SettingMvp.View {
     @Override
     public void onHiddenChanged(boolean hidden) {
         if (!hidden)
-            baseListener.changeToolbar(ToolbarKind.BACK, getString(R.string.setting_toolbar_txt));
+            baseListener.changeToolbar(ToolbarKind.BACK, getString(R.string.setting));
     }
 
 
@@ -62,7 +62,7 @@ public class SettingFragment extends BaseFragment implements SettingMvp.View {
         String twitterLogin = prefs.getString("twitter_login", null);
 
 
-        baseListener.changeToolbar(ToolbarKind.BACK, getString(R.string.setting_toolbar_txt));
+        baseListener.changeToolbar(ToolbarKind.BACK, getString(R.string.setting));
         View view = inflater.inflate(R.layout.fragment_setting, container, false);
         SwitchCompat btnPhoneLogout = view.findViewById(R.id.btnPhoneLogout);
 

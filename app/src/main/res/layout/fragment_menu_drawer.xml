@@ -65,7 +65,7 @@
            android:paddingLeft="@dimen/menu_drawer_item_text_left_padding"
            android:textSize="@dimen/menu_drawer_text_size"
            android:layout_height="match_parent"
-           android:gravity="center_vertical"
+           android:gravity="left|center_vertical"
            android:text="@string/home_toolbar_txt"
            />
    </LinearLayout>
@@ -91,9 +91,9 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:paddingLeft="@dimen/menu_drawer_item_text_left_padding"
-            android:gravity="center_vertical"
+            android:gravity="left|center_vertical"
             android:textSize="@dimen/menu_drawer_text_size"
-            android:text="@string/settings"
+            android:text="@string/setting"
 
             />
     </LinearLayout>
@@ -119,7 +119,7 @@
             android:layout_weight="1"
             android:paddingLeft="@dimen/menu_drawer_item_text_left_padding"
             android:layout_height="match_parent"
-            android:gravity="center_vertical"
+            android:gravity="left|center_vertical"
             android:textSize="@dimen/menu_drawer_text_size"
             android:text="@string/about_us"
             />
@@ -147,7 +147,7 @@
             android:layout_weight="1"
             android:layout_height="match_parent"
             android:paddingLeft="@dimen/menu_drawer_item_text_left_padding"
-            android:gravity="center_vertical"
+            android:gravity="left|center_vertical"
             style="@style/PrimaryTextStyle"
             android:textSize="@dimen/menu_drawer_text_size"
             android:text="@string/privacy_policy"
@@ -176,7 +176,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="match_parent"
-            android:gravity="center_vertical"
+            android:gravity="left|center_vertical"
             android:text="@string/rate_us"
             android:paddingLeft="@dimen/menu_drawer_item_text_left_padding"
             android:textSize="@dimen/menu_drawer_text_size"

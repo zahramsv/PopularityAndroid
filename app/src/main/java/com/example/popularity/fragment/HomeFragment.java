@@ -72,7 +72,7 @@ public class HomeFragment extends BaseFragment implements
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         homePresenter = new HomePresenter(this, getContext(), baseListener);
-        baseListener.changeToolbar(ToolbarKind.HOME, "");
+        baseListener.changeToolbar(ToolbarKind.HOME, getString(R.string.app_name));
 
 
     }
@@ -83,6 +83,7 @@ public class HomeFragment extends BaseFragment implements
 
 
         View view = inflater.inflate(R.layout.fragment_home, container, false);
+        baseListener.changeToolbar(ToolbarKind.HOME, getString(R.string.app_name));
         init(view);
 
         //fixme  Search recyclerView item
