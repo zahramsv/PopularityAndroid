@@ -45,6 +45,7 @@
    <LinearLayout
        android:layout_marginTop="10dp"
        android:id="@+id/btnHome"
+       android:visibility="gone"
        android:layout_height="@dimen/menu_drawer_items_height"
        android:layout_width="match_parent"
        android:background="@drawable/menu_drawer_click_style"

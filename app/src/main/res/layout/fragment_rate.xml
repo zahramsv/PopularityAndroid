@@ -42,7 +42,7 @@
                     <View
                         android:layout_width="170dp"
                         android:layout_height="4dp"
-                        android:layout_marginTop="3dp"
+                        android:layout_marginTop="5dp"
                         android:background="@color/colorAccent"
                        />
                     <TextView
@@ -62,10 +62,11 @@
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="2dp"
+                    android:layout_height="0.8dp"
                     android:layout_marginTop="15dp"
                     android:background="@color/colorAccent"
-                    />
+                    android:layout_marginEnd="50dp"
+                    android:layout_marginRight="50dp"/>
                 <TextView
                     style="@style/PrimaryTextStyle"
                     android:layout_width="match_parent"
@@ -78,17 +79,22 @@
 
                 <androidx.appcompat.widget.AppCompatRatingBar
                     android:id="@+id/rtLook"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginEnd="5dp"
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
                     android:layout_gravity="right"
                     android:numStars="10"
                     android:progressDrawable="@drawable/my_rating_display"
-                    android:stepSize="1" />
+                    android:stepSize="1"
+                     />
 
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="2dp"
+                    android:layout_height="0.8dp"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginStart="50dp"
                     android:layout_marginTop="10dp"
                     android:background="@color/colorAccent"
                     />
@@ -106,6 +112,8 @@
                 <androidx.appcompat.widget.AppCompatRatingBar
                     android:id="@+id/rtFitness"
                     android:layout_width="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginEnd="5dp"
                     android:layout_height="30dp"
                     android:layout_gravity="right"
                     android:numStars="10"
@@ -114,7 +122,9 @@
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="2dp"
+                    android:layout_height="0.8dp"
+                    android:layout_marginEnd="50dp"
+                    android:layout_marginRight="50dp"
                     android:layout_marginTop="10dp"
                     android:background="@color/colorAccent"
                     />
@@ -134,14 +144,18 @@
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
                     android:layout_gravity="right|center"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginEnd="5dp"
                     android:numStars="10"
                     android:progressDrawable="@drawable/my_rating_display"
                     android:stepSize="1" />
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="2dp"
+                    android:layout_height="0.8dp"
                     android:layout_marginTop="10dp"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginStart="50dp"
                     android:background="@color/colorAccent"
                     />
 
@@ -160,6 +174,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
                     android:layout_gravity="right"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginEnd="5dp"
                     android:numStars="10"
                     android:progressDrawable="@drawable/my_rating_display"
                     android:stepSize="1" />
@@ -167,8 +183,10 @@
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="2dp"
+                    android:layout_height="0.8dp"
                     android:layout_marginTop="10dp"
+                    android:layout_marginEnd="50dp"
+                    android:layout_marginRight="50dp"
                     android:background="@color/colorAccent"
                     />
                 <TextView
@@ -186,14 +204,18 @@
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
                     android:layout_gravity="right"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginEnd="5dp"
                     android:numStars="10"
                     android:progressDrawable="@drawable/my_rating_display"
                     android:stepSize="1" />
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="2dp"
+                    android:layout_height="0.8dp"
                     android:layout_marginTop="10dp"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginStart="50dp"
                     android:background="@color/colorAccent"
                     />
 
@@ -211,14 +233,18 @@
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
                     android:layout_gravity="right"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginEnd="5dp"
                     android:numStars="10"
                     android:progressDrawable="@drawable/my_rating_display"
                     android:stepSize="1" />
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="2dp"
+                    android:layout_height="0.8dp"
                     android:layout_marginTop="10dp"
+                    android:layout_marginEnd="50dp"
+                    android:layout_marginRight="50dp"
                     android:background="@color/colorAccent"
                     />
 

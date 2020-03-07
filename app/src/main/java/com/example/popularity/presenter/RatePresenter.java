@@ -41,12 +41,13 @@ public class RatePresenter implements RateMvp.Presenter {
     @Override
     public void submitRate(SubmitRate submitRate) {
 
+        baseComponents.showLoadingBar(true);
 
         apiServices.submitRateToFriend(submitRate).enqueue(new Callback<BaseResponse<String>>() {
             @Override
             public void onResponse(Call<BaseResponse<String>> call, Response<BaseResponse<String>> response) {
 
-                baseComponents.showLoadingBar(true);
+
                 if (response.body().getCode() == 200) {
                     Dialog dialog = new Dialog(rateView.getViewContext());
                     dialog.setContentView(R.layout.submit_rate_dialog);
@@ -59,7 +60,7 @@ public class RatePresenter implements RateMvp.Presenter {
                         handler.postDelayed(() -> {
                             rateView.comeBackToHomeAfterRateDone();
                             dialog.dismiss();
-                        }, 3000);
+                        }, 300);
                     });
                   //  baseComponents.showMessage(ShowMessageType.TOAST, rateView.getViewContext().getString(R.string.submitted_rates));
                     baseComponents.showLoadingBar(false);
@@ -71,8 +72,6 @@ public class RatePresenter implements RateMvp.Presenter {
                     baseComponents.showMessage(ShowMessageType.TOAST, rateView.getViewContext().getString(R.string.rate_before));
 
                 }
-
-
 
             }
 
