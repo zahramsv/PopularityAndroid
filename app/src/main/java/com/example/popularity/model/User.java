@@ -20,6 +20,9 @@ public class User implements Serializable {
     @SerializedName("rates_summary_sum")
     private UserPopularity rates_summary_sum;
 
+    @SerializedName("android")
+    private UpdateInfo android;
+
     @SerializedName("updated_at")
     private String updated_at;
     @SerializedName("created_at")
@@ -33,20 +36,6 @@ public class User implements Serializable {
 
 
     public User() {
-    }
-
-    public User(String social_primary, String username, String token, String full_name, String avatar_url, UserPopularity rates_summary_sum, String updated_at, String created_at, int social_type, int rated_count, int rates_count) {
-        this.social_primary = social_primary;
-        this.username = username;
-        this.token = token;
-        this.full_name = full_name;
-        this.avatar_url = avatar_url;
-        this.rates_summary_sum = rates_summary_sum;
-        this.updated_at = updated_at;
-        this.created_at = created_at;
-        this.social_type = social_type;
-        this.rated_count = rated_count;
-        this.rates_count = rates_count;
     }
 
     public String getSocial_primary() {
@@ -97,6 +86,14 @@ public class User implements Serializable {
         this.rates_summary_sum = rates_summary_sum;
     }
 
+    public UpdateInfo getAndroid() {
+        return android;
+    }
+
+    public void setAndroid(UpdateInfo android) {
+        this.android = android;
+    }
+
     public String getUpdated_at() {
         return updated_at;
     }
@@ -134,6 +131,21 @@ public class User implements Serializable {
     }
 
     public void setRates_count(int rates_count) {
+        this.rates_count = rates_count;
+    }
+
+    public User(String social_primary, String username, String token, String full_name, String avatar_url, UserPopularity rates_summary_sum, UpdateInfo android, String updated_at, String created_at, int social_type, int rated_count, int rates_count) {
+        this.social_primary = social_primary;
+        this.username = username;
+        this.token = token;
+        this.full_name = full_name;
+        this.avatar_url = avatar_url;
+        this.rates_summary_sum = rates_summary_sum;
+        this.android = android;
+        this.updated_at = updated_at;
+        this.created_at = created_at;
+        this.social_type = social_type;
+        this.rated_count = rated_count;
         this.rates_count = rates_count;
     }
 }

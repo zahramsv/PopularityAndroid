@@ -47,13 +47,9 @@ public class SharePresenter implements ShareMvp.Presenter {
 
     @Override
     public void takeScreenShot(View view) {
-
-
         try {
-            // image naming and path  to include sd card  appending name you choose for file
             view.setDrawingCacheEnabled(true);
             Bitmap bit = view.getDrawingCache(true).copy(Bitmap.Config.ARGB_8888, false);
-            //Bitmap.createBitmap(view.getDrawingCache());
             view.destroyDrawingCache();
             File sdCard = new File(view.getContext().getApplicationContext().getFilesDir(), "shared");
             if (!sdCard.exists()) sdCard.mkdir();
@@ -65,7 +61,6 @@ public class SharePresenter implements ShareMvp.Presenter {
             shareView.shareImageOnSocial(shareIntent);
 
         } catch (Throwable e) {
-            // Several error may come out with file handling or DOM
             e.printStackTrace();
 
         }

@@ -1,8 +1,10 @@
 package com.example.popularity.myInterface;
 
 import com.example.popularity.model.BaseResponse;
+import com.example.popularity.model.BaseUserData;
 import com.example.popularity.model.Login;
 import com.example.popularity.model.SubmitRate;
+import com.example.popularity.model.UpdateInfo;
 import com.example.popularity.model.User;
 import com.example.popularity.model.VerifySmsResponseData;
 import com.example.popularity.utils.URLS;
@@ -47,7 +49,7 @@ public interface ApiServices {
     Call<BaseResponse<String>> submitRateToFriend(@Body SubmitRate submitRate);
 
     @GET(URLS.GET_USER_INFO)
-    Call<BaseResponse<User>> getUserInfo(@Query("token") String token, @Query("userId") String userId);
+    Call<BaseResponse<BaseUserData>> getUserInfo(@Query("token") String token, @Query("userId") String userId);
     /*@FormUrlEncoded
     @POST(URLS.RateToFriend)
     Call<BaseResponse<String>> SubmitRateToFriend(

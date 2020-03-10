@@ -1,14 +1,22 @@
 package com.example.popularity.presenter;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.os.Handler;
 import android.util.Log;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.popularity.R;
 import com.example.popularity.fragment.HomeFragment;
 import com.example.popularity.fragment.LoginFragment;
 import com.example.popularity.model.BaseResponse;
+import com.example.popularity.model.BaseUserData;
+import com.example.popularity.model.UpdateInfo;
+import com.example.popularity.model.UpdateInfoOS;
 import com.example.popularity.model.User;
 import com.example.popularity.model.repository.LoginHandler;
 import com.example.popularity.model.repository.UserRepository;
@@ -55,35 +63,78 @@ public class SplashPresenter implements SplashMvp.Presenter {
         if (token != null && social_primary != null) {
 
             ApiServices apiServices = MyApp.getInstance().getBaseComponent().provideApiService();
-            apiServices.getUserInfo(token, social_primary).enqueue(new Callback<BaseResponse<User>>() {
+            apiServices.getUserInfo(token, social_primary).enqueue(new Callback<BaseResponse<BaseUserData>>() {
                 @Override
-                public void onResponse(Call<BaseResponse<User>> call, Response<BaseResponse<User>> response) {
+                public void onResponse(Call<BaseResponse<BaseUserData>> call, Response<BaseResponse<BaseUserData>> response) {
 
                     assert response.body() != null;
-                    BaseResponse<User> result = response.body();
-                    if (result.getCode() == 200) {
-                        User user = result.getData();
-                        userRepository.setCurrentUser(user);
-                        loginHandler.saveLoginInfo(user, user.getRates_summary_sum());
-                        baseComponent.openFragment(new HomeFragment(), false, null);
-                    } else {
-                        baseComponent.openFragment(new LoginFragment(), false, null);
+                    BaseResponse<BaseUserData> result = response.body();
+
+                    //todo: check update status
+                    if (isUpdateStatusOkay(result.getData().getUpdateInfo())) {
+                        if (result.getCode() == 200) {
+                            User user = result.getData().getUserInfo();
+                            userRepository.setCurrentUser(user);
+                            loginHandler.saveLoginInfo(user, user.getRates_summary_sum());
+                            baseComponent.openFragment(new HomeFragment(), false, null);
+                        } else {
+                            baseComponent.openFragment(new LoginFragment(), false, null);
+                        }
                     }
                 }
 
 
                 @Override
-                public void onFailure(Call<BaseResponse<User>> call, Throwable t) {
+                public void onFailure(Call<BaseResponse<BaseUserData>> call, Throwable t) {
 
                 }
             });
 
 
-        }
-        else {
+        } else {
             baseComponent.openFragment(new LoginFragment(), false, null);
         }
         Log.i("app_tag", token + "");
+    }
+
+    private boolean isUpdateStatusOkay(UpdateInfo updateInfo) {
+        try {
+            PackageInfo pInfo = view.getViewContext().getPackageManager().getPackageInfo(view.getViewContext().getPackageName(), 0);
+            int verCode = pInfo.versionCode;
+
+            if ( Integer.parseInt(updateInfo.getUpdateInfoOS().getLastForceUpdateVersion())>verCode) {
+                Dialog dialog = new Dialog(view.getViewContext());
+                dialog.setContentView(R.layout.update_dialog);
+                dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+                TextView updateMessage = dialog.findViewById(R.id.txtUpdateMessage);
+                updateMessage.setText(R.string.update_message);
+                dialog.show();
+                dialog.findViewById(R.id.btnUpdate).setOnClickListener(view1 -> {
+                    baseComponent.showMessage(ShowMessageType.TOAST, view.getViewContext().getString(R.string.error_under_construction));
+                    System.exit(0);
+                });
+
+                return false;
+            }else if (Integer.parseInt(updateInfo.getUpdateInfoOS().getLastVersion())>verCode)
+            {
+                Dialog dialog = new Dialog(view.getViewContext());
+                dialog.setContentView(R.layout.update_dialog);
+                dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+                TextView updateMessage = dialog.findViewById(R.id.txtUpdateMessage);
+                updateMessage.setText(R.string.update_message);
+                dialog.show();
+                dialog.findViewById(R.id.btnUpdate).setOnClickListener(view1 -> {
+                    baseComponent.showMessage(ShowMessageType.TOAST, view.getViewContext().getString(R.string.error_under_construction));
+                });
+                return false;
+            }
+
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+
+
+      return true;
     }
 
 }

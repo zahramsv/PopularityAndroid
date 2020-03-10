@@ -21,9 +21,8 @@ public class SplashFragment extends BaseFragment implements SplashMvp.View {
 
     @Override
     public void onHiddenChanged(boolean hidden) {
-        if (!hidden)
-        {
-            baseListener.changeToolbar(ToolbarKind.EMPTY,"");
+        if (!hidden) {
+            baseListener.changeToolbar(ToolbarKind.EMPTY, "");
         }
 
     }
@@ -33,15 +32,11 @@ public class SplashFragment extends BaseFragment implements SplashMvp.View {
         super.onCreate(savedInstanceState);
 
         presenter = new SplashPresenter(this, baseListener);
-       baseListener.changeToolbar(ToolbarKind.EMPTY,"");
-        if (ConnectivityReceiver.isConnected())
-        {
+        baseListener.changeToolbar(ToolbarKind.EMPTY, "");
+        if (ConnectivityReceiver.isConnected()) {
             presenter.getUserInfoAfterWait();
-        }
-
-        else
-        {
-            baseListener.showMessage(ShowMessageType.TOAST,getString(R.string.network_connection_error));
+        } else {
+            baseListener.showMessage(ShowMessageType.TOAST, getString(R.string.network_connection_error));
         }
 
     }

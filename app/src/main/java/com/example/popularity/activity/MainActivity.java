@@ -1,10 +1,16 @@
 package com.example.popularity.activity;
 
 import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
@@ -25,6 +31,7 @@ import com.example.popularity.R;
 import com.example.popularity.fragment.BaseFragment;
 import com.example.popularity.fragment.MenuDrawerFragment;
 import com.example.popularity.fragment.SplashFragment;
+import com.example.popularity.model.repository.SharedPrefsRepository;
 import com.example.popularity.mvp.MainMvp;
 import com.example.popularity.myInterface.MainActivityTransaction;
 import com.example.popularity.presenter.MainPresenter;
@@ -34,6 +41,8 @@ import com.example.popularity.utils.ShowMessageType;
 import com.example.popularity.utils.ToolBarIconKind;
 import com.example.popularity.utils.ToolbarKind;
 import com.google.android.material.snackbar.Snackbar;
+
+import java.util.Locale;
 
 
 public class MainActivity extends AppCompatActivity implements
@@ -47,16 +56,43 @@ public class MainActivity extends AppCompatActivity implements
     private ImageView toolbarIcon;
     private View parentView;
     private MainMvp.Presenter presenter;
+    private SharedPrefsRepository sharedPrefsRepository;
+
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        sharedPrefsRepository=new SharedPrefsRepository(this);
+        setAppLang(sharedPrefsRepository.getApplicationLanguage());
         setContentView(R.layout.activity_main);
         presenter = new MainPresenter();
         init();
+        setAppLang(sharedPrefsRepository.getApplicationLanguage());
         initNavigationDrawer();
         openFragment(new SplashFragment(), false, null);
     }
+
+
+    public void setAppLang(String lang) {
+        if (lang != "") {
+            Locale myLocale;
+            if (lang.equalsIgnoreCase(""))
+                return;
+            myLocale = new Locale(lang);
+            Locale.setDefault(myLocale);
+            android.content.res.Configuration config = new android.content.res.Configuration();
+            config.locale = myLocale;
+            getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+
+        }
+
+
+    }
+
+
 
     @Override
     public void showMessage(ShowMessageType messageType, String message) {
@@ -95,7 +131,7 @@ public class MainActivity extends AppCompatActivity implements
         if (!addStack) {
 
             transaction.setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.pop_enter, R.anim.pop_exit);
-           // sharedElementEnterTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.move)
+            // sharedElementEnterTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.move)
             transaction.replace(R.id.frmPlaceholder, fragment);
         } else {
             Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.frmPlaceholder);
@@ -113,6 +149,7 @@ public class MainActivity extends AppCompatActivity implements
 
 
     }
+
 
 
     @SuppressLint("ResourceAsColor")
@@ -240,6 +277,7 @@ public class MainActivity extends AppCompatActivity implements
         toolbarTitle = findViewById(R.id.txtToolbar);
         imageToolbarAppIcon = findViewById(R.id.imageToolbarAppIcon);
         loadingBar = findViewById(R.id.loadingBar);
+        sharedPrefsRepository = new SharedPrefsRepository(this);
     }
 
     private void initNavigationDrawer() {

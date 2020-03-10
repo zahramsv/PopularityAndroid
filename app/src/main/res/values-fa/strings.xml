@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Popularity</string>
-    <string name="app_version">version 1.0.0 -beta01</string>
+    <string name="app_version">ورژن 1.0.0 </string>
 
     <!-- TODO: Remove or change this placeholder text -->
 
@@ -19,16 +19,17 @@
     <string name="action_search">جستجو</string>
     <string name="search_hint">وارد کردن شماره تلفن</string>
     <string name="rec_search">RecyclerView Search</string>
-    <string name="share_your_rates">به اشتراک گداری امتیاز ها</string>
+    <string name="share_your_rates">به اشتراک گذاری امتیاز ها</string>
 
 
-    <string name="gallery_hint_get_permissions">please confirm access gallery permissions for better performance.</string>
-    <string name="hint_get_permissions">please confirm these permissions for better performance.</string>
-    <string name="hint_you_should_confirm_permissions">you should confirm permissions</string>
+    <string name="gallery_hint_get_permissions">لطفا اجازه دسترسی به گالری را بدهید</string>
+    <string name="hint_get_permissions">لطفا برای کارکرد بهتر اپلیکیشن اجازه دسترسی بدهید</string>
+    <string name="hint_you_should_confirm_permissions">شما باید اجازه دسترسی دهید</string>
 
 
     <string name="share">به اشتراک گذاری</string>
-    <string name="error_under_construction">This part is under construction!</string>
+    <string name="choose_app">انتخاب اپلیکیشن</string>
+    <string name="error_under_construction">به زودی به بهره برداری میرسد</string>
 
     <string name="about_us_desc">we are very good people who love making
         application and now we made it, we made popularity application in grady way, and we are so
@@ -66,53 +67,56 @@
     <string name="okay">باشه</string>
     <string name="yes">بله</string>
     <string name="no">خیر</string>
-    <string name="some_problems_when_use_api">There was some problem …</string>
+    <string name="some_problems_when_use_api">یک مشکل به وجود آمده است.</string>
+    <string name="save">ذخیره</string>
+    <string name="update_message">لطفا ورژن جدید اپلیکیشن را نصب بفرمایید, با تشکر</string>
 
     <!--ToolBarTitles-->
-    <string name="login_toolbar_txt">Login methods</string>
+    <string name="login_toolbar_txt">انتخاب لاگین</string>
     <string name="home_toolbar_txt">خانه</string>
-    <string name="about_us_toolbar_txt">About Us</string>
-    <string name="privacy_policy_toolbar_txt">Privacy Policy</string>
-    <string name="rate_toolbar">Rate To Friends</string>
+    <string name="about_us_toolbar_txt">درباره ما</string>
+    <string name="privacy_policy_toolbar_txt">امنیت</string>
+    <string name="rate_toolbar">امتیاز به دوستان</string>
     <string name="empty"></string>
-    <string name="rate_before">You Rate to this Friend Before</string>
-    <string name="login_way_description"> welcome to popularity.\nplease choose your data source…</string>
-    <string name="login_with_phone_number_description">enter your mobile number which you want to login with</string>
-    <string name="register_description">submit your base data to register it the world of popularity</string>
+    <string name="rate_before">قبلا به این دوست خود امتیاز داده اید</string>
+
+    <string name="login_way_description"> به پوپیولاریتی خود آمدید \n لطفا یک مورد را انتخاب کنید</string>
+    <string name="login_with_phone_number_description">شماره تلفن خود را برای لاگین وارد کنید</string>
+    <string name="register_description">لطفا مشخصات خود را وارد کنید</string>
 
 
     <!--errors-->
-    <string name="error_api_call">There was a problem sending the request to the server.</string>
-    <string name="error_disconnected">Disconnected</string>
+    <string name="error_api_call">مشکل در ارسال درخواست به سرور به وجود آمده است</string>
+    <string name="error_disconnected">مشکل در برقراری ارتباط …</string>
 
 
     <!-- Login Buttons text-->
-    <string name="login_with_instagram_btn_txt">Login with Instagram</string>
-    <string name="login_with_twitter_btn_txt">Login Twitter</string>
-    <string name="login_with_facebook_btn_txt">Login with FaceBook</string>
-    <string name="login_with_phone_number_btn_txt">Login With Phone Number</string>
-    <string name="login_with_mock_btn_txt">Login With Mock</string>
+    <string name="login_with_instagram_btn_txt">ورود با حساب اینستاگرام</string>
+    <string name="login_with_twitter_btn_txt">ورود با حساب توییتر</string>
+    <string name="login_with_facebook_btn_txt">ورود با حساب فیسبوک</string>
+    <string name="login_with_phone_number_btn_txt">ورود با شماره تلفن</string>
+    <string name="login_with_mock_btn_txt">ورود با داده پیشفرض</string>
 
 
-    <string name="hint_verify_code">verify code</string>
-    <string name="network_connection_error">Please check your connection</string>
-    <string name="error_receive_code">you should get a code..</string>
-    <string name="rate_to_friend">Rate To:</string>
+    <string name="hint_verify_code">کد تاییدیه</string>
+    <string name="network_connection_error">لطفا ارتباط اینترنت خود را چک کنید</string>
+    <string name="error_receive_code">شما باید یک کد دریافت کنید</string>
+    <string name="rate_to_friend">امتیاز به</string>
     <string name="copy_right">copy right all reserved</string>
-    <string name="send_sms_btn_txt">Send SMS</string>
-    <string name="verify_code">Verify code</string>
-    <string name="phone_contacts">Phone Contacts :</string>
+    <string name="send_sms_btn_txt">ارسال پیامک</string>
+    <string name="verify_code">کد تاییدیه</string>
+    <string name="phone_contacts">لیست شماره تلفن ها :</string>
 
     <string name="login_twitter_btn_text">Login Twitter</string>
-    <string name="fallow_us">fallow us in social medias : </string>
-    <string name="phone_number_logout">Logout Phone </string>
-    <string name="btn_setting_login_twitter">Login Twitter </string>
-    <string name="phone_number">Phone Number </string>
-    <string name="user_name">User Name</string>
-    <string name="full_name">Full Name</string>
-    <string name="submitted_rates">Rates Submitted Successfully</string>
-    <string name="register">Register</string>
-    <string name="logout_submit">Are you sure for logout?</string>
+    <string name="fallow_us">ما را در شبکه های اجتماعی دنبال کنید </string>
+    <string name="phone_number_logout">خروج از لاگین تلفن همراه</string>
+    <string name="btn_setting_login_twitter">خروج از لاگین توییتر </string>
+    <string name="phone_number">شماره تلفن </string>
+    <string name="user_name">نام کاربری</string>
+    <string name="full_name">نام</string>
+    <string name="submitted_rates">امتیازدهی با موفقیت ثبت شد</string>
+    <string name="register">ثبت نام</string>
+    <string name="logout_submit">آیا از خروج مطمئن هستید؟</string>
 
     <string name="share_desc">you can share this on your social network or send it to
     your friends and inviting them to popularity have chance to see more result about yourself </string>
@@ -121,7 +125,7 @@
         but would not distinguish who rate him her</string>
 
 
-    <string name="image_hint_navigation_toolbar">this button open drawer menu for more navigation control.</string>
+    <string name="image_hint_navigation_toolbar">این دکمه منوی اپلیکیشن را باز می کند</string>
     <string name="search_friend">جستجوی دوست</string>
     <string name="back_button_press_hint">برای بستن برنامه یکبار دیگر دکمه بازگشت را بزنید</string>
 </resources>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -30,11 +31,13 @@
 
 
               <TextView
-                  android:layout_width="150dp"
+                  android:layout_width="200dp"
+                  android:textStyle="bold"
+                  android:gravity="left|center_vertical"
                   android:layout_height="match_parent"
-                  style="@style/PrimaryTextStyle"
+                  style="@style/SecondaryTextStyle"
                   android:text="@string/phone_number_logout"
-                  />
+                  tools:ignore="RtlHardcoded" />
 
 
               <androidx.appcompat.widget.SwitchCompat
@@ -54,11 +57,13 @@
 
 
               <TextView
-                  android:layout_width="150dp"
+                  android:layout_width="200dp"
+                  android:textStyle="bold"
+                  android:gravity="left|center_vertical"
                   android:layout_height="match_parent"
-                  style="@style/PrimaryTextStyle"
+                  style="@style/SecondaryTextStyle"
                   android:text="@string/btn_setting_login_twitter"
-                  />
+                  tools:ignore="RtlHardcoded" />
 
 
               <androidx.appcompat.widget.SwitchCompat
@@ -70,30 +75,79 @@
 
           </LinearLayout>
 
-          <RadioGroup
-              android:id="@+id/rgLanguage"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content">
-              <RadioButton
-                  android:id="@+id/rbFarsi"
-                  android:layout_width="match_parent"
+
+
+          <LinearLayout
+              android:layout_width="wrap_content"
+              android:layout_height="50dp"
+              android:layout_marginTop="40dp"
+              android:id="@+id/changeLanguage"
+              android:orientation="horizontal">
+
+
+
+              <androidx.appcompat.widget.AppCompatImageView
+                  android:layout_width="36dp"
+                  android:layout_height="36dp"
+                  android:layout_gravity="center"
+                  app:srcCompat="@drawable/ic_language"
+                  >
+              </androidx.appcompat.widget.AppCompatImageView>
+
+
+              <TextView
+                  android:layout_width="150dp"
+                  android:textStyle="bold"
                   android:layout_height="match_parent"
-                  android:text="فارسی"
-                  android:tag="fa"/>
-              <RadioButton
-                  android:id="@+id/rbEnglish"
-                  android:layout_width="match_parent"
-                  android:layout_height="match_parent"
-                  android:text="English"
-                  android:tag="en"
-                  android:checked="true"/>
-          </RadioGroup>
-          <Button
-              android:id="@+id/btnSetLanguage"
+                  style="@style/SecondaryTextStyle"
+                  android:gravity="left|center_vertical"
+                  android:paddingLeft="10dp"
+                  android:text="@string/app_language"
+                  />
+
+
+
+          </LinearLayout>
+
+
+
+          <LinearLayout
+              android:visibility="gone"
               android:layout_width="match_parent"
-              android:layout_height="@dimen/login_way_button_height_size"
-              style="@style/AccentButtonStyle"
-              android:text="ثبت"/>
+              android:layout_height="wrap_content"
+              android:id="@+id/layoutLanguage"
+              android:orientation="vertical">
+              <RadioGroup
+                  android:layout_marginTop="10dp"
+                  android:id="@+id/rgLanguage"
+                  android:layout_marginLeft="20dp"
+                  android:layout_marginRight="20dp"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content">
+                  <RadioButton
+                      android:id="@+id/rbFarsi"
+                      android:layout_width="match_parent"
+                      android:layout_height="match_parent"
+                      android:text="فارسی"
+                      android:gravity="left
+"
+                      android:tag="fa"/>
+                  <RadioButton
+                      android:id="@+id/rbEnglish"
+                      android:layout_width="match_parent"
+                      android:layout_height="match_parent"
+                      android:text="English"
+                      android:tag="en"
+                      android:checked="true"/>
+              </RadioGroup>
+              <Button
+                  android:id="@+id/btnSetLanguage"
+                  android:layout_width="match_parent"
+                  android:layout_marginTop="20dp"
+                  android:layout_height="@dimen/login_way_button_height_size"
+                  style="@style/AccentButtonStyle"
+                  android:text="@string/save"/>
+          </LinearLayout>
       </LinearLayout>
   </androidx.cardview.widget.CardView>
 

@@ -26,6 +26,7 @@
     <string name="rate_us">Rate us</string>
     <string name="rate_to_friends">Rate</string>
     <string name="share">Share</string>
+    <string name="choose_app">Choose an app</string>
     <string name="error_under_construction">This part is under construction!</string>
     <string name="about_us_desc">we are very good people who love making
         application and now we made it, we made popularity application in grady way, and we are so
@@ -121,5 +122,7 @@
     <string name="image_hint_navigation_toolbar">this button open drawer menu for more navigation control.</string>
     <string name="search_friend">Search Friend</string>
     <string name="back_button_press_hint">are you sure exit application?</string>
+    <string name="save">Save</string>
+    <string name="update_message">Please update application for the best performance.</string>
 </resources>
 

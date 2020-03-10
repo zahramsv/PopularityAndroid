@@ -114,12 +114,12 @@ public class HomeFragment extends BaseFragment implements
             });
 
 
-            rates.add(new Rate("Look", Integer.parseInt(userPopularity.getRate_look())));
-            rates.add(new Rate("Fitness", Integer.parseInt(userPopularity.getRate_fitness())));
-            rates.add(new Rate("Style", Integer.parseInt(userPopularity.getRate_style())));
-            rates.add(new Rate("Personality", Integer.parseInt(userPopularity.getRate_personality())));
-            rates.add(new Rate("Trustworthy", Integer.parseInt(userPopularity.getRate_trustworthy())));
-            rates.add(new Rate("Popularity", Integer.parseInt(userPopularity.getRate_popularity())));
+            rates.add(new Rate(getString(R.string.rate_look), Integer.parseInt(userPopularity.getRate_look())));
+            rates.add(new Rate(getString(R.string.rate_fitness), Integer.parseInt(userPopularity.getRate_fitness())));
+            rates.add(new Rate(getString(R.string.rate_style), Integer.parseInt(userPopularity.getRate_style())));
+            rates.add(new Rate(getString(R.string.rate_personality), Integer.parseInt(userPopularity.getRate_personality())));
+            rates.add(new Rate(getString(R.string.rate_trustworthy), Integer.parseInt(userPopularity.getRate_trustworthy())));
+            rates.add(new Rate(getString(R.string.rate_popularity), Integer.parseInt(userPopularity.getRate_popularity())));
             RateListAdapter rateListAdapter = new RateListAdapter(rates, getActivity());
             rateListAdapter.setOnItemClickListener(new RateListAdapter.ClickListener() {
                 @Override

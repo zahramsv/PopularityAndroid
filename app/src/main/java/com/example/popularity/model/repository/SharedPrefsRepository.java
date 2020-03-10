@@ -1,5 +1,6 @@
 package com.example.popularity.model.repository;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 
@@ -17,15 +18,32 @@ public class SharedPrefsRepository {
 
     public final static String USER_DATA = "user_data";
     public final static String LOGOUT_STATUS = "logout_status";
+    public final static String LANGUAGE = "language";
     SharedPreferences sharedPref = null;
 
-    public void SaveLogoutStatus(boolean twitterLogin,boolean phoneNumberLogin )
-    {
+    public void SaveLogoutStatus(boolean twitterLogin, boolean phoneNumberLogin) {
         sharedPref = context.getSharedPreferences(LOGOUT_STATUS, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putBoolean("phone_number_login",phoneNumberLogin);
-        editor.putBoolean("twitter_login",twitterLogin);
+        editor.putBoolean("phone_number_login", phoneNumberLogin);
+        editor.putBoolean("twitter_login", twitterLogin);
     }
+
+    public void setApplicationLanguageWithUser(String language) {
+        sharedPref = context.getSharedPreferences("CommonPrefs",
+                Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString(LANGUAGE, language);
+        editor.commit();
+
+    }
+    public String getApplicationLanguage()
+    {
+        SharedPreferences prefs =context.getSharedPreferences("CommonPrefs",
+                Activity.MODE_PRIVATE);
+        String language = prefs.getString(LANGUAGE, "");
+        return language;
+    }
+
 
     public void SaveUser(User user, UserPopularity userPopularity) {
         sharedPref = context.getSharedPreferences(USER_DATA, Context.MODE_PRIVATE);
@@ -63,7 +81,7 @@ public class SharedPrefsRepository {
     }
 
 
-    public void saveLoginKind(String loginKind){
+    public void saveLoginKind(String loginKind) {
 
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString("login_kind", loginKind);
@@ -72,8 +90,8 @@ public class SharedPrefsRepository {
     }
 
 
-    public String getLoginKind(){
-        return sharedPref.getString("login_kind","");
+    public String getLoginKind() {
+        return sharedPref.getString("login_kind", "");
     }
 
 }

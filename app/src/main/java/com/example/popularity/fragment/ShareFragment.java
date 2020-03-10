@@ -72,19 +72,16 @@ public class ShareFragment extends BaseFragment implements ShareMvp.View {
 
         btnShare.setOnClickListener(view1 -> {
             imgViewEditProfile.setVisibility(View.GONE);
-            View scrren = layoutScreenShot;
-            //  View screenView = getActivity().getWindow().getDecorView().getRootView().findViewById(R.id.layoutScreenShot);
-            presenter.takeScreenShot(scrren);
+            View shareView = layoutScreenShot;
+            presenter.takeScreenShot(shareView);
 
         });
 
         imgUploadProfile.setOnClickListener(view12 -> {
-            // presenter.getGalleryAccessPermission();
             selectAndCropImage();
         });
 
         imgViewEditProfile.setOnClickListener(view13 -> {
-            //  presenter.getGalleryAccessPermission();
             selectAndCropImage();
         });
 
@@ -153,6 +150,6 @@ public class ShareFragment extends BaseFragment implements ShareMvp.View {
 
     @Override
     public void shareImageOnSocial(Intent intent) {
-        startActivity(Intent.createChooser(intent, "Choose an app"));
+        startActivity(Intent.createChooser(intent, getString(R.string.choose_app)));
     }
 }

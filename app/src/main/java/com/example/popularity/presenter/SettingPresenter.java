@@ -1,6 +1,8 @@
 package com.example.popularity.presenter;
 
 import android.app.Dialog;
+import android.content.res.Configuration;
+import android.widget.RadioButton;
 
 import androidx.appcompat.widget.SwitchCompat;
 
@@ -13,15 +15,19 @@ import com.example.popularity.myInterface.MainActivityTransaction;
 import com.example.popularity.utils.MyApp;
 import com.example.popularity.utils.ShowMessageType;
 
+import java.util.Locale;
+
 public class SettingPresenter implements SettingMvp.Presenter {
 
     private SettingMvp.View view;
     private MainActivityTransaction.Components baseComponent;
+    private SharedPrefsRepository sharedPrefsRepository;
 
 
-    public SettingPresenter(SettingMvp.View view, MainActivityTransaction.Components baseComponent) {
+    public SettingPresenter(SettingMvp.View view, MainActivityTransaction.Components baseComponent, SharedPrefsRepository sharedPrefsRepository) {
         this.view = view;
         this.baseComponent = baseComponent;
+        this.sharedPrefsRepository = sharedPrefsRepository;
     }
 
     @Override
@@ -50,7 +56,23 @@ public class SettingPresenter implements SettingMvp.Presenter {
 
         if (btnId == R.id.btnTwitterLogout) {
 
-            baseComponent.showMessage(ShowMessageType.TOAST,"Coming soon ...");
+            baseComponent.showMessage(ShowMessageType.TOAST, "Coming soon ...");
         }
     }
+
+    @Override
+    public void setLocalLanguage() {
+
+        sharedPrefsRepository.setApplicationLanguageWithUser(view.getChosenLanguage());
+        Configuration config = view.getFragActivity().getBaseContext().getResources().getConfiguration();
+        Locale locale = new Locale(view.getChosenLanguage());
+        Locale.setDefault(locale);
+        config.locale = locale;
+        view.getFragActivity().getBaseContext().getResources().updateConfiguration(
+                config,
+                view.getFragActivity().getBaseContext().getResources().getDisplayMetrics()
+        );
+        view.restartActivity();
+    }
+
 }
