@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "290722213475",
+    "firebase_url": "https://popularity-7070.firebaseio.com",
+    "project_id": "popularity-7070",
+    "storage_bucket": "popularity-7070.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:290722213475:android:ebccc9ef4e87abe55f1256",
+        "android_client_info": {
+          "package_name": "ir.mohad.popularity"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "290722213475-utvj7uc3kvtfk77k8sfu75625597kt0a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB299JnSUrtoDxUMvSVlpdohtzBGaDWUPA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "290722213475-utvj7uc3kvtfk77k8sfu75625597kt0a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
