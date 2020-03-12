@@ -2,9 +2,11 @@ package com.example.popularity.presenter;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Handler;
 import android.util.Log;
 import android.widget.TextView;
@@ -19,6 +21,7 @@ import com.example.popularity.model.UpdateInfo;
 import com.example.popularity.model.UpdateInfoOS;
 import com.example.popularity.model.User;
 import com.example.popularity.model.repository.LoginHandler;
+import com.example.popularity.model.repository.SharedPrefsRepository;
 import com.example.popularity.model.repository.UserRepository;
 import com.example.popularity.mvp.SplashMvp;
 import com.example.popularity.myInterface.ApiServices;
@@ -55,6 +58,7 @@ public class SplashPresenter implements SplashMvp.Presenter {
 
 
     private void getUserInfoFromServer() {
+
         SharedPreferences prefs = view.getViewContext().getSharedPreferences("user_data", Context.MODE_PRIVATE);
         String token = prefs.getString("token", null);
         String social_primary = prefs.getString("social_primary", null);
@@ -97,6 +101,7 @@ public class SplashPresenter implements SplashMvp.Presenter {
         Log.i("app_tag", token + "");
     }
 
+
     private boolean isUpdateStatusOkay(UpdateInfo updateInfo) {
         try {
             PackageInfo pInfo = view.getViewContext().getPackageManager().getPackageInfo(view.getViewContext().getPackageName(), 0);
@@ -110,8 +115,10 @@ public class SplashPresenter implements SplashMvp.Presenter {
                 updateMessage.setText(R.string.update_message);
                 dialog.show();
                 dialog.findViewById(R.id.btnUpdate).setOnClickListener(view1 -> {
-                    baseComponent.showMessage(ShowMessageType.TOAST, view.getViewContext().getString(R.string.error_under_construction));
-                    System.exit(0);
+                    //baseComponent.showMessage(ShowMessageType.TOAST, view.getViewContext().getString(R.string.error_under_construction));
+                    //updateAppFromMarket();
+                    dialog.dismiss();
+                    //System.exit(0);
                 });
 
                 return false;
@@ -124,7 +131,10 @@ public class SplashPresenter implements SplashMvp.Presenter {
                 updateMessage.setText(R.string.update_message);
                 dialog.show();
                 dialog.findViewById(R.id.btnUpdate).setOnClickListener(view1 -> {
-                    baseComponent.showMessage(ShowMessageType.TOAST, view.getViewContext().getString(R.string.error_under_construction));
+                   // updateAppFromMarket();
+                    dialog.dismiss();
+
+                   // baseComponent.showMessage(ShowMessageType.TOAST, view.getViewContext().getString(R.string.error_under_construction));
                 });
                 return false;
             }
@@ -133,8 +143,11 @@ public class SplashPresenter implements SplashMvp.Presenter {
             e.printStackTrace();
         }
 
-
       return true;
     }
 
+    private void updateAppFromMarket() {
+        Intent intent = new Intent(Intent.ACTION_VIEW , Uri.parse("market://details?id=com.example.popularity.presenter"));
+        view.getViewContext().startActivity(intent);
+    }
 }

@@ -29,11 +29,12 @@ public class LoginFragment extends BaseFragment implements
     private LoginFragmentMvp.Presenter presenter;
 
 
-    public static LoginFragment newInstance()
-    {
+    public static LoginFragment newInstance() {
         LoginFragment loginFragment=new LoginFragment();
         return loginFragment;
     }
+
+
     @Override
     public void onHiddenChanged(boolean hidden) {
         if (!hidden)
@@ -46,6 +47,7 @@ public class LoginFragment extends BaseFragment implements
         super.onCreate(savedInstanceState);
         presenter = new LoginPresenter(this, baseListener);
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

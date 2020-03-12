@@ -44,6 +44,8 @@ public class SettingPresenter implements SettingMvp.Presenter {
                 return;
             });
 
+
+
             dialog.findViewById(R.id.btnYes).setOnClickListener(view22 -> {
 
                 SharedPrefsRepository sharedPrefsRepository = new SharedPrefsRepository(view.getViewContext());

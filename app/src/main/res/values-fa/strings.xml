@@ -4,6 +4,8 @@
 
     <!-- TODO: Remove or change this placeholder text -->
 
+
+    <string name="app_intro">معرفی اپلیکیشن</string>
     <string name="privacy_policy">حریم خصوصی</string>
     <string name="about_us">درباره ما</string>
     <string name="setting">تنظیمات</string>
@@ -11,6 +13,18 @@
     <string name="rate_to_friends">امتیاز به دوستان</string>
 
     <string name="app_language">زبان</string>
+    <string name="next">بعدی</string>
+    <string name="skip">رد کردن</string>
+    <string name="start">شروع</string>
+
+    <string name="intro_message_one">در این اپلیکیشن قصد داریم شما و دوستانتان با دانستن نظر راجع به
+        همدیگر تعامل بیشتری با هم داشته باشید و دوستان بهتری برای هم بشوید</string>
+
+    <string name="intro_message_two">میتونی به دوستات بگی راجع به اونها چه فکری میکنی، البته اگر میخوای اینکار رو غیرمستقیم انجام بدی \n و میتونی نظرات دوستات رو در مورد خودت ببینی</string>
+
+    <string name="intro_message_three">و میتونید این نظرات رو در شبکه های اجتماعی به اشتراک بگذارید</string>
+
+    <string name="intro_message_four">این باعث میشه نکته های مثبت و منفی شخصیتت رو بهتر بشناسی و برای بهبود آن کار کنی و همچنین این فرصت رو به دوستات هم بدی</string>
 
     <string name="phone_number_validation">لطفا شماره تلفن صحیح را وارد کنید</string>
     <string name="verify_code_validation">لطفا کد دریافت شده از طریق پیامک را وارد کنید</string>

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Color;
@@ -11,6 +12,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
@@ -29,6 +31,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.popularity.R;
 import com.example.popularity.fragment.BaseFragment;
+import com.example.popularity.fragment.IntroFragment;
 import com.example.popularity.fragment.MenuDrawerFragment;
 import com.example.popularity.fragment.SplashFragment;
 import com.example.popularity.model.repository.SharedPrefsRepository;
@@ -58,21 +61,25 @@ public class MainActivity extends AppCompatActivity implements
     private MainMvp.Presenter presenter;
     private SharedPrefsRepository sharedPrefsRepository;
 
-
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        sharedPrefsRepository=new SharedPrefsRepository(this);
+        sharedPrefsRepository = new SharedPrefsRepository(this);
         setAppLang(sharedPrefsRepository.getApplicationLanguage());
         setContentView(R.layout.activity_main);
         presenter = new MainPresenter();
         init();
         setAppLang(sharedPrefsRepository.getApplicationLanguage());
         initNavigationDrawer();
-        openFragment(new SplashFragment(), false, null);
+        Intent intent = getIntent();
+        SharedPrefsRepository sharedPrefsRepository = new SharedPrefsRepository(this);
+        boolean isFirstTime = sharedPrefsRepository.isFirstTimeLaunch();
+        Log.d("app_tag", "isFirstLaunch: " + isFirstTime);
+        if (isFirstTime) {
+            openFragment(new IntroFragment(), false, null);
+        } else {
+            openFragment(new SplashFragment(), false, null);
+        }
     }
 
 
@@ -91,7 +98,6 @@ public class MainActivity extends AppCompatActivity implements
 
 
     }
-
 
 
     @Override
@@ -149,7 +155,6 @@ public class MainActivity extends AppCompatActivity implements
 
 
     }
-
 
 
     @SuppressLint("ResourceAsColor")

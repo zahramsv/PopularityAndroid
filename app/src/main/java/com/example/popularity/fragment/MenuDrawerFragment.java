@@ -39,20 +39,8 @@ public class MenuDrawerFragment extends BaseFragment implements MenuDrawerMvp.Vi
         view = inflater.inflate(R.layout.fragment_menu_drawer, container, false);
         username = view.findViewById(R.id.txtName);
 
-        setObserver();
-
-//        myObervable().subscribe(observer);
-
 
         userRepository = new UserRepository(MyApp.getInstance().getBaseComponent().provideApiService());
-       /* if (userRepository.getCurrentUser()!=null)
-        {
-            User user=userRepository.getCurrentUser();
-            username.setText(user.getFull_name());
-        }*/
-
-       /* SharedPreferences preferences = getActivity().getSharedPreferences("user_data", Context.MODE_PRIVATE);
-        username.setText(preferences.getString("full_name", null));*/
 
         return view;
     }

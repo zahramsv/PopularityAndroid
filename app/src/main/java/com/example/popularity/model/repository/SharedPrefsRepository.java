@@ -10,16 +10,18 @@ import com.example.popularity.model.UserPopularity;
 public class SharedPrefsRepository {
 
     private Context context;
+    SharedPreferences sharedPref = null;
+
+    public final static String USER_DATA = "user_data";
+    public final static String LOGOUT_STATUS = "logout_status";
+    public final static String LANGUAGE = "language";
+    private static final String IS_FIRST_TIME_LAUNCH = "IsFirstTimeLaunch";
+
 
     public SharedPrefsRepository(Context context) {
         this.context = context;
         sharedPref = context.getSharedPreferences(USER_DATA, Context.MODE_PRIVATE);
     }
-
-    public final static String USER_DATA = "user_data";
-    public final static String LOGOUT_STATUS = "logout_status";
-    public final static String LANGUAGE = "language";
-    SharedPreferences sharedPref = null;
 
     public void SaveLogoutStatus(boolean twitterLogin, boolean phoneNumberLogin) {
         sharedPref = context.getSharedPreferences(LOGOUT_STATUS, Context.MODE_PRIVATE);
@@ -29,24 +31,20 @@ public class SharedPrefsRepository {
     }
 
     public void setApplicationLanguageWithUser(String language) {
-        sharedPref = context.getSharedPreferences("CommonPrefs",
-                Activity.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString(LANGUAGE, language);
         editor.commit();
 
     }
-    public String getApplicationLanguage()
-    {
-        SharedPreferences prefs =context.getSharedPreferences("CommonPrefs",
+
+    public String getApplicationLanguage() {
+        SharedPreferences prefs = context.getSharedPreferences("CommonPrefs",
                 Activity.MODE_PRIVATE);
         String language = prefs.getString(LANGUAGE, "");
         return language;
     }
 
-
     public void SaveUser(User user, UserPopularity userPopularity) {
-        sharedPref = context.getSharedPreferences(USER_DATA, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString("rate_look", userPopularity.getRate_look());
         editor.putString("rate_fitness", userPopularity.getRate_fitness());
@@ -80,7 +78,6 @@ public class SharedPrefsRepository {
 
     }
 
-
     public void saveLoginKind(String loginKind) {
 
         SharedPreferences.Editor editor = sharedPref.edit();
@@ -89,9 +86,20 @@ public class SharedPrefsRepository {
         editor.apply();
     }
 
-
     public String getLoginKind() {
         return sharedPref.getString("login_kind", "");
     }
+
+    public void setFirstTimeLaunch(boolean isFirstTime) {
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putBoolean(IS_FIRST_TIME_LAUNCH, isFirstTime);
+        editor.commit();
+        editor.apply();
+    }
+
+    public boolean isFirstTimeLaunch() {
+        return sharedPref.getBoolean(IS_FIRST_TIME_LAUNCH, true);
+    }
+
 
 }

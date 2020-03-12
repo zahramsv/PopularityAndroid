@@ -30,6 +30,11 @@ public class RateFragment extends BaseFragment implements RateMvp.View {
     private View view;
     private RateMvp.Presenter presenter;
 
+
+    public static RateFragment newInstance()
+    {
+        return new RateFragment();
+    }
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

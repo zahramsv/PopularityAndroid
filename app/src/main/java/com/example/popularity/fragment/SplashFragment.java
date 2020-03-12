@@ -43,7 +43,6 @@ public class SplashFragment extends BaseFragment implements SplashMvp.View {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        //baseListener.changeToolbar(ToolbarKind.HOME, "ttt");
         return inflater.inflate(R.layout.fragment_splash, container, false);
     }
 
