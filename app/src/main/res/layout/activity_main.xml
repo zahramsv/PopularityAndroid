@@ -9,7 +9,7 @@
     android:fitsSystemWindows="true"
     android:windowSoftInputMode="adjustPan"
     android:background="@color/white"
-    tools:context=".activity.MainActivity">
+    tools:context="ir.mohad.popularity.activity.MainActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/ctlParentView"
@@ -82,7 +82,7 @@
     <!--sliding menu-->
     <fragment
         android:id="@+id/fragment_nd"
-        android:name="com.example.popularity.fragment.MenuDrawerFragment"
+        android:name="ir.mohad.popularity.fragment.MenuDrawerFragment"
         android:layout_width="280dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
