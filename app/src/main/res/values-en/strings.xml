@@ -16,6 +16,7 @@
     <string name="intro_message_four">This will help you get to know the positive and negative points of your
         personality and work towards improving it, as well as giving your friends the opportunity.</string>
 
+    <string name="exit_message">are you sure to exit application?</string>
     <string name="app_intro">App Intro</string>
     <string name="privacy_policy">Privacy Policy</string>
     <string name="about_us">About us</string>

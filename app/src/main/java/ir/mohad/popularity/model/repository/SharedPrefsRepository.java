@@ -34,14 +34,16 @@ public class SharedPrefsRepository {
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString(LANGUAGE, language);
         editor.commit();
+        editor.apply();
 
     }
 
     public String getApplicationLanguage() {
-        SharedPreferences prefs = context.getSharedPreferences("CommonPrefs",
+        return sharedPref.getString(LANGUAGE,"en");
+        /*SharedPreferences prefs = context.getSharedPreferences("CommonPrefs",
                 Activity.MODE_PRIVATE);
         String language = prefs.getString(LANGUAGE, "");
-        return language;
+        return language;*/
     }
 
     public void SaveUser(User user, UserPopularity userPopularity) {

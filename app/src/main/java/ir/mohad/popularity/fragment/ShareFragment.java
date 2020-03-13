@@ -5,13 +5,16 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
@@ -25,6 +28,7 @@ import ir.mohad.popularity.adapter.RateListAdapter;
 import ir.mohad.popularity.model.Rate;
 import ir.mohad.popularity.mvp.ShareMvp;
 import ir.mohad.popularity.presenter.SharePresenter;
+import ir.mohad.popularity.utils.ShowMessageType;
 import ir.mohad.popularity.utils.ToolbarKind;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
@@ -41,10 +45,23 @@ public class ShareFragment extends BaseFragment implements ShareMvp.View {
     private LinearLayout linearUserProfile;
     private CardView layoutScreenShot;
     private AppCompatButton btnShare;
+    private RelativeLayout relativeLayoutShare;
+    private  View view;
+    private boolean intentBack=false;
 
     public static ShareFragment newInstance() {
         ShareFragment fragment = new ShareFragment();
         return fragment;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (intentBack)
+        {
+            view.findViewById(R.id.imgViewEditProfile).setVisibility(View.VISIBLE);
+        }
+
     }
 
     @Override
@@ -65,7 +82,7 @@ public class ShareFragment extends BaseFragment implements ShareMvp.View {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_share, container, false);
+        view = inflater.inflate(R.layout.fragment_share, container, false);
         init(view);
 
         presenter.setBundleContent(getArguments());
@@ -73,16 +90,20 @@ public class ShareFragment extends BaseFragment implements ShareMvp.View {
         btnShare.setOnClickListener(view1 -> {
             imgViewEditProfile.setVisibility(View.GONE);
             View shareView = layoutScreenShot;
-            presenter.takeScreenShot(shareView);
+            intentBack=presenter.takeScreenShot(shareView);
+           // presenter.takeScreenShot(shareView);
 
         });
 
         imgUploadProfile.setOnClickListener(view12 -> {
             selectAndCropImage();
+
+
         });
 
         imgViewEditProfile.setOnClickListener(view13 -> {
             selectAndCropImage();
+
         });
 
         presenter.getGalleryAccessPermission();
@@ -98,8 +119,8 @@ public class ShareFragment extends BaseFragment implements ShareMvp.View {
     @Override
     public void setRatesList(List<Rate> rates) {
         rateListAdapter = new RateListAdapter(rates, getActivity());
-        GridLayoutManager layoutManager1 = new GridLayoutManager(getActivity(), 2, RecyclerView.VERTICAL, false);
-        rvYourRates.setLayoutManager(layoutManager1);
+        GridLayoutManager layoutManager= new GridLayoutManager(getActivity(), 2, RecyclerView.VERTICAL, false);
+        rvYourRates.setLayoutManager(layoutManager);
         rvYourRates.setAdapter(rateListAdapter);
     }
 
@@ -111,6 +132,7 @@ public class ShareFragment extends BaseFragment implements ShareMvp.View {
         imgUploadProfile = view.findViewById(R.id.imgUploadProfile);
         rvYourRates = view.findViewById(R.id.rvYourRates);
         linearUserProfile = view.findViewById(R.id.linearUserProfile);
+       // relativeLayoutShare=view.findViewById(R.id.relativeLayoutShare);
     }
 
     public void selectAndCropImage() {
@@ -118,6 +140,7 @@ public class ShareFragment extends BaseFragment implements ShareMvp.View {
                 .setGuidelines(CropImageView.Guidelines.ON)
                 .setAspectRatio(3, 1)
                 .setFixAspectRatio(true)
+                .setBackgroundColor(R.color.transparent)
                 .start(getContext(), this);
     }
 
@@ -134,7 +157,9 @@ public class ShareFragment extends BaseFragment implements ShareMvp.View {
             imgUploadProfile.setImageBitmap(null);
             linearUserProfile.setBackground(myDrawable);
             imgViewEditProfile.setVisibility(View.VISIBLE);
-            layoutScreenShot.setBackgroundResource(R.color.white);
+            //fixme ? when comment this two line corner of layout back
+            /*layoutScreenShot.setBackgroundResource(R.color.colorPrimary);
+            relativeLayoutShare.setBackgroundColor(R.color.colorPrimary);*/
         }
     }
 

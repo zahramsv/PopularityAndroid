@@ -53,6 +53,7 @@ public class MobileLoginFragment extends BaseFragment
             baseListener.closeKeyboard();
             if (presenter.phoneNumberValidation(edtMobile.getText().toString()))
             {
+
                 presenter.sendSMS(edtMobile.getText().toString());
                 cardViewVerifyCode.setVisibility(View.VISIBLE);
                 cardViewMobileRegister.setVisibility(View.GONE);

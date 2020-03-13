@@ -14,6 +14,7 @@
     <string name="intro_message_four">This will help you get to know the positive and negative points of your
         personality and work towards improving it, as well as giving your friends the opportunity.</string>
 
+    <string name="exit_message">are you sure to exit application?</string>
     <string name="app_language">Language</string>
     <string name="app_intro">App Intro</string>
 
@@ -139,7 +140,6 @@
     <string name="save">Save</string>
     <string name="update_message">Please update application for the best performance.</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>
 

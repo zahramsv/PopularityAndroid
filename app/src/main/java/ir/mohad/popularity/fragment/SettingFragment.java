@@ -53,7 +53,6 @@ public class SettingFragment extends BaseFragment implements SettingMvp.View {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        sharedPrefsRepository=new SharedPrefsRepository(getContext());
         presenter = new SettingPresenter(this, baseListener,sharedPrefsRepository);
         this.loginHandler = MyApp.getInstance().getBaseComponent().provideLoginHandler();
 
@@ -66,6 +65,10 @@ public class SettingFragment extends BaseFragment implements SettingMvp.View {
 
         View view = inflater.inflate(R.layout.fragment_setting, container, false);
         sharedPrefsRepository = new SharedPrefsRepository(getContext());
+        if (sharedPrefsRepository.getLoginKind().equals("SMS"))
+        {
+            view.findViewById(R.id.logoutLayout).setVisibility(View.VISIBLE);
+        }
         init(view);
 
         LoginKind loginKind = loginHandler.getLoginKind();
@@ -77,12 +80,13 @@ public class SettingFragment extends BaseFragment implements SettingMvp.View {
             presenter.logout(R.id.btnPhoneLogout, btnPhoneLogout);
         });
 
-        btnTwitterLogout.setOnClickListener(view12 -> presenter.logout(R.id.btnTwitterLogout, btnTwitterLogout));
+      //  btnTwitterLogout.setOnClickListener(view12 -> presenter.logout(R.id.btnTwitterLogout, btnTwitterLogout));
 
         changeLanguage.setOnClickListener(view1 -> {
             layoutLanguage.setVisibility(View.VISIBLE);
+
             layoutLanguage.animate()
-                    .translationY(layoutLanguage.getHeight())
+                    .translationY(0)
                     .alpha(1.0f)
                     .setListener(null);
         });

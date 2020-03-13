@@ -8,21 +8,23 @@
     tools:context="ir.mohad.popularity.fragment.RateFragment">
 
 
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
     <androidx.cardview.widget.CardView
         style="@style/CardViewStyle"
+        android:padding="0dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
 
-        <androidx.core.widget.NestedScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:padding="10dp">
+                android:padding="6dp">
 
 
                 <LinearLayout
@@ -57,10 +59,7 @@
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
-                    style="@style/CardViewStyle"
-                    app:cardCornerRadius="15dp"
-                    android:layout_margin="3dp"
-                    android:padding="0dp"
+                    style="@style/RateItemCardViewStyle"
                     android:layout_height="wrap_content">
 
                     <LinearLayout
@@ -72,22 +71,21 @@
                         <TextView
                             style="@style/PrimaryTextStyle"
                             android:layout_width="match_parent"
+                            android:gravity="left|center_vertical"
                             android:layout_height="@dimen/text_rate_item_height"
-                            android:layout_marginTop="3dp"
-                            android:gravity="left"
                             android:layout_marginLeft="5dp"
                             android:text="@string/rate_look"
-                            android:textSize="16sp" />
+                            android:textSize="@dimen/text_size_rate_item" />
 
 
                         <androidx.appcompat.widget.AppCompatRatingBar
                             android:id="@+id/rtLook"
                             android:layout_width="wrap_content"
                             android:layout_height="30dp"
+                            android:layout_marginTop="3dp"
                             android:layout_gravity="right"
-                            android:layout_marginEnd="5dp"
-                            android:layout_marginRight="5dp"
                             android:numStars="10"
+                            style="@style/Widget.AppCompat.RatingBar.Indicator"
                             android:progressDrawable="@drawable/my_rating_display"
                             android:stepSize="1" />
                     </LinearLayout>
@@ -97,10 +95,7 @@
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
-                    style="@style/CardViewStyle"
-                    app:cardCornerRadius="15dp"
-                    android:layout_margin="3dp"
-                    android:padding="0dp"
+                    style="@style/RateItemCardViewStyle"
                     android:layout_height="wrap_content">
 
                     <LinearLayout
@@ -113,21 +108,20 @@
                             style="@style/PrimaryTextStyle"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/text_rate_item_height"
-                            android:layout_marginTop="3dp"
                             android:layout_marginLeft="5dp"
-                            android:gravity="left"
+                            android:gravity="left|center_vertical"
                             android:text="@string/rate_fitness"
-                            android:textSize="16sp" />
+                            android:textSize="@dimen/text_size_rate_item" />
 
 
                         <androidx.appcompat.widget.AppCompatRatingBar
                             android:id="@+id/rtFitness"
+                            android:layout_marginTop="3dp"
                             android:layout_width="wrap_content"
                             android:layout_height="30dp"
                             android:layout_gravity="right"
-                            android:layout_marginEnd="5dp"
-                            android:layout_marginRight="5dp"
                             android:numStars="10"
+                            style="@style/Widget.AppCompat.RatingBar.Indicator"
                             android:progressDrawable="@drawable/my_rating_display"
                             android:stepSize="1" />
 
@@ -138,10 +132,7 @@
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
-                    style="@style/CardViewStyle"
-                    app:cardCornerRadius="15dp"
-                    android:layout_margin="3dp"
-                    android:padding="0dp"
+                    style="@style/RateItemCardViewStyle"
                     android:layout_height="wrap_content">
 
                     <LinearLayout
@@ -154,21 +145,20 @@
                             style="@style/PrimaryTextStyle"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/text_rate_item_height"
-                            android:layout_marginTop="3dp"
-                            android:gravity="left"
+                            android:gravity="left|center_vertical"
                             android:layout_marginLeft="5dp"
                             android:text="@string/rate_style"
-                            android:textSize="16sp" />
+                            android:textSize="@dimen/text_size_rate_item"/>
 
 
                         <androidx.appcompat.widget.AppCompatRatingBar
                             android:id="@+id/rtStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="30dp"
+                            android:layout_marginTop="3dp"
                             android:layout_gravity="right|center"
-                            android:layout_marginEnd="5dp"
-                            android:layout_marginRight="5dp"
                             android:numStars="10"
+                            style="@style/Widget.AppCompat.RatingBar.Indicator"
                             android:progressDrawable="@drawable/my_rating_display"
                             android:stepSize="1" />
 
@@ -179,10 +169,7 @@
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
-                    style="@style/CardViewStyle"
-                    app:cardCornerRadius="15dp"
-                    android:layout_margin="3dp"
-                    android:padding="0dp"
+                    style="@style/RateItemCardViewStyle"
                     android:layout_height="wrap_content">
 
                     <LinearLayout
@@ -194,12 +181,11 @@
                         <TextView
                             style="@style/PrimaryTextStyle"
                             android:layout_width="match_parent"
-                            android:layout_height="25dp"
-                            android:layout_marginTop="3dp"
-                            android:gravity="left"
+                            android:layout_height="@dimen/text_rate_item_height"
+                            android:gravity="left|center_vertical"
                             android:layout_marginLeft="5dp"
                             android:text="@string/rate_personality"
-                            android:textSize="16sp" />
+                            android:textSize="@dimen/text_size_rate_item" />
 
 
                         <androidx.appcompat.widget.AppCompatRatingBar
@@ -207,9 +193,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="30dp"
                             android:layout_gravity="right"
-                            android:layout_marginEnd="5dp"
-                            android:layout_marginRight="5dp"
+                            android:layout_marginTop="3dp"
                             android:numStars="10"
+                            style="@style/Widget.AppCompat.RatingBar.Indicator"
                             android:progressDrawable="@drawable/my_rating_display"
                             android:stepSize="1" />
                     </LinearLayout>
@@ -219,10 +205,7 @@
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
-                    style="@style/CardViewStyle"
-                    app:cardCornerRadius="15dp"
-                    android:layout_margin="3dp"
-                    android:padding="0dp"
+                    style="@style/RateItemCardViewStyle"
                     android:layout_height="wrap_content">
 
                     <LinearLayout
@@ -235,11 +218,10 @@
                             style="@style/PrimaryTextStyle"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/text_rate_item_height"
-                            android:layout_marginTop="3dp"
-                            android:gravity="left"
+                            android:gravity="left|center_vertical"
                             android:layout_marginLeft="5dp"
                             android:text="@string/rate_trustworthy"
-                            android:textSize="16sp" />
+                            android:textSize="@dimen/text_size_rate_item" />
 
 
                         <androidx.appcompat.widget.AppCompatRatingBar
@@ -247,9 +229,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="30dp"
                             android:layout_gravity="right"
-                            android:layout_marginEnd="5dp"
-                            android:layout_marginRight="5dp"
+                            android:layout_marginTop="3dp"
                             android:numStars="10"
+                            style="@style/Widget.AppCompat.RatingBar"
                             android:progressDrawable="@drawable/my_rating_display"
                             android:stepSize="1" />
 
@@ -262,10 +244,7 @@
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
-                    style="@style/CardViewStyle"
-                    app:cardCornerRadius="15dp"
-                    android:layout_margin="3dp"
-                    android:padding="0dp"
+                    style="@style/RateItemCardViewStyle"
                     android:layout_height="wrap_content">
 
                     <LinearLayout
@@ -278,20 +257,19 @@
                             style="@style/PrimaryTextStyle"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/text_rate_item_height"
-                            android:layout_marginTop="3dp"
-                            android:gravity="left"
+                            android:gravity="left|center_vertical"
                             android:layout_marginLeft="5dp"
                             android:text="@string/rate_popularity"
-                            android:textSize="16sp" />
+                            android:textSize="@dimen/text_size_rate_item" />
 
                         <androidx.appcompat.widget.AppCompatRatingBar
                             android:id="@+id/rtPopularity"
                             android:layout_width="wrap_content"
                             android:layout_height="30dp"
                             android:layout_gravity="right"
-                            android:layout_marginEnd="5dp"
-                            android:layout_marginRight="5dp"
+                            android:layout_marginTop="3dp"
                             android:numStars="10"
+                            style="@style/Widget.AppCompat.RatingBar"
                             android:progressDrawable="@drawable/my_rating_display"
                             android:stepSize="1" />
                     </LinearLayout>
@@ -316,7 +294,8 @@
 
 
             </LinearLayout>
-        </androidx.core.widget.NestedScrollView>
     </androidx.cardview.widget.CardView>
+
+    </androidx.core.widget.NestedScrollView>
 
 </FrameLayout>

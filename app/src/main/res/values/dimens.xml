@@ -38,7 +38,7 @@
 
     <dimen name="decs_text_size">17sp</dimen>
     <dimen name="desc_rate_friend_width">250dp</dimen>
-    <dimen name="header_text_size">22sp</dimen>
+    <dimen name="header_text_size">20sp</dimen>
 
     <dimen name="primary_text_size">18sp</dimen>
     <dimen name="secondary_text_size">16sp</dimen>
@@ -51,12 +51,15 @@
     <dimen name="login_way_button_radius_size">10dp</dimen>
 
     <dimen name="about_us_image_icon_height">50dp</dimen>
-    <dimen name="text_rate_item_height">25dp</dimen>
+    <dimen name="text_rate_item_height">23dp</dimen>
+    <dimen name="text_size_rate_item">13sp</dimen>
 
     <declare-styleable name="CustomRatingBar">
         <attr name="maxRating" format="integer" />
         <attr name="filledDrawable" format="integer" />
         <attr name="unfilledDrawable" format="integer" />
     </declare-styleable>
+
+
 
 </resources>

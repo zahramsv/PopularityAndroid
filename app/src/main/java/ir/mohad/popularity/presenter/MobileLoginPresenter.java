@@ -59,21 +59,35 @@ public class MobileLoginPresenter implements
     public void verifyCode(String verifyCode) {
         if (ConnectivityReceiver.isConnected()) {
 
+
+            baseComponent.showLoadingBar(true);
             apiServices.verifySms(userMobile, verifyCode).enqueue(new Callback<BaseResponse<VerifySmsResponseData>>() {
                 @Override
                 public void onResponse(Call<BaseResponse<VerifySmsResponseData>> call, Response<BaseResponse<VerifySmsResponseData>> response) {
 
                     if ((response.isSuccessful())) {
-                        if (response.body().getData().isRegistered) {
-                            loginToServer(getLoginInfo());
-                            setObservable();
-                        } else {
-                            Bundle bundle = new Bundle();
-                            bundle.putString("primary_key", userMobile);
-                            baseComponent.openFragment(RegisterFragment.newInstance(), false, bundle);
+                        assert response.body() != null;
+                        if (response.body().getCode()==200)
+                        {
+                            if (response.body().getData().isRegistered) {
+                                loginToServer(getLoginInfo());
+
+                            } else {
+                                Bundle bundle = new Bundle();
+                                bundle.putString("primary_key", userMobile);
+                                baseComponent.openFragment(RegisterFragment.newInstance(), false, bundle);
+                                baseComponent.showLoadingBar(false);
+                            }
+
                         }
+                        else {
+                            baseComponent.showLoadingBar(false);
+                            baseComponent.showMessage(ShowMessageType.TOAST, MyApp.getInstance().getApplicationContext().getString(R.string.verify_code_validation));
+                        }
+
                     } else {
 
+                        baseComponent.showLoadingBar(false);
                         baseComponent.showMessage(ShowMessageType.TOAST, MyApp.getInstance().getApplicationContext().getString(R.string.error_api_call));
                     }
 
@@ -97,17 +111,20 @@ public class MobileLoginPresenter implements
 
 
         userMobile = mobile;
-
+        baseComponent.showLoadingBar(true);
         apiServices.sendSms(mobile).enqueue(new Callback<BaseResponse>() {
+
             @Override
             public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
 
                 sendSmsResult = response.body();
+                baseComponent.showLoadingBar(false);
 
             }
 
             @Override
             public void onFailure(Call<BaseResponse> call, Throwable t) {
+                baseComponent.showLoadingBar(false);
                 baseComponent.showMessage(ShowMessageType.SNACK, view.getViewContext().getString(R.string.some_problems_when_use_api));
             }
         });

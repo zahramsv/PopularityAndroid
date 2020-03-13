@@ -26,6 +26,7 @@
 
     <string name="intro_message_four">این باعث میشه نکته های مثبت و منفی شخصیتت رو بهتر بشناسی و برای بهبود آن کار کنی و همچنین این فرصت رو به دوستات هم بدی</string>
 
+    <string name="exit_message">آیا مطمئنید میخواهید از اپلیکیشن خارج شوید؟</string>
     <string name="phone_number_validation">لطفا شماره تلفن صحیح را وارد کنید</string>
     <string name="verify_code_validation">لطفا کد دریافت شده از طریق پیامک را وارد کنید</string>
     <string name="full_name_username_validation">لطفا نام و نام کاربری را وارد کنید</string>
@@ -134,13 +135,12 @@
 
     <string name="share_desc">you can share this on your social network or send it to
     your friends and inviting them to popularity have chance to see more result about yourself </string>
-    <string name="rate_submit_description">you rate to your friend done successfully
-        he she will see the result when she login to his her popularity account
-        but would not distinguish who rate him her</string>
+    <string name="rate_submit_description">.شما با موفقیت امتیاز برای دوست خود ثبت کردید. او در اکانت خود قادر خواهد این امتیازات را بدون آگاهی از هویت امتیاز دهنده مشاهده کند</string>
+
 
 
     <string name="image_hint_navigation_toolbar">این دکمه منوی اپلیکیشن را باز می کند</string>
-    <string name="search_friend">جستجوی دوست</string>
+    <string name="search_friend">جستجوی دوست</string>2
     <string name="back_button_press_hint">برای بستن برنامه یکبار دیگر دکمه بازگشت را بزنید</string>
 </resources>
 

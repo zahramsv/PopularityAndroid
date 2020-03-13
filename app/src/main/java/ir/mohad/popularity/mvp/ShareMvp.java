@@ -27,7 +27,7 @@ public interface ShareMvp {
 
     interface Presenter {
 
-        void takeScreenShot(android.view.View view);
+        boolean takeScreenShot(android.view.View view);
 
         void selectAndCropImage();
 

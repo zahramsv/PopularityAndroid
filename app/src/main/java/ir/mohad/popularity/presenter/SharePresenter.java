@@ -46,7 +46,7 @@ public class SharePresenter implements ShareMvp.Presenter {
     private String SHARE_IMAGE_FILE_NAME = "popularity.jpg";
 
     @Override
-    public void takeScreenShot(View view) {
+    public boolean takeScreenShot(View view) {
         try {
             view.setDrawingCacheEnabled(true);
             Bitmap bit = view.getDrawingCache(true).copy(Bitmap.Config.ARGB_8888, false);
@@ -59,10 +59,11 @@ public class SharePresenter implements ShareMvp.Presenter {
 
             Intent shareIntent = getShareIntent(file.getPath());
             shareView.shareImageOnSocial(shareIntent);
+            return true;
 
         } catch (Throwable e) {
             e.printStackTrace();
-
+            return false;
         }
     }
 

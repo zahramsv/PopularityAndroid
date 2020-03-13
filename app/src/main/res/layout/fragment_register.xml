@@ -52,8 +52,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
-
-                        android:gravity="left"
+                        android:layout_gravity="center"
+                        android:gravity="center"
                         android:text="@string/register_description" />
 
 

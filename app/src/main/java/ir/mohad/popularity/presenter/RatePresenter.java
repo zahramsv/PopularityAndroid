@@ -48,6 +48,8 @@ public class RatePresenter implements RateMvp.Presenter {
                     if (response.body().getCode() == 200) {
                         Dialog dialog = new Dialog(rateView.getViewContext());
                         dialog.setContentView(R.layout.submit_rate_dialog);
+                        dialog.setCancelable(false);
+                        dialog.setCanceledOnTouchOutside(false);
                         dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
                         dialog.show();
                         btnRateDone = dialog.findViewById(R.id.btnRateDone);

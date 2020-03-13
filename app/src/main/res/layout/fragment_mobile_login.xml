@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
-    android:orientation="vertical"
     android:fitsSystemWindows="true"
+    android:orientation="vertical"
     android:scrollbars="vertical"
     android:theme="@style/Theme.MaterialComponents.DayNight.DarkActionBar">
     <!--auth header-->
@@ -29,15 +28,16 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="top"
                 android:layout_margin="@dimen/main_cardview_inside_padding"
+                android:gravity="top"
                 android:orientation="vertical">
 
                 <TextView
-                    android:layout_height="wrap_content"
-                    android:layout_width="match_parent"
                     style="@style/SecondaryTextStyle"
-                    android:gravity="left"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
                     android:layout_margin="@dimen/main_cardview_inside_padding"
                     android:text="@string/login_with_phone_number_description" />
 
@@ -47,18 +47,18 @@
                     android:layout_width="match_parent"
                     android:layout_height="55dp"
                     android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
                     android:layout_marginTop="30dp"
+                    android:layout_marginRight="15dp"
                     android:hint="@string/phone_number">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/edtMobile"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:maxLines="1"
-                        android:maxLength="12"
-                        android:inputType="number"
                         android:imeOptions="actionDone"
+                        android:inputType="number"
+                        android:maxLength="12"
+                        android:maxLines="1"
                         android:textSize="@dimen/normal_text_size" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -68,8 +68,8 @@
                     style="@style/AccentButtonStyle"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/login_btn_height"
-                    android:layout_marginTop="10dp"
                     android:layout_marginLeft="15dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginRight="15dp"
                     android:text="@string/send_sms_btn_txt" />
 
@@ -88,32 +88,33 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="top"
                 android:layout_margin="@dimen/main_cardview_inside_padding"
+                android:gravity="top"
                 android:orientation="vertical">
 
                 <TextView
-                    android:layout_height="wrap_content"
-                    android:layout_width="match_parent"
                     style="@style/SecondaryTextStyle"
-                    android:gravity="left"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_margin="@dimen/main_cardview_inside_padding"
+                    android:layout_gravity="center"
+                    android:gravity="center"
                     android:text="@string/login_with_phone_number_description" />
 
                 <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/edtVerifyCode"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/hint_verify_code"
                     android:layout_marginLeft="15dp"
-                    android:gravity="center"
                     android:layout_marginTop="30dp"
-                    android:inputType="number"
-                    android:imeOptions="actionDone"
-                    android:maxLines="1"
-                    android:maxLength="6"
+                    android:layout_marginRight="10dp"
                     android:layout_marginBottom="10dp"
-                    android:layout_marginRight="10dp" />
+                    android:gravity="center"
+                    android:hint="@string/hint_verify_code"
+                    android:imeOptions="actionDone"
+                    android:inputType="number"
+                    android:maxLength="6"
+                    android:maxLines="1" />
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btnVerifyCode"

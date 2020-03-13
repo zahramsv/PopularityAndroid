@@ -91,11 +91,14 @@ public class SplashPresenter implements SplashMvp.Presenter {
             });
 
 
-        } else {
+        }
+        else {
             baseComponent.openFragment(new LoginFragment(), false, null);
         }
+
         Log.i("app_tag", token + "");
     }
+
 
 
     private boolean isUpdateStatusOkay(UpdateInfo updateInfo) {
@@ -116,8 +119,8 @@ public class SplashPresenter implements SplashMvp.Presenter {
                     dialog.dismiss();
                     //System.exit(0);
                 });
-
                 return false;
+
             }else if (Integer.parseInt(updateInfo.getUpdateInfoOS().getLastVersion())>verCode)
             {
                 Dialog dialog = new Dialog(view.getViewContext());
@@ -137,9 +140,11 @@ public class SplashPresenter implements SplashMvp.Presenter {
 
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
+
         }
 
-      return true;
+        return true;
+
     }
 
     private void updateAppFromMarket() {

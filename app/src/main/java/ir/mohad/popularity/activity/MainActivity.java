@@ -2,6 +2,8 @@ package ir.mohad.popularity.activity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Typeface;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -62,7 +64,6 @@ public class MainActivity extends AppCompatActivity implements
         setAppLang(sharedPrefsRepository.getApplicationLanguage());
         initNavigationDrawer();
         Intent intent = getIntent();
-        SharedPrefsRepository sharedPrefsRepository = new SharedPrefsRepository(this);
         boolean isFirstTime = sharedPrefsRepository.isFirstTimeLaunch();
         Log.d("app_tag", "isFirstLaunch: " + isFirstTime);
         if (isFirstTime) {
@@ -98,11 +99,44 @@ public class MainActivity extends AppCompatActivity implements
                 snackbar.setAction(getString(R.string.okay), view -> {
                     snackbar.dismiss();
                 });
+                View snackBarView=snackbar.getView();
+                TextView snackBarText=snackBarView.findViewById(R.id.snackbar_text);
+                if (Build.VERSION.SDK_INT
+                        >= Build.VERSION_CODES.M) {
+                    snackBarText.setTextAppearance(
+                            R.style.ToastTextStyle);
+                }
+                else
+                {
+                    Typeface font = Typeface.createFromAsset(getApplicationContext().getAssets(), "fonts/iransans_light.ttf");
+                    snackBarText.setTypeface(font);
+                }
                 snackbar.show();
                 break;
 
             case TOAST:
-                Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+
+                Toast toast
+                        = Toast.makeText(
+                        MainActivity.this,
+                        " " + message + " ",
+                        Toast.LENGTH_SHORT);
+
+                View toastView = toast.getView();
+                TextView toastText = toastView.findViewById(android.R.id.message);
+
+                if (Build.VERSION.SDK_INT
+                        >= Build.VERSION_CODES.M) {
+                    toastText.setTextAppearance(
+                            R.style.ToastTextStyle);
+                }
+                else
+                {
+                    Typeface font = Typeface.createFromAsset(getApplicationContext().getAssets(), "fonts/iransans_light.ttf");
+                    toastText.setTypeface(font);
+                }
+
+                toast.show();
                 break;
         }
     }
@@ -117,11 +151,10 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public void openFragment(BaseFragment fragment, Boolean addStack, Bundle bundle) {
-
+        presenter.setAppCLoseStatus(false);
         if (bundle != null) {
             fragment.setArguments(bundle);
         }
-
         fragment.attachFragment(this);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         if (!addStack) {
@@ -142,10 +175,7 @@ public class MainActivity extends AppCompatActivity implements
         }
         transaction.commit();
         closeDrawer();
-
-
     }
-
 
     @SuppressLint("ResourceAsColor")
     @Override
@@ -207,15 +237,13 @@ public class MainActivity extends AppCompatActivity implements
         }
     }
 
-    int count = 0;
-
     @Override
     public void onBackPressed() {
         FragmentManager fm = getSupportFragmentManager();
         if (fm.getBackStackEntryCount() == 0) {
-            if (count < 1) {
-                showMessage(ShowMessageType.TOAST, "are you sure?");
-                count++;
+            if (!presenter.canAppClose()) {
+                showMessage(ShowMessageType.TOAST, getString(R.string.exit_message));
+                presenter.setAppCLoseStatus(true);
             } else
                 this.finish();
         } else {
